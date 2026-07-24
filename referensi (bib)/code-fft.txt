@@ -1,0 +1,68 @@
+// ================================================
+// Y1706 Pulse Sensor - Arduino Uno
+// A0 = Raw signal only
+// FFT on collected samples to observe frequency domain
+// ================================================
+
+#include <fix_fft.h>  // install: https://github.com/kosme/arduinoFFT or fix_fft
+
+const int RAW_PIN     = A0;
+const int N_SAMPLES   = 64;    // must be power of 2; 64 fits in Uno SRAM
+const int SAMPLE_RATE = 100;   // Hz — matches original 10ms delay
+
+int8_t  fft_real[N_SAMPLES];   // fix_fft uses int8_t
+int8_t  fft_imag[N_SAMPLES];
+int     sampleIndex = 0;
+
+unsigned long lastSample = 0;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("=== Pulse Sensor FFT Ready ===");
+  delay(1000);
+}
+
+void loop() {
+  unsigned long now = millis();
+
+  // --- Sample at fixed 100 Hz ---
+  if (now - lastSample >= (1000 / SAMPLE_RATE)) {
+    lastSample = now;
+
+    int raw = analogRead(RAW_PIN);
+
+    // Scale 0–1023 to int8_t range (-128 to 127), remove DC offset
+    fft_real[sampleIndex] = (int8_t)((raw >> 2) - 128);
+    fft_imag[sampleIndex] = 0;
+
+    sampleIndex++;
+
+    // --- Buffer full: run FFT and print spectrum ---
+    if (sampleIndex >= N_SAMPLES) {
+      sampleIndex = 0;
+
+      // In-place FFT (log2(N_SAMPLES) = 6 for 64 points)
+      fix_fft(fft_real, fft_imag, 6, 0);
+
+      Serial.println("--- FFT Spectrum (bin: magnitude) ---");
+
+      // Print bins 1 to N/2 (skip DC bin 0, mirror above Nyquist)
+      // Frequency resolution = SAMPLE_RATE / N_SAMPLES = 100/64 ≈ 1.5625 Hz per bin
+      for (int i = 1; i < N_SAMPLES / 2; i++) {
+        int magnitude = sqrt(
+          (long)fft_real[i] * fft_real[i] +
+          (long)fft_imag[i] * fft_imag[i]
+        );
+
+        float freq = (float)i * SAMPLE_RATE / N_SAMPLES;
+
+        Serial.print("Freq:");
+        Serial.print(freq, 2);
+        Serial.print("Hz Mag:");
+        Serial.println(magnitude);
+      }
+
+      Serial.println("-------------------------------------");
+    }
+  }
+}

@@ -1,0 +1,15 @@
+Catatan:
+Tools yang membantu dalam penulisan:
+1. Penulisan Persamaan => https://editor.codecogs.com/
+2. Pembuatan Tabel => https://www.latex-tables.com/
+
+
+1. Semua tabel wajib berupa long table supaya dapat terpotong dan tersambung kembali dengan rapi saat berganti halaman (lihat contoh pada Tabel EL1.1)
+2. Jangan Gunakan Simbol (itemize) tapi gunakan penomoran (enumerate)
+3. Pada pengujian jangan gunakan tabel untuk menampilkan sejumlah data, tapi gunakan grafik.
+4. Jika data sensor mengalami selisih nilai maka harus dilakukan kalibrasi.
+5. Ganti Bahasa dengan comment (\% atau ctrl + / ) pada salah satu bahasa yang tidak digunakan pada file elsinta.cls line 10-11
+    % \usepackage[english]{babel}
+    \usepackage[indonesian]{babel}
+
+    Buku TA/Paper jurnal minimum sinta 5/Prosiding/Patent 

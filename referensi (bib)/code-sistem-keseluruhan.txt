@@ -1,0 +1,108 @@
+// ================================================
+// Y1706 Pulse Sensor - Arduino Uno
+// A0 = Raw signal
+// A1 = Hardware filtered signal (non-inverting op-amp)
+// BPM detection runs on filtered signal
+// Serial Plotter fixed scale: 0 - 2000
+// ================================================
+
+const int RAW_PIN        = A0;
+const int AMPLIFIED_PIN  = A1;
+const int LED_PIN        = 13;
+
+int rawSignal        = 0;
+int amplifiedSignal  = 0;
+
+int Threshold = 550;   // Adjust based on filtered waveform
+
+bool rising = false;
+
+int bpm = 0;
+
+unsigned long lastBeatTime = 0;
+unsigned long lastBPMPrint = 0;
+
+void setup() {
+
+  pinMode(LED_PIN, OUTPUT);
+
+  Serial.begin(115200);
+
+  Serial.println("=== Pulse Sensor Ready ===");
+
+  delay(1000);
+}
+
+void loop() {
+
+  unsigned long now = millis();
+
+  // --------------------------------
+  // Read Signals
+  // --------------------------------
+
+  rawSignal       = analogRead(RAW_PIN);
+  amplifiedSignal = analogRead(AMPLIFIED_PIN);
+
+  // --------------------------------
+  // Serial Plotter Output
+  // Fixed Y-axis Scaling Trick
+  // --------------------------------
+
+  Serial.print("Min:0");
+  Serial.print(",");
+
+  Serial.print("Max:2000");
+  Serial.print(",");
+
+  Serial.print("Raw:");
+  Serial.print(rawSignal);
+  Serial.print(",");
+
+  Serial.print("Amped:");
+  Serial.println(amplifiedSignal);
+
+  // --------------------------------
+  // Beat Detection
+  // --------------------------------
+
+  if (amplifiedSignal > Threshold && !rising) {
+
+    rising = true;
+
+    digitalWrite(LED_PIN, HIGH);
+
+    unsigned long interval = now - lastBeatTime;
+
+    // Valid BPM range: 40 - 180 BPM
+    // Interval: 333ms - 1500ms
+
+    if (interval > 333 && interval < 1500) {
+
+      bpm = 60000 / interval;
+    }
+
+    lastBeatTime = now;
+  }
+
+  if (amplifiedSignal < Threshold && rising) {
+
+    rising = false;
+
+    digitalWrite(LED_PIN, LOW);
+  }
+
+  // --------------------------------
+  // Print BPM Every 1 Second
+  // --------------------------------
+
+  if (now - lastBPMPrint >= 1000) {
+
+    lastBPMPrint = now;
+
+    Serial.print(">>> BPM: ");
+    Serial.println(bpm);
+  }
+
+  delay(10);   // 100 Hz sampling
+}

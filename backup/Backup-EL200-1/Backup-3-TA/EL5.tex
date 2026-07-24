@@ -1,0 +1,244 @@
+\documentclass{elsinta}
+\usepackage{url}
+
+% --- Memasukkan Data Dokumen Menggunakan Perintah Baru ---
+\projectcode{EL5}
+\documentname{\EvaluationsTitle}
+\documenttitle{Teknik Elektro - Sistem Informasi Tugas Akhir}
+\capstonetitle{Teknik Elektro - Sistem Informasi Tugas Akhir}
+\shortname{  ELSINTA} 
+\documentnumber{TA2526.01.099}
+\revisionnumber{03}
+\publicationdate{22 September 2025}
+
+\revdatefooter{03/10/2025}
+% --- Memasukkan Data Halaman Pengesahan (Halaman 2) ---
+\currentpage{2} % Halaman yang sedang dicetak
+
+% Data Tim
+\ketuatimnama{Mahasiswa 1}
+\ketuatimnim{12345678}
+
+\anggotanamaI{Mahasiswa 2}
+\anggotanimI{12345678}
+
+\anggotanamaII{Mahasiswa 3}
+\anggotanimII{12345678}
+
+
+% Data Dosen
+\pembimbingInama{Dosen 1}
+\pembimbingInip{12345678 123456 1 123}
+
+\pembimbingIInama{Dosen 2}
+\pembimbingIInip{12345678 123456 1 123}
+
+
+% Tanggal Pengesahan
+\approvaldate{22 September 2025}
+
+\begin{document}
+
+% Panggil perintah untuk membuat halaman sampul
+\coverpage
+% Pindah ke Halaman Baru
+\newpage
+
+% Membuat Halaman Pengesahan (Halaman 2)
+% \approvalpage
+
+% Lanjut ke halaman proposal
+\newpage
+
+% ======================================
+% Bagian Konten Proposal Dimulai di Sini
+% ======================================
+
+% Mengatur ulang nomor halaman dan gaya halaman
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1} 
+\pagestyle{myfooter} % Ganti dari 'plain' ke 'myfooter'
+
+% Atur margin standar (Opsional, jika Anda ingin margin isi berbeda dari sampul)
+% \newgeometry{left=4cm, right=3cm, top=3cm, bottom=3cm} 
+% Catatan: Perintah \newgeometry memerlukan paket 'geometry' yang sudah ada di cls.
+
+\tableofcontents
+\newpage
+\section*{\docsumary}
+Dokumen ini menyajikan Evaluasi pada  implementasi, analisis kinerja, dan potensi pengembangan solusi sistem yang telah dirancang. Pembahasan utama difokuskan pada tiga aspek fundamental: validasi keberhasilan proyek, transparansi proses pengembangan, dan prospek masa depan.
+
+Pertama, dokumen ini melakukan evaluasi terhadap hasil implementasi dengan mengukur Relevance to Objectives and Requirements (Relevansi terhadap Tujuan dan Kebutuhan) serta mengevaluasi Business Feasibility Evaluation (Evaluasi Kelayakan Bisnis). Analisis ini membuktikan tingkat keberhasilan teknis dan nilai praktis solusi dalam memenuhi kebutuhan yang telah didefinisikan di awal proyek.
+
+Kedua, untuk menjaga transparansi proses pengembangan, disajikan History of System Design Revision (Riwayat Revisi Desain Sistem). Bagian ini mengidentifikasi Identification of Revision Triggers (Pemicu Revisi), mendokumentasikan Detailed Design Revisions (Revisi Desain Rinci) yang terjadi selama implementasi, dan menganalisis Impact Analysis (Analisis Dampak) dari perubahan tersebut terhadap sistem akhir.
+
+Ketiga, dokumen ini memproyeksikan langkah selanjutnya dalam Future Development (Pengembangan Masa Depan), yang mencakup strategi untuk Peningkatan Akurasi dan Kecerdasan Data, Ekspansi Fungsionalitas dan Integrasi, serta potensi Komersialisasi dan Sertifikasi.
+
+Sebagai penutup, dokumen ini menyajikan Conclusion (Kesimpulan), berisi Kesimpulan Hasil Proyek dan Saran dan Rekomendasi untuk pengembangan lebih lanjut. Dokumen ini dilengkapi dengan daftar Abbreviations (Singkatan) dan References (Referensi) yang digunakan.
+
+\newpage
+\section{\RelevanceObjectivesTitle}
+
+
+\begin{enumerate}
+    \item \textbf{Pencapaian Objektif:} Bandingkan hasil akhir yang diperoleh dengan \textbf{tujuan proyek spesifik} (yang dirumuskan di Bab Pendahuluan). Tunjukkan secara eksplisit tujuan mana yang terpenuhi, dan berikan justifikasi berdasarkan data yang ada.
+    \item \textbf{Pemenuhan Kebutuhan:} Verifikasi bahwa \textbf{semua kebutuhan fungsional dan non-fungsional} telah dipenuhi. Gunakan \textbf{Tabel Pemenuhan Kebutuhan} (\textit{Requirement Traceability Matrix}) untuk memetakan setiap kebutuhan dengan bukti pengujian atau implementasi yang membuktikan pemenuhannya.
+\end{enumerate}
+
+
+
+
+\section{\BusinessFeasibilityTitle}
+
+
+
+Nilai dampak dan kelangsungan solusi dari perspektif non-teknis (bisnis, sosial, atau pengguna).
+
+\begin{enumerate}
+    \item \textbf{Dampak dan Manfaat:} Jelaskan bagaimana solusi yang diimplementasikan memberikan \textbf{nilai tambah} atau memecahkan masalah yang diidentifikasi. Jika memungkinkan, estimasi manfaat yang diperoleh (misalnya, peningkatan efisiensi $E$ atau penghematan biaya).
+    \item \textbf{Skalabilitas dan Penerapan:} Diskusikan potensi solusi untuk dikembangkan di masa depan (\textit{scalability}) dan diterapkan pada konteks yang lebih luas.
+    \item \textbf{Analisis Keterbatasan:} Identifikasi dan bahas secara jujur keterbatasan atau kelemahan yang masih dimiliki oleh sistem atau solusi Anda saat ini.
+\end{enumerate}
+
+\section{\HistoryDesignRevisionTitle}
+\label{sec:design_revision}
+
+Sub-bab \textbf{History of System Design Revision} berfungsi untuk mendokumentasikan dan menjelaskan secara transparan segala \textbf{perubahan, modifikasi, atau penyesuaian} signifikan yang dilakukan pada rancangan sistem (\textit{system design}) setelah tahap dilakukan implementasi. Bagian ini penting untuk menganalisis dan memberikan justifikasi atas \textbf{deviasi} antara \textbf{Rancangan Awal} (\textit{As-Planned Design}) yang didokumentasikan di EL3, dengan \textbf{Sistem Aktual} pada EL4 yang telah diimplementasikan.
+
+Jelaskan faktor-faktor pemicu yang mendorong revisi desain. Pemicu utama sering kali muncul selama atau setelah proses implementasi dan pengujian sebagai contoh seperti berikut:
+
+\begin{enumerate}
+    \item \textbf{Technical Inconsistencies:} Rancangan awal tidak dapat diterapkan secara praktis karena adanya batasan teknis dari platform atau bahasa pemrograman yang digunakan.
+    \item \textbf{Performance Optimization:} Ditemukan adanya masalah kinerja (\textit{bottleneck}) selama pengujian, sehingga memerlukan perubahan arsitektur, algoritma, atau skema basis data untuk mencapai kriteria keberhasilan yang ditetapkan.
+    \item \textbf{Incomplete Design:} Adanya elemen sistem krusial yang terlewat atau belum didefinisikan secara rinci pada dokumentasi perancangan awal.
+    \item \textbf{Unforeseen Constraints:} Munculnya kendala tak terduga (misalnya, batasan API pihak ketiga, isu keamanan) yang menuntut penyesuaian fungsionalitas.
+\end{enumerate}
+
+
+
+
+\begin{enumerate}
+    \item \textbf{Revisi Arsitektur atau Modul:} Jelaskan perubahan pada struktur keseluruhan sistem (misalnya, transisi dari arsitektur \textit{monolithic} ke layanan mikro untuk modul tertentu). Sertakan diagram arsitektur yang \textbf{telah direvisi} untuk mencerminkan sistem akhir.
+    \item \textbf{Revisi Skema Basis Data:} Detailkan perubahan pada entitas, atribut, atau relasi dalam basis data.
+    \begin{enumerate}
+        \item \textit{Contoh:} Penggabungan (\textit{merging}) dua tabel untuk meningkatkan efisiensi \textit{query} ($Q_{awal}$ menjadi $Q_{revisi}$) atau penambahan indeks baru.
+    \end{enumerate}
+    \item \textbf{Revisi Antarmuka dan Alir Kerja:} Jelaskan modifikasi pada desain antarmuka (\textit{User Interface/UI}) atau alur proses (\textit{workflow}) yang berbeda dari rancangan awal.
+\end{enumerate}
+Bagian ini menunjukkan kemampuan \textit{Change Management} dan refleksi kritis terhadap proses pengembangan sistem.
+
+
+
+
+\section{\FutureDevelopmentTitle}
+
+\textit{Instruksi: Bagian ini harus menjelaskan potensi pengembangan dan peningkatan projek anda di masa depan. Pengembangan harus logis, realistis, dan berdasar pada keterbatasan atau peluang yang teridentifikasi selama pelaksanaan proyek. Tujuannya adalah memberikan arahan yang jelas untuk proyek Tugas Akhir atau penelitian selanjutnya.}
+
+Pengembangan Project  di masa depan sangat penting untuk meningkatkan kinerja, cakupan fungsionalitas, dan nilai komersial sistem secara berkelanjutan. Rencana pengembangan ini berfokus pada peningkatan kemampuan analitik dan perluasan integrasi sistem.
+
+\subsection{\DataAccuracyTitle}
+\textit{Fokus: Peningkatan keandalan data dan kualitas informasi yang dihasilkan oleh sistem.}
+
+
+\subsection{\FunctionExpansionTitle}
+
+\textit{Fokus: Penambahan fitur baru yang memperluas cakupan sistem (misalnya, integrasi dengan sistem lain).}
+
+\subsection{\CommercializationTitle}
+
+\textit{Fokus: Langkah-langkah yang diperlukan agar prototipe dapat menjadi produk siap pakai.}
+\subsubsection*{Contoh Pengembangan yang Cocok:}
+\begin{enumerate}
+    \item \textbf{Implementasi Algoritma Prediktif Berbasis Machine Learning:} Mengembangkan model *Machine Learning* untuk memproses data historis sensor dan memprediksi tren kualitas udara atau kegagalan sensor sebelum terjadi.
+    \item \textbf{Integrasi Kontrol HVAC (Heating, Ventilation, and Air Conditioning):} Mengembangkan subsistem kendali yang tidak hanya mengaktifkan kipas lokal tetapi juga mampu berkomunikasi dan mengoptimalkan sistem $\text{HVAC}$ bangunan secara keseluruhan untuk efisiensi energi yang lebih tinggi.
+    \item \textbf{Pengembangan Versi Mobile yang Lebih Robust:} Mengubah *dashboard* berbasis web menjadi aplikasi mobile *native* (\text{Android/iOS}) yang memiliki notifikasi *push* yang lebih andal dan akses *offline* sementara.
+    \item \textbf{Pengujian dan Sertifikasi Kepatuhan:} Melakukan serangkaian pengujian formal untuk mendapatkan sertifikasi $\text{SNI}$ atau $\text{K3}$ yang relevan, menjadikan produk layak secara komersial.
+\end{enumerate}
+
+\section{\ConclusionTitle}
+
+\textit{Kesimpulan harus memberikan jawaban yang ringkas dan padat terhadap tujuan utama yang telah ditetapkan di awal proposal. Bagian ini merangkum pencapaian (\emph{achievement}) proyek dan menegaskan kembali kontribusi utamanya. Kesimpulan tidak boleh memuat hasil analisis baru.}
+
+Kesimpulan adalah ringkasan akhir dari seluruh pekerjaan yang telah dilakukan dalam \textbf{Project ELSINTA}. Kesimpulan harus secara langsung membandingkan hasil proyek dengan tujuan yang telah ditetapkan, serta merangkum kontribusi utama proyek.
+
+
+
+
+\subsection{\ProjectSummaryTitle}
+
+\textit{Fokus: Menyajikan pernyataan tegas mengenai apakah tujuan proyek telah tercapai atau divalidasi.}
+
+\subsection{\SuggestionTitle}
+
+\textit{Fokus: Memberikan saran teknis yang jelas untuk perbaikan prototipe saat ini (saran) dan rekomendasi untuk proyek di masa mendatang (pengembangan).}
+
+\subsubsection*{Contoh Kesimpulan Hasil Proyek:}
+\begin{enumerate}
+    \item Tujuan utama proyek, yaitu merancang dan mengimplementasikan prototipe \textbf{Sistem ELSINTA} yang mampu memantau, mencatat, dan mengendalikan kualitas udara multi-sensor, telah \textbf{tercapai sepenuhnya}.
+    \item Sistem telah berhasil diuji dan menunjukkan fungsionalitas penuh dalam mengirimkan data $\text{CO}, \text{CH}_4, \text{CO}_2$, dan $\text{PM2.5}$ ke *cloud* secara *real-time* menggunakan protokol $\text{MQTT}$.
+    \item Kontrol aktif otomatis terhadap kipas dan alarm telah \textbf{dikonfirmasi berfungsi} dengan baik, merespons ambang batas gas berbahaya sesuai dengan regulasi $\text{Permenaker No. 5 Tahun 2018}$.
+    \item Hasil pengujian akurasi menunjukkan bahwa setelah proses kalibrasi, sistem memiliki deviasi rata-rata di bawah $\pm 10\%$ dibandingkan alat ukur standar, memvalidasi reliabilitas sistem.
+\end{enumerate}
+
+\subsubsection*{Contoh Saran dan Rekomendasi:}
+\begin{enumerate}
+    \item \textbf{Saran Teknis:} Disarankan untuk menggunakan sensor $\text{CO}_2$ berbasis $\text{NDIR}$ (\text{Non-Dispersive Infrared}) yang lebih akurat dan stabil dibandingkan sensor semi-konduktor dalam prototipe saat ini.
+    \item \textbf{Rekomendasi Pengembangan:} Pengembangan selanjutnya harus fokus pada penerapan algoritma *fuzzy logic* atau *machine learning* untuk membuat sistem kontrol kipas/ventilasi menjadi lebih prediktif dan efisien energi.
+\end{enumerate}
+
+
+\section{\ReferencesTitle}
+Daftar pustaka ditulis sesuai standar IEEE, sebaiknya gunakan Citation tools seperti Mendeley, Zotero dll.  
+Contoh format IEEE:  
+\renewcommand{\refname}{} 
+\bibliographystyle{IEEEtran} % Menggunakan style sitasi IEEE
+\bibliography{pustaka}    % Memanggil file pustaka.bib
+
+\section{\AbbrevTitle}
+
+% longtable tidak menggunakan lingkungan table[] di sekitarnya.
+% Perintah \begin{longtable} langsung menggantikan \begin{table}\begin{tabular}
+\begin{longtable}{|p{4cm}|p{11cm}|} % Lebar kolom ditetapkan agar teks wrap
+    \caption{Daftar Singkatan (Abbreviations)} \label{tab:abbreviations5} \\
+    \hline
+    \textbf{Abbreviation} & \textbf{Definition} \\
+    \hline
+    \endhead % Mengakhiri baris header yang akan diulang di setiap halaman
+    
+    \hline 
+    \multicolumn{2}{|r|}{Lanjutan di halaman berikutnya...} \\ 
+    \endfoot % Footer untuk semua halaman kecuali yang terakhir
+    
+    \hline
+    \endlastfoot % Footer untuk halaman terakhir (kosong)
+
+    % --- Isi Tabel ---
+    IoT & Internet of Things \\
+    \hline
+    KPI & Key Performance Indicator \\
+    \hline
+    ROI & Return on Investment \\
+    \hline
+    WBS & Work Breakdown Structure \\
+    \hline
+    SWOT & Strengths, Weaknesses, Opportunities, Threats \\
+    \hline
+    BMC & Business Model Canvas \\
+    \hline
+    IEEE & Institute of Electrical and Electronics Engineers \\
+    \hline
+    ISO & International Organization for Standardization \\   
+    \hline
+    CO & Carbon Monoxide \\
+    \hline
+    CH$_4$ & Methane (atau LPG) \\
+    \hline
+    PM2.5 & Particulate Matter 2.5 \\
+    \hline
+    
+    % Tambahkan lebih banyak baris di sini untuk memicu pemisahan halaman
+    % ... (Tambahkan entri lain jika tabel perlu memanjang)
+
+\end{longtable}
+\end{document}

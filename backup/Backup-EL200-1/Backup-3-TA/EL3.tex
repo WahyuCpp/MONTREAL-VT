@@ -1,0 +1,545 @@
+\documentclass{elsinta}
+\usepackage{url}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codeblue}{rgb}{0,0,0.95}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{arduino}{
+    language=C++,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codegreen},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=single
+}
+
+\lstset{style=arduino}
+
+% --- Memasukkan Data Dokumen ---
+\projectcode{EL3}
+\documentname{\SystemDesignTitle}
+\documenttitle{Teknik Elektro - Sistem Informasi Tugas Akhir}
+\capstonetitle{Sistem Monitoring Getaran dan Suhu Motor Induksi}
+\shortname{ELSINTA} 
+\documentnumber{TA2526.01.099}
+\revisionnumber{00}
+\publicationdate{22 September 2025}
+\revdatefooter{03/10/2025}
+
+% Data Tim (isi sesuai data Anda)
+\ketuatimnama{Ahmad Fauzi}
+\ketuatimnim{1211234567}
+\anggotanamaI{Budi Santoso}
+\anggotanimI{1211234568}
+\anggotanamaII{Citra Dewi}
+\anggotanimII{1211234569}
+
+% Data Dosen (isi sesuai data Anda)
+\pembimbingInama{Dr. Ir. Rahmat Hidayat, S.T., M.T.}
+\pembimbingInip{19651234 199003 1 123}
+\pembimbingIInama{Ibu Lestari, S.T., M.Eng.}
+\pembimbingIInip{19801234 200501 2 001}
+
+\approvaldate{22 September 2025}
+
+\begin{document}
+
+\coverpage
+\newpage
+
+% \approvalpage
+% \newpage
+
+\tableofcontents
+\newpage
+
+% ============================================================
+% RINGKASAN DOKUMEN
+% ============================================================
+\section*{\docsumary}
+\addcontentsline{toc}{section}{\docsumary}
+
+Dokumen EL3 ini menyajikan desain teknis dan perancangan sistem untuk proyek \textbf{"Sistem Monitoring Getaran dan Suhu Motor Induksi"}. Berdasarkan kebutuhan yang telah diidentifikasi pada EL1 dan analisis kesenjangan pada EL2 (keterbatasan solusi komersial mahal seperti SKF QuickCollect \cite{skf_cmdt392} dan Siemens SIDRIVE IQ, serta kurangnya integrasi multi-parameter pada prototipe penelitian \cite{sonowal2019}), dokumen ini merinci arsitektur sistem secara keseluruhan.
+
+Perangkat keras yang digunakan meliputi mikrokontroler ESP32 sebagai unit pemrosesan utama (sesuai dengan paten yang direview pada EL2 tentang implementasi FFT pada ESP32), sensor accelerometer MPU6050 untuk pengukuran getaran 3-sumbu, sensor suhu DS18B20 dan thermocouple MAX6675, sensor arus ACS712, serta modul kontrol kecepatan berbasis TRIAC untuk kendali loop tertutup.
+
+Perangkat lunak meliputi firmware ESP32 yang mengimplementasikan akuisisi data, filter digital, analisis FFT (Fast Fourier Transform) untuk identifikasi jenis kerusakan motor sebagaimana direview pada EL2, perhitungan RMS getaran, serta protokol MQTT untuk komunikasi IoT. \textit{Dashboard} berbasis Blynk/ThingsBoard menyediakan visualisasi \textit{real-time}, notifikasi Telegram, dan penyimpanan data historis.
+
+Dokumen ini juga memuat rencana pengujian yang mengacu pada standar teknis yang telah diuraikan pada EL2 (ISO 10816-3 untuk evaluasi getaran, IEEE 802.11 untuk komunikasi Wi-Fi, IEC 60034 untuk batasan suhu motor, ISO 9001 untuk manajemen mutu). Seluruh desain bertujuan menghasilkan prototipe sistem pemantauan motor induksi yang ekonomis (<Rp1.000.000), akurat (galat ≤15\%), dengan \textit{time-delay} ≤1000 ms, serta mudah direplikasi oleh institusi pendidikan maupun UMKM.
+
+\newpage
+
+% ============================================================
+% BAB 1: SPESIFIKASI SISTEM
+% ============================================================
+\section{\SystemSpecTitle}
+
+Bab ini menjelaskan rancangan dan spesifikasi teknis sistem yang akan dikembangkan, mengacu pada standar yang telah diuraikan pada EL2 (ISO 10816-3, IEC 60034, IEEE 802.11) serta merespons keterbatasan solusi komersial mahal yang telah diidentifikasi.
+
+\subsection{\FunctionalSpecTitle}
+
+Berdasarkan analisis pada EL2 yang mengidentifikasi kurangnya sistem pemantauan multi-parameter dengan biaya terjangkau, sistem ini dirancang dengan fungsi-fungsi utama sebagai berikut:
+
+\begin{enumerate}
+    \item Sistem dapat membaca data getaran 3-sumbu (X, Y, Z) dari sensor accelerometer MPU6050 dengan frekuensi sampling minimum 1 kHz.
+    \item Sistem dapat membaca data suhu dari sensor DS18B20 (bearing) dan thermocouple MAX6675 (stator) dengan akurasi ±1°C.
+    \item Sistem dapat membaca arus beban motor menggunakan sensor ACS712 untuk mendeteksi overload.
+    \item Sistem melakukan analisis Fast Fourier Transform (FFT) pada sinyal getaran untuk mengidentifikasi frekuensi dominan (1×RPM, 2×RPM, frekuensi bearing), sebagaimana direview pada paten EL2 tentang implementasi FFT pada ESP32.
+    \item Sistem menghitung nilai RMS kecepatan getaran (mm/s) dan mengkategorikannya berdasarkan standar ISO 10816-3 (Zone A, B, C, D) yang telah diuraikan pada EL2.
+    \item Sistem mengirimkan data sensor ke \textit{cloud} melalui protokol MQTT dengan \textit{time-delay} ≤1000 ms.
+    \item Sistem menampilkan data \textit{real-time} pada \textit{dashboard} web dan memberikan notifikasi Telegram ketika kondisi motor memasuki Zone C atau Zone D.
+    \item Sistem mengendalikan kecepatan motor dalam loop tertutup menggunakan kontrol PWM/TRIAC dengan umpan balik dari sensor kecepatan.
+\end{enumerate}
+
+\subsection{\NonFunctionalSpecTitle}
+
+\begin{table}[H]
+\centering
+\caption{Spesifikasi Non-Fungsional Sistem (Mengacu pada EL2)}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.25\textwidth} p{0.65\textwidth}}
+    \hline
+    \textbf{Aspek} & \textbf{Deskripsi} \\
+    \hline
+    Kinerja (Performance) & Data sensor dikirim setiap 2 detik dengan \textit{time-delay} ≤1000 ms. \\
+    Keandalan (Reliability) & Sistem mampu beroperasi 24 jam dengan \textit{uptime} ≥95\%. \\
+    Akurasi & Galat getaran ≤15\% terhadap referensi (SKF QuickCollect sebagai pembanding). \\
+    Keamanan (Security) & Komunikasi data menggunakan token autentikasi MQTT dan enkripsi SSL/TLS. \\
+    Portabilitas & Sistem dapat berjalan pada ESP32 dengan integrasi \textit{cloud} multiplatform. \\
+    Daya (Power) & Konsumsi daya total ≤5W (tidak termasuk motor). \\
+    \hline
+\end{tabular}
+\end{table}
+
+\subsection{\HardwareSpecTitle}
+
+\begin{table}[H]
+\centering
+\caption{Daftar Spesifikasi Perangkat Keras}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{p{0.27\textwidth} p{0.30\textwidth} p{0.35\textwidth}}
+    \hline
+    \textbf{Komponen} & \textbf{Fungsi} & \textbf{Spesifikasi Utama} \\
+    \hline
+    ESP32 DevKit V1 & Mikrokontroler utama & 32-bit dual-core, 240 MHz, WiFi, 520 KB SRAM \\
+    MPU6050 & Sensor getaran & Rentang ±2g s.d. ±16g, I2C, ADC 16-bit \\
+    DS18B20 & Sensor suhu bearing & -55°C s.d. +125°C, akurasi ±0.5°C \\
+    MAX6675 + TC-K & Sensor suhu stator & 0°C s.d. +600°C, resolusi 0.25°C \\
+    ACS712 5A/20A & Sensor arus & Sensitivitas 185 mV/A, analog output \\
+    Modul TRIAC & Kontrol kecepatan & 220V AC, 4A, isolasi optocoupler \\
+    Power Supply 5V/2A & Sumber daya & Output stabil 5V DC \\
+    \hline
+\end{tabular}
+\end{table}
+
+\subsection{\SoftwareSpecTitle}
+
+Sistem ini terdiri atas tiga lapisan utama yang selaras dengan arsitektur yang direview pada EL2:
+
+\begin{enumerate}
+    \item \textbf{Bahasa Pemrograman:}
+    \begin{itemize}
+        \item Firmware ESP32: C++ (Arduino Framework)
+        \item Dashboard Web: HTML5, CSS3, JavaScript (Chart.js)
+    \end{itemize}
+    
+    \item \textbf{Library yang Digunakan:}
+    \begin{itemize}
+        \item ArduinoFFT (untuk analisis FFT - mengacu pada paten EL2)
+        \item PubSubClient (MQTT client)
+        \item OneWire dan DallasTemperature (DS18B20)
+        \item Adafruit MPU6050 (accelerometer)
+    \end{itemize}
+    
+    \item \textbf{Platform Cloud:}
+    \begin{itemize}
+       
+    \end{itemize}
+    
+    \item \textbf{Protokol Komunikasi:}
+    \begin{itemize}
+        \item MQTT (ISO/IEC 20922:2016) sebagaimana diuraikan pada EL2
+    \end{itemize}
+\end{enumerate}
+
+\subsection{\PerformanceCriteriaTitle}
+
+\begin{enumerate}
+    \item Akurasi sensor getaran: Galat ≤15\% terhadap referensi (mengacu pada EL2)
+    \item \textit{Time-delay} IoT: ≤1000 ms dari pembacaan hingga tampil di dashboard
+    \item Keberhasilan pengiriman data: ≥99\%
+    \item \textit{Steady-state error} kontrol kecepatan: ≤5\%
+    \item Skor \textit{usability}: ≥80\% responden dapat mengoperasikan dashboard
+\end{enumerate}
+
+
+% ============================================================
+% BAB 2: SOLUSI YANG DIUSULKAN
+% ============================================================
+\section{\ProposedSolutionTitle}
+
+Merujuk pada analisis kesenjangan di EL2 yang mengidentifikasi empat keterbatasan utama solusi yang ada (terlalu mahal, hanya satu parameter, kurang klasifikasi cerdas, kurang visualisasi informatif), sistem ini menawarkan solusi terintegrasi dengan spesifikasi berikut.
+
+\subsection{\ArchitectureTitle}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering \vspace{2cm} 
+    [Gambar Diagram Blok: Sensor $\rightarrow$ ESP32 $\rightarrow$ MQTT $\rightarrow$ Cloud $\rightarrow$ Dashboard] \vspace{2cm}}}
+    \caption{Arsitektur Sistem Monitoring Motor Induksi}
+    \label{fig:architecture}
+\end{figure}
+
+\subsubsection{Subsistem Akuisisi Data (Hardware)}
+
+\begin{algorithm}[H]
+\caption{Algoritma Akuisisi Data dan FFT}
+\label{alg:acquisition}
+\begin{algorithmic}[1]
+\STATE Inisialisasi pin sensor (I2C, 1-Wire, SPI, ADC)
+\STATE Inisialisasi koneksi Wi-Fi dan MQTT
+\WHILE{true}
+    \STATE Baca data accelerometer (X,Y,Z) $\rightarrow$ buffer[1024]
+    \STATE Baca suhu DS18B20 dan MAX6675
+    \STATE Baca arus ACS712
+    \IF{jumlah sampel = 1024}
+        \STATE Hitung FFT (ArduinoFFT)
+        \STATE Hitung RMS getaran (mm/s)
+        \STATE Bandingkan dengan ISO 10816-3 $\rightarrow$ Zone A/B/C/D
+        \STATE Identifikasi frekuensi puncak (1×RPM, 2×RPM, bearing)
+        \STATE Kirim data via MQTT
+    \ENDIF
+    \STATE Tunggu 2 detik
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Subsistem Komunikasi dan Cloud}
+
+Menggunakan protokol MQTT (ISO/IEC 20922:2016) dengan topik:
+\begin{itemize}
+    \item \texttt{elsinta/motor1/vibration}
+    \item \texttt{elsinta/motor1/temperature}
+    \item \texttt{elsinta/motor1/speed}
+    \item \texttt{elsinta/motor1/status}
+\end{itemize}
+
+\subsubsection{Subsistem Visualisasi}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering \vspace{1.5cm} 
+    [Skema Dashboard: Grafik getaran, suhu, zona ISO 10816-3, rekomendasi teks] \vspace{1.5cm}}}
+    \caption{Skema Rancangan Dashboard Monitoring}
+    \label{fig:dashboard}
+\end{figure}
+
+\subsection{\MainFeaturesTitle}
+
+\begin{enumerate}
+    \item \textbf{Pemantauan Getaran 3-Sumbu Real-Time} - MPU6050 dengan sampling 1 kHz
+    \item \textbf{Analisis FFT untuk Identifikasi Jenis Kerusakan}:
+    \begin{itemize}
+        \item 1×RPM $\rightarrow$ ketidakseimbangan rotor
+        \item 2×RPM $\rightarrow$ ketidakselarasan (misalignment)
+        \item Sidebands frekuensi tinggi $\rightarrow$ kerusakan bearing
+    \end{itemize}
+    \item \textbf{Kategorisasi ISO 10816-3} - Zone A (Hijau), B (Kuning), C (Oranye), D (Merah)
+    \item \textbf{Pemantauan Suhu Multi-Titik} - Stator (TC-K) dan bearing (DS18B20)
+    \item \textbf{Kontrol Kecepatan Loop Tertutup} - TRIAC + umpan balik encoder
+    \item \textbf{Notifikasi Telegram} - Peringatan instan saat kondisi Warning/Danger
+    \item \textbf{Rekomendasi Pemeliharaan Otomatis} - Berbasis logika aturan
+    \item \textbf{Penyimpanan Data Historis} - Analisis tren degradasi motor
+\end{enumerate}
+
+\subsection{\AdvantagesTitle}
+
+Merujuk pada celah yang diidentifikasi di EL2, proyek ini memiliki keunggulan:
+
+\begin{enumerate}
+    \item \textbf{Solusi Low-Cost dengan Fungsionalitas Tinggi} (<Rp1.000.000 vs SKF QuickCollect Rp26-50 juta)
+    \item \textbf{Integrasi Pemantauan dan Kendali Aktif} (loop tertutup)
+    \item \textbf{Rekomendasi Actionable Insight} (teks sederhana, bukan data mentah)
+    \item \textbf{Peringatan Dini Multi-Kanal} (Telegram Bot gratis)
+    \item \textbf{Dokumentasi Terbuka} (replikasi dan pengembangan)
+\end{enumerate}
+
+\subsection{\JustificationTitle}
+
+Pemilihan komponen didasarkan pada analisis yang selaras dengan EL2:
+
+\begin{enumerate}
+    \item \textbf{ESP32 vs Raspberry Pi:} ESP32 dipilih karena biaya lebih rendah (<Rp100.000 vs Rp600.000), konsumsi daya lebih kecil, dan sudah memadai untuk FFT.
+    \item \textbf{MPU6050 vs ADXL335:} MPU6050 dipilih karena memiliki ADC 16-bit (vs 10-bit) dan rentang yang dapat diprogram.
+    \item \textbf{Blynk vs Self-Hosted:} Blynk dipilih untuk mempercepat pengembangan dashboard sesuai target waktu 4 bulan.
+\end{enumerate}
+
+
+% ============================================================
+% BAB 3: RENCANA IMPLEMENTASI
+% ============================================================
+\section{\ImplementationPlanTitle}
+
+\subsection{\WBSTitle}
+
+\begin{enumerate}
+    \item \textbf{Fase 1: Perancangan (Minggu 1-4)}
+    \begin{enumerate}
+        \item WBS 1.1: Desain skematik dan wiring diagram
+        \item WBS 1.2: Desain algoritma FFT dan logika aturan
+        \item WBS 1.3: Desain dashboard dan database
+    \end{enumerate}
+    \item \textbf{Fase 2: Implementasi (Minggu 5-10)}
+    \begin{enumerate}
+        \item WBS 2.1: Perakitan hardware dan pengujian sensor
+        \item WBS 2.2: Pengembangan firmware (akuisisi, FFT, MQTT)
+        \item WBS 2.3: Integrasi dengan dashboard cloud
+    \end{enumerate}
+    \item \textbf{Fase 3: Pengujian (Minggu 11-14)}
+    \begin{enumerate}
+        \item WBS 3.1: Pengujian akurasi sensor (galat ≤15\%)
+        \item WBS 3.2: Pengujian delay IoT (≤1000 ms)
+        \item WBS 3.3: Pengujian kontrol kecepatan (error steady-state ≤5\%)
+        \item WBS 3.4: Pengujian usability (5 skenario)
+    \end{enumerate}
+    \item \textbf{Fase 4: Dokumentasi (Minggu 15-16)}
+    \begin{enumerate}
+        \item WBS 4.1: Laporan teknis dan manual pengguna
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{\TimelineTitle}
+
+\begin{table}[H]
+\centering
+\caption{Jadwal Proyek (Gantt Chart)}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Tugas} & \multicolumn{16}{|c|}{\textbf{Minggu ke-}} \\
+\cline{2-17}
+ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\
+\hline
+Perancangan & X & X & X & X & & & & & & & & & & & & \\
+Implementasi & & & & & X & X & X & X & X & X & & & & & & \\
+Pengujian & & & & & & & & & & & X & X & X & X & & \\
+Dokumentasi & & & & & & & & & & & & & & & X & X \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{\TeamDivisionTitle}
+
+\begin{enumerate}
+    \item \textbf{Ketua Tim:} Koordinasi proyek, algoritma FFT, integrasi cloud
+    \item \textbf{Anggota 1:} Perancangan hardware, firmware ESP32, kalibrasi sensor
+    \item \textbf{Anggota 2:} Dashboard web, notifikasi Telegram, dokumentasi
+\end{enumerate}
+
+\subsection{\SystemTestingTitle}
+
+\begin{longtable}{|c|p{5cm}|p{7cm}|}
+    \caption{Kriteria Keberhasilan Pengujian Sistem}
+    \label{tab:pengujian} \\
+    \hline
+    \textbf{No} & \textbf{Parameter Pengujian} & \textbf{Kriteria Keberhasilan} \\
+    \hline
+    \endhead
+    \hline
+    1 & Akurasi getaran (RMS) & Galat ≤15\% terhadap vibration analyzer referensi \\
+    \hline
+    2 & Akurasi suhu & Galat ≤5\% terhadap termometer referensi \\
+    \hline
+    3 & \textit{Time-delay} IoT & ≤1000 ms dari pembacaan ke dashboard \\
+    \hline
+    4 & Keberhasilan pengiriman data & ≥99\% paket terkirim \\
+    \hline
+    5 & \textit{Steady-state error} kecepatan & ≤5\% dari setpoint \\
+    \hline
+    6 & Waktu respons notifikasi & ≤2 detik setelah kondisi terdeteksi \\
+    \hline
+    7 & \textit{Usability} (5 teknisi) & ≥80\% responden memahami dashboard \\
+    \hline
+\end{longtable}
+
+
+% ============================================================
+% BAB 4: ANALISIS RISIKO
+% ============================================================
+\section{\RiskAssessmentTitle}
+
+\subsection{\TechFinancialRiskTitle}
+
+\begin{enumerate}
+    \item \textbf{Risiko Teknis:}
+    \begin{itemize}
+        \item Akurasi sensor accelerometer low-cost (MPU6050) mungkin tidak mencapai ≤15\%
+        \item Koneksi Wi-Fi tidak stabil di lingkungan laboratorium
+        \item Keterbatasan memori ESP32 untuk buffer FFT 1024 sampel
+    \end{itemize}
+    \item \textbf{Risiko Finansial:}
+    \begin{itemize}
+        \item Fluktuasi harga komponen (ESP32, sensor)
+        \item Biaya tak terduga untuk komponen pengganti
+    \end{itemize}
+\end{enumerate}
+
+\subsection{\RiskMitigationTitle}
+
+\begin{enumerate}
+    \item \textbf{Mitigasi Risiko Teknis:}
+    \begin{itemize}
+        \item Implementasi kalibrasi two-point pada accelerometer
+        \item Mekanisme reconnect otomatis dan buffering data lokal
+        \item Optimasi kode dan penggunaan PSRAM eksternal jika diperlukan
+    \end{itemize}
+    \item \textbf{Mitigasi Risiko Finansial:}
+    \begin{itemize}
+        \item Buffer anggaran 15\% untuk biaya tak terduga
+        \item Pembelian komponen dari multiple supplier
+    \end{itemize}
+\end{enumerate}
+
+
+% ============================================================
+% BAB 5: ANALISIS FINANSIAL
+% ============================================================
+\section{\FinancialAnalysisTitle}
+
+\subsection{\CostEstimationTitle}
+
+\begin{table}[H]
+\centering
+\caption{Estimasi Biaya Prototipe}
+\begin{tabular}{|l|c|}
+    \hline
+    \textbf{Komponen} & \textbf{Harga (Rp)} \\
+    \hline
+    ESP32 DevKit V1 & 80.000 \\
+    MPU6050 & 50.000 \\
+    DS18B20 & 20.000 \\
+    MAX6675 + Thermocouple K & 120.000 \\
+    ACS712 5A & 35.000 \\
+    Modul TRIAC (MOC3021+BT136) & 25.000 \\
+    Power Supply 5V/2A & 50.000 \\
+    Sensor Kecepatan (IR/Encoder) & 30.000 \\
+    Kabel, PCB, Casing & 100.000 \\
+    Lain-lain (konektor, resistor) & 50.000 \\
+    \hline
+    \textbf{Total} & \textbf{Rp 560.000} \\
+    \hline
+\end{tabular}
+\end{table}
+
+\subsection{\CostBenefitTitle}
+
+\begin{enumerate}
+    \item \textbf{Manfaat Finansial:} Penghematan biaya pembelian vibration analyzer komersial (SKF QuickCollect: Rp26-50 juta)
+    \item \textbf{Manfaat Non-Finansial:}
+    \begin{itemize}
+        \item Pencegahan downtime produksi akibat kerusakan motor
+        \item Peningkatan keselamatan kerja (early warning)
+        \item Nilai edukasi bagi laboratorium ITERA
+    \end{itemize}
+\end{enumerate}
+
+
+% ============================================================
+% DAFTAR PUSTAKA
+% ============================================================
+\section{\ReferencesTitle}
+
+\renewcommand{\refname}{}
+\bibliographystyle{IEEEtran}
+\bibliography{pustaka}
+
+
+% ============================================================
+% DAFTAR SINGKATAN
+% ============================================================
+\section{\AbbrevTitle}
+
+\begin{longtable}{|p{4cm}|p{11cm}|}
+    \caption{Daftar Singkatan (Abbreviations)} \label{tab:abbreviations_el3} \\
+    \hline
+    \textbf{Abbreviation} & \textbf{Definition} \\
+    \hline
+    \endhead
+    \hline 
+    \multicolumn{2}{|r|}{Lanjutan di halaman berikutnya...} \\ 
+    \endfoot
+    \hline
+    \endlastfoot
+    
+    PdM & Predictive Maintenance \\
+    \hline
+    VAT & Vibration Analysis Technique \\
+    \hline
+    FFT & Fast Fourier Transform \\
+    \hline
+    RMS & Root Mean Square \\
+    \hline
+    RPM & Rotations Per Minute \\
+    \hline
+    IoT & Internet of Things \\
+    \hline
+    MQTT & Message Queuing Telemetry Transport \\
+    \hline
+    ESP32 & Espressif Systems 32-bit Microcontroller \\
+    \hline
+    I2C & Inter-Integrated Circuit \\
+    \hline
+    SPI & Serial Peripheral Interface \\
+    \hline
+    PWM & Pulse Width Modulation \\
+    \hline
+    TRIAC & Triode for Alternating Current \\
+    \hline
+    ISO & International Organization for Standardization \\
+    \hline
+    IEC & International Electrotechnical Commission \\
+    \hline
+    IEEE & Institute of Electrical and Electronics Engineers \\
+    \hline
+    SNI & Standar Nasional Indonesia \\
+    \hline
+    UU & Undang-Undang \\
+    \hline
+    Permenaker & Peraturan Menteri Ketenagakerjaan \\
+    \hline
+    K3 & Keselamatan dan Kesehatan Kerja \\
+    \hline
+    SOP & Standard Operating Procedure \\
+    \hline
+    LOTO & Lock-Out/Tag-Out \\
+    \hline
+    UMKM & Usaha Mikro Kecil dan Menengah \\
+    \hline
+    ITERA & Institut Teknologi Sumatera \\
+    \hline
+\end{longtable}
+
+\end{document}
