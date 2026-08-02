@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.7,
-          "height": 1.4,
-          "width": 1.4
+          "drill": 0.8,
+          "height": 1.27,
+          "width": 2.54
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -491,7 +491,7 @@
       "specctra_dsn": "",
       "step": "",
       "svg": "",
-      "vrml": "skematik-monitor.wrl"
+      "vrml": ""
     },
     "page_layout_descr_file": ""
   },
@@ -620,6 +620,30 @@
     [
       "a829869c-96ff-413d-b6a5-644534e66486",
       "Root"
+    ],
+    [
+      "df56853b-d8dc-4f2b-975d-13af0968e568",
+      "Current Sensor A"
+    ],
+    [
+      "17aee9fb-92e2-46d9-b640-e79d1aa66e30",
+      "Current Sensor B"
+    ],
+    [
+      "8ff8e687-5b44-457d-9505-38f36b5e521d",
+      "Protection Relay"
+    ],
+    [
+      "fa493a3f-5a30-40d5-8f88-5e95e0e0f083",
+      "Vibration Sensor A"
+    ],
+    [
+      "b36c3021-aa77-4db6-af9a-e799cc948741",
+      "RPM Sensor"
+    ],
+    [
+      "907f1500-eecf-4bfe-a484-cd5713cb182b",
+      "Temperature Sensor"
     ]
   ],
   "text_variables": {}

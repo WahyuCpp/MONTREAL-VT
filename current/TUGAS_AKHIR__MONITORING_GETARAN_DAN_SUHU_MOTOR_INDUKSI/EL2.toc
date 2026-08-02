@@ -1,0 +1,23 @@
+\babel@toc {indonesian}{}\relax 
+\contentsline {section}{\numberline {1}Tolok Ukur Proyek}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Proyek / Produk Terdahulu}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Riset/Paten Relevan}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Analisis Kesenjangan}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Keterbatasan Solusi yang Ada}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Kontribusi Proyek}{6}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Standar dan Regulasi}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Standar Teknis}{6}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}ISO 20816-1:2016}{6}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}ISO 13373-1:2002}{7}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}ISO 13373-:2006}{8}{subsubsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.4}IEC 60034-1:2022}{8}{subsubsection.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.5}ISO/IEC 20922:2016 (Protokol MQTT)}{8}{subsubsection.3.1.5}%
+\contentsline {subsubsection}{\numberline {3.1.6}ISO 9001:2015}{9}{subsubsection.3.1.6}%
+\contentsline {subsection}{\numberline {3.2}Regulasi}{9}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Undang-Undang Nomor 30 Tahun 2009 tentang Ketenagalistrikan}{9}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Peraturan Menteri Ketenagakerjaan Nomor 5 Tahun 2018 tentang Keselamatan dan Kesehatan Kerja Lingkungan Kerja}{10}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Peraturan DJID (Direktorat Jenderal Infrastruktur Digital) tentang Sertifikasi Perangkat Telekomunikasi}{10}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}Standar Operasional Prosedur (SOP) Keselamatan Laboratorium ITERA}{10}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.5}Standar Nasional Indonesia (SNI) terkait Motor Listrik}{11}{subsubsection.3.2.5}%
+\contentsline {section}{\numberline {4}Referensi}{11}{section.4}%
+\contentsline {section}{\numberline {5}Singkatan}{13}{section.5}%

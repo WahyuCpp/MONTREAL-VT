@@ -1,0 +1,43 @@
+\babel@toc {indonesian}{}\relax 
+\contentsline {section}{\numberline {1}Spesifikasi Sistem}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Spesifikasi Fungsional}{4}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Use Case Diagram}{5}{subsubsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.2}Spesifikasi Non-Fungsional}{6}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Perhitungan Frekuensi Minimum Pengukuran Akselerasi Getaran}{7}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Perhitungan Batas Suhu Housing Maksimum}{7}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Perhitungan Batas Arus Motor Maksimum}{8}{subsubsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.3}Spesifikasi Perangkat Keras}{8}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Spesifikasi Perangkat Lunak}{9}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Kriteria Kinerja dan Evaluasi}{10}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Solusi / Produk yang Diusulkan}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Arsitektur}{11}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}{13}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Subsistem Komunikasi, Cloud, dan Algoritma (KCA)}{14}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Subsistem Desain Alarm dan Sistem Proteksi (DASP)}{17}{subsubsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.2}Fitur Utama}{19}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Keunggulan Dibandingkan Solusi Lain}{19}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Desain Alternatif (Opsional)}{19}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Justifikasi Pemilihan}{19}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Rencana Implementasi}{20}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Struktur Pemecahan Kerja (WBS)}{20}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Jadwal (Diagram Gantt)}{24}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Pembagian Tugas Tim}{24}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Pengujian Sistem}{25}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Analisis Risiko}{28}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Risiko Teknis, Finansial, dan Penerimaan Pengguna}{28}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Mitigasi Risiko}{30}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Analisis Finansial}{31}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Estimasi Biaya Utama}{31}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Biaya Perangkat Keras (\textit {Hardware})}{31}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Biaya Perangkat Lunak (\textit {Software})}{32}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}Biaya Pengujian dan Kalibrasi}{32}{subsubsection.5.1.3}%
+\contentsline {subsubsection}{\numberline {5.1.4}Biaya Operasional}{33}{subsubsection.5.1.4}%
+\contentsline {subsubsection}{\numberline {5.1.5}Rekapitulasi Estimasi Biaya}{33}{subsubsection.5.1.5}%
+\contentsline {subsection}{\numberline {5.2}Analisis Biaya–Manfaat}{33}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Manfaat Teknis}{34}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Manfaat Ekonomi}{34}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Manfaat Operasional}{34}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Manfaat Akademik}{35}{subsubsection.5.2.4}%
+\contentsline {subsubsection}{\numberline {5.2.5}Kesimpulan Analisis Biaya--Manfaat}{35}{subsubsection.5.2.5}%
+\contentsline {section}{\numberline {6}Referensi}{35}{section.6}%
+\contentsline {section}{\numberline {7}Singkatan}{36}{section.7}%
