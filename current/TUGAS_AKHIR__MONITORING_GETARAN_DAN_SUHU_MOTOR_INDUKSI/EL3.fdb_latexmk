@@ -1,20 +1,20 @@
 # Fdb version 4
-["bibtex EL3"] 1785582963.97052 "EL3.aux" "EL3.bbl" "EL3" 1785583012.16952 0
+["bibtex EL3"] 1785998384.46886 "EL3.aux" "EL3.bbl" "EL3" 1785998414.47375 0
   "./pustaka.bib" 1784836042 41303 271ce6a12de559ce1f1bf31f235f7899 ""
-  "EL3.aux" 1785583010 13125 f8f06861155170c797d935de64720449 "pdflatex"
+  "EL3.aux" 1785998412 14500 cb7b8bd9ce06b829be9b6d3f8b802d8b "pdflatex"
   "c:/texlive/2026/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1784861732 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
   (generated)
   "EL3.bbl"
   "EL3.blg"
   (rewritten before read)
-["pdflatex"] 1785582986.78606 "c:/Users/User/Documents/04_TA-Monitoring_Motor_Induksi/current/TUGAS_AKHIR__MONITORING_GETARAN_DAN_SUHU_MOTOR_INDUKSI/EL3.tex" "EL3.pdf" "EL3" 1785583012.17095 0
-  "EL3.aux" 1785583010 13125 f8f06861155170c797d935de64720449 "pdflatex"
-  "EL3.bbl" 1785582964 3207 1e8cc6f82194a1b303340b00436f2a4a "bibtex EL3"
-  "EL3.out" 1785583010 8251 93ed48de90c2ff028df2a8303bbbe0b8 "pdflatex"
-  "EL3.tex" 1785582990 80199 db23b4f9dde8db95d41198d3522b232c ""
-  "EL3.toc" 1785583010 4046 d1ae1a5ecbd7525742a92194524290c4 "pdflatex"
+["pdflatex"] 1785998385.39355 "c:/Users/User/Documents/04_TA-Monitoring_Motor_Induksi/current/TUGAS_AKHIR__MONITORING_GETARAN_DAN_SUHU_MOTOR_INDUKSI/EL3.tex" "EL3.pdf" "EL3" 1785998414.47546 0
+  "EL3.aux" 1785998412 14500 cb7b8bd9ce06b829be9b6d3f8b802d8b "pdflatex"
+  "EL3.bbl" 1785998385 3207 1e8cc6f82194a1b303340b00436f2a4a "bibtex EL3"
+  "EL3.out" 1785998412 8251 93ed48de90c2ff028df2a8303bbbe0b8 "pdflatex"
+  "EL3.tex" 1785998325 83533 985e2123ac27b7bbd8482e6f26a291f1 ""
+  "EL3.toc" 1785998412 4047 f7019dcff8e3ea2f6843db0ef3dfb7ba "pdflatex"
   "bilingual.sty" 1784836042 14011 8039a75f0e6bb5aed34a91c2c00f74be ""
-  "c:/Users/User/Documents/04_TA-Monitoring_Motor_Induksi/current/TUGAS_AKHIR__MONITORING_GETARAN_DAN_SUHU_MOTOR_INDUKSI/EL3.tex" 1785582990 80199 db23b4f9dde8db95d41198d3522b232c ""
+  "c:/Users/User/Documents/04_TA-Monitoring_Motor_Induksi/current/TUGAS_AKHIR__MONITORING_GETARAN_DAN_SUHU_MOTOR_INDUKSI/EL3.tex" 1785998325 83533 985e2123ac27b7bbd8482e6f26a291f1 ""
   "c:/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1784859366 2971 def0b6c1f0b107b3b936def894055589 ""
   "c:/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1784859366 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1784860912 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -22,7 +22,6 @@
   "c:/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/ecsi1200.tfm" 1784860263 3584 76f906ed3d5c5ef20a2687ba265e1ef9 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/ecso1200.tfm" 1784860263 3584 cbe5ebb0a61a12e09a1e9be16b117d04 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/ecss0800.tfm" 1784860263 3584 885a9b5d0df19657ad7066a0c4430437 ""
-  "c:/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/ecss1000.tfm" 1784860263 3584 ab55608ad377891510479d34d90acc46 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/ecss1095.tfm" 1784860263 3584 8ece407347b270c252c46fdfaef5a9ef ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/ecss1200.tfm" 1784860263 3584 db562fb1d1c474cc55f0ce8a1dd94fe7 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/ecss1440.tfm" 1784860263 3584 861af00b50f6fb3ae4544a29a04a7577 ""
@@ -53,7 +52,6 @@
   "c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfso1200.pfb" 1784859366 158660 a2d25fcb17216df731c0a28f23b36349 ""
   "c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb" 1784859366 99931 d244d4dcf6e945454e6769a899e62d70 ""
   "c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb" 1784859366 95441 f3742c04ede4078cb6256b4a44ed48ea ""
-  "c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb" 1784859366 94269 b8638f5578a6059af3119476061f491e ""
   "c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb" 1784859366 97272 e31c1319e3ff43b442c57e2c8f2acc52 ""
   "c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb" 1784859366 95792 f6ef03df3db8497e198f45a1aca9ebce ""
   "c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb" 1784859366 148436 6a185415b8a1b77c58fee2272f3574e2 ""
@@ -244,9 +242,15 @@
   "image/doc/Flowchart-Page-3.png" 1785072985 2801223 dbf1a2e42af67bd9a0b2a823ed0d751c ""
   "image/doc/Flowchart-Part-1-Page-2.png" 1785074030 3280245 2c70469558ba1f9b1e1039d92776384a ""
   "image/doc/arsitektur_sistem_2.png" 1784836042 450559 73e152047cd8b18b3eb47aaaa67340a9 ""
+  "image/doc/device-motor.jpg" 1785767384 171952 c024438f0ae431e4edc5245e3893e4a1 ""
   "image/doc/logo-itera.png" 1784836042 305800 01584d759a6732e0bd6cb3f6a37b9ec1 ""
+  "image/doc/motor-assembled.jpg" 1785765027 151705 dfabd9dbfddbbf8e67d4bc16b0c7fa55 ""
+  "image/doc/motor-disassembled.jpg" 1785764939 168650 4ce24b691fca4fb95d26bffc85eaacfc ""
+  "image/doc/pcb-3d-3-4.png" 1785996639 98404 023b1412d1a828417a3d1a0a44e71880 ""
+  "image/doc/pcb-3d-depan.png" 1785995048 52881 6788e749b65035393f114b18abc31596 ""
+  "image/doc/pcb-layout.pdf" 1785997658 14028 d953239abec078053610fc78cc0ef0e1 ""
   "image/doc/prodi.png" 1784836042 84045 9225deb56ef3fcdab3981e612609ed0d ""
-  "image/doc/skematik-monitor.pdf" 1784836042 148741 cdee31a52528652f4f7673aecd68139c ""
+  "image/doc/skematik-monitor-2.pdf" 1785680220 137231 b3827dd9c900d77b97b402f6e0a8f712 ""
   "image/doc/use_case_2.png" 1784836042 245051 807c748f0f0ab6b344f1a894c559bca5 ""
   (generated)
   "EL3.aux"

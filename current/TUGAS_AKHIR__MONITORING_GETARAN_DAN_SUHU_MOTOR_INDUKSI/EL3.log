@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.7.24)  1 AUG 2026 18:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.7.24)  6 AUG 2026 13:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -855,33 +855,13 @@ Overfull \hbox (35.13318pt too wide) has occurred while \output is active
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 152--153
-[]|\T1/cmss/m/n/12 Mentransmisikan da-ta me-nu-ju clo-
+Underfull \hbox (badness 1237) in paragraph at lines 191--193
+[]|\T1/cmss/m/n/12 Sistem ha-rus mam-pu mem-ban-dingk-an
  []
 
 
-Underfull \hbox (badness 7704) in paragraph at lines 153--155
-[]|\T1/cmss/m/n/12 Upload to clo-ud, cloud-
- []
-
-
-Underfull \hbox (badness 2600) in paragraph at lines 165--167
-[]|\T1/cmss/m/n/12 Memprediksi ke-ru-sak-an ba-gi-an mo-tor
- []
-
-
-Underfull \hbox (badness 1762) in paragraph at lines 174--175
-[]|\T1/cmss/m/n/12 Informasi ke-ru-sak-an ba-gi-an
- []
-
-
-Underfull \hbox (badness 2293) in paragraph at lines 180--180
-[]|\T1/cmss/m/n/12 Mengaktifkan alarm ke-ti-ka pa-ra-me-ter
- []
-
-
-Underfull \hbox (badness 1509) in paragraph at lines 184--185
-[]|\T1/cmss/m/n/12 Rekam per-a-wat-an (ma-in-te-
+Underfull \hbox (badness 1997) in paragraph at lines 222--224
+[]|\T1/cmss/m/n/12 Sistem ha-rus di-leng-ka-pi ak-ses his-to-ri
  []
 
 
@@ -890,43 +870,53 @@ Overfull \hbox (35.13318pt too wide) has occurred while \output is active
  []
 
 [4]
-<image/doc/use_case_2.png, id=298, 420.6114pt x 281.853pt>
+Overfull \hbox (35.13318pt too wide) has occurred while \output is active
+ [][] 
+ []
+
+[5]
+<image/doc/use_case_2.png, id=303, 420.6114pt x 281.853pt>
 File: image/doc/use_case_2.png Graphic file (type png)
 <use image/doc/use_case_2.png>
-Package pdftex.def Info: image/doc/use_case_2.png  used on input line 193.
+Package pdftex.def Info: image/doc/use_case_2.png  used on input line 302.
 (pdftex.def)             Requested size: 364.19667pt x 244.05753pt.
+
+Overfull \hbox (12.5707pt too wide) in paragraph at lines 298--306
+\T1/cmss/m/n/12 Use ca-se di-a-gram meng-i-lus-tra-sik-an in-te-rak-si fung-sio-nal an-ta-ra peng-gu-na dan sis-tem MONTREAL-
+ []
+
 
 Overfull \hbox (35.13318pt too wide) has occurred while \output is active
  [][] 
  []
 
-[5
+[6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.226 
+l.313 
        <./image/doc/use_case_2.png>]
-Underfull \hbox (badness 4205) in paragraph at lines 271--271
+Underfull \hbox (badness 4205) in paragraph at lines 341--341
 []|\T1/cmss/m/n/12 Pengukuran Ge-
  []
 
 
-Underfull \hbox (badness 3746) in paragraph at lines 293--293
+Underfull \hbox (badness 3746) in paragraph at lines 363--363
 []|\T1/cmss/m/n/12 Pengukuran Ke-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 293--293
+Underfull \hbox (badness 10000) in paragraph at lines 363--363
 \T1/cmss/m/n/12 ce-pat-an Pu-tar
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
+Underfull \hbox (badness 10000) in paragraph at lines 391--391
 []|\T1/cmss/m/n/12 Ketahanan Sis-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 337--337
+Underfull \hbox (badness 10000) in paragraph at lines 408--408
 []|\T1/cmss/m/n/12 Autentikasi
  []
 
@@ -935,68 +925,63 @@ Overfull \hbox (35.13318pt too wide) has occurred while \output is active
  [][] 
  []
 
-[6]
-Overfull \hbox (35.13318pt too wide) has occurred while \output is active
- [][] 
- []
-
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 502--502
 []|\T1/cmss/m/n/12 Capacitor-Starter
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 502--502
 \T1/cmss/m/n/12 SPIM (Mo-del
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 431--431
+Underfull \hbox (badness 10000) in paragraph at lines 502--502
 \T1/cmss/m/n/12 ki-pas angin
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 444--444
+Underfull \hbox (badness 10000) in paragraph at lines 515--515
 []|\T1/cmss/m/n/12 Mikrokontroler
  []
 
 
-Underfull \hbox (badness 4792) in paragraph at lines 445--446
+Underfull \hbox (badness 4792) in paragraph at lines 516--517
 \T1/cmss/m/n/12 384KB, SRAM 512KB, SRAM
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 449--450
+Underfull \hbox (badness 10000) in paragraph at lines 520--521
 []\T1/cmss/m/n/12 Bluetooth LE; Blu-e-to-o-th
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 449--450
+Underfull \hbox (badness 10000) in paragraph at lines 520--521
 \T1/cmss/m/n/12 5, Blu-e-to-o-th Me-sh, Spe-ed:
  []
 
 
-Underfull \hbox (badness 2111) in paragraph at lines 451--452
+Underfull \hbox (badness 2111) in paragraph at lines 522--523
 []\T1/cmss/m/n/12 45 GPI-Os: 3 UART, 2 I2Cs,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 456--456
+Underfull \hbox (badness 10000) in paragraph at lines 527--527
 []|\T1/cmss/m/n/12 Sensor ge-tar-an
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 488--488
+Underfull \hbox (badness 10000) in paragraph at lines 559--559
 \T1/cmss/m/n/12 pu-tar mo-tor
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 494--494
+Underfull \hbox (badness 10000) in paragraph at lines 565--565
 []|\T1/cmss/m/n/12 Sistem pro-tek-si
  []
 
 
-Underfull \hbox (badness 1968) in paragraph at lines 499--500
+Underfull \hbox (badness 1968) in paragraph at lines 570--571
 []\T1/cmss/m/n/12 kapasitas mak-si-mum 10 A 250
  []
 
@@ -1011,7 +996,7 @@ Overfull \hbox (35.13318pt too wide) has occurred while \output is active
  []
 
 [9]
-Underfull \hbox (badness 1205) in paragraph at lines 647--648
+Underfull \hbox (badness 1205) in paragraph at lines 718--719
 []|\T1/cmss/m/n/12 Dashboard mam-pu me-nam-pilk-an da-ta
  []
 
@@ -1021,22 +1006,23 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  []
 
 [10]
-<image/doc/arsitektur_sistem_2.png, id=348, 536.2434pt x 463.2507pt>
+<image/doc/arsitektur_sistem_2.png, id=349, 536.2434pt x 463.2507pt>
 File: image/doc/arsitektur_sistem_2.png Graphic file (type png)
 <use image/doc/arsitektur_sistem_2.png>
-Package pdftex.def Info: image/doc/arsitektur_sistem_2.png  used on input line 717.
+Package pdftex.def Info: image/doc/arsitektur_sistem_2.png  used on input line 788.
 (pdftex.def)             Requested size: 364.19667pt x 314.63167pt.
-<image/doc/Flowchart-Page-1.png, id=350, 435.0654pt x 753.0534pt>
-File: image/doc/Flowchart-Page-1.png Graphic file (type png)
-<use image/doc/Flowchart-Page-1.png>
-Package pdftex.def Info: image/doc/Flowchart-Page-1.png  used on input line 732.
-(pdftex.def)             Requested size: 364.19667pt x 630.38881pt.
 
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
  []
 
 [11]
+<image/doc/Flowchart-Page-1.png, id=358, 435.0654pt x 753.0534pt>
+File: image/doc/Flowchart-Page-1.png Graphic file (type png)
+<use image/doc/Flowchart-Page-1.png>
+Package pdftex.def Info: image/doc/Flowchart-Page-1.png  used on input line 803.
+(pdftex.def)             Requested size: 364.19667pt x 630.38881pt.
+
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
  []
@@ -1045,8 +1031,8 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.736 
-       <./image/doc/arsitektur_sistem_2.png>]
+l.819     \item \textbf
+                       {Modul Sensor Akselerometer ADXL345}: Modul sensor ak... <./image/doc/arsitektur_sistem_2.png>]
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
  []
@@ -1055,73 +1041,131 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.743 
-       <./image/doc/Flowchart-Page-1.png>]
+l.819     \item \textbf
+                       {Modul Sensor Akselerometer ADXL345}: Modul sensor ak... <./image/doc/Flowchart-Page-1.png>]
+<image/doc/skematik-monitor-2.pdf, id=376, 845.0531pt x 597.52838pt>
+File: image/doc/skematik-monitor-2.pdf Graphic file (type pdf)
+<use image/doc/skematik-monitor-2.pdf>
+Package pdftex.def Info: image/doc/skematik-monitor-2.pdf  used on input line 830.
+(pdftex.def)             Requested size: 364.19667pt x 257.52483pt.
+<image/doc/pcb-layout.pdf, id=377, 597.55246pt x 421.09319pt>
+File: image/doc/pcb-layout.pdf Graphic file (type pdf)
+<use image/doc/pcb-layout.pdf>
+Package pdftex.def Info: image/doc/pcb-layout.pdf  used on input line 837.
+(pdftex.def)             Requested size: 364.19667pt x 256.65442pt.
+<image/doc/pcb-3d-depan.png, id=378, 1092.08pt x 624.3325pt>
+File: image/doc/pcb-3d-depan.png Graphic file (type png)
+<use image/doc/pcb-3d-depan.png>
+Package pdftex.def Info: image/doc/pcb-3d-depan.png  used on input line 847.
+(pdftex.def)             Requested size: 218.51521pt x 124.92145pt.
+<image/doc/pcb-3d-3-4.png, id=379, 1092.08pt x 624.3325pt>
+File: image/doc/pcb-3d-3-4.png Graphic file (type png)
+<use image/doc/pcb-3d-3-4.png>
+Package pdftex.def Info: image/doc/pcb-3d-3-4.png  used on input line 854.
+(pdftex.def)             Requested size: 218.51521pt x 124.92145pt.
+<image/doc/motor-assembled.jpg, id=380, 1154.06157pt x 598.48593pt>
+File: image/doc/motor-assembled.jpg Graphic file (type jpg)
+<use image/doc/motor-assembled.jpg>
+Package pdftex.def Info: image/doc/motor-assembled.jpg  used on input line 866.
+(pdftex.def)             Requested size: 218.51521pt x 113.32082pt.
+<image/doc/motor-disassembled.jpg, id=381, 1154.06157pt x 598.48593pt>
+File: image/doc/motor-disassembled.jpg Graphic file (type jpg)
+<use image/doc/motor-disassembled.jpg>
+Package pdftex.def Info: image/doc/motor-disassembled.jpg  used on input line 873.
+(pdftex.def)             Requested size: 218.51521pt x 113.32082pt.
+<image/doc/device-motor.jpg, id=382, 1154.06157pt x 598.48593pt>
+File: image/doc/device-motor.jpg Graphic file (type jpg)
+<use image/doc/device-motor.jpg>
+Package pdftex.def Info: image/doc/device-motor.jpg  used on input line 881.
+(pdftex.def)             Requested size: 364.19667pt x 188.87108pt.
+
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
  []
 
 [14]
-<image/doc/Flowchart-Part-1-Page-2.png, id=388, 579.6054pt x 1099.9494pt>
+Overfull \hbox (40.57318pt too wide) has occurred while \output is active
+ [][] 
+ []
+
+[15
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.936 \end{enumerate}
+                     
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.936 \end{enumerate}
+                      <./image/doc/skematik-monitor-2.pdf> <./image/doc/pcb-layout.pdf>]
+<image/doc/Flowchart-Part-1-Page-2.png, id=414, 579.6054pt x 1099.9494pt>
 File: image/doc/Flowchart-Part-1-Page-2.png Graphic file (type png)
 <use image/doc/Flowchart-Part-1-Page-2.png>
-Package pdftex.def Info: image/doc/Flowchart-Part-1-Page-2.png  used on input line 812.
+Package pdftex.def Info: image/doc/Flowchart-Part-1-Page-2.png  used on input line 941.
 (pdftex.def)             Requested size: 318.66948pt x 604.75586pt.
 
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
  []
 
-[15]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 818.
-
+[16
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.965 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.965 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.7}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.965 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.965 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.965 
+       <./image/doc/pcb-3d-depan.png> <./image/doc/pcb-3d-3-4.png> <./image/doc/motor-assembled.jpg> <./image/doc/motor-disassembled.jpg> <./image/doc/device-motor.jpg>]
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
  []
 
-[16
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3}) has been already used, duplicate ignored
+[17
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.833 
+l.965 
        <./image/doc/Flowchart-Part-1-Page-2.png>]
-<image/doc/Flowchart-Page-3.png, id=406, 521.7894pt x 1013.2254pt>
+<image/doc/Flowchart-Page-3.png, id=434, 521.7894pt x 1013.2254pt>
 File: image/doc/Flowchart-Page-3.png Graphic file (type png)
 <use image/doc/Flowchart-Page-3.png>
-Package pdftex.def Info: image/doc/Flowchart-Page-3.png  used on input line 851.
+Package pdftex.def Info: image/doc/Flowchart-Page-3.png  used on input line 980.
 (pdftex.def)             Requested size: 318.66948pt x 618.8087pt.
 
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
  []
 
-[17]
-Overfull \hbox (40.57318pt too wide) has occurred while \output is active
- [][] 
- []
-
-[18
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2.4}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.863     \item \textbf
-                       {Notifikasi Kondisi dan Informasi Perkiraan Kerusakan... <./image/doc/Flowchart-Page-3.png>]
-<image/doc/skematik-monitor.pdf, id=437, 845.0531pt x 597.52838pt>
-File: image/doc/skematik-monitor.pdf Graphic file (type pdf)
-<use image/doc/skematik-monitor.pdf>
-Package pdftex.def Info: image/doc/skematik-monitor.pdf  used on input line 890.
-(pdftex.def)             Requested size: 364.19667pt x 257.52483pt.
-
+[18]
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
  []
 
 [19
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2.5}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2.11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.898     \item \textbf
-                       {Alasan Penolakan:} Solusi ini tidak memenuhi kebutuh... <./image/doc/skematik-monitor.pdf>]
+l.1014     \item \textbf
+                        {Alasan Penolakan:} Meskipun pemrosesan lokal dapat ... <./image/doc/Flowchart-Page-3.png>]
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
  []
@@ -1142,17 +1186,17 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  []
 
 [23]
-Underfull \hbox (badness 10000) in paragraph at lines 1210--1211
+Underfull \hbox (badness 10000) in paragraph at lines 1333--1334
 []|\T1/cmss/m/n/12 Mahasiswa A
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1212--1213
+Underfull \hbox (badness 10000) in paragraph at lines 1335--1336
 []|\T1/cmss/m/n/12 Instalasi Sen-sor dan
  []
 
 
-Underfull \hbox (badness 2065) in paragraph at lines 1228--1229
+Underfull \hbox (badness 2065) in paragraph at lines 1351--1352
 []|\T1/cmss/m/n/12 Threshold Alarm dan
  []
 
@@ -1165,7 +1209,7 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
 pdfTeX warning (ext4): destination with the same identifier (name{table.3.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1236 
+l.1359 
        ]
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
@@ -1175,64 +1219,64 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
 pdfTeX warning (ext4): destination with the same identifier (name{table.3.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1251 
+l.1374 
        ]
-Underfull \hbox (badness 10000) in paragraph at lines 1273--1273
+Underfull \hbox (badness 10000) in paragraph at lines 1396--1396
 []|\T1/cmss/m/n/12 Akurasi sen-sor ge-tar-an
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1279--1279
+Underfull \hbox (badness 10000) in paragraph at lines 1402--1402
 []|\T1/cmss/m/n/12 Akurasi sen-sor su-hu
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1280--1280
+Underfull \hbox (badness 10000) in paragraph at lines 1403--1403
 []|\T1/cmss/m/n/12 Dibandingkan de-ngan
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1285--1285
+Underfull \hbox (badness 10000) in paragraph at lines 1408--1408
 []|\T1/cmss/m/n/12 Akurasi sen-sor arus
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1286--1286
+Underfull \hbox (badness 10000) in paragraph at lines 1409--1409
 []|\T1/cmss/m/n/12 Dibandingkan de-ngan
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1292--1292
+Underfull \hbox (badness 10000) in paragraph at lines 1415--1415
 []|\T1/cmss/m/n/12 Dibandingkan de-ngan
  []
 
 
-Underfull \hbox (badness 1325) in paragraph at lines 1304--1304
+Underfull \hbox (badness 1325) in paragraph at lines 1427--1427
 []|\T1/cmss/m/n/12 Pengukuran wak-tu pe-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1310--1310
+Underfull \hbox (badness 10000) in paragraph at lines 1433--1433
 []|\T1/cmss/m/n/12 Dibandingkan de-ngan
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1316--1316
+Underfull \hbox (badness 10000) in paragraph at lines 1439--1439
 []|\T1/cmss/m/n/12 Dibandingkan de-ngan
  []
 
 
-Underfull \hbox (badness 4940) in paragraph at lines 1323--1324
+Underfull \hbox (badness 4940) in paragraph at lines 1446--1447
 []|\T1/cmss/m/n/12 Akurasi kla-si-fi-ka-si $\OMS/cmsy/m/n/12 ^^U$
  []
 
 
-Underfull \hbox (badness 2875) in paragraph at lines 1329--1330
+Underfull \hbox (badness 2875) in paragraph at lines 1452--1453
 []|\T1/cmss/m/n/12 Sesuai kon-di-si ak-tu-al
  []
 
 
-Underfull \hbox (badness 1092) in paragraph at lines 1334--1334
+Underfull \hbox (badness 1092) in paragraph at lines 1457--1457
 []|\T1/cmss/m/n/12 Simulasi me-le-wa-ti ni-lai
  []
 
@@ -1250,7 +1294,7 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
 pdfTeX warning (ext4): destination with the same identifier (name{table.3.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1418 
+l.1541 
        ]
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
@@ -1260,14 +1304,14 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
 pdfTeX warning (ext4): destination with the same identifier (name{table.3.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1441     \item \textbf
+l.1564     \item \textbf
                         {Akurasi Sensor dan Noise Lingkungan:} Sensor aksele...]
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
  []
 
 [29]
-Overfull \hbox (7.82083pt too wide) in paragraph at lines 1471--1472
+Overfull \hbox (7.82083pt too wide) in paragraph at lines 1594--1595
 []\T1/cmss/bx/n/12 Kompatibilitas Ha-rdwa-re/Software: \T1/cmss/m/n/12 Mem-ba-gi beb-an ker-ja me-la-lui sis-tem Cloud-
  []
 
@@ -1290,12 +1334,12 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
 pdfTeX warning (ext4): destination with the same identifier (name{table.5.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1615 
+l.1738 
        
 pdfTeX warning (ext4): destination with the same identifier (name{table.5.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1615 
+l.1738 
        ]
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
@@ -1305,17 +1349,17 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
 pdfTeX warning (ext4): destination with the same identifier (name{table.5.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1690 
+l.1813 
        
 pdfTeX warning (ext4): destination with the same identifier (name{table.5.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1690 
+l.1813 
        
 pdfTeX warning (ext4): destination with the same identifier (name{table.5.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1690 
+l.1813 
        ]
 Overfull \hbox (40.57318pt too wide) has occurred while \output is active
  [][] 
@@ -1325,9 +1369,9 @@ Overfull \hbox (40.57318pt too wide) has occurred while \output is active
 pdfTeX warning (ext4): destination with the same identifier (name{table.5.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1740 
+l.1863 
        ]
-Overfull \hbox (15.58182pt too wide) in paragraph at lines 1745--1746
+Overfull \hbox (15.58182pt too wide) in paragraph at lines 1868--1869
 \T1/cmss/m/n/12 mem-ba-ngun sis-tem mo-ni-to-ring ge-tar-an dan su-hu pa-da mo-tor in-duk-si ada-lah se-ki-tar \T1/cmss/bx/n/12 Rp1.400.000\T1/cmss/m/n/12 .
  []
 
@@ -1352,18 +1396,18 @@ Package rerunfilecheck Info: File `EL3.out' has not changed.
 (rerunfilecheck)             Checksum: 93ED48DE90C2FF028DF2A8303BBBE0B8;8251.
  ) 
 Here is how much of TeX's memory you used:
- 31872 strings out of 467168
- 640714 string characters out of 5413705
- 1119557 words of memory out of 5000000
- 60394 multiletter control sequences out of 15000+600000
- 641899 words of font info for 67 fonts, out of 8000000 for 9000
+ 31867 strings out of 467168
+ 641565 string characters out of 5413705
+ 1123933 words of memory out of 5000000
+ 60395 multiletter control sequences out of 15000+600000
+ 641138 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 114i,16n,122p,1186b,661s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsi1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfso1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb>
-Output written on EL3.pdf (37 pages, 3749987 bytes).
+ 114i,16n,122p,1186b,643s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsi1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfso1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss0600.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb><c:/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfsx1728.pfb>
+Output written on EL3.pdf (37 pages, 4378923 bytes).
 PDF statistics:
- 755 PDF objects out of 1000 (max. 8388607)
- 639 compressed objects within 7 object streams
- 193 named destinations out of 1000 (max. 500000)
- 533 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 754 PDF objects out of 1000 (max. 8388607)
+ 632 compressed objects within 7 object streams
+ 188 named destinations out of 1000 (max. 500000)
+ 563 words of extra memory for PDF output out of 10000 (max. 10000000)
 

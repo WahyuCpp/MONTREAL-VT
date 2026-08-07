@@ -94,19 +94,23 @@ dicapai oleh fungsi sistem tersebut.
 \subsection{\FunctionalSpecTitle}
 Spesifikasi fungsional mencakup kemampuan yang harus 
 dimiliki oleh sistem agar memenuhi tujuan pemantauan 
-kondisi motor serperti tercantum pada tabel \ref{tab:fungsional}.
-
+kondisi motor seperti yang tercantum pada tabel \ref{tab:fungsional}.
+Spesifikasi ini mendefinisikan seluruh fungsi
+yang harus dipenuhi sistem agar mampu melaksanakan proses
+akuisisi data, pemrosesan sinyal, komunikasi data, 
+analisis kondisi, visualisasi, serta mekanisme proteksi
+secara terpadu. 
 \renewcommand{\arraystretch}{1.3}
 \begin{longtable}{|p{1.5cm}|p{7cm}|p{5cm}|}
     \caption{Spesifikasi Fungsional Sistem} \label{tab:fungsional} \\
     \hline
-    \textbf{Kode} & \textbf{Spesifikasi Fungsional} & \textbf{Tujuan} \\
+    \textbf{No.} & \textbf{Spesifikasi Fungsional} & \textbf{Tujuan} \\
     \hline
     \endfirsthead
     
     \multicolumn{3}{c}{\tablename\ \thetable\ -- \textit{lanjutan dari halaman sebelumnya}} \\
     \hline
-    Kode & \textbf{Spesifikasi Fungsional} & \textbf{Tujuan} \\
+    \textbf{No.} & \textbf{Spesifikasi Fungsional} & \textbf{Tujuan} \\
     \hline
     \endhead
     
@@ -117,129 +121,195 @@ kondisi motor serperti tercantum pada tabel \ref{tab:fungsional}.
     \hline
     \endlastfoot
     
-    F01 
-    & Mengukur parameter akselerasi getaran 
-    & Vibration Analysis\\
+    1 
+    & Sistem harus mampu mengukur parameter 
+    akselerasi getaran 
+    & \textit{Vibration analysis}\\
     \hline
 
-    F02 
-    & Mengukur suhu housing motor
-    & Deteksi panas berlebih
+    2 
+    & Sistem harus mampu mengukur suhu housing 
+    motor
+    & Deteksi panas winding
     
-    Tren suhu\\
+    Mengukur tren suhu winding\\
     \hline
 
-    F03 
-    & Mengukur arus motor 
-    & Pemantauan kondisi 
-    pembebanan dan arus \\
-    \hline
-
-    F04 & Mengukur kecepatan rotasi (RPM) & Deteksi 
-    perubahan kecepatan dan slip \\
-    \hline
-
+    3 
+    & Sistem harus mampu mengukur arus motor 
+    & Deteksi overcurrent
     
-    F05 & Mengkonversi sinyal analog sensor menjadi 
-    digital & Akuisisi data \\
+    Mengukur tren arus motor\\
     \hline
-    F06 & Menerapkan pengkondisian sinyal pada keluaran 
-    sensor & Peningkatan kualitas sinyal \\
+
+    4 
+    & Sistem harus mampu mengukur kecepatan rotasi shaft 
+    & Deteksi perubahan kecepatan dan slip pada
+    shaft \\
     \hline
-    F07 & Time-stamp setiap pengukuran & Sinkronisasi 
-    parameter \\
+
+    5 
+    & Sistem harus mampu mengkondisikan sinyal 
+    sensor sebelum atau disaat dikirimkan ke
+    mikrokontroler 
+    & Peningkatan kualitas sinyal \\
     \hline
-    F08 & Mentransmisikan data menuju cloud/server 
-    menggunakan Wi-Fi & Upload to cloud, cloud-computing,
-    remote monitoring \\
+
+    6 
+    & Sistem harus mampu memberikan
+    time-stamp pada setiap parameter ukur 
+    & Sinkronisasi parameter ukur \\
     \hline
-    F09 & Menyimpan riwayat pengukuran pada basis data
-    serverless & Analisis data historis \\
+
+    7 
+    & Sistem harus mampu mentransmisikan data
+     menuju cloud/server menggunakan Wi-Fi 
+     & \textit{Cloud computing} \\
     \hline
-    F10 & Menerapkan FFT pada data getaran & Deteksi 
-    kerusakan melalui data domain-frekuensi\\
+
+    8 
+    & Sistem harus dilengkapi dengan metode
+    penyimpanan data eksternal (SD Card)
+    & \textit{Backup storage}\\
     \hline
-    F11 & Menghitung indikator getaran (RMS, Peak, 
-    Peak-to-Peak, dsb) & Penilaian kondisi mekanis \\
+    
+    9
+    & Sistem harus mampu menyimpan data historis
+    dalam basis data serverless
+    & Analisis data historis \\
     \hline
-    F12 & Memprediksi kerusakan bagian motor berlandaskan
-    signature getaran yang tercantum pada ISO 20816 dan 
-    13373 & Klasifikasi kerusakan \\
+
+    10
+    & Sistem harus mampu memroses data getaran;
+    mengkonversi data akselerasi menjadi data kecepatan
+    getaran dan kecepatan RMS, dan mengubah 
+    data domain waktu menjadi domain frekuensi
+    & \textit{Vibration analysis}\\
     \hline
-    F13 & Mengkalkulasikan Health Index Motor & Penilaian
-    kesehatan motor secara keseluruhan \\
+
+    11 
+    & Sistem harus mampu membandingkan pola getaran
+    pada analisis frekuensi dengan data referensi
+    & \textit{Fault prediction} \\
     \hline
-    F14 & Mengklasifikasikan tingkat kesehatan motor & Penilaian kesehatan motor secara keseluruhan \\
+
+    12 
+    & Sistem harus mampu menghitung parameter
+    \textit{Motor Health Index} (MHI) 
+    & \textit{Condition rating} \\
     \hline
-    F15 & Memberikan perkiraan kerusakan pada bagian motor & Informasi kerusakan bagian motor \\
+
+    13
+    & Sistem harus mampu menampilkan data akuisisi real-time pada 
+    dashboard 
+    & \textit{Remote condition monitoring} \\
     \hline
-    F16 & Menampilkan data akuisisi real-time pada dashboard & Pemantauan melalui HMI \\
+
+    14 
+    & Sistem harus mampu menampilkan tren historis getaran, arus, 
+    suhu, dan rotasi shaft 
+    & \textit{Remote condition monitoring} \\
     \hline
-    F17 & Menampilkan tren historis getaran, arus, suhu, dan RPM & Predictive Maintenance \\
+
+    15
+    & Sistem harus dilengkapi dengan mekanisme
+    alarm dan proteksiketika parameter 
+    melebihi batas yang telah ditentukan 
+    & Proteksi sistem \\
     \hline
-    F18 & Mengaktifkan alarm ketika parameter melebihi batas yang telah ditentukan & Peringatan awal \\
-    \hline
-    F19 & Mengaktifkan output proteksi (SSR) pada kondisi kritis & Mencegah kerusakan motor \\
-    \hline
-    F20 & Log event alarm & Rekam perawatan (maintenance) \\
+
+    16 
+    & Sistem harus dilengkapi akses histori
+    alarm dan perawatan 
+    & \textit{Maintenance logging} \\
     \hline
 \end{longtable}
 
-\subsubsection{Use Case Diagram}
-% Gambar \ref{fig:use_case} menjelaskan mengenai interaksi operator dan sistem.
+Fungsi utama sistem paling utama tercantum seperti pada poin 1-4
+adalah kemampuan sistem melakukan pembacaan, pengolahan,
+parameter operasional motor yang telah ditetapkan, yakni akselerasi getaran
+suhu housing, arus motor, dan kecepatan rotasi shaft. Parameter
+tersebut merepresentasikan indikator utama kesehatan motor.
 
-\begin{figure}[t!]
+Data getaran digunakan untuk mendeteksi kerusakan mekanis 
+(contoh: unbalance, misalignment, bearing fault), sedangkan data
+suhu housing berfungsi sebagai identfikasi peningkatan suhu
+akibat kerusakan winding. Pengukuran arus dimanfaatkan untuk
+memantau kondisi pembebanan dan deteksi overcurrent, sementara kecepatan rotasi
+digunakan untuk mengidentifikasi adanya perubahan kecepatan
+maupun slip yang mampu mengindikasikan gangguan mekanis atau
+elektrik pada motor.
+
+Sebelum data diproses lebih lanjut pad mikrokontroler,
+sistem harus mampu melakukan pengkondisian sinyal
+(\textit{signal conditioning}) (poin 5) sebelum dikirimkan atau 
+pada mikrokontroler agar kualitas sinyal sesuai dengan
+spesifikasi tegangan pin mikrokontroler.
+Sistem juga harus mampu memberikan \textit{time-stamp}
+pada setiap parameter ukur untuk menjamin
+sinkronisasi data antarparameter sehingga data
+dapat dianalisis secara akurat (poin 6).
+
+Selanjutnya, sistem dirancang untuk mendukung arsitektur
+cloud computing dengan memanfaatkan Wi-Fi sebagai media
+transmisi data menuju server (poin 7). Untuk meningkatkan keandalan,
+data juga disimpan secara lokal menggunakan media penyimpanan eksternal
+sebagai mekanisme backup storage apabila terjadi
+gangguan komunikasi (poin 8). Data historis disimpan pada basis
+data serverless sehingga riwayat operasi motor dapat diakses untuk
+keperluan analisis jangka panjang dan keperluan evaluasi 
+motor (poin 9).
+
+Pada tahap pemrosesan tingkat lanjut, sistem 
+harus mampu mengolah data akselerasi getaran, hal ini meliputi
+proses konversi data akselerasi menjadi kecepatan getaran dan
+kecepatan rms, serta transformasi sinyal dari domain waktu
+ke domain frekuensi menggunakan metode Fast Fourier Transform (FFT) (poin 10).
+Hasil analisis domain frekuensi data getaran 
+akan dibandingkan dengan data referensi untukm
+endeteksi adanya pola getaran yang mengindikasikan
+kerusakan mekanis pada motor (poin 11).
+
+Data getaran, bersamaan dengan data suhu, arus, dan 
+kecepatan rotasi shaft, digunakan untuk menghitung
+parameter \textit{Motor Health Index} (MHI) (poin 12),
+parameter MHI berguna untuk indikasi tingkat kesehatan motor
+secara keseluruhan dan perhitungan sisa umur motor.
+
+Sebagai komponen antarmuka pengguna, sistem harus mampu
+menyajikan data hasil pengukuran secara real-time pada dashboard (poin 13),
+serta menampilkan tren historis dari seluruh parameter yang dipantau (poin 14).
+Penyajian data historis bertujuan agar pengguna dapat mengakses
+data historis motor untuk keperluan analisis perkembangan kondisi motor,
+sehingga proses pengambilan keputusan pemeliharaan 
+dapat dilakukan dengan lebih objektif.
+
+Terakhir, sistem harus dilengkapi dengan mekanisme 
+alarm dan proteksi yang akan aktif apabila parameter operasi arus dan suhu
+melampaui batas yang telah ditentukan (poin 14-15). 
+Selain memberikan notifikasi kondisi motor abnormal, sistem
+harus menyediakan fiture pencatatan histori alarm dan aktivitas perawatan
+(\textit{maintenance logging}). Dokumentasi tersebut berfungsi
+sebagai rekam jejak operasional motor yang dapat dimanfaatkan
+untuk evaluasi efektivitas pemeliharaan, analisis akar gangguan, serta
+perencanaan predictive maintenance di masa mendatang (poin 16).
+
+\subsubsection{Use Case Diagram}
+Use case diagram mengilustrasikan interaksi fungsional antara
+pengguna dan sistem MONTREAL-VT.
+\begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\textwidth]{image/doc/use_case_2.png} % Ganti dengan path diagram Anda
     \caption{Diagram Use Case MONTREAL-VT}
     \label{fig:use_case}
 \end{figure}
 
-% \subsubsection{Diagram Alir Sistem}
-% Diagram alir menunjukkan cara kerja MONTREAL-VT dari inisialisasi sistem, proses akuisisi data, pemrograman sistem, hingga visualisasi dan notifikasi seperti pada gambar \ref{fig:flowchart} 
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=\textwidth, height=0.7\textheight]{image/doc/flowchart_3.png}
-%     \caption{Flowchart sistem MONTREAL-VT Opsi 1}
-%     \label{fig:flowchart}
-% \end{figure}
-
-Desain kerja MONTREAL-VT dimulai dari inisialisasi 
-komponen pada sistem, yakni mikrokontroler, sumber arus,
-sensor, pengkondisian sinyal, dan komponen proteksi. 
-Sensor mengukur data akselerasi getaran, 
-suhu housing, arus listrik motor, dan kecepatan torsi, kumpulan data ini
-tergolong sebagai data mentah. Data perolehan
-sensor ini dikirimkan dalam bentuk sinyal yang akan 
-dipre-proses pada proses pengkondisian sinyal baik pada
-sistem pengkondisian analog ataupun digital pada mikrokontroler.
-
-Lalu, sinyal yang telah dikondisikan akan dikonversi
-menjadi data digital yang dikirimkan ke server cloud
-dengan memanfaatkan modul Wi-Fi pada mikrokontroler.
-Apabila tidak terdapat koneksi Wi-Fi, data akan disimpan
-sementara pada memori eksternal (SD Card) hingga sistem
-mendapatkan koneksi Wi-Fi. Data yang telah dikirimkan ke
-server cloud disimpan pada basis data tabel A. Tabel A meliputi
-data mentah yang telah dikondisikan.
-
-Data tabel A akan diproses dalam 2 tahapan, yakni serial plotting
-data mentah yang divisualisasikan secara real-time, dan pemrosesan sinyal akselerasi getaran
-untuk mendapatkan indikator kecepatan getaran (cite ISO 13373).
-Data kecepatan dan percepatan getaran akan digunakan untuk memprediksi
-kerusakan bagian motor berdasarkan signature getaran yang tercantum pada
-ISO 13373-1 lampiran C. Hasil pemrosesan lebih lanjut pada 
-data getaran dikombinasikan dengan tren suhu, arus, dan RPM untuk
-menghitung Indeks Kesehatan Motor (MHI) yang digunakan untuk
-menilai tingkat kesehatan dan memprediksi sisa umur motor.
-
-Selain sistem pemantauan, MONTREAL-VT dilengkapi dengan
-sistem alarm dan proteksi. Sistem proteksi ini menggunakan
-parameter ambang batas pada parameter arus dan suhu.
-
-
-
+Pada gambar \ref{fig:use_case}, aktor utama dari sistem
+adalah administrator atau user yang memiliki bertanggung jawab
+dalam pengoperasian dan pengawasan platform monitoring. 
+User memiliki hak akses untuk memulai sistem, mengakses data melalui
+dashboard setelah proses autentikasi pengguna dan data riwayat,
+menerima notifikasi alarm, dan melakukan pengaturan sistem proteksi.
 
 \subsection{\NonFunctionalSpecTitle}
 
@@ -268,7 +338,7 @@ parameter ambang batas pada parameter arus dan suhu.
     \hline
     \endlastfoot
 
-    NF01 & Pengukuran Getaran &
+    1 & Pengukuran Getaran &
     Target bandwidth fault, $f_{max}=300Hz$
 
     $F_{s}=2 \times f_{max}=600Hz$
@@ -276,75 +346,76 @@ parameter ambang batas pada parameter arus dan suhu.
     \\
     \hline
 
-    NF02 & Pengukuran Suhu &
+    2 & Pengukuran Suhu &
     $F{s}=1Hz$
     
     Galat absolut,$\Delta=\pm 0.5^\circ C$, suhu ruang
     \\
     \hline
 
-    NF03 & Frekuensi Pengukuran Arus &
+    3 & Frekuensi Pengukuran Arus &
     $F_{s}=1Hz$
     
      $\%error=4\%$    
     \\
     \hline
 
-    NF04 & Pengukuran Kecepatan Putar (RPM) &
+    4 & Pengukuran Kecepatan Putar (RPM) &
     $F_{s}=1400RPM/60s$
     $F_{s}=23.3Hz$
     \\
     \hline
 
-    NF05 & MQTT &
+    5 & MQTT &
     1s publish interval
     \\
     \hline
 
-    NF06 & Dashboard &
+    6 & Dashboard &
     1s latency (maks)
     \\
     \hline
 
-    NF07 & Interval pembaruan MHI &
+    7 & Interval pembaruan MHI &
     1s (maks)
     \\
     \hline
 
-    NF08 &  Deteksi fault dan proteksi &
+    8 &  Deteksi fault dan proteksi &
     3s delay (maks), sebelum notifikasi
     
     5s delay (maks), sebelum pemutusan arus
     \\
     \hline
 
-    NF09 & Ketahanan Sistem &
+    9 & Ketahanan Sistem &
     24 jam operasional
     \\
     \hline
-    NF10 & FFT &
+
+    10 & FFT &
     1024 buffer size
 
     update latency 60s
     \\
     \hline
     
-    NF10 & Koneksi &
+    11 & Koneksi &
     ESP32 reconnect otomatis ketika Wi-Fi terputus
     \\
     \hline
     
-    NF11 & Autentikasi Dashboard &
+    12 & Autentikasi Dashboard &
     Dashboard hanya dapat diakses oleh otoritas yang diberi akses berupa password dan nomor ID.
     \\
     \hline
 
-    NF12 & Kompatibilitas &
+    13 & Kompatibilitas &
     Dashboard dapat diakses melalui browser PC, dan android.
     \\
     \hline
 
-    NF13 & Maintanability &
+    14 & Maintanability &
     Software dikembangkan secara modular sehingga mudah dipelihara dan dikembangkan
     \\
     \hline
@@ -727,7 +798,7 @@ Gambar \ref{fig:arsitektur} memaparkan arsitektur sistem MONTREAL-VT, terdiri at
 \subsubsection{Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
 % \textit{Penjelasan: Fokus pada semua komponen fisik yang bertugas mengumpulkan data dari lingkungan. Sebutkan jenis sensor, mikrokontroler, dan modul-modul lain yang terlibat. Jelaskan bagaimana data dikumpulkan dan diproses secara lokal sebelum dikirim. }
 
-\begin{figure}[H]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=0.8\textwidth]{image/doc/Flowchart-Page-1.png} % Ganti dengan path diagram Anda
     \caption{Flowchart Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
@@ -753,7 +824,65 @@ Subsistem ini bertanggung jawab untuk instalasi, pengumpulan, dan pemrosesan sin
     \item \textbf{Kapasitor:} Kapasitor digunakan sebagai decoupling/bypass capacitor untuk mengurangi ripple tegangan serta meredam noise tinggi, filter RC.
     \item \textbf{Resistor:} Resistor berfungsi untuk membatasi arus, mengatur level tegangan, serta membentuk konfigurasi yang sesuai.
 \end{enumerate}
-% Data yang terkumpul dari sensor akan diproses dan difilter di mikrokontroler sebelum dikirim ke subsistem komunikasi.
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{image/doc/skematik-monitor-2.pdf} % Ganti dengan path diagram Anda
+    \caption{Skematik Rangkaian Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
+    \label{fig:skematik-isps}
+\end{figure}
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{image/doc/pcb-layout.pdf} % Ganti dengan path diagram Anda
+    \caption{Layout PCB Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
+    \label{fig:layout-pcb-isps}
+\end{figure}
+
+\begin{figure}[t!]
+    \centering
+    
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/doc/pcb-3d-depan.png}
+        \caption{3D View PCB Tampak Depan}
+        \label{fig:3d-pcb-depan}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/doc/pcb-3d-3-4.png}
+        \caption{3D View PCB Tampak Belakang}
+        \label{fig:3d-pcb-belakang}
+    \end{minipage}
+    
+\end{figure}
+
+\begin{figure}[t!]
+    \centering
+    
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/doc/motor-assembled.jpg}
+        \caption{Konstruksi Motor Induksi Penelitian}
+        \label{fig:motor-assembled}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/doc/motor-disassembled.jpg}
+        \caption{Konstruksi Motor Induksi Penelitian (disassembled)}
+        \label{fig:motor-disassembled}
+    \end{minipage}
+\end{figure}
+    
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{image/doc/device-motor.jpg} % Ganti dengan path diagram Anda
+    \caption{Lokasi Instalasi Device}
+    \label{fig:instalasi-device}
+\end{figure}
+
 
 %%=========================Contoh Kode List, dan Algoritma==================================%%
 % Contoh  Penulisan Algoritma  di Latex seperti pada Algoritme \autoref{alg:contoh1}:
@@ -807,29 +936,29 @@ Subsistem Komunikasi, Cloud, dan Algoritma (KCA) bertugas menghubungkan perangka
 \end{enumerate}
 Data di cloud kemudian dapat diakses oleh subsistem visualisasi dan kontrol dari mana saja.
 
-\begin{figure}[H]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=0.7\textwidth]{image/doc/Flowchart-Part-1-Page-2.png} % Ganti dengan path diagram Anda
     \caption{Flowchart Subsistem Komunikasi, Cloud, dan Algoritma (KCA)}
     \label{fig:flowchart_kca}
 \end{figure}
 
-\begin{algorithm}[H]
-\caption{Pembacaan Sensor Suhu dan LED Control}
-\label{alg:contoh1}
-\begin{algorithmic}[1]
-\STATE Inisialisasi pin sensor dan LED
-\WHILE{true}
-    \STATE Baca nilai suhu dari sensor
-    \IF{suhu > 30$^\circ$C}
-        \STATE Nyalakan LED
-    \ELSE
-        \STATE Matikan LED
-    \ENDIF
-    \STATE Tunggu 1 detik
-\ENDWHILE
-\end{algorithmic}
-\end{algorithm}
+% \begin{algorithm}[H]
+% \caption{Pembacaan Sensor Suhu dan LED Control}
+% \label{alg:contoh1}
+% \begin{algorithmic}[1]
+% \STATE Inisialisasi pin sensor dan LED
+% \WHILE{true}
+%     \STATE Baca nilai suhu dari sensor
+%     \IF{suhu > 30$^\circ$C}
+%         \STATE Nyalakan LED
+%     \ELSE
+%         \STATE Matikan LED
+%     \ENDIF
+%     \STATE Tunggu 1 detik
+% \ENDWHILE
+% \end{algorithmic}
+% \end{algorithm}
 
 \subsubsection{Subsistem Desain Alarm dan Sistem Proteksi (DASP)}
 Subsistem Desain Alarm dan Sistem Proteksi (DASP) memiliki sistem dalam merancang arus dan suhu batas pada kerja motor, mendesain alarm peringatan dalam bentuk buzzer, dan visualisasi pada website, serta mengaktifkan relay proteksi apabila parameter arus dan suhu melewati batas dalam jangka waktu yang ditentukan.
@@ -846,7 +975,7 @@ Subsistem Desain Alarm dan Sistem Proteksi (DASP) memiliki sistem dalam merancan
     \item \textbf{Saklar Manual (AZ5):} Digunakan sebagai saklar mekanis untuk menghubungkan atau memutus suplai daya secara manual. Saklar ini berfungsi sebagai lapisan proteksi tambahan (manual override) ketika terjadi kegagalan sistem elektronik, proses perawatan (maintenance), maupun kondisi darurat yang memerlukan penghentian operasi motor secara langsung.
 \end{enumerate}
 
-\begin{figure}[H]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=0.7\textwidth]{image/doc/Flowchart-Page-3.png} % Ganti dengan path diagram Anda
     \caption{Flowchart Subsistem Desain Alarm dan Sistem Proteksi (DASP)}
@@ -869,7 +998,7 @@ Subsistem Desain Alarm dan Sistem Proteksi (DASP) memiliki sistem dalam merancan
 
 %Contoh:  Project ELSINTA menawarkan beberapa keunggulan signifikan dibandingkan solusi pemantauan dan pengendalian kualitas udara yang sudah ada di pasaran atau prototipe penelitian terdahulu:
 \begin{enumerate}
-    \item \textbf{Solusi Holistik dan Terintegrasi dengan Biaya Efektif:} 
+    \item ...
 \end{enumerate}
 
 \subsection{\AlternativeDesignTitle}
@@ -879,24 +1008,18 @@ Subsistem Desain Alarm dan Sistem Proteksi (DASP) memiliki sistem dalam merancan
 
 % \textbf{Contoh}: Selama tahap desain, beberapa solusi alternatif telah dipertimbangkan sebelum memutuskan untuk mengembangkan arsitektur \text{IoT} berbasis $\text{ESP32}$ dan $\text{MQTT}$. Alternatif-alternatif tersebut antara lain:
 
-\subsubsection*{Alternatif 1: Mikrokontroler ESP32-S3, Cloud Computing}
+\subsubsection*{Alternatif 1: Mikrokontroler ESP32-S3, Edge Computing}
 \begin{enumerate}
-    \item \textbf{Deskripsi:} Alih-alih menggunakan $\text{WiFi}$, data sensor akan dikirim menggunakan koneksi kabel $\text{RS485}$ ke unit pusat (Gateway) yang kemudian mengirimkan data ke cloud.
-    \item \textbf{Alasan Penolakan:} Meskipun $\text{RS485}$ menawarkan keandalan tinggi dan kekebalan kebisingan yang baik (teknis), ini memerlukan instalasi kabel yang kompleks, mahal, dan tidak fleksibel, sehingga bertentangan dengan tujuan proyek untuk menciptakan solusi yang mudah dipasang (\textit{plug-and-play}) dan efektif biaya.
+    \item \textbf{Deskripsi:} Pemrosesan lebih lanjut dilakukan secara lokal pada mikrokontroler ESP32-S3.
+    \item \textbf{Alasan Penolakan:} Meskipun pemrosesan lokal dapat mengurangi ketergantungan pada koneksi internet, hal ini membatasi kemampuan sistem untuk menyimpan data historis dan melakukan analisis yang lebih kompleks. Selain itu, keterbatasan sumber daya pada mikrokontroler dapat membatasi skalabilitas dan fleksibilitas sistem di masa depan.
 \end{enumerate}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{image/doc/skematik-monitor.pdf} % Ganti dengan path diagram Anda
-    \caption{Skematik desain alternatif 1}
-    \label{fig:skematik}
-\end{figure}
 
 \subsubsection*{Alternatif 2: Raspberry Pi 4, Edge Computing}
 \begin{enumerate}
-    \item \textbf{Deskripsi:} Sistem hanya akan menggunakan mikrokontroler dan layar $\text{LCD}$ lokal untuk menampilkan data dan mengaktifkan alarm/kipas. Tidak ada koneksi internet, dashboard, atau penyimpanan data historis.
-    \item \textbf{Alasan Penolakan:} Solusi ini tidak memenuhi kebutuhan kunci pasar akan akses data real-time dan analisis historis. Meskipun biayanya sangat rendah, kelemahan ini secara signifikan mengurangi dampak dan nilai tambah (\textit{value proposition}) proyek, terutama dalam konteks pelaporan dan manajemen risiko.
-\end{enumerate}
+    \item \textbf{Deskripsi:} Mengganti mikrokontroler ESP32-S3 dengan Raspberry Pi 4 untuk pemrosesan data secara lokal.
+    \item \textbf{Alasan Penolakan:} Raspberry Pi 4 menawarkan kemampuan pemrosesan yang lebih tinggi, tetapi juga meningkatkan kompleksitas sistem, konsumsi daya, dan
+\end{enumerate}   
+
 
 \section{\ImplementationPlanTitle}
 
