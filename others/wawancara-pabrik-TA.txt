@@ -1,0 +1,30 @@
+Syarat wawancara
+1. Responden harus terlibat dalam operasi/maintenance motor!
+2. Wawancara harus menghasilkan data yang bisa dianalisis!
+
+List pertanyaan:
+A. Profil Responden (WAJIB)
+	1. Apa posisi anda di perusahaan/pabrik?
+	2. Apakah anda pernah terlibat dalam operasi atau pemeliharaan motor listrik
+	3. Jenis motor apa yang paling banyak digunakan? (1 fasa/3 fasa)
+	4. Biasanya digunakan/diaplikasikan sebagai apa? (pompa/konveyor/dll?)
+
+B. Kondisi Sistem Saat Ini (WAJIB)
+	1. Apakah motor induksi dilengkapi dengan sistem monitoring kondisi? (Kalo tidak, stop)
+	2. Parameter apa yang dipantau? (suhu/getaran/arus)
+	3. Metode pemantauan? (manual/berkala/real-time)
+
+C. Metode pemeliharaan (WAJIB)
+	1. Bagaimana pemeliharaan dilakukan? Rutin(preventive) atau Setelah kerusakan (corrective)
+	2. Berapa banyak motor yang rusak dalam periode per kuartal tahun (3 bulan)?
+	3. Apa jenis kerusakan yang paling sering terjadi? (bearing/overheating/lainnya)
+
+D. Permasalahan Yang Dihadapi (DISARANKAN)
+	1. Apakah pernah terjadi kerusakan motor tak terprediksi?
+	2. Apa dampaknya terhadap produksi pabrik?
+	3. Kendala utama dalam monitoring (biaya/alat tak tersedia/sulit diimplementasikan/tidak real-time)
+
+E. Kebutuhan Industri (DISARANKAN)
+	1. Sistem monitoring seperti apa yang dibutuhkan? (lebih murah? real-time? mudah dipasang?)
+	2. Parameter apa yang paling penting untuk dipantau? (getaran? rotasi? arus? suhu?)
+	3. Apakah sistem berbasis sensor sederhana (getaran + suhu) menarik untuk digunakan?

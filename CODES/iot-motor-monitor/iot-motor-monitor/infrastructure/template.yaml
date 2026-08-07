@@ -1,0 +1,260 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  ESP32 induction motor monitoring pipeline:
+  IoT Core -> Lambda (buffer/FFT) -> DynamoDB -> API Gateway -> React
+  Live path: IoT Core -> results/{deviceId} -> MQTT-WSS -> React
+
+Parameters:
+  ProjectName:
+    Type: String
+    Default: motor-monitor
+  SampleRateHz:
+    Type: Number
+    Default: 1000
+    Description: ADXL335 sample rate configured on the ESP32 (must match firmware)
+  IotEndpoint:
+    Type: String
+    Description: >
+      Output of `aws iot describe-endpoint --endpoint-type iot:Data-ATS`
+      (e.g. xxxxxxxxxxxxx-ats.iot.us-east-1.amazonaws.com)
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Timeout: 30
+    MemorySize: 256
+    Environment:
+      Variables:
+        RAW_BUFFER_TABLE: !Ref RawBufferTable
+        FFT_RESULTS_TABLE: !Ref FftResultsTable
+        SAMPLE_RATE_HZ: !Ref SampleRateHz
+        RESULTS_TOPIC_PREFIX: "results"
+
+Resources:
+
+  ### ---------- DynamoDB ---------- ###
+
+  RawBufferTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${ProjectName}-raw-buffer"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: deviceId
+          AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: N
+      KeySchema:
+        - AttributeName: deviceId
+          KeyType: HASH
+        - AttributeName: timestamp
+          KeyType: RANGE
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      SSESpecification:
+        SSEEnabled: true
+
+  FftResultsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub "${ProjectName}-fft-results"
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: deviceId
+          AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: N
+      KeySchema:
+        - AttributeName: deviceId
+          KeyType: HASH
+        - AttributeName: timestamp
+          KeyType: RANGE
+      SSESpecification:
+        SSEEnabled: true
+
+  ### ---------- Lambda: raw ingest (triggered by IoT Rule) ---------- ###
+
+  IngestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: ingest_handler.handler
+      CodeUri: ../lambda/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref RawBufferTable
+
+  IngestFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref IngestFunction
+      Principal: iot.amazonaws.com
+      SourceArn: !GetAtt RawIngestRule.Arn
+
+  RawIngestRule:
+    Type: AWS::IoT::TopicRule
+    Properties:
+      RuleName: !Sub "${ProjectName}_raw_ingest"
+      TopicRulePayload:
+        Sql: "SELECT *, topic(3) as deviceId FROM 'sensors/raw/+'"
+        AwsIotSqlVersion: "2016-03-23"
+        Actions:
+          - Lambda:
+              FunctionArn: !GetAtt IngestFunction.Arn
+
+  ### ---------- Lambda: FFT (triggered every 60s by EventBridge) ---------- ###
+
+  FftFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: fft_handler.handler
+      CodeUri: ../lambda/
+      Timeout: 60
+      MemorySize: 512
+      Layers:
+        - !Sub "arn:aws:lambda:${AWS::Region}:336392948345:layer:AWSSDKPandas-Python312:9"
+      Environment:
+        Variables:
+          IOT_ENDPOINT: !Ref IotEndpoint
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref RawBufferTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref FftResultsTable
+        - Statement:
+            - Effect: Allow
+              Action: iot:Publish
+              Resource: !Sub "arn:aws:iot:${AWS::Region}:${AWS::AccountId}:topic/results/*"
+      Events:
+        ScheduledFft:
+          Type: Schedule
+          Properties:
+            Schedule: "rate(1 minute)"
+
+  ### ---------- Lambda: historical query (behind API Gateway) ---------- ###
+
+  QueryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: query_handler.handler
+      CodeUri: ../lambda/
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref FftResultsTable
+      Events:
+        GetResults:
+          Type: Api
+          Properties:
+            RestApiId: !Ref DashboardApi
+            Path: /results/{deviceId}
+            Method: GET
+
+  ### ---------- API Gateway (Cognito-authorized) ---------- ###
+
+  DashboardApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Cors:
+        AllowMethods: "'GET,OPTIONS'"
+        AllowHeaders: "'Content-Type,Authorization'"
+        AllowOrigin: "'*'"  # tighten to your React app's domain before production
+      Auth:
+        DefaultAuthorizer: CognitoAuthorizer
+        Authorizers:
+          CognitoAuthorizer:
+            UserPoolArn: !GetAtt DashboardUserPool.Arn
+
+  ### ---------- Cognito: User Pool (authentication) ---------- ###
+
+  DashboardUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: !Sub "${ProjectName}-users"
+      AutoVerifiedAttributes: [email]
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 10
+          RequireUppercase: true
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: false
+
+  DashboardUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref DashboardUserPool
+      ClientName: react-dashboard
+      ExplicitAuthFlows:
+        - ALLOW_USER_PASSWORD_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+      GenerateSecret: false
+
+  ### ---------- Cognito: Identity Pool (authorization / IAM credential exchange) ---------- ###
+
+  DashboardIdentityPool:
+    Type: AWS::Cognito::IdentityPool
+    Properties:
+      IdentityPoolName: !Sub "${ProjectName}_identity"
+      AllowUnauthenticatedIdentities: false
+      CognitoIdentityProviders:
+        - ClientId: !Ref DashboardUserPoolClient
+          ProviderName: !GetAtt DashboardUserPool.ProviderName
+
+  AuthenticatedRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: cognito-identity.amazonaws.com
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                cognito-identity.amazonaws.com:aud: !Ref DashboardIdentityPool
+              ForAnyValue:StringLike:
+                cognito-identity.amazonaws.com:amr: authenticated
+      Policies:
+        - PolicyName: iot-mqtt-subscribe
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - iot:Connect
+                Resource: !Sub "arn:aws:iot:${AWS::Region}:${AWS::AccountId}:client/*"
+              - Effect: Allow
+                Action:
+                  - iot:Subscribe
+                Resource: !Sub "arn:aws:iot:${AWS::Region}:${AWS::AccountId}:topicfilter/results/*"
+              - Effect: Allow
+                Action:
+                  - iot:Receive
+                Resource: !Sub "arn:aws:iot:${AWS::Region}:${AWS::AccountId}:topic/results/*"
+              - Effect: Allow
+                Action:
+                  - execute-api:Invoke
+                Resource: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*"
+
+  IdentityPoolRoleAttachment:
+    Type: AWS::Cognito::IdentityPoolRoleAttachment
+    Properties:
+      IdentityPoolId: !Ref DashboardIdentityPool
+      Roles:
+        authenticated: !GetAtt AuthenticatedRole.Arn
+
+Outputs:
+  ApiEndpoint:
+    Value: !Sub "https://${DashboardApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
+  UserPoolId:
+    Value: !Ref DashboardUserPool
+  UserPoolClientId:
+    Value: !Ref DashboardUserPoolClient
+  IdentityPoolId:
+    Value: !Ref DashboardIdentityPool
+  IotEndpointHint:
+    Value: "Run: aws iot describe-endpoint --endpoint-type iot:Data-ATS"

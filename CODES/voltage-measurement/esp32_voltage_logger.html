@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ESP32 Voltage Logger</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  body { font-family: -apple-system, Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; color: #222; }
+  h1 { font-size: 20px; }
+  button { padding: 10px 16px; font-size: 14px; margin-right: 8px; margin-bottom: 12px; cursor: pointer; border: 1px solid #888; border-radius: 6px; background: #f5f5f5; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  #status { font-size: 14px; padding: 8px 0; color: #555; }
+  table { border-collapse: collapse; width: 100%; margin-top: 12px; font-size: 13px; }
+  th, td { border: 1px solid #ddd; padding: 6px 10px; text-align: left; }
+  th { background: #f0f0f0; }
+  #log { max-height: 300px; overflow-y: auto; border: 1px solid #ddd; }
+  #count { font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>ESP32 Voltage Logger (Web Serial → xlsx)</h1>
+<p id="status">Click "Connect" and select your ESP32's serial port. Chrome or Edge required.</p>
+
+<button id="connectBtn">Connect to ESP32</button>
+<button id="downloadBtn" disabled>Download voltage.xlsx</button>
+<button id="clearBtn" disabled>Clear log</button>
+
+<p>Readings logged: <span id="count">0</span></p>
+
+<div id="log">
+  <table>
+    <thead><tr><th>Timestamp</th><th>Voltage (V)</th></tr></thead>
+    <tbody id="logBody"></tbody>
+  </table>
+</div>
+
+<script>
+let port, reader, readableStreamClosed;
+let readings = [];
+let buffer = "";
+
+const connectBtn = document.getElementById('connectBtn');
+const downloadBtn = document.getElementById('downloadBtn');
+const clearBtn = document.getElementById('clearBtn');
+const statusEl = document.getElementById('status');
+const logBody = document.getElementById('logBody');
+const countEl = document.getElementById('count');
+
+if (!('serial' in navigator)) {
+  statusEl.textContent = "Web Serial API not supported. Please use Chrome or Edge on desktop.";
+  connectBtn.disabled = true;
+}
+
+connectBtn.addEventListener('click', async () => {
+  try {
+    port = await navigator.serial.requestPort();
+    await port.open({ baudRate: 9600 });
+    statusEl.textContent = "Connected. Listening for voltage readings...";
+    connectBtn.disabled = true;
+    downloadBtn.disabled = false;
+    clearBtn.disabled = false;
+    readLoop();
+  } catch (err) {
+    statusEl.textContent = "Connection failed or cancelled: " + err.message;
+  }
+});
+
+async function readLoop() {
+  const decoder = new TextDecoderStream();
+  readableStreamClosed = port.readable.pipeTo(decoder.writable);
+  reader = decoder.readable.getReader();
+
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buffer += value;
+      let lines = buffer.split("\n");
+      buffer = lines.pop();
+      for (const line of lines) {
+        handleLine(line.trim());
+      }
+    }
+  } catch (err) {
+    statusEl.textContent = "Read error: " + err.message;
+  }
+}
+
+function handleLine(line) {
+  if (!line) return;
+  const voltage = parseFloat(line);
+  if (isNaN(voltage)) return;
+  const timestamp = new Date().toISOString().replace('T', ' ').substring(0, 19);
+  readings.push({ Timestamp: timestamp, "Voltage (V)": voltage });
+  countEl.textContent = readings.length;
+
+  const row = document.createElement('tr');
+  row.innerHTML = `<td>${timestamp}</td><td>${voltage.toFixed(2)}</td>`;
+  logBody.appendChild(row);
+  document.getElementById('log').scrollTop = document.getElementById('log').scrollHeight;
+}
+
+downloadBtn.addEventListener('click', () => {
+  if (readings.length === 0) {
+    alert("No readings yet.");
+    return;
+  }
+  const ws = XLSX.utils.json_to_sheet(readings);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Voltage Log");
+  XLSX.writeFile(wb, "voltage.xlsx");
+});
+
+clearBtn.addEventListener('click', () => {
+  readings = [];
+  logBody.innerHTML = "";
+  countEl.textContent = "0";
+});
+</script>
+
+</body>
+</html>
