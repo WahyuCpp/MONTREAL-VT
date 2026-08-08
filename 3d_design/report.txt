@@ -1,0 +1,25 @@
+Info: Processing symbol 'C1:'.
+Info: Processing symbol 'K1:'.
+Info: Processing symbol 'M1:'.
+Info: Processing symbol 'R1:'.
+Info: Processing symbol 'R2:'.
+Info: Processing symbol 'R3:'.
+Info: Processing symbol 'SW1:'.
+Info: Processing symbol 'U1:PCM_Espressif:ESP32-DevKitC'.
+Info: Processing symbol 'U2:Package_TO_SOT_THT:TO-92_Inline'.
+Info: Processing symbol 'U3:Package_SO:SOIC-8_3.9x4.9mm_P1.27mm'.
+Info: Processing symbol 'U4:Package_LGA:LGA-14_3x5mm_P0.8mm_LayoutBorder1x6y'.
+Info: Processing symbol 'U5:Package_TO_SOT_SMD:SOT-23W'.
+Info: Total warnings: 0, errors: 7.
+
+
+Error: Cannot add C1 (no footprint assigned).
+Error: Cannot add K1 (no footprint assigned).
+Error: Cannot add M1 (no footprint assigned).
+Error: Cannot add R1 (no footprint assigned).
+Error: Cannot add R2 (no footprint assigned).
+Error: Cannot add R3 (no footprint assigned).
+Error: Cannot add SW1 (no footprint assigned).
+
+
+Info: Total warnings: 0, errors: 7.

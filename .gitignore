@@ -230,4 +230,16 @@ tmp/
 
 # Generated PDFs:
 # Uncomment this ONLY if PDFs should not be version-controlled
-*.pdf
+# *.pdf
+
+#======================================
+#UNNECESSARY
+#======================================
+cited_references/
+data_set/
+datasheet/
+backup/
+referensi(bib)/
+github/
+others/
+
