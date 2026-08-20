@@ -1,0 +1,104 @@
+\begin{longtable}{|p{1.5cm}|p{3cm}|p{9cm}|}
+    \caption{Spesifikasi Non-Fungsional Sistem}
+    \label{tab:nonfungsional} \\
+    \hline
+    \textbf{Kode} & \textbf{Aspek} & \textbf{Spesifikasi Non-Fungsional} \\
+    \hline
+    \endfirsthead
+
+    \multicolumn{3}{c}{\tablename\ \thetable\ -- \textit{lanjutan dari halaman sebelumnya}} \\
+    \hline
+    \textbf{Kode} & \textbf{Aspek} & \textbf{Spesifikasi Non-Fungsional} \\
+    \hline
+    \endhead
+
+    \hline
+    \multicolumn{3}{r}{\textit{bersambung ke halaman berikutnya}} \\
+    \endfoot
+
+    \hline
+    \endlastfoot
+
+    1 & Pengukuran Getaran &
+    Target bandwidth fault, $f_{max}=300Hz$
+
+    $F_{s}=2 \times f_{max}=600Hz$
+    
+    \\
+    \hline
+
+    2 & Pengukuran Suhu &
+    $F{s}=1Hz$
+    
+    Galat absolut,$\Delta=\pm 0.5^\circ C$, suhu ruang
+    \\
+    \hline
+
+    3 & Frekuensi Pengukuran Arus &
+    $F_{s}=1Hz$
+    
+     $\%error=4\%$    
+    \\
+    \hline
+
+    4 & Pengukuran Kecepatan Putar (RPM) &
+    $F_{s}=1400RPM/60s$
+    $F_{s}=23.3Hz$
+    \\
+    \hline
+
+    5 & MQTT &
+    1s publish interval
+    \\
+    \hline
+
+    6 & Dashboard &
+    1s latency (maks)
+    \\
+    \hline
+
+    7 & Interval pembaruan MHI &
+    1s (maks)
+    \\
+    \hline
+
+    8 &  Deteksi fault dan proteksi &
+    3s delay (maks), sebelum notifikasi
+    
+    5s delay (maks), sebelum pemutusan arus
+    \\
+    \hline
+
+    9 & Ketahanan Sistem &
+    24 jam operasional
+    \\
+    \hline
+
+    10 & FFT &
+    1024 buffer size
+
+    update latency 60s
+    \\
+    \hline
+    
+    11 & Koneksi &
+    ESP32 reconnect otomatis ketika Wi-Fi terputus
+    \\
+    \hline
+    
+    12 & Autentikasi Dashboard &
+    Dashboard hanya dapat diakses oleh otoritas yang diberi akses berupa password dan nomor ID.
+    \\
+    \hline
+
+    13 & Kompatibilitas &
+    Dashboard dapat diakses melalui browser PC, dan android.
+    \\
+    \hline
+
+    14 & Maintanability &
+    Software dikembangkan secara modular sehingga mudah dipelihara dan dikembangkan
+    \\
+    \hline
+
+\end{longtable}

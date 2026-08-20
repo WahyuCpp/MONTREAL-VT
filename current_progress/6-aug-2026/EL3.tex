@@ -5,6 +5,7 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows.meta, positioning}
 \usepackage{adjustbox}
+\usepackage{amsmath}
 
 % --- Memasukkan Data Dokumen Menggunakan Perintah Baru ---
 \projectcode{EL3}
@@ -81,28 +82,26 @@
 \newpage
 
 \section{\SystemSpecTitle}
-Spesifikasi sistem ditetapkan sebagai acuan dalam proses
-pengembangan sistem Monitoring On Induction Motor In Real-Time:
+Berdasrkan ISO 29148-2018\cite{3.1.1}, spesifikasi sistem ditetapkan sebagai acuan 
+dalam proses pengembangan sistem Monitoring On Induction Motor In Real-Time:
 Vibration and Temperature (MONTREAL-VT). Hal ini dilakukan 
-untuk memastikan bahwa sistem yang dikembangkan memenuhi kriteria
-sistem yang baik. Spesifikasi dibagi menjadi spesifikasi fungsional
-yang menjelaskan fungsi yang harus dimiliki sistem, dan spesifikasi
-non-fungsional yang menjabarkan kualitas yang harus
-dicapai oleh fungsi sistem tersebut.
+untuk memastikan bahwa sistem yang dikembangkan memenuhi kriteria yang telah ditentukan
+oleh perancang dan pemilik kepentingan. Spesifikasi sistem dibagi menjadi spesifikasi 
+fungsional dan spesifikasi non-fungsional.
 
 % ==============================================================
 \subsection{\FunctionalSpecTitle}
-Spesifikasi fungsional mencakup kemampuan yang harus 
-dimiliki oleh sistem agar memenuhi tujuan pemantauan 
-kondisi motor seperti yang tercantum pada tabel \ref{tab:fungsional}.
-Spesifikasi ini mendefinisikan seluruh fungsi
-yang harus dipenuhi sistem agar mampu melaksanakan proses
-akuisisi data, pemrosesan sinyal, komunikasi data, 
-analisis kondisi, visualisasi, serta mekanisme proteksi
-secara terpadu. 
-\renewcommand{\arraystretch}{1.3}
+Spesifikasi fungsional menjabarkan sistem dan elemen fungsi sistem, atau serangkaian tugas
+yang mampu dilaksanakan oleh sistem\cite{3.1.1}. Tabel \ref{tab:fungsional} menunjukkan
+tugas-tugas yang dilakukan oleh sistem MONTREAL-VT. Tugas utama hal ini meliputi pembacaan
+dan pemrosesan data, komunikasi perangkat ke cloud, penyimpanan data historis, 
+proses analisis data, serta penyajian data ke pengguna. Fungsi opsional meliputi penyimpanan
+data secara lokal, arsitektur semi-permanen dan enkripsi data untuk keamanan komunikasi.
+
+% \renewcommand{\arraystretch}{1.3}
 \begin{longtable}{|p{1.5cm}|p{7cm}|p{5cm}|}
-    \caption{Spesifikasi Fungsional Sistem} \label{tab:fungsional} \\
+    \caption{Spesifikasi Fungsional Sistem} 
+    \label{tab:fungsional} \\
     \hline
     \textbf{No.} & \textbf{Spesifikasi Fungsional} & \textbf{Tujuan} \\
     \hline
@@ -122,13 +121,13 @@ secara terpadu.
     \endlastfoot
     
     1 
-    & Sistem harus mampu mengukur parameter 
+    & Sistem mampu mengukur parameter 
     akselerasi getaran 
     & \textit{Vibration analysis}\\
     \hline
 
     2 
-    & Sistem harus mampu mengukur suhu housing 
+    & Sistem mampu mengukur suhu housing 
     motor
     & Deteksi panas winding
     
@@ -136,163 +135,190 @@ secara terpadu.
     \hline
 
     3 
-    & Sistem harus mampu mengukur arus motor 
+    & Sistem mampu mengukur arus motor 
     & Deteksi overcurrent
     
     Mengukur tren arus motor\\
     \hline
 
     4 
-    & Sistem harus mampu mengukur kecepatan rotasi shaft 
+    & Sistem mampu mengukur kecepatan rotasi shaft 
     & Deteksi perubahan kecepatan dan slip pada
     shaft \\
     \hline
 
     5 
-    & Sistem harus mampu mengkondisikan sinyal 
-    sensor sebelum atau disaat dikirimkan ke
-    mikrokontroler 
-    & Peningkatan kualitas sinyal \\
-    \hline
-
-    6 
-    & Sistem harus mampu memberikan
-    time-stamp pada setiap parameter ukur 
-    & Sinkronisasi parameter ukur \\
-    \hline
-
-    7 
-    & Sistem harus mampu mentransmisikan data
-     menuju cloud/server menggunakan Wi-Fi 
+    & Sistem mampu mentransmisikan data
+     menuju cloud/server menggunakan Wi-Fi atau protokol komunikasi nirkabel integrasi
+     ke infrastruktur cloud lainnya.
      & \textit{Cloud computing} \\
     \hline
-
-    8 
-    & Sistem harus dilengkapi dengan metode
-    penyimpanan data eksternal (SD Card)
-    & \textit{Backup storage}\\
-    \hline
     
-    9
-    & Sistem harus mampu menyimpan data historis
+    6
+    & Sistem mampu menyimpan data historis
     dalam basis data serverless
     & Analisis data historis \\
     \hline
 
-    10
-    & Sistem harus mampu memroses data getaran;
+    7
+    & Sistem mampu memroses data getaran;
     mengkonversi data akselerasi menjadi data kecepatan
     getaran dan kecepatan RMS, dan mengubah 
     data domain waktu menjadi domain frekuensi
     & \textit{Vibration analysis}\\
     \hline
 
-    11 
-    & Sistem harus mampu membandingkan pola getaran
+    8 
+    & Sistem mampu membandingkan pola getaran
     pada analisis frekuensi dengan data referensi
     & \textit{Fault prediction} \\
     \hline
 
-    12 
-    & Sistem harus mampu menghitung parameter
+    9 
+    & Sistem mampu menghitung parameter
     \textit{Motor Health Index} (MHI) 
     & \textit{Condition rating} \\
     \hline
 
-    13
-    & Sistem harus mampu menampilkan data akuisisi real-time pada 
+    11
+    & Sistem mampu menampilkan data akuisisi real-time pada 
     dashboard 
     & \textit{Remote condition monitoring} \\
     \hline
 
-    14 
-    & Sistem harus mampu menampilkan tren historis getaran, arus, 
+    12 
+    & Sistem mampu menampilkan tren historis getaran, arus, 
     suhu, dan rotasi shaft 
     & \textit{Remote condition monitoring} \\
     \hline
 
-    15
-    & Sistem harus dilengkapi dengan mekanisme
+    13
+    & Sistem dilengkapi dengan mekanisme
     alarm dan proteksiketika parameter 
     melebihi batas yang telah ditentukan 
     & Proteksi sistem \\
     \hline
 
-    16 
-    & Sistem harus dilengkapi akses histori
+    14 
+    & Sistem dilengkapi akses histori
     alarm dan perawatan 
     & \textit{Maintenance logging} \\
     \hline
+
+    14 
+    & Sistem akan dilengkapi dengan sistem
+    penyimpanan data eksternal (SD Card)
+    & \textit{Backup storage}\\
+    \hline
+
+    15
+    & Proses komunikasi sistem akan dilengkapi dengan enkripsi data
+    & Keamanan data siber\\
+    \hline
+
+    16
+    & Arsitektur sistem akan bersifat semi-permanen
+    & Kemudahan instalasi\\
+    \hline
+
 \end{longtable}
 
-Fungsi utama sistem paling utama tercantum seperti pada poin 1-4
-adalah kemampuan sistem melakukan pembacaan, pengolahan,
-parameter operasional motor yang telah ditetapkan, yakni akselerasi getaran
-suhu housing, arus motor, dan kecepatan rotasi shaft. Parameter
-tersebut merepresentasikan indikator utama kesehatan motor.
+%Mengapa parameter getaran?
+Pola getaran mampu mengindikasikan adanya pemerosotan kondisi mekanis pada motor \cite{1.1.1},
+efektivitas parameter getaran dalam memprediksi adanya gangguan mekanis terbukti
+lebih baik dibandingkan dengan parameter arus\cite{1.1.2}. Maka dari itu, fungsi utama
+dari sistem ini adalah dengan mengandalkan parameter getaran untuk mendeteksi adanya gangguan mekanis,
+contohnya seperti gangguan pada \textit{bearing}, \textit{misalignment}, dan \textit{unbalance} (poin 1). Akselerometer
+\textit{micro-electromechanical systems} (MEMS) triaksial
+digital digunakan sebagai transduser utama yang membaca parameter akselerasi getaran.
+Akselerometer dipasang secara permanen pada divais MONTREAL-VT, sementara itu divais 
+dipasang pada lempeng besi stator agar berdekatan lokasi dengan \textit{bearing} 
+motor\cite{2.1.4}.
 
-Data getaran digunakan untuk mendeteksi kerusakan mekanis 
-(contoh: unbalance, misalignment, bearing fault), sedangkan data
-suhu housing berfungsi sebagai identfikasi peningkatan suhu
-akibat kerusakan winding. Pengukuran arus dimanfaatkan untuk
-memantau kondisi pembebanan dan deteksi overcurrent, sementara kecepatan rotasi
-digunakan untuk mengidentifikasi adanya perubahan kecepatan
-maupun slip yang mampu mengindikasikan gangguan mekanis atau
-elektrik pada motor.
+%Kendala menggunakan parameter getaran dan fungsi pengkondisian sinyal
+Akselerometer MEMS merupakan jenis transduser yang
+cukup baik dalam mengatasi noise, yakni tidak lebih dari 
+$1 LSB RMS$ pada sumbu-x dan sumbu-y, dan tidak lebih dari 
+$1.5 LSB RMS$ pada sumbu-z\cite{ADXL345}.
+Namun, beberapa transduser yang digunakan pada proyek ini,
+seperti transduser efek hall\cite{A3144} dan transduser arus\cite{ACS712}, 
+tidak memiliki sistem pengkondisian sinyal internal.
+Oleh karena itu, sistem pengkondisian sinyal sinyal eksternal harus
+tetap dirancang. Hal ini dilakukan agar sinyal output tetap pada rentang
+kerja yang mampu dibaca oleh mikrokontroler. Sinyal
+dapat dikondisikan menggunakan rangkaian penguat dan filter
+analog maupun digital sesuai dengan kebutuhan.
 
-Sebelum data diproses lebih lanjut pad mikrokontroler,
-sistem harus mampu melakukan pengkondisian sinyal
-(\textit{signal conditioning}) (poin 5) sebelum dikirimkan atau 
-pada mikrokontroler agar kualitas sinyal sesuai dengan
-spesifikasi tegangan pin mikrokontroler.
-Sistem juga harus mampu memberikan \textit{time-stamp}
-pada setiap parameter ukur untuk menjamin
-sinkronisasi data antarparameter sehingga data
-dapat dianalisis secara akurat (poin 6).
+%Analisis sinyal getaran lebih lanjut
+Analisis sinyal getaran dilakukan
+dengan dua metode, yakni metode analisis domain waktu
+dan analisis domain frekuensi. Maka dari itu,
+pemrosesan sinyal getaran dibagi lagi menjadi
+konversi parameter akselerasi getaran
+menjadi kecepatan dan kecepatan \textit{root-mean square} (rms) (poin 7). Serta konversi
+data domain waktu menjadi domain frekuensi dengan mengaplikasikan
+\textit{fast-fourier
+transform} (FFT)\cite{2.1.5} (poin 7). Analisis domain frekuensi
+dilakukan dengan menangkap frekuensi khas dari kerusakan
+mekanis tertentu seperti yang tercantum pada tabel C
+lampiran C ISO 13373-1\cite{2.1.4} (poin 8).
 
-Selanjutnya, sistem dirancang untuk mendukung arsitektur
-cloud computing dengan memanfaatkan Wi-Fi sebagai media
-transmisi data menuju server (poin 7). Untuk meningkatkan keandalan,
-data juga disimpan secara lokal menggunakan media penyimpanan eksternal
-sebagai mekanisme backup storage apabila terjadi
-gangguan komunikasi (poin 8). Data historis disimpan pada basis
-data serverless sehingga riwayat operasi motor dapat diakses untuk
-keperluan analisis jangka panjang dan keperluan evaluasi 
-motor (poin 9).
+%Mengapa parameter suhu?
+Selain parameter getaran, suhu merupakan parameter yang umum digunakan
+memperhitungkan kondisi motor. Ranah pengaplikasian pemantauan
+parameter suhu biasanya adalah sistem proteksi\cite{3.1.2}. Peningkatan
+suhu pada mesin listrik disebabkan oleh kegagalan sistem pendingin
+dan arus berlebih pada winding rotor dan/atau stator\cite{3.1.3}. 
+Sensor termokapel dipertimbangkan sebagai transduser suhu sistem
+berdasarkan ketentuan dari ISO 60034-1 untuk jenis motor dengan
+rating daya di bawah 15kW\cite{IEC60034} (poin 2). 
 
-Pada tahap pemrosesan tingkat lanjut, sistem 
-harus mampu mengolah data akselerasi getaran, hal ini meliputi
-proses konversi data akselerasi menjadi kecepatan getaran dan
-kecepatan rms, serta transformasi sinyal dari domain waktu
-ke domain frekuensi menggunakan metode Fast Fourier Transform (FFT) (poin 10).
-Hasil analisis domain frekuensi data getaran 
-akan dibandingkan dengan data referensi untukm
-endeteksi adanya pola getaran yang mengindikasikan
-kerusakan mekanis pada motor (poin 11).
+%Mengapa parameter arus dan rpm?
+Parameter arus dan kecepatan putar shaft dapat 
+digunakan sebagai 
+parameter pendukung pengambilan keputusan pemeliharaan dan proteksi 
+pada motor (poin 3 dan 4). Transduser \textit{current transformer} (CT)
+dapat digunakan dalam sistem proteksi
+\textit{overcurrent} pada pada motor\cite{3.1.4}. Selain sebagai komponen
+sistem proteksi, parameter arus motor juga dapat digunakan sebagai pendukung diagnosa
+kerusakan mekanis pada motor\cite{1.1.2}. 
+Sementara itu, parameter kecepatan putar shaft menggunakan
+transduser rpm digunakan untuk mendeteksi terjadinya slip.
+Slip
+Setelah itu,
+mikrokontroler akan memberikan
+\textit{timestamp} pada data sehingga memudahkan 
+sistem pemantauan.
+%%Tambahkan soal urgensi RPM sensor
 
+%On MHI
 Data getaran, bersamaan dengan data suhu, arus, dan 
 kecepatan rotasi shaft, digunakan untuk menghitung
 parameter \textit{Motor Health Index} (MHI) (poin 12),
 parameter MHI berguna untuk indikasi tingkat kesehatan motor
-secara keseluruhan dan perhitungan sisa umur motor.
+secara keseluruhan dan perhitungan sisa umur motor
 
-Sebagai komponen antarmuka pengguna, sistem harus mampu
-menyajikan data hasil pengukuran secara real-time pada dashboard (poin 13),
-serta menampilkan tren historis dari seluruh parameter yang dipantau (poin 14).
-Penyajian data historis bertujuan agar pengguna dapat mengakses
-data historis motor untuk keperluan analisis perkembangan kondisi motor,
-sehingga proses pengambilan keputusan pemeliharaan 
-dapat dilakukan dengan lebih objektif.
+%%Pengantar kalibrasi dan pemrosesan sinyal
+ISO 10012 berisi mengenai panduan pengelolaan sistem
+metrologi, dalam hal ini merupakan transduser yang digunakan
+untuk merekam data pada sistem\cite{3.1.6}. Sebelum sinyal transduser
+diproses lebih lanjut pada mikrokontroler,
+transduser harus terlebih dahulu dikalibrasi\cite{3.1.6}.
+Proses kalibrasi merupakan proses pembandingan kualitas
+data transduser dengan alat ukur yang telah ditetapkan\cite{3.1.6}.
+Hasil proses kalibrasi harus didokumentasikan untuk memastikan
+kesesuaian, kekonsistenan, dan validitas dari hasil ukur transduser\cite{3.1.6}.
 
-Terakhir, sistem harus dilengkapi dengan mekanisme 
-alarm dan proteksi yang akan aktif apabila parameter operasi arus dan suhu
-melampaui batas yang telah ditentukan (poin 14-15). 
-Selain memberikan notifikasi kondisi motor abnormal, sistem
-harus menyediakan fiture pencatatan histori alarm dan aktivitas perawatan
-(\textit{maintenance logging}). Dokumentasi tersebut berfungsi
-sebagai rekam jejak operasional motor yang dapat dimanfaatkan
-untuk evaluasi efektivitas pemeliharaan, analisis akar gangguan, serta
-perencanaan predictive maintenance di masa mendatang (poin 16).
+%Mengapa cloud computing?
+Selanjutnya, sistem dirancang untuk mendukung arsitektur
+\textit(cloud computing) dengan memanfaatkan Wi-Fi sebagai media
+transmisi data menuju server (poin 5). Untuk meningkatkan keandalan,
+data juga disimpan secara lokal menggunakan media penyimpanan eksternal
+sebagai mekanisme backup storage apabila terjadi
+gangguan komunikasi (poin 14). Data historis disimpan pada basis
+data serverless sehingga riwayat operasi motor dapat diakses untuk
+keperluan analisis jangka panjang dan keperluan evaluasi 
+motor (poin 9).
 
 \subsubsection{Use Case Diagram}
 Use case diagram mengilustrasikan interaksi fungsional antara
@@ -312,8 +338,11 @@ dashboard setelah proses autentikasi pengguna dan data riwayat,
 menerima notifikasi alarm, dan melakukan pengaturan sistem proteksi.
 
 \subsection{\NonFunctionalSpecTitle}
-
-%Perhitungan fmax dan Fs
+Spesifikasi non-fungsional atau spesifikasi kualitas
+meliputi angka yang mewakili kemampuan sistem
+dalam menyajikan fungsi-fungsi yang ditargetkan pada
+spesifikasi fungsional\cite{3.1.1}. Tabel \ref{tab:nonfungsional} mewakili
+spesifikasi tersebut.
 
 % Spesifikasi non-fungsional menjelaskan karakteristik kualitas yang harus dipenuhi oleh sistem monitoring getaran dan suhu pada motor induksi. Selain mampu menjalankan fungsi utama, sistem juga harus memiliki kinerja yang baik, keandalan yang tinggi, keamanan, kemudahan penggunaan, serta kemampuan beroperasi secara stabil dalam proses monitoring kondisi motor. Karakteristik tersebut merupakan aspek penting dalam pengembangan sistem Internet of Things (IoT) yang menuntut kemampuan komunikasi data secara \textit{real-time}, andal, dan mudah diakses oleh pengguna \cite{bahga2014,mqtt311}.
 
@@ -422,54 +451,135 @@ menerima notifikasi alarm, dan melakukan pengaturan sistem proteksi.
 
 \end{longtable}
 
+\subsubsection{Perhitungan Analisis Domain Waktu}
+    Akselerometer ADXL345 menangkap data getaran
+    dalam besaran akselerasi getaran bagian \textit{non-rotating}. 
+    Oleh karena itu,
+    data akselerasi harus dikonversi menjadi data
+    kecepatan seperti pada persamaan \ref{eq:velocity}\cite{2.1.3}.
 
-\subsubsection{Perhitungan Frekuensi Minimum Pengukuran Akselerasi Getaran}
-    Spesifikasi motor yang digunakan adalah motor 
-    induksi 1-fasa dengan kecepatan putar 1400 
-    revolusi per menit;
-    \[\omega=1400RPM\]
-    \[\omega=\frac{1400}{60}\]
-    \[\omega=23.3 Hz\]
-    Maka satu revolusi penuh putaran kipas angin memiliki frekuensi $23.3 Hz$.
+    \begin{equation}
+        \label{eq:velocity}
+        v=\int_{}^{}a\,dx
+    \end{equation}
+
+    Kecepatan \textit{root-mean square} merupakan
+    besaran getaran yang umum digunakan dalam
+    mengkarakterisasi respon getaran mesin \cite{2.1.3}.
+    Persamaan \ref{eq:rms_1} merupakan persamaan
+    yang dapat digunakan untuk mengkonversi besaran
+    kecepatan ke kecepatan rms.
+
+    \begin{equation}
+        \label{eq:rms_1}
+        v_{rms}=\sqrt{\frac{1}{T} \int_{0}^{T} v^{2}(t)\,dx}
+    \end{equation}
+
+    Dalam situasi di mana hanya diketahui kecepatan
+    maksimum dan minimum dari suatu getaran, maka
+    persamaan \ref{eq:rms_2} dapat digunakan.
+
+    \begin{equation}
+        \label{eq:rms_2}
+        v_{rms} = \sqrt{\frac{1}{2} (v_{max}^2 + v_{min}^2)} 
+    \end{equation}
+
+    Tabel C1 mengenai rentang zona A/B,
+    B/C, C/D pada ISO 20816-1 bagian lampiran 
+    C dapat digunakan sebagai upaya  evaluasi
+    kriteria motor.
+
+\subsubsection{Perhitungan Analisis Domain Frekuensi}
+    Rating kecepatan putar motor merupakan
+    faktor penentu utama frekuensi sampling 
+    maksimum ADC. Kecepatan putar ($\omega$) dalam satuan
+    hertz ($Hz$) dapat dihitung menggunakan persamaan \ref{eq:omega}.
     
-    Berdasarkan F12 pada tabel \ref{tab:fungsional}, sistem harus
-    harus mampu memprediksi kerusakan bagian motor. Berdasarkan ISO 13373-1 lampiran C
-    , pola getaran yang dihasilkan kerusakan meliputi $1\times$
-    revolusi untuk unbalance dan misalignment, $2\times$ revolusi
+    \begin{equation}
+        \label{eq:omega}
+        \omega=\frac{RPM}{60 s}
+    \end{equation}
 
-    \[f_{fault}=300 Hz\]
+    Berdasarkan ISO 13373-1, analisis domain frekuensi
+    dapat dilakukan dengan mendapatkan pola
+    getaran tertentu yang mampu menggambarkan kerusakan,
+    $\omega$, $2 \omega$, $3 \omega$, 
+    ,..., $n \omega$.
 
-    Maka dari itu, fmax pengukuran harus mampu menangkap detil
+    Maka dari itu, $fmax$ pengukuran harus mampu menangkap detil
     dari frekuensi eksitasi yang mengindikasikan kerusakan.
 
     \[f_{max} \geq f_{fault}\] 
-    \[f_{max} \geq 300 Hz\]
+    \[f_{max} \geq n \omega\]
 
-    Teori Nyquist-Shannon menyatakan bahwa frekuensi 
-    sampling harus lebih besar dari dua kali 
-    frekuensi sinyal yang diukur untuk menghindari terjadinya
-    aliasing. Maka dari itu, frekuensi
-    minimum pengukuran akselerasi getaran motor induksi
-    adalah:
+    Batas bawah dari frekuensi maksimum dicantumkan
+    pada persamaan \ref{eq:fmax-omega}.
 
-    \[F_{s} = 2 \cdot f_{max}\]
-    \[F_{s} = 2 \cdot 300 Hz\]
-    \[F_{s} = 600 Hz\]
+    \begin{equation}
+        \label{eq:fmax-omega}
+        f_{max} = n \omega
+    \end{equation}
+
+    Berdasarkan teori Nyquist-Shannon, aliasing
+    dapat diminimalisir dengan menetapkan
+    nilai frekuensi sampling dua kali lebih besar
+    daripada frekuensi maksimum seperti pada persamaan
+    \ref{eq:sampling_frequency} dan \ref{eq:sampling_frequency_final}.
+
+    \begin{align}
+        \label{eq:sampling_frequency}
+        F_{s} = 2 f_{max}\\
+        \label{eq:sampling_frequency_final}
+        F_{s} = 2 n \omega
+    \end{align}
+
+    Persamaan tersebut berfungsi dalam menentukan
+    frekuensi sampling minimum agar sistem
+    mampu menangkap target frekuensi yang menjadi
+    ciri khas fault pada suatu motor pada tabel
+    ISO 13373-1 lampiran C \cite{2.1.4}.
 
 \subsubsection{Perhitungan Batas Suhu Housing Maksimum}
     Berdasarkan panduan IEC 60034, pengukuran suhu motor dengan
-    rating daya ($P_{rated} \leq 600W/VA$) (cite IEC 60034)
-    harus dilakukan dengan metode termometer. 
+    rating daya di bawah 15 kilowatt,
+    parameter suhu pada winding dipengaruhi
+    oleh tipe insulasi motor seperti pada tabel 
+    \ref{tab:insulation_class}\cite{iec60034_2022}.
+    
+    \begin{table}[H]
+    \centering
+    \caption{Tabel kelas insulasi winding\cite{3.1.5}}
+    \label{tab:insulation_class}
+    \begin{tabular}{|p{3cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
+        \hline
+        \textbf{Tipe Insulasi} &\textbf{A} & \textbf{B} & \textbf{F} & \textbf{H} & \textbf{200} & \textbf{220}\\
+        \hline
+        \textbf{Batas Suhu Maksimum} & 115 & 140 & 165 & 190 & 210 & 230 \\
+        \hline
+        \textbf{Batas Kenaikan Suhu} & 80 & 80 & n & n & n & n\\
+        \hline
+    \end{tabular}
+\end{table}
 
+    Apabila transduser suhu dipasang pada
+    casing motor, maka perbedaan antara suhu casing
+    dan winding motor harus diperhitungkan.
+
+    \[T_{winding} \geq T_{case}\]
 
 \subsubsection{Perhitungan Batas Arus Motor Maksimum}
     Berdasarkan panduan IEC 60034, batas arus motor maksimum
-    dapat ditentukan dari rating daya motor.
-    \[P_{rated}=46W\] 
-    \[P_{rated}=V_{rated} \cdot \eta \cdot cos(\Theta) \cdot I_{rated}\] 
-    Persamaan dapat diubah
-    \[I_{rated}=\frac{P_{rated}}{V_{rated} \cdot \eta \cdot \cos(\Theta)}\]
+    dapat ditentukan dari rating daya motor. Rating
+    arus konstan maksimum dinyatakan pada persamaan
+    \ref{eq:rating_daya} dan \ref{eq:rating_arus}.
 
+    \begin{align}
+        P_{rated}=V_{rated} I_{rated} cos(\Theta) \eta\\ \label{eq:rating_daya}
+        I_{rated}=\frac{P_{rated}}{V_{rated} \cos(\Theta) \eta}\\         \label{eq:rating_arus}
+    \end{align}
+
+    Rumus rating arus diimplementasikan untuk menetapkan 
+    batas arus normal pada operasi motor.
 % Dari Tabel~\ref{tab:nonfungsional}, sistem tidak hanya dituntut mampu melakukan proses monitoring parameter motor induksi, tetapi juga harus memiliki kualitas layanan yang baik dari sisi kinerja, keandalan, keamanan, dan kemudahan penggunaan. Seluruh aspek tersebut menjadi acuan dalam proses implementasi dan pengujian sistem agar sistem yang dikembangkan memenuhi karakteristik perangkat IoT yang andal, mudah dipelihara, dan mampu beroperasi secara berkelanjutan \cite{bahga2014,PMBOK}.
 
 % ==============================================================
@@ -744,43 +854,6 @@ Berdasarkan Tabel~\ref{tab:evaluasi}, keberhasilan sistem tidak hanya ditentukan
 % \textit{Penjelasan: Jelaskan secara naratif apa itu Project Tim Anda. Gambarkan secara singkat arsitektur sistem (misalnya, sensor, mikrokontroler, cloud, aktuator) dan bagaimana keseluruhan sistem bekerja. Tujuan utama adalah memberikan pemahaman yang jelas tentang konsep dan fungsionalitas inti proyek.}
 
 \subsection{\ArchitectureTitle}
-% \textit{Penjelasan: Bagian ini harus menguraikan arsitektur keseluruhan dari Project . Jelaskan bagaimana berbagai komponen (hardware, software, cloud) saling berinteraksi. Sangat disarankan untuk menyertakan diagram arsitektur sistem (Gambar ELx.y) yang memvisualisasikan subsistem-subsistem ini secara jelas. Kemudian, jelaskan setiap subsistem secara terperinci.}
-
-% Arsitektur Project  dirancang secara modular untuk memastikan skalabilitas, kemudahan pengembangan, dan integrasi yang efisien antara komponen perangkat keras, perangkat lunak, dan layanan cloud. Arsitektur utama dibagi menjadi beberapa subsistem fungsional yang saling berinteraksi, membentuk sebuah solusi pemantauan dan pengendalian kualitas udara yang komprehensif. Seperti yang ditunjukkan pada Gambar \ref{fig:elsinta_arch}.
-
-% \begin{tikzpicture}[
-%     node distance=1.4cm and 1.8cm,
-%     every node/.style={font=\sffamily\small},
-%     box/.style={
-%         rectangle, draw=black, thick, text width=3.6cm,
-%         minimum height=1.4cm, align=center,
-%         text=black, fill=white
-%     },
-%     ellip/.style={
-%         ellipse, draw=black, thick, text width=3.2cm,
-%         minimum height=1.6cm, align=center,
-%         text=black, fill=white
-%     },
-%     arr/.style={-{Stealth[length=3mm]}, black, thick}
-% ]
-
-% % Nodes
-% \node[ellip] (spim) {Capacitor-Starter SPIM};
-% \node[box, below=of spim] (sensor) {Subsistem: Instalasi Sensor dan Pemrosesan Sinyal};
-% \node[box, below left=1.6cm and 0.4cm of sensor] (komunikasi) {Subsistem: Komunikasi, Cloud, dan Algoritma};
-% \node[box, below right=1.6cm and 0.4cm of sensor] (proteksi) {Subsistem: Desain Threshold dan Sistem Proteksi};
-
-% % Arrows
-% \draw[arr] (spim) -- (sensor);
-% \draw[arr] (sensor.south) -- ++(0,-0.5) -| (komunikasi.north);
-% \draw[arr] (sensor.south) -- ++(0,-0.5) -| (proteksi.north);
-% \draw[arr] (proteksi.west) -- (komunikasi.east);
-
-% % Feedback loop: proteksi -> spim
-% \draw[arr] (proteksi.east) -- ++(1.5,0) |- (spim.east);
-
-% \end{tikzpicture}
-
 % --- Di sini Anda bisa menyisipkan Diagram Arsitektur Sistem ---
 % Contoh:
 \begin{figure}[b!]
@@ -807,23 +880,23 @@ Gambar \ref{fig:arsitektur} memaparkan arsitektur sistem MONTREAL-VT, terdiri at
 
 Instalasi Sensor dan Pemrosesan Sinyal (ISPS) merupakan 
 subsistem yang mencakup proses pemilihan
- sensor dan instalasi yang sensor tepat,
-  dan proses pengkondisian sinyal output
-   dari sensor yang meliputi pemfilteran
-    derau dan penguatan sinyal. 
+sensor dan instalasi yang sensor tepat,
+dan proses pengkondisian sinyal output
+dari sensor yang meliputi pemfilteran
+derau dan penguatan sinyal. 
 
-Subsistem ini bertanggung jawab untuk instalasi, pengumpulan, dan pemrosesan sinyal output dari sensor getaran, sensor suhu, sensor arus, dan sensor RPM.
-\begin{enumerate}
-    \item \textbf{Kapasitor Starter SPIM:} Motor induksi satu fasa kipas angin model Cosmos 16SN, kecepatan putar 1400 RPM, 46W.
-    \item \textbf{Unit Mikrokontroler:} Menggunakan $\text{ESP32}$. Mikrokontroler ini membaca data dari sensor, pra-pemrosesan, modul Wi-Fi, protokol komunikasi MQTT.
-    \item \textbf{Modul Sensor Akselerometer ADXL345}: Modul sensor akselerometer digital 3-sumbu (X,Y,Z) dengan rentang +-2g hingga +-16g melalui I2C/SPI, sample-rate pengukuran hingga 3600Hz.
-    \item \textbf{Sensor Suhu DS18B20 dan Driver:} Sensor suhu digital One-Wire yang memiliki rentang pengukuran -55C hingga +125C dengan akurasi +-0.5C pada rentang kerja normal. Sensor memiliki keluaran digital sehingga tidak memerlukan rangkaian penguat atau ADC tambahan.
-    \item \textbf{Sensor Arus ACS172:} ACS712 merupakan sensor arus berbasis efek Hall yang mampu mengukur arus AC maupun DC dengan keluaran berupa tegangan analog yang proporsional terhadap arus.
-    \item \textbf{Sensor Hall A3144 dan Magnet:} Sensor Hall A3144 digunakan bersama magnet permanen untuk mengukur kecepatan putar (RPM) motor melalui pendeteksian setiap putaran poros.
-    \item \textbf{Operational Amplifier:} Operational Amplifier (Op-Amp) digunakan pada rangkaian pengkondisi sinyal untuk memperkuat, membuffer, dan memfilter sinyal sensor sebelum diproses mikrokontroler. Kegunaannya adalah untuk meningkatkan SNR, mengurangi gangguanw frekuensi tinggi.
-    \item \textbf{Kapasitor:} Kapasitor digunakan sebagai decoupling/bypass capacitor untuk mengurangi ripple tegangan serta meredam noise tinggi, filter RC.
-    \item \textbf{Resistor:} Resistor berfungsi untuk membatasi arus, mengatur level tegangan, serta membentuk konfigurasi yang sesuai.
-\end{enumerate}
+% Subsistem ini bertanggung jawab untuk instalasi, pengumpulan, dan pemrosesan sinyal output dari sensor getaran, sensor suhu, sensor arus, dan sensor RPM.
+% \begin{enumerate}
+%     \item \textbf{Kapasitor Starter SPIM:} Motor induksi satu fasa kipas angin model Cosmos 16SN, kecepatan putar 1400 RPM, 46W.
+%     \item \textbf{Unit Mikrokontroler:} Menggunakan $\text{ESP32}$. Mikrokontroler ini membaca data dari sensor, pra-pemrosesan, modul Wi-Fi, protokol komunikasi MQTT.
+%     \item \textbf{Modul Sensor Akselerometer ADXL345}: Modul sensor akselerometer digital 3-sumbu (X,Y,Z) dengan rentang +-2g hingga +-16g melalui I2C/SPI, sample-rate pengukuran hingga 3600Hz.
+%     \item \textbf{Sensor Suhu DS18B20 dan Driver:} Sensor suhu digital One-Wire yang memiliki rentang pengukuran -55C hingga +125C dengan akurasi +-0.5C pada rentang kerja normal. Sensor memiliki keluaran digital sehingga tidak memerlukan rangkaian penguat atau ADC tambahan.
+%     \item \textbf{Sensor Arus ACS172:} ACS712 merupakan sensor arus berbasis efek Hall yang mampu mengukur arus AC maupun DC dengan keluaran berupa tegangan analog yang proporsional terhadap arus.
+%     \item \textbf{Sensor Hall A3144 dan Magnet:} Sensor Hall A3144 digunakan bersama magnet permanen untuk mengukur kecepatan putar (RPM) motor melalui pendeteksian setiap putaran poros.
+%     \item \textbf{Operational Amplifier:} Operational Amplifier (Op-Amp) digunakan pada rangkaian pengkondisi sinyal untuk memperkuat, membuffer, dan memfilter sinyal sensor sebelum diproses mikrokontroler. Kegunaannya adalah untuk meningkatkan SNR, mengurangi gangguanw frekuensi tinggi.
+%     \item \textbf{Kapasitor:} Kapasitor digunakan sebagai decoupling/bypass capacitor untuk mengurangi ripple tegangan serta meredam noise tinggi, filter RC.
+%     \item \textbf{Resistor:} Resistor berfungsi untuk membatasi arus, mengatur level tegangan, serta membentuk konfigurasi yang sesuai.
+% \end{enumerate}
 
 \begin{figure}[t!]
     \centering
@@ -858,23 +931,23 @@ Subsistem ini bertanggung jawab untuk instalasi, pengumpulan, dan pemrosesan sin
     
 \end{figure}
 
-\begin{figure}[t!]
-    \centering
+% \begin{figure}[t!]
+%     \centering
     
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{image/doc/motor-assembled.jpg}
-        \caption{Konstruksi Motor Induksi Penelitian}
-        \label{fig:motor-assembled}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{image/doc/motor-disassembled.jpg}
-        \caption{Konstruksi Motor Induksi Penelitian (disassembled)}
-        \label{fig:motor-disassembled}
-    \end{minipage}
-\end{figure}
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{image/doc/motor-assembled.jpg}
+%         \caption{Konstruksi Motor Induksi Penelitian}
+%         \label{fig:motor-assembled}
+%     \end{minipage}
+%     \hfill
+%     \begin{minipage}{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{image/doc/motor-disassembled.jpg}
+%         \caption{Konstruksi Motor Induksi Penelitian (disassembled)}
+%         \label{fig:motor-disassembled}
+%     \end{minipage}
+% \end{figure}
     
 \begin{figure}[b!]
     \centering
@@ -888,7 +961,7 @@ Subsistem ini bertanggung jawab untuk instalasi, pengumpulan, dan pemrosesan sin
 % Contoh  Penulisan Algoritma  di Latex seperti pada Algoritme \autoref{alg:contoh1}:
 
 % \begin{algorithm}[H]
-% \caption{Pembacaan Sensor Suhu dan LED Control}
+% \caption{Proses }
 % \label{alg:contoh1}
 % \begin{algorithmic}[1]
 % \STATE Inisialisasi pin sensor dan LED
@@ -906,6 +979,7 @@ Subsistem ini bertanggung jawab untuk instalasi, pengumpulan, dan pemrosesan sin
 
 % Contoh Script di Latex seperti pada \autoref{lst:arduino}: 
 % \begin{lstlisting}[caption={Contoh Kode Arduino}, label={lst:arduino}]
+
 % int led = 13;
 % int sensor = A0;
 
@@ -942,23 +1016,6 @@ Data di cloud kemudian dapat diakses oleh subsistem visualisasi dan kontrol dari
     \caption{Flowchart Subsistem Komunikasi, Cloud, dan Algoritma (KCA)}
     \label{fig:flowchart_kca}
 \end{figure}
-
-% \begin{algorithm}[H]
-% \caption{Pembacaan Sensor Suhu dan LED Control}
-% \label{alg:contoh1}
-% \begin{algorithmic}[1]
-% \STATE Inisialisasi pin sensor dan LED
-% \WHILE{true}
-%     \STATE Baca nilai suhu dari sensor
-%     \IF{suhu > 30$^\circ$C}
-%         \STATE Nyalakan LED
-%     \ELSE
-%         \STATE Matikan LED
-%     \ENDIF
-%     \STATE Tunggu 1 detik
-% \ENDWHILE
-% \end{algorithmic}
-% \end{algorithm}
 
 \subsubsection{Subsistem Desain Alarm dan Sistem Proteksi (DASP)}
 Subsistem Desain Alarm dan Sistem Proteksi (DASP) memiliki sistem dalam merancang arus dan suhu batas pada kerja motor, mendesain alarm peringatan dalam bentuk buzzer, dan visualisasi pada website, serta mengaktifkan relay proteksi apabila parameter arus dan suhu melewati batas dalam jangka waktu yang ditentukan.
@@ -1250,7 +1307,7 @@ Rencana jadwal implementasi penelitian ditunjukkan pada Tabel~\ref{tab:jadwal}.
 \centering
 \caption{Jadwal Implementasi Penelitian}
 \label{tab:jadwal}
-\renewcommand{\arraystretch}{1.3}
+% \renewcommand{\arraystretch}{1.3}
 \begin{tabular}{|c|p{7cm}|c|c|c|}
 \hline
 No & Kegiatan & Minggu & Durasi & Ketergantungan\\
@@ -1320,7 +1377,7 @@ Subsistem yang dikembangkan terdiri atas sistem instalasi sensor dan pemrosesan 
 \caption{Pembagian Tugas Tim}
 \label{tab:pembagian_tugas}
 
-\renewcommand{\arraystretch}{1.4}
+% \renewcommand{\arraystretch}{1.4}
 
 \begin{tabular}{|p{3cm}|p{4cm}|p{7cm}|}
 \hline
@@ -1382,7 +1439,7 @@ Kriteria keberhasilan pengujian sistem ditunjukkan pada Tabel~\ref{tab:kriteria_
 \centering
 \caption{Kriteria Keberhasilan Pengujian Sistem}
 \label{tab:kriteria_pengujian}
-\renewcommand{\arraystretch}{1.3}
+%%\renewcommand{\arraystretch}{1.3}
 
 \begin{tabular}{|c|p{4.5cm}|p{4.2cm}|p{4cm}|}
 \hline
@@ -1487,7 +1544,7 @@ Tahapan pengujian integrasi sistem ditunjukkan pada Tabel~\ref{tab:integrasi_sis
 \centering
 \caption{Pengujian Integrasi Sistem}
 \label{tab:integrasi_sistem}
-\renewcommand{\arraystretch}{1.3}
+%%\renewcommand{\arraystretch}{1.3}
 
 \begin{tabular}{|c|p{6cm}|p{7cm}|}
 \hline
@@ -1625,7 +1682,7 @@ Perangkat keras yang digunakan merupakan komponen utama dalam pembangunan sistem
 \centering
 \caption{Estimasi Biaya Perangkat Keras}
 \label{tab:harga}
-\renewcommand{\arraystretch}{1.3}
+%%\renewcommand{\arraystretch}{1.3}
 
 \begin{tabular}{|c|p{5.8cm}|c|r|r|}
 \hline
@@ -1676,7 +1733,7 @@ Perangkat lunak yang digunakan pada penelitian ini merupakan perangkat lunak beb
 \centering
 \caption{Estimasi Biaya Perangkat Lunak}
 \label{tab:biaya-software}
-\renewcommand{\arraystretch}{1.3}
+%%\renewcommand{\arraystretch}{1.3}
 
 \begin{tabular}{|c|p{8cm}|r|}
 \hline
@@ -1713,7 +1770,7 @@ Biaya pengujian digunakan untuk mendukung proses validasi sistem, kalibrasi sens
 \centering
 \caption{Estimasi Biaya Pengujian dan Kalibrasi}
 \label{tab:pengujian}
-\renewcommand{\arraystretch}{1.3}
+%%\renewcommand{\arraystretch}{1.3}
 
 \begin{tabular}{|c|p{8cm}|r|}
 \hline
@@ -1746,7 +1803,7 @@ Biaya operasional meliputi kebutuhan administrasi, dokumentasi, transportasi, se
 \centering
 \caption{Estimasi Biaya Operasional}
 \label{tab:operasional}
-\renewcommand{\arraystretch}{1.3}
+%%\renewcommand{\arraystretch}{1.3}
 
 \begin{tabular}{|c|p{8cm}|r|}
 \hline
@@ -1781,7 +1838,7 @@ Rekapitulasi keseluruhan biaya proyek ditunjukkan pada Tabel~\ref{tab:rekap_biay
 \centering
 \caption{Rekapitulasi Estimasi Biaya Proyek}
 \label{tab:rekap_biaya}
-\renewcommand{\arraystretch}{1.3}
+%%\renewcommand{\arraystretch}{1.3}
 
 \begin{tabular}{|c|p{8cm}|r|}
 \hline
@@ -1826,7 +1883,7 @@ Biaya pembangunan prototipe relatif lebih rendah dibandingkan sistem monitoring 
 \centering
 \caption{Perbandingan Estimasi Biaya Sistem}
 \label{tab:perbandingan_biaya}
-\renewcommand{\arraystretch}{1.3}
+%%\renewcommand{\arraystretch}{1.3}
 
 \begin{tabular}{|c|p{8cm}|r|}
 \hline
@@ -1906,6 +1963,95 @@ Contoh format IEEE:
     % ... (Tambahkan entri lain jika tabel perlu memanjang)
 
 \end{longtable}
+
+\subsection{Lampiran}
+% Contoh Script di Latex seperti pada \autoref{lst:arduino}: 
+\begin{lstlisting}[caption={Fast-Fourier Transform Sinyal Kecepatan Getaran}, label={lst: fft-esp32}]
+
+Listing 1: Program to execute FFT on the ESP32.
+/***************************************************************
+ *           FAST FOURIER TRANSFORM
+ *           ======================
+ *
+ * This program uses the Arduino Audio Tools library to display
+ * the FFT components of an input signal.
+ *
+ * Author : Dogan Ibrahim
+ * Program: FFT
+ * Date   : May, 2023
+ *
+ * (This program is a modified version of the program developed
+ *  by Phil Pschatzmann)
+ ***************************************************************/
+#include "AudioTools.h"
+#include "AudioLibs/AudioRealFFT.h"
+
+uint16_t sample_rate=44100;
+uint8_t channels = 2;
+I2SStream in;
+AudioRealFFT fft;
+StreamCopy copier(fft, in);
+
+//
+// Display fft result on Serial Monitor
+//
+void fftResult(AudioFFTBase &fft)
+{
+    float diff;
+    auto result = fft.result();
+    if (result.magnitude>100)
+    {
+        Serial.print(result.frequency);
+        Serial.print(" ");
+        Serial.print(result.magnitude);  
+        Serial.print(" => ");
+        Serial.print(result.frequencyAsNote(diff));
+        Serial.print( " diff: ");
+        Serial.println(diff);
+    }
+}
+
+void setup(void)
+{
+  Serial.begin(115200);
+ 
+//
+// Configure in stream
+//
+  auto configin = in.defaultConfig(RX_MODE);
+  configin.sample_rate = sample_rate;
+  configin.channels = channels;
+  configin.bits_per_sample = 16;
+  configin.i2s_format = I2S_STD_FORMAT;
+  configin.is_master = true;
+  configin.port_no = 0;
+  configin.pin_ws = 15;                        // LRCK
+  configin.pin_bck = 14;                       // SCLK
+  configin.pin_data = 22;                      // SDOUT
+  configin.pin_mck = 0;
+  in.begin(configin);
+
+//
+// Configure FFT
+//
+  auto tcfg = fft.defaultConfig();
+  tcfg.length = 8192;
+  tcfg.channels = channels;
+  tcfg.sample_rate = sample_rate;
+  tcfg.bits_per_sample = 16;
+  tcfg.callback = &fftResult;
+  fft.begin(tcfg);
+}
+
+//
+// Copy input signal to fft
+//
+void loop()
+{
+  copier.copy();
+}
+
+\end{lstlisting}
 
 
 

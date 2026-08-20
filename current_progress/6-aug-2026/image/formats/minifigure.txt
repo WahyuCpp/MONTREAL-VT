@@ -1,0 +1,17 @@
+\begin{figure}[t!]
+    \centering
+    
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/doc/pcb-3d-depan.png}
+        \caption{3D View PCB Tampak Depan}
+        \label{fig:3d-pcb-depan}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/doc/pcb-3d-3-4.png}
+        \caption{3D View PCB Tampak Belakang}
+        \label{fig:3d-pcb-belakang}
+    \end{minipage}
+\end{figure}

@@ -1,0 +1,6 @@
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{image/doc/pcb-layout.pdf} % Ganti dengan path diagram Anda
+    \caption{Layout PCB Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
+    \label{fig:layout-pcb-isps}
+\end{figure}
