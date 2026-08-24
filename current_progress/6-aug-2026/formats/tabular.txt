@@ -1,0 +1,14 @@
+    \begin{table}[H]
+    \centering
+    \caption{Tabel kelas insulasi winding\cite{3.1.5}}
+    \label{tab:insulation_class}
+    \begin{tabular}{|p{3cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
+        \hline
+        \textbf{Tipe Insulasi} &\textbf{A} & \textbf{B} & \textbf{F} & \textbf{H} & \textbf{200} & \textbf{220}\\
+        \hline
+        \textbf{Batas Suhu Maksimum} & 115 & 140 & 165 & 190 & 210 & 230 \\
+        \hline
+        \textbf{Batas Kenaikan Suhu} & 80 & 80 & n & n & n & n\\
+        \hline
+    \end{tabular}
+    \end{table}

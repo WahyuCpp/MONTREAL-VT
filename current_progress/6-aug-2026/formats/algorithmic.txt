@@ -1,0 +1,40 @@
+
+%%=========================Contoh Kode List, dan Algoritma==================================%%
+% Contoh  Penulisan Algoritma  di Latex seperti pada Algoritme \autoref{alg:contoh1}:
+
+% \begin{algorithm}[H]
+% \caption{Proses }
+% \label{alg:contoh1}
+% \begin{algorithmic}[1]
+% \STATE Inisialisasi pin sensor dan LED
+% \WHILE{true}
+%     \STATE Baca nilai suhu dari sensor
+%     \IF{suhu > 30$^\circ$C}
+%         \STATE Nyalakan LED
+%     \ELSE
+%         \STATE Matikan LED
+%     \ENDIF
+%     \STATE Tunggu 1 detik
+% \ENDWHILE
+% \end{algorithmic}
+% \end{algorithm}
+
+% Contoh Script di Latex seperti pada \autoref{lst:arduino}: 
+% \begin{lstlisting}[caption={Contoh Kode Arduino}, label={lst:arduino}]
+
+% int led = 13;
+% int sensor = A0;
+
+% void setup() {
+%   pinMode(led, OUTPUT);
+% }
+
+% void loop() {
+%   int suhu = analogRead(sensor);
+%   if (suhu > 600) digitalWrite(led, HIGH);
+%   else digitalWrite(led, LOW);
+%   delay(1000);
+% }
+
+% \end{lstlisting}
+%%==================Contoh Codelist, dan Algoritma================================%%

@@ -6,6 +6,8 @@
 \usetikzlibrary{shapes.geometric, arrows.meta, positioning}
 \usepackage{adjustbox}
 \usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{rotating}
 
 % --- Memasukkan Data Dokumen Menggunakan Perintah Baru ---
 \projectcode{EL3}
@@ -322,18 +324,19 @@ motor (poin 9).
 
 \subsubsection{Use Case Diagram}
 Use case diagram mengilustrasikan interaksi fungsional antara
-pengguna dan sistem MONTREAL-VT.
-\begin{figure}[htb!]
+pengguna dan sistem MONTREAL-VT. Gambar \ref{fig:use_case} menunjukkan
+relasi dan interaksi antara divais dan pengguna.
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{image/doc/use_case_2.png} % Ganti dengan path diagram Anda
     \caption{Diagram Use Case MONTREAL-VT}
     \label{fig:use_case}
 \end{figure}
 
-Pada gambar \ref{fig:use_case}, aktor utama dari sistem
-adalah administrator atau user yang memiliki bertanggung jawab
+Aktor utama dari sistem
+adalah pengguna atau \textit{user} yang memiliki bertanggung jawab
 dalam pengoperasian dan pengawasan platform monitoring. 
-User memiliki hak akses untuk memulai sistem, mengakses data melalui
+Pengguna memiliki hak akses untuk memulai sistem, mengakses data melalui
 dashboard setelah proses autentikasi pengguna dan data riwayat,
 menerima notifikasi alarm, dan melakukan pengaturan sistem proteksi.
 
@@ -368,30 +371,31 @@ spesifikasi tersebut.
     \endlastfoot
 
     1 & Pengukuran Getaran &
-    Target bandwidth fault, $f_{max}=300Hz$
+    Target bandwidth fault, 
+    $f_{max}=n \omega$
 
-    $F_{s}=2 \times f_{max}=600Hz$
-    
+    $F_{s} = 2 n f_{max}$
+
+    $F_{s} = 2 n \omega$
     \\
     \hline
 
     2 & Pengukuran Suhu &
-    $F{s}=1Hz$
-    
-    Galat absolut,$\Delta=\pm 0.5^\circ C$, suhu ruang
+    Galat absolut, $\Delta=\pm 0.5^\circ C$, suhu ruang
     \\
     \hline
 
     3 & Frekuensi Pengukuran Arus &
-    $F_{s}=1Hz$
+    $F_{s} = 2 f_{AC}$
+
+    $F_{s} = 100Hz$
     
-     $\%error=4\%$    
+    $\%error=4\%$    
     \\
     \hline
 
     4 & Pengukuran Kecepatan Putar (RPM) &
-    $F_{s}=1400RPM/60s$
-    $F_{s}=23.3Hz$
+    $F_{s}=2 RPM/60s$
     \\
     \hline
 
@@ -559,7 +563,7 @@ spesifikasi tersebut.
         \textbf{Batas Kenaikan Suhu} & 80 & 80 & n & n & n & n\\
         \hline
     \end{tabular}
-\end{table}
+    \end{table}
 
     Apabila transduser suhu dipasang pada
     casing motor, maka perbedaan antara suhu casing
@@ -574,19 +578,25 @@ spesifikasi tersebut.
     \ref{eq:rating_daya} dan \ref{eq:rating_arus}.
 
     \begin{align}
-        P_{rated}=V_{rated} I_{rated} cos(\Theta) \eta\\ \label{eq:rating_daya}
-        I_{rated}=\frac{P_{rated}}{V_{rated} \cos(\Theta) \eta}\\         \label{eq:rating_arus}
+        \label{eq:rating_daya}
+        P_{rated}=V_{rated} I_{rated} cos(\Theta) \eta\\ 
+        \label{eq:rating_arus}
+        I_{rated}=\frac{P_{rated}}{V_{rated} \cos(\Theta) \eta}
     \end{align}
 
-    Rumus rating arus diimplementasikan untuk menetapkan 
+    Persamaan rating arus diimplementasikan untuk menetapkan 
     batas arus normal pada operasi motor.
 % Dari Tabel~\ref{tab:nonfungsional}, sistem tidak hanya dituntut mampu melakukan proses monitoring parameter motor induksi, tetapi juga harus memiliki kualitas layanan yang baik dari sisi kinerja, keandalan, keamanan, dan kemudahan penggunaan. Seluruh aspek tersebut menjadi acuan dalam proses implementasi dan pengujian sistem agar sistem yang dikembangkan memenuhi karakteristik perangkat IoT yang andal, mudah dipelihara, dan mampu beroperasi secara berkelanjutan \cite{bahga2014,PMBOK}.
 
 % ==============================================================
 \subsection{\HardwareSpecTitle}
-% Spesifikasi perangkat keras menjelaskan komponen utama yang digunakan dalam perancangan sistem monitoring getaran dan suhu pada motor induksi. Perangkat keras terdiri atas sensor, mikrokontroler, modul komunikasi, aktuator, serta catu daya yang saling terintegrasi untuk memperoleh, mengolah, dan mengirimkan data kondisi motor secara \textit{real-time}. Pemilihan setiap komponen didasarkan pada kebutuhan sistem, kemudahan integrasi, serta kemampuan dalam mendukung proses monitoring dan proteksi motor induksi.
-
-% Tabel \ref{tab:hardware} menunjukkan spesifikasi perangkat keras yang digunakan pada sistem.
+Kemampuan sistem yang tertulis pada tabel
+\ref{tab:fungsional} dan \ref{tab:nonfungsional}
+hanya bisa dicapai apabila komponen-komponen
+yang membangun sistem, memenuhi batasan
+kemampuan tertentu yang mencukupi. Tabel
+\ref{tab:hardware-specs} dan \ref{tab:software-specs}
+mencakup batasan-batasan tersebut.
 
 \begin{longtable} {|p{1cm}|p{3cm}|p{3cm}|p{6cm}|}
     \caption{Spesifikasi Perangkat Keras}
@@ -621,7 +631,7 @@ spesifikasi tersebut.
     \hline
     
     2 &
-    ESP32-S3&
+    ESP32-S3\cite{ESP32-S3}&
     Mikrokontroler utama &
     CPU Single/Dual-Core Xtensa 32-bit LX7 up to 240 MHz, ROM 384KB, SRAM 512KB, SRAM RTC 16KB
     
@@ -633,7 +643,7 @@ spesifikasi tersebut.
     \hline
     
     3 & 
-    ADXL345 &
+    ADXL345\cite{ADXL345} &
     Sensor getaran motor &
     Sensor accelerometer 3-axis
     
@@ -645,7 +655,7 @@ spesifikasi tersebut.
     \hline
     
     4 &
-    DS18B20 &
+    DS18B20\cite{DS18B20} &
     Sensor suhu motor &
     Rentang pengukuran -55$^\circ$C hingga 125$^\circ$C
     
@@ -655,7 +665,7 @@ spesifikasi tersebut.
     \hline
     
     5 &
-    ACS712 &
+    ACS712\cite{ACS712}&
     Sensor arus motor &
     Sensor arus Hall Effect
     
@@ -665,7 +675,7 @@ spesifikasi tersebut.
     \hline
     
     6 &
-    Hall Effect Sensor &
+    Hall Effect Sensor\cite{A3144} &
     Sensor kecepatan putar motor (RPM) &
     Sensor digital berbasis efek Hall untuk mendeteksi jumlah putaran poros motor. \\
     \hline
@@ -675,32 +685,15 @@ spesifikasi tersebut.
     Sistem proteksi motor &
     Relay 5 V
     
-    kontak NO/NC
-    
     kapasitas maksimum 10 A 250 VAC. \\
-    \hline
-    
-    8 &
-    Buzzer &
-    Indikator alarm &
-    Buzzer aktif 5 V sebagai indikator peringatan ketika kondisi motor abnormal. \\
-    \hline
-    
-    9 &
-    Power Supply &
-    Catu daya sistem &
-    Adaptor DC 5 V / 2 A untuk menyuplai seluruh perangkat elektronika. \\
     \hline
 \end{longtable}
 
 % ==============================================================
 \subsection{\SoftwareSpecTitle}
-
-% Perangkat lunak pada sistem monitoring getaran dan suhu motor induksi berfungsi untuk mengendalikan proses akuisisi data, pemrosesan sinyal, analisis kondisi motor, komunikasi data melalui jaringan Wi-Fi, serta visualisasi hasil monitoring pada dashboard. Arsitektur perangkat lunak dirancang secara modular sehingga setiap fungsi dapat dikembangkan dan dipelihara secara terpisah tanpa mempengaruhi fungsi lainnya \cite{bahga2014,ESP32}.
-
-% Sistem perangkat lunak terdiri atas tiga lapisan utama, yaitu \textit{edge device}, \textit{cloud/server}, dan \textit{user interface}. Lapisan \textit{edge device} bertugas membaca data sensor, melakukan pemrosesan awal, dan mengirimkan data ke server. Lapisan \textit{cloud/server} berfungsi menyimpan data, mengelola data historis, serta menyediakan layanan komunikasi dengan dashboard. Sementara itu, lapisan \textit{user interface} berfungsi menampilkan hasil monitoring kepada pengguna secara \textit{real-time} melalui jaringan Internet \cite{bahga2014,mqtt311}.
-
-% Tabel \ref{tab:software} menunjukkan spesifikasi perangkat lunak yang digunakan pada sistem monitoring motor induksi.
+Spesifikasi perangkat lunak yang digunakan
+pada sistem ini tercantum pada tabel \ref{tab:software-specs}
+di bawah ini.
 
 \begin{longtable}{|p{1cm}|p{4cm}|p{8.5cm}|}
 \caption{Spesifikasi Perangkat Lunak}
@@ -735,16 +728,16 @@ Wi-Fi IEEE 802.11 b/g/n dengan protokol HTTP atau MQTT.\\
 \hline
 
 4 & Platform Cloud &
-AWS IoT Core, Thingspeak.\\
+Firebase\\
 \hline
 
 5 & Database &
-Macam
+Firebase
 \\
 \hline
 
 6 & Dashboard Monitoring &
-Dashboard berbasis Web atau Blynk IoT yang menampilkan parameter monitoring, grafik tren, status alarm, dan riwayat data.\\
+Firebase\\
 \hline
 
 7 & Pengolahan Data &
@@ -790,17 +783,17 @@ Tabel \ref{tab:evaluasi} menunjukkan parameter yang digunakan sebagai acuan dala
 
 1 &
 Sensor Getaran (ADXL345) &
-Sensor mampu membaca data getaran secara stabil dan menghasilkan data sesuai kondisi operasi motor. \\
+Sensor mampu membaca data getaran secara stabil dan menghasilkan data sesuai kondisi operasi motor.\\
 \hline
 
 2 &
 Sensor Suhu (DS18B20) &
-Galat pengukuran suhu maksimum sebesar 15\% dibandingkan alat ukur referensi. \\
+Galat pengukuran suhu maksimum sebesar 15\% dibandingkan alat ukur referensi.\\
 \hline
 
 3 &
 Sensor Arus (ACS712) &
-Galat pengukuran arus maksimum sebesar 15\% dibandingkan alat ukur referensi. \\
+Galat pengukuran arus maksimum sebesar 15\% dibandingkan alat ukur referensi.\\
 \hline
 
 4 &
@@ -847,195 +840,150 @@ Data monitoring berhasil disimpan ke database lengkap dengan informasi \textit{t
 
 Berdasarkan Tabel~\ref{tab:evaluasi}, keberhasilan sistem tidak hanya ditentukan dari kemampuan membaca data sensor, tetapi juga kemampuan sistem dalam proses pengolahan sinyal, analisis kondisi motor, komunikasi data, visualisasi hasil monitoring, serta pemberian alarm dan proteksi ketika terjadi kondisi tidak normal. Pengujian terhadap parameter RMS dan Fast Fourier Transform (FFT) digunakan untuk mengevaluasi karakteristik getaran motor, sedangkan pengujian komunikasi data memastikan sistem mampu melakukan monitoring secara \textit{real-time} melalui jaringan Internet. Seluruh hasil pengujian tersebut menjadi dasar untuk menilai tingkat keandalan sistem monitoring yang dikembangkan \cite{oppenheim2010,randall2011,mqtt311}.
 
+\newpage
 \section{\ProposedSolutionTitle}
-
-% Bagian ini menyajikan gambaran menyeluruh tentang solusi yang diusulkan. Yang mencakup deskripsi produk/sistem secara umum, fitur-fitur kunci yang akan diimplementasikan, dan keunggulan kompetitif yang membedakannya dari solusi yang sudah ada.
-
-% \textit{Penjelasan: Jelaskan secara naratif apa itu Project Tim Anda. Gambarkan secara singkat arsitektur sistem (misalnya, sensor, mikrokontroler, cloud, aktuator) dan bagaimana keseluruhan sistem bekerja. Tujuan utama adalah memberikan pemahaman yang jelas tentang konsep dan fungsionalitas inti proyek.}
-
 \subsection{\ArchitectureTitle}
-% --- Di sini Anda bisa menyisipkan Diagram Arsitektur Sistem ---
-% Contoh:
-\begin{figure}[b!]
+Arsitektur utama yang diterapkan pada sistem
+MONTREAL-VT dibagi menjadi tiga subsistem utama.
+Subsistem tersebut meliputi subsistem Instalasi Sensor
+dan Pemrosesan Sinyal (ISPS), subsistem Cloud-Hosting dan
+Basis Data (CHBD), dan subsitem Desain Alarm
+dan Sistem Proteksi (DASP). Ketiga subsistem
+ini saling bergantung satu sama lain agar sistem
+MONTREAL-VT dapat berfungsi sebagaimana mestinya,
+seperti yang tertulis pada subbab spesifikasi sistem
+pada tabel \ref{tab:fungsional} dan \ref{tab:nonfungsional}.
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{image/doc/arsitektur_sistem_2.png} % Ganti dengan path diagram Anda
+    \includegraphics[width=1\textwidth]{image/doc/arsitektur_sistem_2.pdf} % Ganti dengan path diagram Anda
     \caption{Arsitektur Proyek}
     \label{fig:arsitektur}
 \end{figure}
 
-\textbf{MONTREAL-VT} merupakan sistem pemantauan motor induksi 1-fasa terintegrasi yang memiliki fitur dalam merekam, menyimpan, menganalisa data, dan memberikan informasi kepada operator mengenai kondisi motor. Parameter yang digunakan untuk menganalisa data meliputi getaran motor melalui sumbu x, y, dan z, suhu housing, arus motor, dan kecepatan putar motor.
-
-Gambar \ref{fig:arsitektur} memaparkan arsitektur sistem MONTREAL-VT, terdiri atas tiga subsistem yang mencakup subsistem instalasi sensor dan pemrosesan sinyal, subsistem desain alarm dan sistem proteksi, dan sistem komunikasi, cloud, dan algoritma. 
-% Ingat untuk menamai gambar Anda dengan format ELx.y yang sudah diatur.
-
-\subsubsection{Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
-% \textit{Penjelasan: Fokus pada semua komponen fisik yang bertugas mengumpulkan data dari lingkungan. Sebutkan jenis sensor, mikrokontroler, dan modul-modul lain yang terlibat. Jelaskan bagaimana data dikumpulkan dan diproses secara lokal sebelum dikirim. }
-
-\begin{figure}[t!]
+\subsubsection{Subsistem Instalasi Sensor dan Pemrosesan Sinyal}
+Subsistem instalasi sensor dan pemrosesan sinyal
+mencakup proses penginstalan sensor pada sistem
+montreal-vt, dan pemrosesan sinyal output sensor
+sebelum atau saat sinyal diterima oleh mikrokontroler. 
+Tahapan proses kerja mikrokontroler
+pada subsistem isps digambarkan oleh gambar \ref{fig:flowchart_isps_1}
+dan \ref{fig:flowchart_isps_2}.
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{image/doc/Flowchart-Page-1.png} % Ganti dengan path diagram Anda
+    \includegraphics[width=0.28\textwidth]{image/doc/pg1.pdf} % Ganti dengan path diagram Anda
     \caption{Flowchart Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
-    \label{fig:flowchart_isps}
+    \label{fig:flowchart_isps_1}
 \end{figure}
 
-Instalasi Sensor dan Pemrosesan Sinyal (ISPS) merupakan 
-subsistem yang mencakup proses pemilihan
-sensor dan instalasi yang sensor tepat,
-dan proses pengkondisian sinyal output
-dari sensor yang meliputi pemfilteran
-derau dan penguatan sinyal. 
-
-% Subsistem ini bertanggung jawab untuk instalasi, pengumpulan, dan pemrosesan sinyal output dari sensor getaran, sensor suhu, sensor arus, dan sensor RPM.
-% \begin{enumerate}
-%     \item \textbf{Kapasitor Starter SPIM:} Motor induksi satu fasa kipas angin model Cosmos 16SN, kecepatan putar 1400 RPM, 46W.
-%     \item \textbf{Unit Mikrokontroler:} Menggunakan $\text{ESP32}$. Mikrokontroler ini membaca data dari sensor, pra-pemrosesan, modul Wi-Fi, protokol komunikasi MQTT.
-%     \item \textbf{Modul Sensor Akselerometer ADXL345}: Modul sensor akselerometer digital 3-sumbu (X,Y,Z) dengan rentang +-2g hingga +-16g melalui I2C/SPI, sample-rate pengukuran hingga 3600Hz.
-%     \item \textbf{Sensor Suhu DS18B20 dan Driver:} Sensor suhu digital One-Wire yang memiliki rentang pengukuran -55C hingga +125C dengan akurasi +-0.5C pada rentang kerja normal. Sensor memiliki keluaran digital sehingga tidak memerlukan rangkaian penguat atau ADC tambahan.
-%     \item \textbf{Sensor Arus ACS172:} ACS712 merupakan sensor arus berbasis efek Hall yang mampu mengukur arus AC maupun DC dengan keluaran berupa tegangan analog yang proporsional terhadap arus.
-%     \item \textbf{Sensor Hall A3144 dan Magnet:} Sensor Hall A3144 digunakan bersama magnet permanen untuk mengukur kecepatan putar (RPM) motor melalui pendeteksian setiap putaran poros.
-%     \item \textbf{Operational Amplifier:} Operational Amplifier (Op-Amp) digunakan pada rangkaian pengkondisi sinyal untuk memperkuat, membuffer, dan memfilter sinyal sensor sebelum diproses mikrokontroler. Kegunaannya adalah untuk meningkatkan SNR, mengurangi gangguanw frekuensi tinggi.
-%     \item \textbf{Kapasitor:} Kapasitor digunakan sebagai decoupling/bypass capacitor untuk mengurangi ripple tegangan serta meredam noise tinggi, filter RC.
-%     \item \textbf{Resistor:} Resistor berfungsi untuk membatasi arus, mengatur level tegangan, serta membentuk konfigurasi yang sesuai.
-% \end{enumerate}
-
-\begin{figure}[t!]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{image/doc/skematik-monitor-2.pdf} % Ganti dengan path diagram Anda
+    \includegraphics[width=0.6\textwidth]{image/doc/pg2.pdf} % Ganti dengan path diagram Anda
+    \caption{Flowchart Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
+    \label{fig:flowchart_isps_2}
+\end{figure}
+
+Subsistem ISPS bertanggung jawab pada alur kerja
+sistem sensor, pemrosesan sinyal output sensor
+, serta proses akuisisi data melalui sensor dan
+mikrokontroler.
+
+\subsubsection{Pemrosesan Sinyal Sensor Accelerometer ADXL345}
+Kalman filter umum digunakan untuk analisis getaran.
+
+\subsubsection{Pemrosesan Sinyal Sensor CT}
+
+\subsubsection{Pemrosesan Sinyal Termokapel}
+
+\subsubsection{Pemrosesan Sinyal Sensor Efek-Hall}
+
+\newpage
+\begin{sidewaysfigure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{image/doc/skematik-monitor-2.pdf} % Ganti dengan path diagram Anda
     \caption{Skematik Rangkaian Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
     \label{fig:skematik-isps}
-\end{figure}
+\end{sidewaysfigure}
 
-\begin{figure}[b!]
+\clearpage
+
+Gambar \ref{fig:skematik-isps} merupakan skematik
+dari rangkaian subsistem ISPS, yang meliputi ... 
+
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{image/doc/pcb-layout.pdf} % Ganti dengan path diagram Anda
     \caption{Layout PCB Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
     \label{fig:layout-pcb-isps}
 \end{figure}
 
-\begin{figure}[t!]
+\begin{figure}[H]
     \centering
-    
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[width=\linewidth]{image/doc/pcb-3d-depan.png}
-        \caption{3D View PCB Tampak Depan}
+        \caption{Tampilan model 3d pcb tampak depan}
         \label{fig:3d-pcb-depan}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[width=\linewidth]{image/doc/pcb-3d-3-4.png}
-        \caption{3D View PCB Tampak Belakang}
+        \caption{Tampilan model 3d pcb tampak 3/4}
         \label{fig:3d-pcb-belakang}
     \end{minipage}
-    
 \end{figure}
-
-% \begin{figure}[t!]
-%     \centering
     
-%     \begin{minipage}{0.48\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{image/doc/motor-assembled.jpg}
-%         \caption{Konstruksi Motor Induksi Penelitian}
-%         \label{fig:motor-assembled}
-%     \end{minipage}
-%     \hfill
-%     \begin{minipage}{0.48\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{image/doc/motor-disassembled.jpg}
-%         \caption{Konstruksi Motor Induksi Penelitian (disassembled)}
-%         \label{fig:motor-disassembled}
-%     \end{minipage}
-% \end{figure}
-    
-\begin{figure}[b!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{image/doc/device-motor.jpg} % Ganti dengan path diagram Anda
     \caption{Lokasi Instalasi Device}
     \label{fig:instalasi-device}
 \end{figure}
 
-
-%%=========================Contoh Kode List, dan Algoritma==================================%%
-% Contoh  Penulisan Algoritma  di Latex seperti pada Algoritme \autoref{alg:contoh1}:
-
-% \begin{algorithm}[H]
-% \caption{Proses }
-% \label{alg:contoh1}
-% \begin{algorithmic}[1]
-% \STATE Inisialisasi pin sensor dan LED
-% \WHILE{true}
-%     \STATE Baca nilai suhu dari sensor
-%     \IF{suhu > 30$^\circ$C}
-%         \STATE Nyalakan LED
-%     \ELSE
-%         \STATE Matikan LED
-%     \ENDIF
-%     \STATE Tunggu 1 detik
-% \ENDWHILE
-% \end{algorithmic}
-% \end{algorithm}
-
-% Contoh Script di Latex seperti pada \autoref{lst:arduino}: 
-% \begin{lstlisting}[caption={Contoh Kode Arduino}, label={lst:arduino}]
-
-% int led = 13;
-% int sensor = A0;
-
-% void setup() {
-%   pinMode(led, OUTPUT);
-% }
-
-% void loop() {
-%   int suhu = analogRead(sensor);
-%   if (suhu > 600) digitalWrite(led, HIGH);
-%   else digitalWrite(led, LOW);
-%   delay(1000);
-% }
-
-% \end{lstlisting}
-%%==================Contoh Codelist, dan Algoritma================================%%
-
-\subsubsection{Subsistem Komunikasi, Cloud, dan Algoritma (KCA)}
+\subsubsection{Subsistem Cloud-hosting dan Basis Data}
 % \textit{Penjelasan: Fokus pada bagaimana data dikirim dari perangkat keras ke server/cloud dan bagaimana data tersebut disimpan serta diproses lebih lanjut. Sebutkan protokol komunikasi (\text{MQTT}), platform  cloud (\text{AWS IoT, Firebase, Thingspeak}), dan database.}
 
-Subsistem Komunikasi, Cloud, dan Algoritma (KCA) bertugas menghubungkan perangkat keras dengan infrastruktur cloud melalui protokol MQTT dan metode enkripsi, KCA juga bertanggung jawab atas post-processing sinyal sensor agar dapat digunakan untuk menganalisa keadaan motor.
-\begin{enumerate}
-    \item \textbf{Modul Komunikasi Nirkabel:} ESP32-S3 telah dilengkapi oleh modul Wi-Fi untuk menyediakan konektivitas internet. Modul ini memungkinkan proses pengiriman data hasil pengukuran sensor ke platform cloud secara nirkabel.
-    \item \textbf{Protokol Komunikasi \text{IoT}:} Message Queuing Telemetry Transport (MQTT) merupakan protokol komunikasi utama antara ESP32-S3 dan platform cloud. MQTT bersifat ringan, memiliki konsumsi bandwidth yang rendah, serta mendukung komunikasi real-time yang andal.
-    \item \textbf{Platform \text{Cloud} \text{IoT}:} AWS IoT Core merupakan platform cloud yang bertugas menerima data sensor melalui protokol MQTT. AWS IoT Core berfungsi sebagai MQTT broker sekaligus mekanisme autentikasi perangkat, pengelolaan koneksi, serta integrasi layanan AWS untuk pemrosesan dan analisis data.
-    \item \textbf{Basis Data (\text{Database}):} Data sensor yang diterima AWS IoT Core akan diteruskan dan disimpan pada layanan penyimpanan AWS, Amazon DynamoDB dan Amazon S3. Data ini digunakan untuk analisis historis, dan visualisasi.
-    \item \textbf{\emph{Dashboard} Berbasis Web:} Dashboard berbasis web yang bertugas dalam memvisualisasikan data secara real-time, visualisasi data historis, konfigurasi sistem, dan sistem notifikasi kondisi motor dan alarm. Dashboard dikembangkan menggunakan React, serta terhubung dengan layanan AWS.
-\end{enumerate}
+Subsistem Cloud-Hosting dan Basis Data (CBD) bertugas 
+menghubungkan perangkat keras ke sistem serverless melalui
+layanan cloud.
+
+% \begin{enumerate}
+%     \item \textbf{Modul Komunikasi Nirkabel:} ESP32-S3 telah dilengkapi oleh modul Wi-Fi untuk menyediakan konektivitas internet. Modul ini memungkinkan proses pengiriman data hasil pengukuran sensor ke platform cloud secara nirkabel.
+%     \item \textbf{Protokol Komunikasi \text{IoT}:} Message Queuing Telemetry Transport (MQTT) merupakan protokol komunikasi utama antara ESP32-S3 dan platform cloud. MQTT bersifat ringan, memiliki konsumsi bandwidth yang rendah, serta mendukung komunikasi real-time yang andal.
+%     \item \textbf{Platform \text{Cloud} \text{IoT}:} AWS IoT Core merupakan platform cloud yang bertugas menerima data sensor melalui protokol MQTT. AWS IoT Core berfungsi sebagai MQTT broker sekaligus mekanisme autentikasi perangkat, pengelolaan koneksi, serta integrasi layanan AWS untuk pemrosesan dan analisis data.
+%     \item \textbf{Basis Data (\text{Database}):} Data sensor yang diterima AWS IoT Core akan diteruskan dan disimpan pada layanan penyimpanan AWS, Amazon DynamoDB dan Amazon S3. Data ini digunakan untuk analisis historis, dan visualisasi.
+%     \item \textbf{\emph{Dashboard} Berbasis Web:} Dashboard berbasis web yang bertugas dalam memvisualisasikan data secara real-time, visualisasi data historis, konfigurasi sistem, dan sistem notifikasi kondisi motor dan alarm. Dashboard dikembangkan menggunakan React, serta terhubung dengan layanan AWS.
+% \end{enumerate}
 Data di cloud kemudian dapat diakses oleh subsistem visualisasi dan kontrol dari mana saja.
 
-\begin{figure}[t!]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{image/doc/Flowchart-Part-1-Page-2.png} % Ganti dengan path diagram Anda
+    \includegraphics[width=0.35\textwidth]{image/doc/pg4.pdf} % Ganti dengan path diagram Anda
     \caption{Flowchart Subsistem Komunikasi, Cloud, dan Algoritma (KCA)}
     \label{fig:flowchart_kca}
 \end{figure}
 
-\subsubsection{Subsistem Desain Alarm dan Sistem Proteksi (DASP)}
+\subsubsection{Subsistem Desain Alarm dan Sistem Proteksi}
 Subsistem Desain Alarm dan Sistem Proteksi (DASP) memiliki sistem dalam merancang arus dan suhu batas pada kerja motor, mendesain alarm peringatan dalam bentuk buzzer, dan visualisasi pada website, serta mengaktifkan relay proteksi apabila parameter arus dan suhu melewati batas dalam jangka waktu yang ditentukan.
 
-\begin{enumerate}
-    \item \textbf{ESP32-S3:} Berfungsi sebagai pengendali utama (main controller) yang menerima data dari seluruh sensor, melakukan komunikasi dengan platform cloud melalui jaringan Wi-Fi, menerima hasil analisis kondisi motor, serta mengeksekusi logika proteksi. Mikrokontroler ini mengendalikan aktivasi relay SSR untuk memutus atau menghubungkan catu daya motor berdasarkan kondisi operasi yang terdeteksi.
+% \begin{enumerate}
+%     \item \textbf{ESP32-S3:} Berfungsi sebagai pengendali utama (main controller) yang menerima data dari seluruh sensor, melakukan komunikasi dengan platform cloud melalui jaringan Wi-Fi, menerima hasil analisis kondisi motor, serta mengeksekusi logika proteksi. Mikrokontroler ini mengendalikan aktivasi relay SSR untuk memutus atau menghubungkan catu daya motor berdasarkan kondisi operasi yang terdeteksi.
 
-    \item \textbf{FOTEK SSR 20A:} Solid State Relay (SSR) digunakan sebagai aktuator proteksi yang berfungsi menghubungkan atau memutus suplai daya 220 VAC menuju motor induksi. SSR dikendalikan oleh sinyal keluaran ESP32-S3 sehingga proses pemutusan daya dapat dilakukan secara otomatis ketika sistem mendeteksi kondisi abnormal, seperti temperatur berlebih, getaran tinggi, arus berlebih, atau nilai Motor Health Index (MHI) yang berada di bawah batas aman.
+%     \item \textbf{FOTEK SSR 20A:} Solid State Relay (SSR) digunakan sebagai aktuator proteksi yang berfungsi menghubungkan atau memutus suplai daya 220 VAC menuju motor induksi. SSR dikendalikan oleh sinyal keluaran ESP32-S3 sehingga proses pemutusan daya dapat dilakukan secara otomatis ketika sistem mendeteksi kondisi abnormal, seperti temperatur berlebih, getaran tinggi, arus berlebih, atau nilai Motor Health Index (MHI) yang berada di bawah batas aman.
 
-    \item \textbf{Sistem Notifikasi:} Berfungsi memberikan peringatan kepada pengguna ketika parameter pemantauan melewati ambang batas yang telah ditentukan. Notifikasi ditampilkan pada dashboard secara real-time dan dapat dikirim melalui email atau layanan pesan sehingga pengguna dapat segera melakukan inspeksi maupun tindakan pemeliharaan.
+%     \item \textbf{Sistem Notifikasi:} Berfungsi memberikan peringatan kepada pengguna ketika parameter pemantauan melewati ambang batas yang telah ditentukan. Notifikasi ditampilkan pada dashboard secara real-time dan dapat dikirim melalui email atau layanan pesan sehingga pengguna dapat segera melakukan inspeksi maupun tindakan pemeliharaan.
 
-    \item \textbf{Sumber Arus 220 VAC:} Merupakan sumber tegangan utama yang menyuplai motor induksi satu fasa. Jalur catu daya ini dikendalikan melalui SSR sehingga suplai listrik ke motor dapat diputus secara otomatis ketika sistem proteksi diaktifkan.
+%     \item \textbf{Sumber Arus 220 VAC:} Merupakan sumber tegangan utama yang menyuplai motor induksi satu fasa. Jalur catu daya ini dikendalikan melalui SSR sehingga suplai listrik ke motor dapat diputus secara otomatis ketika sistem proteksi diaktifkan.
 
-    \item \textbf{Saklar Manual (AZ5):} Digunakan sebagai saklar mekanis untuk menghubungkan atau memutus suplai daya secara manual. Saklar ini berfungsi sebagai lapisan proteksi tambahan (manual override) ketika terjadi kegagalan sistem elektronik, proses perawatan (maintenance), maupun kondisi darurat yang memerlukan penghentian operasi motor secara langsung.
-\end{enumerate}
+%     \item \textbf{Saklar Manual (AZ5):} Digunakan sebagai saklar mekanis untuk menghubungkan atau memutus suplai daya secara manual. Saklar ini berfungsi sebagai lapisan proteksi tambahan (manual override) ketika terjadi kegagalan sistem elektronik, proses perawatan (maintenance), maupun kondisi darurat yang memerlukan penghentian operasi motor secara langsung.
+% \end{enumerate}
 
-\begin{figure}[t!]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{image/doc/Flowchart-Page-3.png} % Ganti dengan path diagram Anda
-    \caption{Flowchart Subsistem Desain Alarm dan Sistem Proteksi (DASP)}
+    \includegraphics[width=0.6\textwidth]{image/doc/pg3.pdf} % Ganti dengan path diagram Anda
+    \caption{Flowchart Subsistem Desain Alarm dan Sistem Proteksi}
     \label{fig:flowchart_dasp}
 \end{figure}
 
@@ -1964,7 +1912,7 @@ Contoh format IEEE:
 
 \end{longtable}
 
-\subsection{Lampiran}
+\section{Lampiran}
 % Contoh Script di Latex seperti pada \autoref{lst:arduino}: 
 \begin{lstlisting}[caption={Fast-Fourier Transform Sinyal Kecepatan Getaran}, label={lst: fft-esp32}]
 
