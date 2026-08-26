@@ -1,0 +1,63 @@
+\begin{table}[H]
+\centering
+\caption{Jadwal Implementasi Penelitian}
+\label{tab:jadwal}
+% \renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|p{7cm}|c|c|c|}
+\hline
+No & Kegiatan & Minggu & Durasi & Ketergantungan\\
+\hline
+
+1 & Analisis kebutuhan sistem & 1--2 & 2 minggu & -\\
+\hline
+
+2 & Studi literatur & 1--2 & 2 minggu & -\\
+\hline
+
+3 & Perancangan arsitektur sistem & 2 & 1 minggu & 1,2\\
+\hline
+
+4 & Perancangan perangkat keras & 3--4 & 2 minggu & 3\\
+\hline
+
+5 & Perancangan perangkat lunak & 3--5 & 3 minggu & 3\\
+\hline
+
+6 & Perancangan dashboard monitoring & 4--5 & 2 minggu & 5\\
+\hline
+
+7 & Implementasi akuisisi data dan pemrosesan sinyal & 6--8 & 3 minggu & 4,5\\
+\hline
+
+8 & Implementasi analisis kondisi motor & 7--9 & 3 minggu & 7\\
+\hline
+
+9 & Implementasi alarm dan proteksi & 8--10 & 3 minggu & 7\\
+\hline
+
+10 & Pengujian perangkat keras & 11 & 1 minggu & 7\\
+\hline
+
+11 & Pengujian pemrosesan sinyal & 11--12 & 2 minggu & 8\\
+\hline
+
+12 & Pengujian dashboard monitoring & 12 & 1 minggu & 8\\
+\hline
+
+13 & Pengujian alarm dan proteksi & 12--13 & 2 minggu & 9\\
+\hline
+
+14 & Pengujian integrasi sistem & 13 & 1 minggu & 10--13\\
+\hline
+
+15 & Penyusunan laporan tugas akhir & 14--15 & 2 minggu & 14\\
+\hline
+
+16 & Penyusunan panduan penggunaan sistem & 15 & 1 minggu & 14\\
+\hline
+
+17 & Persiapan seminar hasil & 16 & 1 minggu & 15,16\\
+\hline
+
+\end{tabular}
+\end{table}

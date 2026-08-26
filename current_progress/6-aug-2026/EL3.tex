@@ -560,8 +560,6 @@ spesifikasi tersebut.
         \hline
         \textbf{Batas Suhu Maksimum} & 115 & 140 & 165 & 190 & 210 & 230 \\
         \hline
-        \textbf{Batas Kenaikan Suhu} & 80 & 80 & n & n & n & n\\
-        \hline
     \end{tabular}
     \end{table}
 
@@ -838,7 +836,7 @@ Data monitoring berhasil disimpan ke database lengkap dengan informasi \textit{t
 
 \end{longtable}
 
-Berdasarkan Tabel~\ref{tab:evaluasi}, keberhasilan sistem tidak hanya ditentukan dari kemampuan membaca data sensor, tetapi juga kemampuan sistem dalam proses pengolahan sinyal, analisis kondisi motor, komunikasi data, visualisasi hasil monitoring, serta pemberian alarm dan proteksi ketika terjadi kondisi tidak normal. Pengujian terhadap parameter RMS dan Fast Fourier Transform (FFT) digunakan untuk mengevaluasi karakteristik getaran motor, sedangkan pengujian komunikasi data memastikan sistem mampu melakukan monitoring secara \textit{real-time} melalui jaringan Internet. Seluruh hasil pengujian tersebut menjadi dasar untuk menilai tingkat keandalan sistem monitoring yang dikembangkan \cite{oppenheim2010,randall2011,mqtt311}.
+Berdasarkan Tabel~\ref{tab:evaluasi}, keberhasilan sistem tidak hanya ditentukan dari kemampuan membaca data sensor, tetapi juga kemampuan sistem dalam proses pengolahan sinyal, analisis kondisi motor, komunikasi data, visualisasi hasil monitoring, serta pemberian alarm dan proteksi ketika terjadi kondisi tidak normal. Pengujian terhadap parameter RMS dan Fast Fourier Transform (FFT) digunakan untuk mengevaluasi karakteristik getaran motor, sedangkan pengujian komunikasi data memastikan sistem mampu melakukan monitoring secara \textit{real-time} melalui jaringan internet. Seluruh hasil pengujian tersebut menjadi dasar untuk menilai tingkat keandalan sistem monitoring yang dikembangkan \cite{oppenheim2010,randall2011,mqtt311}.
 
 \newpage
 \section{\ProposedSolutionTitle}
@@ -847,12 +845,17 @@ Arsitektur utama yang diterapkan pada sistem
 MONTREAL-VT dibagi menjadi tiga subsistem utama.
 Subsistem tersebut meliputi subsistem Instalasi Sensor
 dan Pemrosesan Sinyal (ISPS), subsistem Cloud-Hosting dan
-Basis Data (CHBD), dan subsitem Desain Alarm
+Basis Data (CBD), dan subsitem Desain Alarm
 dan Sistem Proteksi (DASP). Ketiga subsistem
 ini saling bergantung satu sama lain agar sistem
 MONTREAL-VT dapat berfungsi sebagaimana mestinya,
 seperti yang tertulis pada subbab spesifikasi sistem
 pada tabel \ref{tab:fungsional} dan \ref{tab:nonfungsional}.
+
+Gambar \ref{fig:arsitektur} merepresentasikan
+arsitektur sistem dan interaksi antar subsistem
+agar sistem MONTREAL-VT dapat melaksanakan
+fungsinya dengan benar.
 
 \begin{figure}[H]
     \centering
@@ -862,13 +865,15 @@ pada tabel \ref{tab:fungsional} dan \ref{tab:nonfungsional}.
 \end{figure}
 
 \subsubsection{Subsistem Instalasi Sensor dan Pemrosesan Sinyal}
-Subsistem instalasi sensor dan pemrosesan sinyal
+Subsistem Instalasi Sensor dan Pemrosesan Sinyal
 mencakup proses penginstalan sensor pada sistem
-montreal-vt, dan pemrosesan sinyal output sensor
+MONTREAL-VT, dan pemrosesan sinyal output sensor
 sebelum atau saat sinyal diterima oleh mikrokontroler. 
 Tahapan proses kerja mikrokontroler
-pada subsistem isps digambarkan oleh gambar \ref{fig:flowchart_isps_1}
+pada subsistem isps digambarkan pada flowchart
+pada gambar \ref{fig:flowchart_isps_1}
 dan \ref{fig:flowchart_isps_2}.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.28\textwidth]{image/doc/pg1.pdf} % Ganti dengan path diagram Anda
@@ -881,21 +886,16 @@ dan \ref{fig:flowchart_isps_2}.
     \includegraphics[width=0.6\textwidth]{image/doc/pg2.pdf} % Ganti dengan path diagram Anda
     \caption{Flowchart Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
     \label{fig:flowchart_isps_2}
-\end{figure}
+\end{figure} 
 
-Subsistem ISPS bertanggung jawab pada alur kerja
-sistem sensor, pemrosesan sinyal output sensor
-, serta proses akuisisi data melalui sensor dan
-mikrokontroler.
+% \subsubsection{Pemrosesan Sinyal Sensor Accelerometer ADXL345}
+% Kalman filter umum digunakan untuk analisis getaran.
 
-\subsubsection{Pemrosesan Sinyal Sensor Accelerometer ADXL345}
-Kalman filter umum digunakan untuk analisis getaran.
+% \subsubsection{Pemrosesan Sinyal Sensor CT}
 
-\subsubsection{Pemrosesan Sinyal Sensor CT}
+% \subsubsection{Pemrosesan Sinyal Termokapel}
 
-\subsubsection{Pemrosesan Sinyal Termokapel}
-
-\subsubsection{Pemrosesan Sinyal Sensor Efek-Hall}
+% \subsubsection{Pemrosesan Sinyal Sensor Efek-Hall}
 
 \newpage
 \begin{sidewaysfigure}[htbp]
@@ -908,7 +908,14 @@ Kalman filter umum digunakan untuk analisis getaran.
 \clearpage
 
 Gambar \ref{fig:skematik-isps} merupakan skematik
-dari rangkaian subsistem ISPS, yang meliputi ... 
+dari rangkaian subsistem ISPS, yang meliputi 
+instalasi sensor dan pengolahan sinyal.
+Sementara itu, model 3D PCB ditunjukkan oleh gambar \ref{fig:3d-pcb-depan}
+dan \ref{fig:3d-pcb-belakang}.
+Desain skematik \ref{fig:skematik-isps} dan desain
+PCB  pada gambar \ref{fig:layout-pcb-isps},
+\ref{fig:3d-pcb-depan}, dan \ref{fig:3d-pcb-belakang}
+dilakukan dengan menggunakan aplikasi KiCAD.
 
 
 \begin{figure}[H]
@@ -935,28 +942,71 @@ dari rangkaian subsistem ISPS, yang meliputi ...
     \end{minipage}
 \end{figure}
     
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{image/doc/device-motor.jpg} % Ganti dengan path diagram Anda
+%     \caption{Lokasi Instalasi Device}
+%     \label{fig:instalasi-device}
+% \end{figure}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{image/doc/device-motor.jpg} % Ganti dengan path diagram Anda
-    \caption{Lokasi Instalasi Device}
-    \label{fig:instalasi-device}
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/doc/device-motor.jpg}
+        \caption{Lokasi instalasi sistem sensor (tampak 3/4)}
+        \label{fig:motor-3-4}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/doc/motor-atas.jpg}
+        \caption{Lokasi instalasi sistem sensor (tampak atas)}
+        \label{fig:motor-atas}
+    \end{minipage}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/doc/motor-samping.jpg}
+        \caption{Lokasi instalasi sistem sensor (tampak samping)}
+        \label{fig:motor-samping}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{image/doc/motor-belakang.jpg}
+        \caption{Lokasi instalasi sistem sensor (tampak belakang)}
+        \label{fig:motor-belakang}
+    \end{minipage}
+\end{figure}
+Algoritma FFT dan pemrosesan sinyal ditulis menggunakan bahasa 
+pemrograman Python seperti pada codelist \ref{lst: fft-esp32}.
+
 \subsubsection{Subsistem Cloud-hosting dan Basis Data}
-% \textit{Penjelasan: Fokus pada bagaimana data dikirim dari perangkat keras ke server/cloud dan bagaimana data tersebut disimpan serta diproses lebih lanjut. Sebutkan protokol komunikasi (\text{MQTT}), platform  cloud (\text{AWS IoT, Firebase, Thingspeak}), dan database.}
 
-Subsistem Cloud-Hosting dan Basis Data (CBD) bertugas 
-menghubungkan perangkat keras ke sistem serverless melalui
-layanan cloud.
+Subsistem Cloud-Hosting dan Basis Data (CBD) berfungsi sebagai
+lapisan infrastruktur yang mengintregrasikan perangkat keras
+dengan layanan komputasi, komunikasi, dan penyimpanan data
+berbasis cloud. Subsistem ini mencakup pengelolaan komunikasi data
+antara perangkat dan server melalui protokol tertentu yang telah
+ditetapkan, penerimaan dan pengolahan data hasil pemantauan,
+serta penyimpanan data historis, data trip, dan data pemeliharaan.
 
-% \begin{enumerate}
-%     \item \textbf{Modul Komunikasi Nirkabel:} ESP32-S3 telah dilengkapi oleh modul Wi-Fi untuk menyediakan konektivitas internet. Modul ini memungkinkan proses pengiriman data hasil pengukuran sensor ke platform cloud secara nirkabel.
-%     \item \textbf{Protokol Komunikasi \text{IoT}:} Message Queuing Telemetry Transport (MQTT) merupakan protokol komunikasi utama antara ESP32-S3 dan platform cloud. MQTT bersifat ringan, memiliki konsumsi bandwidth yang rendah, serta mendukung komunikasi real-time yang andal.
-%     \item \textbf{Platform \text{Cloud} \text{IoT}:} AWS IoT Core merupakan platform cloud yang bertugas menerima data sensor melalui protokol MQTT. AWS IoT Core berfungsi sebagai MQTT broker sekaligus mekanisme autentikasi perangkat, pengelolaan koneksi, serta integrasi layanan AWS untuk pemrosesan dan analisis data.
-%     \item \textbf{Basis Data (\text{Database}):} Data sensor yang diterima AWS IoT Core akan diteruskan dan disimpan pada layanan penyimpanan AWS, Amazon DynamoDB dan Amazon S3. Data ini digunakan untuk analisis historis, dan visualisasi.
-%     \item \textbf{\emph{Dashboard} Berbasis Web:} Dashboard berbasis web yang bertugas dalam memvisualisasikan data secara real-time, visualisasi data historis, konfigurasi sistem, dan sistem notifikasi kondisi motor dan alarm. Dashboard dikembangkan menggunakan React, serta terhubung dengan layanan AWS.
-% \end{enumerate}
-Data di cloud kemudian dapat diakses oleh subsistem visualisasi dan kontrol dari mana saja.
+Subsistem CBD dirancang agar dapat mendukung pemantauan kondisi
+motor near-real-time, memliki latensi end-to-end kurang dari 500ms
+sejak data pengukuran diterima oleh sistem hingga informasi
+diperbarui pada antarmuka. Selain itu, CBD juga bertanggung jawab
+atas aspek keamanan sistem yang mencakup mekanisme autentikasi dan
+otorisasi untuk membatasi akses terhadap data dan fungsi sistem
+dengan menggunakan kredensial atau kunci akses yang valid,
+sistem juga diharapkan untuk menerapkan mekanisme
+pengamanan komunikasi agar kerahasiaan data terjaga selama
+proses transmisi. Flowchart \ref{fig:flowchart_kca} menunjukkan
+proses kerja dari subsistem CBD.
 
 \begin{figure}[H]
     \centering
@@ -965,20 +1015,81 @@ Data di cloud kemudian dapat diakses oleh subsistem visualisasi dan kontrol dari
     \label{fig:flowchart_kca}
 \end{figure}
 
+\subsubsection{Desain Tampilan Antarmuka Sistem Pemantauan}
+Tampilan antarmuka dashboard (Dashboard Interface)
+merupakan komponen sistem yang sangat penting dalam
+proses pemantauan motor. Maka dari itu, desain
+antarmuka menjadi bagian krusial dari subsitem CBD.
+Tampilan antarmuka dibagi menjadi lima laman;
+laman utama,, laman domain frekuensi,
+laman riwayat alarm dan trip, dan laman log riwayat
+hasil pemantauan.
+
+Gambar \ref{fig:web-main}, merupakan laman utama
+dashboard,  
+laman utama didesain secara sederhana yang berfungsi
+menunjukkan tingkat kesehatan motor (MHI), parameter getaran rms,
+suhu, kecepatan putar motor, dan prediksi sisa umur motor.
+Laman ini juga berfungsi menunjukkan sistem alarm
+aktif.
+\begin{figure}[H]
+    \centering
+    \includegraphics[angle=-90, width=0.7\textwidth]{image/doc/web-pg1.pdf} % Ganti dengan path diagram Anda
+    \caption{Laman utama}
+    \label{fig:web-main}
+\end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[angle=-90, width=0.7\textwidth]{image/doc/web-pg2.pdf} % Ganti dengan path diagram Anda
+%     \caption{Laman pemantauan real-time}
+%     \label{fig:web-monitor}
+% \end{figure}
+
+Laman domain frekuensi pada gambar \ref{fig:web-frequency}
+berfungsi menunjukkan spektrum frekuensi dari parameter
+getaran RMS. Laman ini berfungsi sebagai sarana
+untuk melakukan analisis domain frekuensi pada sistem.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[angle=-90, width=0.7\textwidth]{image/doc/web-pg3.pdf} % Ganti dengan path diagram Anda
+    \caption{Laman domain frekuensi kecepatan rms}
+    \label{fig:web-frequency}
+\end{figure}
+
+Gambar \ref{fig:web-alarm} dan \ref{fig:web-timestamp} berfungsi
+untuk menampilkan riwayat alarm, trip, dan data timestamp.
+Tujuan dari laman ini adalah apabila pengguna ingin melakukan
+tindakan analisa historis lebih lanjut mengenai
+kondisi motor.
+\begin{figure}[H]
+    \centering
+    \includegraphics[angle=-90, width=0.7\textwidth]{image/doc/web-pg4.pdf} % Ganti dengan path diagram Anda
+    \caption{Laman riwayat alarm dan trip}
+    \label{fig:web-alarm}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[angle=-90, width=0.7\textwidth]{image/doc/web-pg5.pdf} % Ganti dengan path diagram Anda
+    \caption{Laman riwayat data timestamp}
+    \label{fig:web-timestamp}
+\end{figure}
+
 \subsubsection{Subsistem Desain Alarm dan Sistem Proteksi}
-Subsistem Desain Alarm dan Sistem Proteksi (DASP) memiliki sistem dalam merancang arus dan suhu batas pada kerja motor, mendesain alarm peringatan dalam bentuk buzzer, dan visualisasi pada website, serta mengaktifkan relay proteksi apabila parameter arus dan suhu melewati batas dalam jangka waktu yang ditentukan.
+ Proteksi (DASP) memiliki sistem dalam 
+ merancang arus dan suhu batas pada kerja 
+ motor, mendesain alarm peringatan dalam bentuk
+ notifikasi dan visualisasi pada website, 
+ serta mengaktifkan relay proteksi apabila 
+ parameter arus dan suhu melewati batas 
+ dalam jangka waktu yang ditentukan.
 
-% \begin{enumerate}
-%     \item \textbf{ESP32-S3:} Berfungsi sebagai pengendali utama (main controller) yang menerima data dari seluruh sensor, melakukan komunikasi dengan platform cloud melalui jaringan Wi-Fi, menerima hasil analisis kondisi motor, serta mengeksekusi logika proteksi. Mikrokontroler ini mengendalikan aktivasi relay SSR untuk memutus atau menghubungkan catu daya motor berdasarkan kondisi operasi yang terdeteksi.
-
-%     \item \textbf{FOTEK SSR 20A:} Solid State Relay (SSR) digunakan sebagai aktuator proteksi yang berfungsi menghubungkan atau memutus suplai daya 220 VAC menuju motor induksi. SSR dikendalikan oleh sinyal keluaran ESP32-S3 sehingga proses pemutusan daya dapat dilakukan secara otomatis ketika sistem mendeteksi kondisi abnormal, seperti temperatur berlebih, getaran tinggi, arus berlebih, atau nilai Motor Health Index (MHI) yang berada di bawah batas aman.
-
-%     \item \textbf{Sistem Notifikasi:} Berfungsi memberikan peringatan kepada pengguna ketika parameter pemantauan melewati ambang batas yang telah ditentukan. Notifikasi ditampilkan pada dashboard secara real-time dan dapat dikirim melalui email atau layanan pesan sehingga pengguna dapat segera melakukan inspeksi maupun tindakan pemeliharaan.
-
-%     \item \textbf{Sumber Arus 220 VAC:} Merupakan sumber tegangan utama yang menyuplai motor induksi satu fasa. Jalur catu daya ini dikendalikan melalui SSR sehingga suplai listrik ke motor dapat diputus secara otomatis ketika sistem proteksi diaktifkan.
-
-%     \item \textbf{Saklar Manual (AZ5):} Digunakan sebagai saklar mekanis untuk menghubungkan atau memutus suplai daya secara manual. Saklar ini berfungsi sebagai lapisan proteksi tambahan (manual override) ketika terjadi kegagalan sistem elektronik, proses perawatan (maintenance), maupun kondisi darurat yang memerlukan penghentian operasi motor secara langsung.
-% \end{enumerate}
+ Gambar \ref{fig:flowchart_dasp} menunjukkan
+ proses kerja mikrokontroler pada subsistem DASP.
+ Program alarm dan proteksi diimplementasikan 
+ melalui pemrograman mikrokontroler secara langsung.
 
 \begin{figure}[H]
     \centering
@@ -987,13 +1098,24 @@ Subsistem Desain Alarm dan Sistem Proteksi (DASP) memiliki sistem dalam merancan
     \label{fig:flowchart_dasp}
 \end{figure}
 
+Gambar \ref{fig:skematik-rectifier} menunjukkan
+desain skematik dari sistem penyearah dari sumber 220VAC
+menjadi tegangan 5VDC sehingga sumber dapat dihubungkan
+dengan komponen sumber DC seperti mikrokontroler.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{image/doc/rectifier.pdf} % Ganti dengan path diagram Anda
+    \caption{Desain rectifier 220VAC to 5VDC}
+    \label{fig:skematik-rectifier}
+\end{figure}
+
 \subsection{\MainFeaturesTitle}
-% \textit{Penjelasan: Daftarkan fitur-fitur utama yang akan disediakan oleh Project anda. Gunakan poin-poin yang jelas dan spesifik. Fokus pada apa yang dapat dilakukan oleh sistem yang tim buat.}
-
-% \textbf{Contoh:} Berikut adalah fitur-fitur kunci yang akan diimplementasikan dalam \textbf{Project ELSINTA}:
-
+Di bawah ini merupakan daftar fitur utama yang ditawarkan
+oleh MONTREAL-VT.
 \begin{enumerate}
-    \item \textbf{Sistem Pemantauan Kondisi Motor Multi-Sensor:} Integrasi sensor ADXL345, ACS712, A314, dan DS18B20.
+    \item \textbf{Sistem Pemantauan Motor Rendah Biaya:} MONTREAL-VT merupakan solusi pemantauan kondisi motor induksi yang ditujukan ke unit usaha skala kecil.
+    \item \textbf{Analisa Getaran Domain Waktu dan Domain Frekuensi:} SIstem MONTREAL-VT mampu menampilkan hasil analisa domain waktu berbasis pada displacement dan displacement peak-to-peak, serta analisa signature analysis domain frekuensi, sistem juga akan mampu menerapkan envelope analysis.
     \item \textbf{Notifikasi Kondisi dan Informasi Perkiraan Kerusakan Motor:} Notifikasi otomatis melalui website desain HMI, dan informasi perkiraan jenis kerusakan motor.
     \item \textbf{Sistem Proteksi Otomatis:} Memutus kontak arus apabila parameter arus dan suhu melebihi batas yang telah ditentukan.
 \end{enumerate}
@@ -1003,29 +1125,24 @@ Subsistem Desain Alarm dan Sistem Proteksi (DASP) memiliki sistem dalam merancan
 
 %Contoh:  Project ELSINTA menawarkan beberapa keunggulan signifikan dibandingkan solusi pemantauan dan pengendalian kualitas udara yang sudah ada di pasaran atau prototipe penelitian terdahulu:
 \begin{enumerate}
-    \item ...
+    \item Sistem MONTREAL-VT merupakan solusi rendah biaya sebagai sistem pemantauan kondisi mesin berbasis parameter getaran dan suhu.
+    \item Sistem MONTREAL-VT oleh khalayak umum, karena sudah tertanam program saran berdasarkan data pemantauan real-time.
+    \item Sistem sudah dilengkapi dengan sistem proteksi otomatis untuk mencegah kecelakaan akibat overcurrent dan overheat.
 \end{enumerate}
 
 \subsection{\AlternativeDesignTitle}
 
 \subsection{\JustificationTitle}
-% \textit{Bagian ini bertujuan untuk menjustifikasi pemilihan komponen arsitektur utama Project dengan menganalisis solusi-solusi atau komponen alternatif yang sempat dipertimbangkan. Untuk setiap alternatif, jelaskan kelemahan spesifiknya yang menyebabkan penolakan, sehingga memperkuat argumen bahwa solusi yang dipilih adalah yang paling optimal berdasarkan kriteria biaya, kinerja, dan kompleksitas.}
 
-% \textbf{Contoh}: Selama tahap desain, beberapa solusi alternatif telah dipertimbangkan sebelum memutuskan untuk mengembangkan arsitektur \text{IoT} berbasis $\text{ESP32}$ dan $\text{MQTT}$. Alternatif-alternatif tersebut antara lain:
-
-\subsubsection*{Alternatif 1: Mikrokontroler ESP32-S3, Edge Computing}
+\subsubsection*{Alternatif 1: Mikrokontroler ESP32-S3, Cloud Computing}
 \begin{enumerate}
-    \item \textbf{Deskripsi:} Pemrosesan lebih lanjut dilakukan secara lokal pada mikrokontroler ESP32-S3.
-    \item \textbf{Alasan Penolakan:} Meskipun pemrosesan lokal dapat mengurangi ketergantungan pada koneksi internet, hal ini membatasi kemampuan sistem untuk menyimpan data historis dan melakukan analisis yang lebih kompleks. Selain itu, keterbatasan sumber daya pada mikrokontroler dapat membatasi skalabilitas dan fleksibilitas sistem di masa depan.
-\end{enumerate}
+    \item \textbf{Deskripsi:} Pada desain opsional ini, operasi pemrosesan sinyal lebih lanjut, terutama
+    konversi domain waktu dari parameter kecepatan RMS menjadi domain frekuensi (FFT) dilakukan
+    melalui 
+    \item \textbf{Alasan Penolakan:} Implementasi operasi cloud-computing ...
+\end{enumerate} 
 
-\subsubsection*{Alternatif 2: Raspberry Pi 4, Edge Computing}
-\begin{enumerate}
-    \item \textbf{Deskripsi:} Mengganti mikrokontroler ESP32-S3 dengan Raspberry Pi 4 untuk pemrosesan data secara lokal.
-    \item \textbf{Alasan Penolakan:} Raspberry Pi 4 menawarkan kemampuan pemrosesan yang lebih tinggi, tetapi juga meningkatkan kompleksitas sistem, konsumsi daya, dan
-\end{enumerate}   
-
-
+\newpage
 \section{\ImplementationPlanTitle}
 
 Work Breakdown Structure (WBS) merupakan dekomposisi pekerjaan proyek menjadi beberapa tahapan yang lebih terstruktur sehingga proses perancangan, implementasi, pengujian, dan dokumentasi dapat dilaksanakan secara sistematis. Penyusunan WBS bertujuan untuk mempermudah proses perencanaan, pengelolaan, serta pengawasan setiap aktivitas selama penelitian berlangsung.
@@ -1247,73 +1364,13 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
 \subsection{\TimelineTitle}
 Jadwal implementasi disusun berdasarkan \textit{Work Breakdown Structure} (WBS) yang telah dijelaskan pada Subbab 3.1. Penyusunan jadwal bertujuan untuk mengatur urutan pelaksanaan setiap kegiatan sehingga proses pengembangan sistem dapat berlangsung secara sistematis dan sesuai target waktu yang telah ditetapkan. Seluruh aktivitas penelitian direncanakan berlangsung selama 16 minggu, dimulai dari tahap perencanaan hingga penyusunan laporan akhir. Setiap tahapan memiliki keterkaitan dengan tahapan sebelumnya sehingga penyelesaian suatu pekerjaan menjadi prasyarat untuk melanjutkan pekerjaan berikutnya.
 
-Rencana jadwal implementasi penelitian ditunjukkan pada Tabel~\ref{tab:jadwal}.
-
-
-
-\begin{table}[H]
-\centering
-\caption{Jadwal Implementasi Penelitian}
-\label{tab:jadwal}
-% \renewcommand{\arraystretch}{1.3}
-\begin{tabular}{|c|p{7cm}|c|c|c|}
-\hline
-No & Kegiatan & Minggu & Durasi & Ketergantungan\\
-\hline
-
-1 & Analisis kebutuhan sistem & 1--2 & 2 minggu & -\\
-\hline
-
-2 & Studi literatur & 1--2 & 2 minggu & -\\
-\hline
-
-3 & Perancangan arsitektur sistem & 2 & 1 minggu & 1,2\\
-\hline
-
-4 & Perancangan perangkat keras & 3--4 & 2 minggu & 3\\
-\hline
-
-5 & Perancangan perangkat lunak & 3--5 & 3 minggu & 3\\
-\hline
-
-6 & Perancangan dashboard monitoring & 4--5 & 2 minggu & 5\\
-\hline
-
-7 & Implementasi akuisisi data dan pemrosesan sinyal & 6--8 & 3 minggu & 4,5\\
-\hline
-
-8 & Implementasi analisis kondisi motor & 7--9 & 3 minggu & 7\\
-\hline
-
-9 & Implementasi alarm dan proteksi & 8--10 & 3 minggu & 7\\
-\hline
-
-10 & Pengujian perangkat keras & 11 & 1 minggu & 7\\
-\hline
-
-11 & Pengujian pemrosesan sinyal & 11--12 & 2 minggu & 8\\
-\hline
-
-12 & Pengujian dashboard monitoring & 12 & 1 minggu & 8\\
-\hline
-
-13 & Pengujian alarm dan proteksi & 12--13 & 2 minggu & 9\\
-\hline
-
-14 & Pengujian integrasi sistem & 13 & 1 minggu & 10--13\\
-\hline
-
-15 & Penyusunan laporan tugas akhir & 14--15 & 2 minggu & 14\\
-\hline
-
-16 & Penyusunan panduan penggunaan sistem & 15 & 1 minggu & 14\\
-\hline
-
-17 & Persiapan seminar hasil & 16 & 1 minggu & 15,16\\
-\hline
-
-\end{tabular}
-\end{table}
+Rencana jadwal implementasi penelitian ditunjukkan pada tabel \ref{fig:gantt}.
+\begin{sidewaysfigure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{image/doc/gantt-2.pdf} % Ganti dengan path diagram Anda
+    \caption{Diagram Gantt}
+    \label{fig:gantt}
+\end{sidewaysfigure}
 
 \subsection{\TeamDivisionTitle}
 Pembagian tugas tim dilakukan berdasarkan hasil diskusi bersama dosen pembimbing agar setiap anggota memiliki fokus penelitian yang berbeda sehingga tidak terjadi tumpang tindih dalam pengembangan sistem. Setiap anggota bertanggung jawab terhadap satu subsistem utama yang saling terintegrasi untuk membentuk sistem monitoring kondisi motor induksi secara menyeluruh.
@@ -1556,6 +1613,8 @@ Tahapan pengujian sistem dilakukan sebagai berikut.
 \item Pengujian integrasi seluruh subsistem dalam satu sistem monitoring motor induksi.
 \item Pengujian operasi sistem secara kontinu selama minimal 24 jam untuk mengevaluasi kestabilan sistem.
 \end{enumerate} 
+
+\newpage
 \section{\RiskAssessmentTitle}
 
 mengidentifikasi potensi risiko yang dapat memengaruhi keberhasilan proyek MONTREAL-VT, mempelajari dampaknya, dan merumuskan strategi mitigasi untuk mengurangi kemungkinan dan/atau konsekuensi dari risiko tersebut.
@@ -1613,8 +1672,8 @@ Risiko yang berkaitan dengan persepsi, kepuasan, dan adopsi sistem oleh pengguna
     \end{enumerate}
 \end{enumerate}
 
----
 
+\newpage
 \section{\FinancialAnalysisTitle}
 
 Bagian ini menyajikan estimasi biaya yang terkait dengan pengembangan dan implementasi \textbf{Project }, serta analisis manfaat-biaya. Analisis finansial ini membantu dalam menilai kelayakan ekonomi proyek.
