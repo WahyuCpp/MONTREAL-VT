@@ -94,15 +94,15 @@ Dokumen ini juga mengidentifikasi standar teknis dan regulasi yang relevan dalam
 \begin{enumerate}
     \item \textbf{SKF QuickCollect CMDT 391 (Komersial):}
     \begin{enumerate}
-        \item \textbf{Fitur:} Sensor getaran, kondisi bearing, dan suhu terpadu yang mampu diintegrasikan dengan aplikasi pemantauan cloud terkoneksi android dan iOS \cite{2.1.1}, wujud produk ditampilkan pada gambar EL2.1.
+        \item \textbf{Fitur:} Sensor getaran, kondisi bearing, dan suhu terpadu yang mampu diintegrasikan dengan aplikasi pemantauan cloud terkoneksi android dan iOS \cite{SKF2021Brochure}, wujud produk ditampilkan pada gambar EL2.1.
         \item \textbf{Kelebihan:} Maksimum percepatan ($50g$), rentang frekuensi internal sensor ($\leq f \leq 10000Hz$), \textit{sample rate} ($256\leq sr \leq 32768$) sampel \cite{skf_datasheet}, aplikasi mudah dioperasikan pengguna.
         \item \textbf{Kekurangan:} Harga sangat mahal yang berkisar $Rp26.000.000,00$ hingga $Rp50.000.000,00$, solusi berlebihan untuk sistem skala Usaha Mikro, Kecil, dan Menengah (UMKM).
         \item \textbf{Celah produk:} Mengembangkan solusi pemantauan motor induksi minim biaya yang dilengkapi aplikasi pemantauan yang mampu dioperasikan jarak jauh.
     \end{enumerate}
     \item \textbf{Siemens SIDRIVE IQ (Komersial):}
     \begin{enumerate}
-        \item \textbf{Fitur:} Jasa IoT industri dalam pemantauan kondisi, \textit{Preventive Maintenance} (PM), analisis kegagalan reaktif \cite{2.1.2}.
-        \item \textbf{Kelebihan:} Sistem analitik berbasis IoT dengan dukungan kendali jarak jauh, \textit{Motor Damage Detection System}, Pemodelan numerik berbasis \textit{Internet of Things} (IoT) cloud\cite{2.1.2}.
+        \item \textbf{Fitur:} Jasa IoT industri dalam pemantauan kondisi, \textit{Preventive Maintenance} (PM), analisis kegagalan reaktif \cite{Siemens2023SiDrive}.
+        \item \textbf{Kelebihan:} Sistem analitik berbasis IoT dengan dukungan kendali jarak jauh, \textit{Motor Damage Detection System}, Pemodelan numerik berbasis \textit{Internet of Things} (IoT) cloud\cite{Siemens2023SiDrive}.
         \item \textbf{Kekurangan:} Sistem SIDRIVE IQ dilakukan melalui platform cloud Siemens, biaya implementasi tinggi sehingga tidak cocok untuk industri tingkat UMKM, ekosistem yang bersifat \textit{vendor lock-in}, algoritma analistik yang bersifat eksklusif.
         \item \textbf{Celah produk:} Merancang sistem pemantauan kondisi motor induksi berbasis sensor getaran dan sensor suhu yang berbiaya rendah sehingga mampu diakses bisnis skala UMKM. Mengembangkan model yang mampu dilatih menggunakan data motor induksi sehingga mampu mendeteksi kerusakan dan melakukan klasifikasi kerusakan pada motor induksi.
     \end{enumerate}
@@ -111,38 +111,38 @@ Dokumen ini juga mengidentifikasi standar teknis dan regulasi yang relevan dalam
 \subsection{\RelResearchPatentsTitle}
 % Subbab ini mengulas penelitian ilmiah dan paten yang telah dipublikasikan terkait teknologi atau metodologi yang akan digunakan.
 \begin{enumerate}
-    \item \textbf{Paten:} Metode Pemantauan Getaran Rotating Equipment secara Real-Time dengan Pemrosesan FFT menggunakan Mikrokontroler (distribusi approval)\cite{2.1.10}.
+    \item \textbf{Paten:} Metode Pemantauan Getaran Rotating Equipment secara Real-Time dengan Pemrosesan FFT menggunakan Mikrokontroler (distribusi approval)\cite{Silaban2026SistemMonitoring}.
     \begin{enumerate}
         \item \textbf{Studi:} Paten ini mengusulkan metode pemantauan getaran dan mikrokontroler ESP32 yang mengimplementasikan algoritma \textit{Fast-Fourier Transform} (FFT). Data getaran yang diperoleh sensor diproses secara \textit{real-time} pada mikrokontroler sehingga menghasilkan representasi domain waktu dan domain frekuensi. Data ini memungkinkan identfikasi karakteristik getaran.
         \item \textbf{Relevansi dengan  MONTREAL-VT:} Paten ini menjadi landasan dalam implementasi pengolahan data yang diperoleh sensor getaran menjadi informasi kondisi motor induksi satu-fasa. Proses FFT merupakan proses konversi data getaran domain waktu menjadi domain frekuensi.
         \item \textbf{Kontribusi  MONTREAL-VT:} Mengimplementasikan pemrosesan sinyal getaran dan mengembangkan algoritma konversi domain waktu yang merepresentasikan getaran ke domain frekuensi guna mendapatkan informasi kondisi motor induksi satu-fasa. MONTREAL-VT juga dilengkapi dengan fitur klasifikasi keparahan getaran dengan mengacu pada standar \textit{International Organization for Standardization} (ISO).
         % visualisasi data pada laman web berbasis cloud, serta mengembangkan algoritma diagnostik berbasis parameter getaran dan suhu.
     \end{enumerate}
-    \item \textbf{Riset:} \textit{Health Monitoring of Induction Motor through Vibration Analysis} \cite{1.1.17}
+    \item \textbf{Riset:} \textit{Health Monitoring of Induction Motor through Vibration Analysis} \cite{Sonowal2019IM}
     \begin{enumerate}
         \item \textbf{Studi:} Penelitian ini menerapkan \textit{Vibration Analysis Technique} (VAT) sebagai pendekatan Non-Destructive Testing (NDT) untuk memantau kondisi motor induksi tiga-fasa. Sistem dikembangkan menggunakan mikrokontroler dan sensor akselerometer untuk memperoleh sinyal percepatan getaran.
         \item \textbf{Relevansi dengan  MONTREAL-VT:} Metodologi VAT menjadi dasar dalam proses akuisisi data getaran dari motor induksi. MONTREAL-VT mengadopsi sensor getaran sebagai media pengumpulan data.
-        \item \textbf{Kontribusi  MONTREAL-VT:} MONTREAL-VT memperluas pendekatan riset\cite{1.1.17} dengan parameter tambahan seperti rpm, suhu, dan arus sehingga proses diagnosis tidak hanya mengandalkan data getaran motor. MONTREAL-VT dibekali sistem peunggahan data berbasis cloud sehingga pengguna dapat mengakses data hasil akuisisi dan diagnosa kondisi motor.
+        \item \textbf{Kontribusi  MONTREAL-VT:} MONTREAL-VT memperluas pendekatan riset\cite{Sonowal2019IM} dengan parameter tambahan seperti rpm, suhu, dan arus sehingga proses diagnosis tidak hanya mengandalkan data getaran motor. MONTREAL-VT dibekali sistem peunggahan data berbasis cloud sehingga pengguna dapat mengakses data hasil akuisisi dan diagnosa kondisi motor.
     \end{enumerate}
-    \item \textbf{Riset:} \textit{Monitoring of Single-Phase Induction Motor through IoT Using ESP32 Module} \cite{2.1.6}
+    \item \textbf{Riset:} \textit{Monitoring of Single-Phase Induction Motor through IoT Using ESP32 Module} \cite{Shukla2022RotatingMonitoring}
     \begin{enumerate}
         \item \textbf{Studi:} Shukla et al. mengembangkan sistem pemantauan pada motor induksi multi-parameter dengan memanfaatkan sensor akselerometer, sensor arus, dan sensor suhu.
         \item \textbf{Relevansi dengan MONTREAL-VT:} Penelitian ini mengembangkan sistem pemantauan kondisi motor induksi satu-fasa multi-parameter menggunakan mikrokontroler yang terintegrasi IoT untuk memperoleh dan bertukar informasi, serta mampu dioperasikan dari jarak jauh.
         \item \textbf{Kontribusi MONTREAL-VT:} MONTREAL-VT menngembangkan proses pengolahan data dan konversi ke data domain frekuensi secara \textit{real-time}. MONTREAL-VT dilengkapi dengan fitur notifikasi kondisi motor yang didasarkan pada kombinasi tren data arus, rpm, dan suhu sehingga sistem tidak hanya menampilkan hasil pengukuran sensor tetapi juga memberikan informasi mengenai kondisi motor.
     \end{enumerate}
-    \item \textbf{Riset:} \textit{IoT-Based Real-Time Vibration and Temperature Monitoring System for Industrial Machinery Using ESP32 and MQTT}\cite{2.1.7}
+    \item \textbf{Riset:} \textit{IoT-Based Real-Time Vibration and Temperature Monitoring System for Industrial Machinery Using ESP32 and MQTT}\cite{Shiddiqi2026Design}
     \begin{enumerate}
         \item \textbf{Studi:} Kontribusi utama dari riset ini merupakan implementasi klasifikasi keparahan getaran dengan mengacu pada standar ISO, integrasi akuisisi multi-sensor dengan pemrosesan RMS dan FFT secara \textit{real-time} tanpa menitikberatkan pada algoritma \textit{machine learning} (ML).
         \item \textbf{Relevansi dengan MONTREAL-VT:} Penelitian ini menjadi referensi dalam implementasi pemrosesan data domain waktu menjadi domain frekuensi secara \textit{real-time} dengan mengacu pada standar ISO 13373 dan ISO 20816, implementasi protokol komunikasi IoT, serta model klasifikasi keparahan getaran dengan mengacu pada ISO 20816 sebagai dasar evaluasi tingkat keparahan getaran pada sistem pemantauan kondisi mesin.
         \item \textbf{Kontribusi MONTREAL-VT:} MONTREAL-VT menerapkan pemrosesan sinyal getaran seperti pemfilteran, penguatan, dan konversi data getaran domain waktu ke domain frekuensi yang diintegrasikan model klasifikasi keparahan getaran ISO 20816-1:2016.
     \end{enumerate}
-    \item \textbf{Riset:} Rancang Bangun Sistem Deteksi Menggunakan Getaran, Suhu, Arus, dan rpm Motor Listrik\cite{2.1.8}
+    \item \textbf{Riset:} Rancang Bangun Sistem Deteksi Menggunakan Getaran, Suhu, Arus, dan rpm Motor Listrik\cite{Yusro2025Desain}
     \begin{enumerate}
         \item \textbf{Studi:} Silaban et al. pada risetnya mengembangkan sistem dengan nama \textit{MachinaSense Predictive Enginer Guardian} yang berfungsi sebagai sistem pemantauan kondisi mesin yang dilakukan secara kontinyu. Sistem ini mengintegrasikan beberapa sensor yang meliputi sensor suhu, sensor rpm \textit{Rotary Encoder}, dan sensor getaran yang dikontrol menggunakan mikrokontroler (ESP32).
         \item \textbf{Relevansi dengan MONTREAL-VT:} Penelitian ini menjadi referensi pengembangan sistem multisensor yang memadukan beberapa parameter operasional mesin untuk meningkatkan akurasi diagnostik.
         \item \textbf{Kontribusi MONTREAL-VT:} MONTREAL-VT menyajikan algoritma analisis spektrum getaran FFT yang sesuai dengan standar teknis internasional seperti ISO 20816 dan ISO 13373.
     \end{enumerate}
-    \item \textbf{Riset:} Desain Sistem Monitoring Gangguan Motor Induksi Berdasarkan Nilai Suhu, Getaran, dan Konsumsi Arus\cite{2.1.9}
+    \item \textbf{Riset:} Desain Sistem Monitoring Gangguan Motor Induksi Berdasarkan Nilai Suhu, Getaran, dan Konsumsi Arus\cite{Silaban2026SistemMonitoring}
     \begin{enumerate}
         \item \textbf{Studi:} Paper ini menyajikan desain sistem pemantauan berbasis IoT yang terhubung melalui \textit{Local Area Network }(LAN). Sistem ini terdiri atas ESP8266 menggunakan arsitektur komunikasi \textit{master-slave}. Sistem mengintegrasikan sensor DS18B20, MPU6050, lalu sensor arus SCT013-30A. Proses penyimpnanan data memanfaatkan MySQL dan ditampilkan pada web server lokal. Riset ini menjadikan ISO 10813 sebagai landasan klasifikasi status motor.
         \item \textbf{Relevansi dengan MONTREAL-VT:} Penelitian ini menjadi referensi dalam integrasi multisensor untuk pemantauan kondisi motor induksi serta implementasi database cloud sebagai media penyimpnanan, visualisasi data, dan media akses data secara \textit{real-time} dan jarak jauh.
@@ -156,10 +156,10 @@ Dokumen ini juga mengidentifikasi standar teknis dan regulasi yang relevan dalam
 \subsection{\LimitationsTitle}
 % Solusi-solusi  yang ada saat ini, baik produk komersial maupun prototipe hasil penelitian sebelumnya, memiliki beberapa keterbatasan kunci yang belum sepenuhnya teratasi. Contoh Keterbatasan:
 \begin{enumerate}
-    \item \textbf{Biaya Implementasi yang relatif tinggi bagi UMKM dan laboratorium pendidikan:} Solusi yang ada saat ini seperti SKF CMDT391\cite{2.1.1} dan layanan Siemens SIDRIVE IQ\cite{2.1.2} umumnya dirancang untuk aplikasi industri berskala besar dengan biaya investasi, lisensi, dan pemeliharaan yang relatif tinggi. Solusi tersebut berlebihan untuk industri kecil dan menengah, laboratorium pendidikan, maupun lingkungan penelitian.
-    \item \textbf{Sistem kurang memiliki klasifikasi kerusakan yang detil:} Sistem pemantauan berbasis IoT yang hanya berfungsi sebagai alat akuisisi dan visualisasi data tanpa dibekali algoritma yang dapat mengidentifikasi jenis kerusakan secara langsung\cite{1.1.17}, beberapa sistem dibekali dengan identifikasi status motor yang kurang detil (contoh: waspada, aman)\cite{2.1.8, 2.1.9}. Akibatnya, pengguna masih harus melakukan interpretasi data secara manual untuk mengidentifikasi bagian motor yang mengalami kerusakan. 
-    \item \textbf{Proses penyimpanan dan pemrosesan masih dilakukan secara lokal:} Sebagian sistem masih menyimpan dan mengolah data secara lokal\cite{2.1.9, 1.1.17, 2.1.8}, sehingga proses penyimpanan dan pengolahan data sinyal getaran terlalu membebani mikrokontroler.
-    \item \textbf{Sistem yang tidak dibekali sistem proteksi:} Sebagian sistem pemantauan kondisi motor hanya menyajikan data, dan informasi motor\cite{1.1.17, 2.1.9, 2.1.8}. Sistem pemantauan kondis yang baik memiliki komponen proteksi seperti \textit{Molded Case Circuit Breake}r (MCCB) atau \textit{Thermal Overload Relay} (TOR) sehingga mampu memutus sumber arus dari motor dalam kondisi waspada.
+    \item \textbf{Biaya Implementasi yang relatif tinggi bagi UMKM dan laboratorium pendidikan:} Solusi yang ada saat ini seperti SKF CMDT391\cite{SKF2021Brochure} dan layanan Siemens SIDRIVE IQ\cite{Siemens2023SiDrive} umumnya dirancang untuk aplikasi industri berskala besar dengan biaya investasi, lisensi, dan pemeliharaan yang relatif tinggi. Solusi tersebut berlebihan untuk industri kecil dan menengah, laboratorium pendidikan, maupun lingkungan penelitian.
+    \item \textbf{Sistem kurang memiliki klasifikasi kerusakan yang detil:} Sistem pemantauan berbasis IoT yang hanya berfungsi sebagai alat akuisisi dan visualisasi data tanpa dibekali algoritma yang dapat mengidentifikasi jenis kerusakan secara langsung\cite{Sonowal2019IM}, beberapa sistem dibekali dengan identifikasi status motor yang kurang detil (contoh: waspada, aman)\cite{Yusro2025Desain, Silaban2026SistemMonitoring}. Akibatnya, pengguna masih harus melakukan interpretasi data secara manual untuk mengidentifikasi bagian motor yang mengalami kerusakan. 
+    \item \textbf{Proses penyimpanan dan pemrosesan masih dilakukan secara lokal:} Sebagian sistem masih menyimpan dan mengolah data secara lokal\cite{Silaban2026SistemMonitoring, Sonowal2019IM, Yusro2025Desain}, sehingga proses penyimpanan dan pengolahan data sinyal getaran terlalu membebani mikrokontroler.
+    \item \textbf{Sistem yang tidak dibekali sistem proteksi:} Sebagian sistem pemantauan kondisi motor hanya menyajikan data, dan informasi motor\cite{Sonowal2019IM, Silaban2026SistemMonitoring, Yusro2025Desain}. Sistem pemantauan kondis yang baik memiliki komponen proteksi seperti \textit{Molded Case Circuit Breake}r (MCCB) atau \textit{Thermal Overload Relay} (TOR) sehingga mampu memutus sumber arus dari motor dalam kondisi waspada.
 \end{enumerate}
 
 \subsection{\ProjectContribsTitle}
@@ -195,7 +195,7 @@ Dokumen ini juga mengidentifikasi standar teknis dan regulasi yang relevan dalam
 
 \subsubsection{ISO 20816-1:2016}
 \textbf{Penjelasan:} 
-\cite{2.1.3} berisi panduan umum mengenai pengukuran dan evaluasi dari getaran mesin. ISO 20816 menjelaskan besaran fisik yang relevan pada proses pengukuran; \textit{displacement} ($\mu m$),\textit{ velocity} ($m/s$) pada pengukuran \textit{housing}, dan \textit{displacement peak-to-peak}. \textit{Broadband RMS} merupakan landasan untuk melakukan analisis. Panduan ini juga menyajikan model untuk menentukan tingkat keparahan kerusakan dalam kriteria besaran pada \textit{steady velocity}, \textit{constant-velocity region}, dan \textit{peak-to-peak displacement}.
+\cite{BS20816ISO} berisi panduan umum mengenai pengukuran dan evaluasi dari getaran mesin. ISO 20816 menjelaskan besaran fisik yang relevan pada proses pengukuran; \textit{displacement} ($\mu m$),\textit{ velocity} ($m/s$) pada pengukuran \textit{housing}, dan \textit{displacement peak-to-peak}. \textit{Broadband RMS} merupakan landasan untuk melakukan analisis. Panduan ini juga menyajikan model untuk menentukan tingkat keparahan kerusakan dalam kriteria besaran pada \textit{steady velocity}, \textit{constant-velocity region}, dan \textit{peak-to-peak displacement}.
 
 \textbf{Penerapan pada proyek:} 
 \begin{enumerate}
@@ -208,7 +208,7 @@ Dokumen ini juga mengidentifikasi standar teknis dan regulasi yang relevan dalam
 
 \subsubsection{ISO 13373-1:2002}
 \textbf{Penjelasan:} 
-\cite{2.1.4} mencakup bagian pertama mengenai standar ISO pada pemantauan kondisi mesin berbasis getaran. Panduan ini menunjukkan prosedur pengukuran dan pengumpulan data getaran yang digunakan untuk mengawasi kesehatan mesin. Panduan ini berisi mengenai petunjuk jenis sistem pemantauan, tipe pengukuran, panduan jenis transduser, besaran getaran yang diukur, referensi baseline dan trending (ISO 7919 dan seri ISO 10816). Lampiran dari panduan ini menyajikan tabel kecocokan tipe mesin terhadap lokasi transduser (Lampiran A), checklist jejak data (Lampiran B), \textit{signature} getaran umum yang memiliki korelasi dengan \textit{unbalance}, \textit{misalignment}, \textit{bearing wear}, \textit{rubs }(Lampiran C). dan penamaan formal untuk titik pengukuran (Lampiran D).
+\cite{ISO13373V1} mencakup bagian pertama mengenai standar ISO pada pemantauan kondisi mesin berbasis getaran. Panduan ini menunjukkan prosedur pengukuran dan pengumpulan data getaran yang digunakan untuk mengawasi kesehatan mesin. Panduan ini berisi mengenai petunjuk jenis sistem pemantauan, tipe pengukuran, panduan jenis transduser, besaran getaran yang diukur, referensi baseline dan trending (ISO 7919 dan seri ISO 10816). Lampiran dari panduan ini menyajikan tabel kecocokan tipe mesin terhadap lokasi transduser (Lampiran A), checklist jejak data (Lampiran B), \textit{signature} getaran umum yang memiliki korelasi dengan \textit{unbalance}, \textit{misalignment}, \textit{bearing wear}, \textit{rubs }(Lampiran C). dan penamaan formal untuk titik pengukuran (Lampiran D).
 
 \textbf{Penerapan pada proyek:}
 \begin{enumerate}
@@ -219,7 +219,7 @@ Dokumen ini juga mengidentifikasi standar teknis dan regulasi yang relevan dalam
 \end{enumerate}
 
 \subsubsection{ISO 13373-:2006}
-\textbf{Penjelasan:} Panduan lebih lanjut mengenai pemantauan kondisi berbasis getaran. \cite{2.1.5} berkaitan dengan pemrosesan, analisis, dan presentasi data dari sinyal getaran. Panduan ini lebih berfokus pada proses pengubahan sinyal getaran mentah menjadi informasi diagnostik. Standar melakukan analisis getaran melalui dua pendekatan yaitu analisis domain waktu, dan FFT.
+\textbf{Penjelasan:} Panduan lebih lanjut mengenai pemantauan kondisi berbasis getaran. \cite{ISO13373V2} berkaitan dengan pemrosesan, analisis, dan presentasi data dari sinyal getaran. Panduan ini lebih berfokus pada proses pengubahan sinyal getaran mentah menjadi informasi diagnostik. Standar melakukan analisis getaran melalui dua pendekatan yaitu analisis domain waktu, dan FFT.
 
 \textbf{Penerapan pada proyek:}
 \begin{enumerate}
