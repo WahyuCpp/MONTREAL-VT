@@ -620,6 +620,30 @@
     [
       "a829869c-96ff-413d-b6a5-644534e66486",
       "Root"
+    ],
+    [
+      "85cc16b6-b69d-4b5c-896b-dfab6afb3a91",
+      "esp32"
+    ],
+    [
+      "106efc51-e9f4-43ef-a710-7829f3d888a4",
+      "sct013"
+    ],
+    [
+      "f3639f94-fff3-4865-bbd2-0bc0efe77f3b",
+      "adxl345"
+    ],
+    [
+      "99aff1d3-5d9a-428b-be34-be28c2c2d3dd",
+      "temperature"
+    ],
+    [
+      "6ac216f4-9929-49d0-a984-4bfdf10bb056",
+      "acs712"
+    ],
+    [
+      "26aae467-6286-425a-ac9d-3802b392ca2c",
+      "relay"
     ]
   ],
   "text_variables": {}

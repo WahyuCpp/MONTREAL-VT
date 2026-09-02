@@ -6859,6 +6859,258 @@
 			)
 		)
 	)
+	(sheet
+		(at 133.35 5.08)
+		(size 33.02 8.89)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "106efc51-e9f4-43ef-a710-7829f3d888a4")
+		(property "Sheetname" "sct013"
+			(at 133.35 4.3684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "sct013.kicad_sch"
+			(at 133.35 14.5546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "skematik-monitor"
+				(path "/a829869c-96ff-413d-b6a5-644534e66486"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 62.23 190.5)
+		(size 38.1 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "26aae467-6286-425a-ac9d-3802b392ca2c")
+		(property "Sheetname" "relay"
+			(at 62.23 189.7884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "relay.kicad_sch"
+			(at 62.23 202.5146 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "skematik-monitor"
+				(path "/a829869c-96ff-413d-b6a5-644534e66486"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 241.3 163.83)
+		(size 30.48 10.16)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6ac216f4-9929-49d0-a984-4bfdf10bb056")
+		(property "Sheetname" "acs712"
+			(at 241.3 163.1184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "acs712.kicad_sch"
+			(at 241.3 174.5746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "skematik-monitor"
+				(path "/a829869c-96ff-413d-b6a5-644534e66486"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 69.85 8.89)
+		(size 26.67 3.81)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "85cc16b6-b69d-4b5c-896b-dfab6afb3a91")
+		(property "Sheetname" "esp32"
+			(at 69.85 8.1784 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "esp32.kicad_sch"
+			(at 69.85 13.2846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "skematik-monitor"
+				(path "/a829869c-96ff-413d-b6a5-644534e66486"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 248.92 143.51)
+		(size 24.13 10.16)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "99aff1d3-5d9a-428b-be34-be28c2c2d3dd")
+		(property "Sheetname" "temperature"
+			(at 248.92 142.7984 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "temperature.kicad_sch"
+			(at 248.92 154.2546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "skematik-monitor"
+				(path "/a829869c-96ff-413d-b6a5-644534e66486"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 190.5 7.62)
+		(size 34.29 6.35)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "f3639f94-fff3-4865-bbd2-0bc0efe77f3b")
+		(property "Sheetname" "adxl345"
+			(at 190.5 6.9084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "adxl345.kicad_sch"
+			(at 190.5 14.5546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "skematik-monitor"
+				(path "/a829869c-96ff-413d-b6a5-644534e66486"
+					(page "4")
+				)
+			)
+		)
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")

@@ -3,171 +3,29 @@
 	(generator "eeschema")
 	(generator_version "9.0")
 	(uuid "f8c39835-f684-462a-9e37-a147b67bdaef")
-	(paper "A4")
+	(paper "User" 70 60)
 	(lib_symbols
-		(symbol "Device:R"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "R"
-				(at 2.032 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "R"
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at -1.778 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Resistor"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "R res resistor"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "R_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "R_0_1"
-				(rectangle
-					(start -1.016 -2.54)
-					(end 1.016 2.54)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "R_1_1"
-				(pin passive line
-					(at 0 3.81 270)
-					(length 1.27)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 1.27)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Sensor_Temperature:DS18B20"
+		(symbol "Sensor_Motion:ADXL343"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U"
-				(at -3.81 6.35 0)
+				(at -8.89 11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "DS18B20"
-				(at 6.35 6.35 0)
+			(property "Value" "ADXL343"
+				(at -7.62 -11.43 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
-				(at -25.4 -6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf"
-				(at -3.81 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Programmable Resolution 1-Wire Digital Thermometer TO-92"
+			(property "Footprint" "Package_LGA:LGA-14_3x5mm_P0.8mm_LayoutBorder1x6y"
 				(at 0 0 0)
 				(effects
 					(font
@@ -176,7 +34,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "OneWire 1Wire Dallas Maxim"
+			(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ADXL343.pdf"
 				(at 0 0 0)
 				(effects
 					(font
@@ -185,7 +43,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "TO*92*"
+			(property "Description" "3-Axis MEMS Accelerometer, 2/4/8/16g range, I2C/SPI, LGA-14"
 				(at 0 0 0)
 				(effects
 					(font
@@ -194,10 +52,28 @@
 					(hide yes)
 				)
 			)
-			(symbol "DS18B20_0_1"
+			(property "ki_keywords" "3-axis accelerometer i2c spi mems"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*LGA*3x5mm*P0.8mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "ADXL343_0_1"
 				(rectangle
-					(start -5.08 5.08)
-					(end 5.08 -5.08)
+					(start -10.16 10.16)
+					(end 10.16 -10.16)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -206,130 +82,84 @@
 						(type background)
 					)
 				)
-				(polyline
-					(pts
-						(xy -3.937 3.175) (xy -3.937 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.937 3.175) (xy -3.302 3.175)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.937 2.54) (xy -3.302 2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.937 1.905) (xy -3.302 1.905)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.937 1.27) (xy -3.302 1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -3.937 0.635) (xy -3.302 0.635)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -3.937 3.175)
-					(mid -3.302 3.8073)
-					(end -2.667 3.175)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center -3.302 -2.54)
-					(radius 1.27)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.667 3.175) (xy -2.667 0)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -2.667 -1.905)
-					(end -3.937 0)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
 			)
-			(symbol "DS18B20_1_1"
-				(pin power_in line
-					(at 0 7.62 270)
+			(symbol "ADXL343_1_1"
+				(pin bidirectional line
+					(at -12.7 2.54 0)
 					(length 2.54)
-					(name "V_{DD}"
+					(name "SDO/ADDR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -12.7 0 0)
+					(length 2.54)
+					(name "SDA/SDI/SDIO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 -2.54 0)
+					(length 2.54)
+					(name "SCL/SCLK"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 -5.08 0)
+					(length 2.54)
+					(name "~{CS}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 12.7 270)
+					(length 2.54)
+					(name "RES"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -344,10 +174,103 @@
 						)
 					)
 				)
+				(pin no_connect line
+					(at -5.08 -10.16 90)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin power_in line
-					(at 0 -7.62 90)
+					(at 0 12.7 270)
+					(length 2.54)
+					(name "Vs"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -12.7 90)
 					(length 2.54)
 					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -12.7 90)
+					(length 2.54)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -12.7 90)
+					(length 2.54)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 5.08 12.7 270)
+					(length 2.54)
+					(name "Vdd_I/O"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -362,17 +285,53 @@
 						)
 					)
 				)
-				(pin bidirectional line
-					(at 7.62 0 180)
+				(pin passive line
+					(at 5.08 -12.7 90)
 					(length 2.54)
-					(name "DQ"
+					(name "RES"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "2"
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 12.7 0 180)
+					(length 2.54)
+					(name "INT1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 12.7 -2.54 180)
+					(length 2.54)
+					(name "INT2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -485,91 +444,115 @@
 			(embedded_fonts no)
 		)
 	)
-	(junction
-		(at 140.97 102.87)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "3ac609fe-4495-4833-878e-bbcbda857623")
+	(rectangle
+		(start 6.35 7.62)
+		(end 64.77 53.34)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 8e32c797-26c5-42ac-bff6-16d310047fc2)
 	)
-	(junction
-		(at 132.08 90.17)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "95fb2dae-f5c4-4b47-a045-88f8cd90dd85")
+	(text "Sensor Akselerometer"
+		(exclude_from_sim no)
+		(at 52.832 50.546 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "dfa99f59-1137-440c-9496-13bdbeae7f4d")
 	)
 	(wire
 		(pts
-			(xy 140.97 97.79) (xy 140.97 102.87)
+			(xy 20.32 34.29) (xy 16.51 34.29)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "699a1539-8889-4c79-a80f-643fcf798f5d")
+		(uuid "0f149a9f-0542-4d36-87e3-2ff9e0cc7bd3")
 	)
 	(wire
 		(pts
-			(xy 132.08 86.36) (xy 132.08 90.17)
+			(xy 55.88 39.37) (xy 45.72 39.37)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "771e8fa4-8884-419d-8c47-ac3250fb1996")
+		(uuid "75f0a892-742d-4091-8502-c2c833a66cf0")
 	)
 	(wire
 		(pts
-			(xy 139.7 102.87) (xy 140.97 102.87)
+			(xy 30.48 15.24) (xy 30.48 21.59)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "86514355-2142-4f2f-84eb-c681ec9bdc84")
+		(uuid "ba337b8f-40d0-4ec5-95ae-0b9e6d6ed177")
 	)
 	(wire
 		(pts
-			(xy 132.08 90.17) (xy 140.97 90.17)
+			(xy 33.02 15.24) (xy 33.02 21.59)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "8ddc78a4-15eb-4e14-ac86-95af695fc813")
+		(uuid "dc8dc71b-e6fc-4ae9-9c92-b7320fb2dd45")
 	)
-	(wire
-		(pts
-			(xy 132.08 90.17) (xy 132.08 95.25)
+	(global_label "SCL"
+		(shape output)
+		(at 30.48 15.24 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
 		)
-		(stroke
-			(width 0)
-			(type default)
+		(uuid "a124546b-c7d2-4076-acbb-1ad3a210a64d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 30.48 8.7472 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
 		)
-		(uuid "9e8100cd-7f10-4bf5-864a-61688d7c9f1b")
 	)
-	(wire
-		(pts
-			(xy 132.08 110.49) (xy 132.08 118.11)
+	(global_label "SDA"
+		(shape output)
+		(at 33.02 15.24 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
 		)
-		(stroke
-			(width 0)
-			(type default)
+		(uuid "cae86128-c811-450c-b2e1-028a0ce3c3b0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 33.02 8.6867 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
 		)
-		(uuid "c83db44f-2d03-40f8-b3b4-cb4b98c7a23f")
-	)
-	(wire
-		(pts
-			(xy 140.97 102.87) (xy 146.05 102.87)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fa286c76-05af-4e08-825f-39cf064c7129")
 	)
 	(global_label "3V3"
 		(shape input)
-		(at 132.08 86.36 90)
+		(at 55.88 39.37 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -577,184 +560,29 @@
 			)
 			(justify left)
 		)
-		(uuid "b9d264dd-9371-4678-b913-a29a9b624adf")
+		(uuid "dacc2eb8-d414-46f4-9187-93a4b8844ed0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.08 79.8672 90)
+			(at 62.3728 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 				(hide yes)
-			)
-		)
-	)
-	(hierarchical_label "GPIO35"
-		(shape input)
-		(at 146.05 102.87 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "cdfe69a9-b3e0-4fc7-a974-8f5a485ca093")
-	)
-	(symbol
-		(lib_id "Sensor_Temperature:DS18B20")
-		(at 132.08 102.87 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c298a80b-243f-427e-9b48-352245f3702c")
-		(property "Reference" "U1"
-			(at 125.73 101.5999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "DS18B20"
-			(at 125.73 104.1399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
-			(at 106.68 109.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf"
-			(at 128.27 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Programmable Resolution 1-Wire Digital Thermometer TO-92"
-			(at 132.08 102.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2726aa4d-d4e2-42c4-a8e1-7a1f8ab347d4")
-		)
-		(pin "2"
-			(uuid "3634a924-2862-4610-950f-b7e1152e8a4a")
-		)
-		(pin "3"
-			(uuid "1fa90f2d-3c14-4563-b0f6-64348c16a6c0")
-		)
-		(instances
-			(project "skematik-monitor"
-				(path "/a829869c-96ff-413d-b6a5-644534e66486/1a8931ca-04e7-46b0-bf0c-fee1638736d1/fb524295-acbe-41a4-8d0c-ba57fc2392a1"
-					(reference "U1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 140.97 93.98 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c78b04a9-2df2-4c07-ae77-1e9878580db1")
-		(property "Reference" "R1"
-			(at 143.51 92.7099 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "R"
-			(at 143.51 95.2499 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 139.192 93.98 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 140.97 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 140.97 93.98 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7e43b830-deee-421c-ab88-5c5970dc874f")
-		)
-		(pin "2"
-			(uuid "30bab184-65e3-4ff6-b6bb-a0ce2a614bc8")
-		)
-		(instances
-			(project "skematik-monitor"
-				(path "/a829869c-96ff-413d-b6a5-644534e66486/1a8931ca-04e7-46b0-bf0c-fee1638736d1/fb524295-acbe-41a4-8d0c-ba57fc2392a1"
-					(reference "R1")
-					(unit 1)
-				)
 			)
 		)
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 132.08 118.11 0)
+		(at 16.51 34.29 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ddd41da7-6f4a-4fc2-8913-47b0a60e7f40")
-		(property "Reference" "#PWR02"
-			(at 132.08 124.46 0)
+		(uuid "c4c620d8-deea-4984-93ee-a1663f917bb3")
+		(property "Reference" "#PWR015"
+			(at 10.16 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -763,7 +591,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 132.08 123.19 0)
+			(at 11.43 34.29 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -771,7 +599,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 132.08 118.11 0)
+			(at 16.51 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -780,7 +608,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 132.08 118.11 0)
+			(at 16.51 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -789,7 +617,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 132.08 118.11 0)
+			(at 16.51 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -798,12 +626,115 @@
 			)
 		)
 		(pin "1"
-			(uuid "23d9b342-f187-498b-9842-bfdc8cfb1f18")
+			(uuid "7b79bb98-9e1d-4d1c-a3a0-20c4b8dc192b")
 		)
 		(instances
 			(project "skematik-monitor"
-				(path "/a829869c-96ff-413d-b6a5-644534e66486/1a8931ca-04e7-46b0-bf0c-fee1638736d1/fb524295-acbe-41a4-8d0c-ba57fc2392a1"
-					(reference "#PWR02")
+				(path "/a829869c-96ff-413d-b6a5-644534e66486/f3639f94-fff3-4865-bbd2-0bc0efe77f3b"
+					(reference "#PWR015")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Motion:ADXL343")
+		(at 33.02 34.29 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f399098d-62b9-4320-9f7a-f2a7b7468d1e")
+		(property "Reference" "U7"
+			(at 17.018 26.924 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "ADXL345"
+			(at 17.018 24.384 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_LGA:LGA-14_3x5mm_P0.8mm_LayoutBorder1x6y"
+			(at 33.02 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ADXL343.pdf"
+			(at 33.02 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "3-Axis MEMS Accelerometer, 2/4/8/16g range, I2C/SPI, LGA-14"
+			(at 33.02 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "df2a0f42-42d9-4228-85bd-124d88b30793")
+		)
+		(pin "7"
+			(uuid "83587660-1a10-43da-a735-ae5fe929582f")
+		)
+		(pin "10"
+			(uuid "e059abd0-686a-4961-9d8d-76eb5a274aee")
+		)
+		(pin "8"
+			(uuid "a42c6382-b89e-43c1-8f3d-e411b86f8c4b")
+		)
+		(pin "12"
+			(uuid "6bf72f54-7f05-4e48-b6e6-cdbe439e7f21")
+		)
+		(pin "4"
+			(uuid "22187f62-f802-4aff-9c25-e4592236adee")
+		)
+		(pin "13"
+			(uuid "e771395c-c719-4743-a85d-c252c88ecaeb")
+		)
+		(pin "6"
+			(uuid "10250884-95e8-4ecb-bb94-1dedf5d10b66")
+		)
+		(pin "3"
+			(uuid "50e5ea15-1ce1-4bc1-83fe-03836cc1640d")
+		)
+		(pin "14"
+			(uuid "10242fff-9126-4e93-9fd9-9f91f2a5b165")
+		)
+		(pin "5"
+			(uuid "a383a9bd-5c88-44b4-b247-eb86463c93b9")
+		)
+		(pin "1"
+			(uuid "d90401e4-ac6b-4251-9844-5aec6665121f")
+		)
+		(pin "11"
+			(uuid "33c6b162-c006-4c77-ac88-9e428c1c393b")
+		)
+		(pin "9"
+			(uuid "a51d6189-7812-44e7-912c-7016959858a4")
+		)
+		(instances
+			(project "skematik-monitor"
+				(path "/a829869c-96ff-413d-b6a5-644534e66486/f3639f94-fff3-4865-bbd2-0bc0efe77f3b"
+					(reference "U7")
 					(unit 1)
 				)
 			)

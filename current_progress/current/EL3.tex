@@ -7,7 +7,13 @@
 \usepackage{adjustbox}
 \usepackage{amsmath}
 \usepackage{graphicx}
-\usepackage{rotating}
+% \usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{amssymb}
+\definecolor{ganttblue}{RGB}{68,114,196}
+\newcommand{\pk}{\cellcolor{ganttblue}\textcolor{white}{\checkmark}}
 
 % --- Memasukkan Data Dokumen Menggunakan Perintah Baru ---
 \projectcode{EL3}
@@ -15,7 +21,7 @@
 \documenttitle{Teknik Elektro - Sistem Informasi Tugas Akhir}
 \capstonetitle{Monitoring on Induction Motor In Real-Time: Vibration and Temperature}
 \shortname{MONTREAL-VT} 
-\documentnumber{TA2526.01.099}
+\documentnumber{TA2526.02.003}
 \revisionnumber{03}
 \publicationdate{22 September 2025}
 
@@ -84,7 +90,7 @@
 \newpage
 
 \section{\SystemSpecTitle}
-Berdasrkan ISO 29148-2018\cite{ISO2018DesignReq}, spesifikasi sistem ditetapkan sebagai acuan 
+Berdasrkan ISO 29148-2018\cite{BritishStandardsInstitution2016}, spesifikasi sistem ditetapkan sebagai acuan 
 dalam proses pengembangan sistem Monitoring On Induction Motor In Real-Time:
 Vibration and Temperature (MONTREAL-VT). Hal ini dilakukan 
 untuk memastikan bahwa sistem yang dikembangkan memenuhi kriteria yang telah ditentukan
@@ -94,7 +100,7 @@ fungsional dan spesifikasi non-fungsional.
 % ==============================================================
 \subsection{\FunctionalSpecTitle}
 Spesifikasi fungsional menjabarkan sistem dan elemen fungsi sistem, atau serangkaian tugas
-yang mampu dilaksanakan oleh sistem\cite{ISO2018DesignReq}. Tabel \ref{tab:fungsional} menunjukkan
+yang mampu dilaksanakan oleh sistem\cite{BritishStandardsInstitution2016}. Tabel \ref{tab:fungsional} menunjukkan
 tugas-tugas yang dilakukan oleh sistem MONTREAL-VT. Tugas utama hal ini meliputi pembacaan
 dan pemrosesan data, komunikasi perangkat ke cloud, penyimpanan data historis, 
 proses analisis data, serta penyajian data ke pengguna. Fungsi opsional meliputi penyimpanan
@@ -226,16 +232,16 @@ data secara lokal, arsitektur semi-permanen dan enkripsi data untuk keamanan kom
 \end{longtable}
 
 %Mengapa parameter getaran?
-Pola getaran mampu mengindikasikan adanya pemerosotan kondisi mekanis pada motor \cite{Vishnu2015Vibration},
+Pola getaran mampu mengindikasikan adanya pemerosotan kondisi mekanis pada motor \cite{VishnuKvAnoopBk2015},
 efektivitas parameter getaran dalam memprediksi adanya gangguan mekanis terbukti
-lebih baik dibandingkan dengan parameter arus\cite{Ayankoso2024VibrationCurrent}. Maka dari itu, fungsi utama
+lebih baik dibandingkan dengan parameter arus\cite{Ayankoso2026}. Maka dari itu, fungsi utama
 dari sistem ini adalah dengan mengandalkan parameter getaran untuk mendeteksi adanya gangguan mekanis,
 contohnya seperti gangguan pada \textit{bearing}, \textit{misalignment}, dan \textit{unbalance} (poin 1). Akselerometer
 \textit{micro-electromechanical systems} (MEMS) triaksial
 digital digunakan sebagai transduser utama yang membaca parameter akselerasi getaran.
 Akselerometer dipasang secara permanen pada divais MONTREAL-VT, sementara itu divais 
 dipasang pada lempeng besi stator agar berdekatan lokasi dengan \textit{bearing} 
-motor\cite{ISO13373V1}.
+motor\cite{InternationalOrganizationforStandardization2002}.
 
 %Kendala menggunakan parameter getaran dan fungsi pengkondisian sinyal
 Akselerometer MEMS merupakan jenis transduser yang
@@ -243,7 +249,7 @@ cukup baik dalam mengatasi noise, yakni tidak lebih dari
 1 LSB RMS pada sumbu-x dan sumbu-y, dan tidak lebih dari 
 1.5 LSB RMS pada sumbu-z\cite{ADXL345}.
 Namun, beberapa transduser yang digunakan pada proyek ini,
-seperti transduser efek hall\cite{A3144} dan transduser arus\cite{ACS712}, 
+seperti transduser efek hall\cite{AllegroMicrosystems2018} dan transduser arus\cite{AllegroMicrosystems2020}, 
 tidak memiliki sistem pengkondisian sinyal internal.
 Oleh karena itu, sistem pengkondisian sinyal sinyal eksternal harus
 tetap dirancang. Hal ini dilakukan agar sinyal output tetap pada rentang
@@ -260,20 +266,20 @@ konversi parameter akselerasi getaran
 menjadi kecepatan dan kecepatan \textit{root-mean square} (rms) (poin 7). Serta konversi
 data domain waktu menjadi domain frekuensi dengan mengaplikasikan
 \textit{fast-fourier
-transform} (FFT)\cite{ISO13373V2} (poin 7). Analisis domain frekuensi
+transform} (FFT)\cite{InternationalOrganizationforStandardization2016} (poin 7). Analisis domain frekuensi
 dilakukan dengan menangkap frekuensi khas dari kerusakan
 mekanis tertentu seperti yang tercantum pada tabel C
-lampiran C ISO 13373-1\cite{ISO13373V1} (poin 8).
+lampiran C ISO 13373-1\cite{InternationalOrganizationforStandardization2002} (poin 8).
 
 %Mengapa parameter suhu?
 Selain parameter getaran, suhu merupakan parameter yang umum digunakan
 memperhitungkan kondisi motor. Ranah pengaplikasian pemantauan
-parameter suhu biasanya adalah sistem proteksi\cite{Maximiliano2010SensorlessIM}. Peningkatan
+parameter suhu biasanya adalah sistem proteksi\cite{Sonnaillon2010}. Peningkatan
 suhu pada mesin listrik disebabkan oleh kegagalan sistem pendingin
-dan arus berlebih pada winding rotor dan/atau stator\cite{Bonnett1991Failures}. 
+dan arus berlebih pada winding rotor dan/atau stator\cite{Bonnett1991}. 
 Sensor termokapel dipertimbangkan sebagai transduser suhu sistem
 berdasarkan ketentuan dari ISO 60034-1 untuk jenis motor dengan
-rating daya di bawah 15kW\cite{iec60034_2022} (poin 2). 
+rating daya di bawah 15kW\cite{InternationalElectrotechnicalCommission2022} (poin 2). 
 
 %Mengapa parameter arus dan rpm?
 Parameter arus dan kecepatan putar shaft dapat 
@@ -281,9 +287,9 @@ digunakan sebagai
 parameter pendukung pengambilan keputusan pemeliharaan dan proteksi 
 pada motor (poin 3 dan 4). Transduser \textit{current transformer} (CT)
 dapat digunakan dalam sistem proteksi
-\textit{overcurrent} pada pada motor\cite{Kishibe2000Patent}. Selain sebagai komponen
+\textit{overcurrent} pada pada motor\cite{Kishibe2001}. Selain sebagai komponen
 sistem proteksi, parameter arus motor juga dapat digunakan sebagai pendukung diagnosa
-kerusakan mekanis pada motor\cite{Ayankoso2024VibrationCurrent}. 
+kerusakan mekanis pada motor\cite{Ayankoso2026}. 
 Sementara itu, parameter kecepatan putar shaft menggunakan
 transduser rpm digunakan untuk mendeteksi terjadinya slip.
 Slip
@@ -299,21 +305,7 @@ kecepatan rotasi shaft, digunakan untuk menghitung
 parameter \textit{Health Index} (HI) (poin 12),
 parameter HI dapat digunakan untuk indikasi tingkat kesehatan motor
 secara keseluruhan dan perhitungan sisa umur motor (\textit{Remaining Useful
-Life}) atau RUL \cite{Yang2016MHI}. 
-
-
-%%Pengantar kalibrasi dan pemrosesan sinyal
-ISO 10012 berisi mengenai panduan pengelolaan sistem
-metrologi, dalam hal ini merupakan transduser yang digunakan
-untuk merekam data pada sistem\cite{ISO10012Measurement}. Sebelum sinyal transduser
-diproses lebih lanjut pada mikrokontroler,
-transduser harus terlebih dahulu dikalibrasi\cite{ISO10012Measurement}.
-Proses kalibrasi merupakan proses pembandingan kualitas
-data transduser dengan alat ukur yang telah ditetapkan\cite{ISO10012Measurement}.
-Hasil proses kalibrasi harus didokumentasikan untuk memastikan
-kesesuaian, kekonsistenan, dan validitas dari hasil ukur transduser\cite{ISO10012Measurement}.
-
-% Mengapa edge computing
+Life}) atau RUL \cite{Yang2016}. 
 
 \subsubsection{Use Case Diagram}
 Use case diagram mengilustrasikan interaksi fungsional antara
@@ -337,7 +329,7 @@ menerima notifikasi alarm, dan melakukan pengaturan sistem proteksi.
 Spesifikasi non-fungsional atau spesifikasi kualitas
 meliputi angka yang mewakili kemampuan sistem
 dalam menyajikan fungsi-fungsi yang ditargetkan pada
-spesifikasi fungsional\cite{ISO2018DesignReq}. Tabel \ref{tab:nonfungsional} mewakili
+spesifikasi fungsional\cite{BritishStandardsInstitution2016}. Tabel \ref{tab:nonfungsional} mewakili
 spesifikasi tersebut.
 
 % Spesifikasi non-fungsional menjelaskan karakteristik kualitas yang harus dipenuhi oleh sistem monitoring getaran dan suhu pada motor induksi. Selain mampu menjalankan fungsi utama, sistem juga harus memiliki kinerja yang baik, keandalan yang tinggi, keamanan, kemudahan penggunaan, serta kemampuan beroperasi secara stabil dalam proses monitoring kondisi motor. Karakteristik tersebut merupakan aspek penting dalam pengembangan sistem Internet of Things (IoT) yang menuntut kemampuan komunikasi data secara \textit{real-time}, andal, dan mudah diakses oleh pengguna \cite{bahga2014,mqtt311}.
@@ -374,7 +366,7 @@ spesifikasi tersebut.
     \hline
 
     2 & Pengukuran Suhu &
-    Galat absolut, $\Delta=\pm 0.5^\circ C$, suhu ruang
+    $\%error=5\%$, suhu ruang
     \\
     \hline
 
@@ -383,7 +375,7 @@ spesifikasi tersebut.
 
     $F_{s} = 100Hz$
     
-    $\%error=4\%$    
+    $\%error=5\%$    
     \\
     \hline
 
@@ -453,7 +445,7 @@ spesifikasi tersebut.
     dalam besaran akselerasi getaran bagian \textit{non-rotating}. 
     Oleh karena itu,
     data akselerasi harus dikonversi menjadi data
-    kecepatan seperti pada persamaan \ref{eq:velocity}\cite{BS20816ISO}.
+    kecepatan seperti pada persamaan \ref{eq:velocity}\cite{InternationalOrganizationforStandardization2003}.
 
     \begin{equation}
         \label{eq:velocity}
@@ -462,7 +454,7 @@ spesifikasi tersebut.
 
     Kecepatan \textit{root-mean square} merupakan
     besaran getaran yang umum digunakan dalam
-    mengkarakterisasi respon getaran mesin \cite{BS20816ISO}.
+    mengkarakterisasi respon getaran mesin \cite{InternationalOrganizationforStandardization2003}.
     Persamaan \ref{eq:rms_1} merupakan persamaan
     yang dapat digunakan untuk mengkonversi besaran
     kecepatan ke kecepatan rms.
@@ -534,18 +526,18 @@ spesifikasi tersebut.
     frekuensi sampling minimum agar sistem
     mampu menangkap target frekuensi yang menjadi
     ciri khas fault pada suatu motor pada tabel
-    ISO 13373-1 lampiran C \cite{ISO13373V1}.
+    ISO 13373-1 lampiran C \cite{InternationalOrganizationforStandardization2002}.
 
 \subsubsection{Perhitungan Batas Suhu Housing Maksimum}
     Berdasarkan panduan IEC 60034, pengukuran suhu motor dengan
     rating daya di bawah 15 kilowatt,
     parameter suhu pada winding dipengaruhi
     oleh tipe insulasi motor seperti pada tabel 
-    \ref{tab:insulation_class}\cite{iec60034_2022}.
+    \ref{tab:insulation_class}\cite{InternationalElectrotechnicalCommission2022}.
     
     \begin{table}[H]
     \centering
-    \caption{Tabel kelas insulasi winding\cite{Swardt2022Insulation}}
+    \caption{Tabel kelas insulasi winding\cite{deSwardt2002}}
     \label{tab:insulation_class}
     \begin{tabular}{|p{3cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
         \hline
@@ -610,8 +602,8 @@ mencakup batasan-batasan tersebut.
     \hline\endlastfoot
     
     1 & 
-    Capacitor-Starter SPIM (Model kipas angin Cosmos SN16) &
-    Motor induksi 1-fasa &
+    Motor Cosmos SN16 &
+    Motor induksi 1-fasa (kapasitor start)&
     Kecepatan torsi 1400RPM
     
     Rating Daya 48W
@@ -622,7 +614,7 @@ mencakup batasan-batasan tersebut.
     \hline
     
     2 &
-    ESP32-S3\cite{ESP32-S3}&
+    ESP32-S3\cite{EspressifSystems2024}&
     Mikrokontroler utama &
     CPU Single/Dual-Core Xtensa 32-bit LX7 up to 240 MHz, ROM 384KB, SRAM 512KB, SRAM RTC 16KB
     
@@ -646,37 +638,106 @@ mencakup batasan-batasan tersebut.
     \hline
     
     4 &
-    DS18B20\cite{DS18B20} &
+    DS18B20\cite{AnalogDevicesInc2015} &
     Sensor suhu motor &
     Rentang pengukuran -55$^\circ$C hingga 125$^\circ$C
     
-    akurasi ±0.5$^\circ$C
+    akurasi ±0.5$^\circ$, $-10^{\circ}$C hingga $85^{\circ}$C
     
-    komunikasi One-Wire. \\
+    Komunikasi One-Wire. \\
+    \hline
+
+    5&
+    XYMD-02 dan modul terminal RS485\cite{XYMD02} (alternatif)&
+    Sensor suhu dan kelembapan standar industri&
+    Rentang suhu $-40^{\circ}$ hingga $60^{\circ}$
+
+    Suhu kerja $-40^{\circ}$ hingga $85^{\circ}$
+
+    Tegangan kerja 5V hingga 30V
+    
+    Modbus RTU protocol
+    
+    Sinyal output RS485\\
     \hline
     
-    5 &
-    ACS712\cite{ACS712}&
+    6&
+    ACS712\cite{AllegroMicrosystems2020}&
     Sensor arus motor &
-    Sensor arus Hall Effect
+    Sensor arus efek hall
     
     Rentang ±20 A
     
-    tegangan kerja 5 V. \\
+    Tegangan kerja 5 V
+    
+    $\%error=1.5\%$, suhu ruang
+    
+    $\%error=4\%$, $40^{\circ}C$ hingga $85^{\circ}C$\\
+    \hline
+
+    7&
+    SCT-013-005\cite{SCT013} (alternatif)&
+    Sensor arus motor berbasis CT&
+    Rated tegangan output 1V
+
+    Rated arus input maksimum 5A
+
+    Akurasi $\pm 1\%$\\
+    \hline
+
+    8&
+    A3141\cite{AllegroMicrosystems2018} dan magnet neodymium &
+    Sensor efek hall untuk RPM &
+    Tegangan suplai 4.5V hingga 28V
+    
+    Arus output 25mA\\
     \hline
     
-    6 &
-    Hall Effect Sensor\cite{A3144} &
-    Sensor kecepatan putar motor (RPM) &
-    Sensor digital berbasis efek Hall untuk mendeteksi jumlah putaran poros motor. \\
-    \hline
-    
-    7 &
+    9&
     Relay Module &
     Sistem proteksi motor &
     Relay 5 V
     
     kapasitas maksimum 10 A 250 VAC. \\
+    \hline
+
+    10&
+    Transformator Step-down 220/9VAC (3A)&
+    Trafo step-down&
+    Tegangan primer 220 VAC
+
+    Tegangan sekunder 9 VAC
+
+    Rating arus maksimum 3A\\
+    \hline
+
+    11&
+    IC 7805\cite{L7800}&
+    Regulator tegangan 5VDC&
+    Tegangan input maksimum 35V
+    
+    Rentang tegangan output 4.8V hingga 5.2V, suhu ruang.
+    4.65V hingga 5.35V, $P_{0}\leq15W$
+    
+    Rentang suhu kerja $-55^{\circ}$C hingga $150^{\circ}$\\
+    \hline
+
+    12&
+    TL07&
+    Operational amplifier&
+    Tegangan input\\
+    \hline
+
+    13&
+    Kartu SD dan modul Kartu SD&
+    Penyimpanan data eksternal&
+    32GB, SPI interface\\
+    \hline
+
+    14&
+    Resistor, dan kapasitor&
+    Komponen pasif pada rangkaian&
+    -\\
     \hline
 \end{longtable}
 
@@ -747,9 +808,16 @@ Penyimpanan data monitoring yang dilengkapi informasi \textit{timestamp} untuk a
 % Dari Tabel~\ref{tab:software}, perangkat lunak pada ESP32 bertugas membaca data dari seluruh sensor, melakukan proses \textit{filtering}, menghitung parameter RMS dan FFT, kemudian menentukan kondisi motor berdasarkan nilai ambang (\textit{threshold}) yang telah ditetapkan. Selanjutnya, data dikirimkan melalui jaringan Wi-Fi menuju server sehingga dapat ditampilkan pada dashboard monitoring secara \textit{real-time}. Perangkat lunak juga mengendalikan sistem alarm dan relay proteksi apabila terdeteksi kondisi motor yang berada di luar batas operasi normal. Implementasi komunikasi IoT menggunakan protokol MQTT, sedangkan analisis sinyal getaran dilakukan menggunakan metode RMS dan Fast Fourier Transform (FFT) untuk memperoleh informasi kondisi motor secara akurat \cite{mqtt311,Filho2025Fault,oppenheim2010}.
 % ==============================================================
 \subsection{\PerformanceCriteriaTitle}
-
-% Kriteria kinerja dan evaluasi diterapkan sebagai acuan untuk menilai keberhasilan sistem monitoring getaran dan suhu pada motor induksi yang dikembangkan. Pengujian dilakukan terhadap seluruh fungsi utama sistem, mulai dari akuisisi data sensor, pemrosesan sinyal, komunikasi data, visualisasi dashboard, hingga sistem alarm dan proteksi. Hasil pengujian ini akan dibandingkan dengan spesifikasi yang telah ditetapkan sehingga dapat diketahui tingkat keberhasilan implementasi sistem. Evaluasi kinerja merupakan tahapan penting dalam pengembangan sistem monitoring berbasis \textit{condition monitoring} dan \textit{predictive maintenance} untuk memastikan seluruh fungsi sistem bekerja sesuai dengan kebutuhan pengguna \cite{jardine2006,Filho2025Fault}.
-
+%%Pengantar kalibrasi dan pemrosesan sinyal
+ISO 10012 berisi mengenai panduan pengelolaan sistem
+metrologi, dalam hal ini merupakan transduser yang digunakan
+untuk merekam data pada sistem\cite{InternationalOrganizationforStandardization2003}. Sebelum sinyal transduser
+diproses lebih lanjut pada mikrokontroler,
+transduser harus terlebih dahulu dikalibrasi\cite{InternationalOrganizationforStandardization2003}.
+Proses kalibrasi merupakan proses pembandingan kualitas
+data transduser dengan alat ukur yang telah ditetapkan\cite{InternationalOrganizationforStandardization2003}.
+Hasil proses kalibrasi harus didokumentasikan untuk memastikan
+kesesuaian, kekonsistenan, dan validitas dari hasil ukur transduser\cite{InternationalOrganizationforStandardization2003}.
 Tabel \ref{tab:evaluasi} menunjukkan parameter yang digunakan sebagai acuan dalam pengujian sistem.
 
 \begin{longtable}{|p{1cm}|p{5cm}|p{7cm}|}
@@ -774,59 +842,70 @@ Tabel \ref{tab:evaluasi} menunjukkan parameter yang digunakan sebagai acuan dala
 
 1 &
 Sensor Getaran (ADXL345) &
-Sensor mampu membaca data getaran secara stabil dan menghasilkan data sesuai kondisi operasi motor.\\
+$\%error = \pm 5\%$
+
+Kalibrasi DC offset dan sensitivitas dengan gravitasi\\
 \hline
 
 2 &
 Sensor Suhu (DS18B20) &
-Galat pengukuran suhu maksimum sebesar 15\% dibandingkan alat ukur referensi.\\
+$\%error = \pm 5\%$
+
+Kalibrasi dengan termometer.\\
 \hline
 
 3 &
 Sensor Arus (ACS712) &
-Galat pengukuran arus maksimum sebesar 15\% dibandingkan alat ukur referensi.\\
+$\%error = \pm 5\%$
+
+Kalibrasi dengan multimeter.\\
 \hline
 
 4 &
-Sensor Kecepatan (Hall Effect) &
-Sensor mampu membaca kecepatan putar motor secara stabil selama pengujian. \\
+Sensor efek hall&
+$\%error = \pm 10\%$\\
 \hline
 
 5 &
-Filtering Sinyal &
-Proses filtering mampu mengurangi noise tanpa menghilangkan informasi utama pada sinyal. \\
+Pengkondisian sinyal &
+$SNR_{vib} = $
+
+$SNR_{temp} = $
+
+$SNR_{curr} = $
+
+$SNR_{rpm} = $\\
 \hline
 
 6 &
-Analisis RMS dan FFT &
-Sistem mampu menghitung nilai RMS dan menampilkan spektrum frekuensi sinyal getaran. \\
+Konversi parameter getaran dan FFT &
+...\\
 \hline
 
 7 &
 Analisis Kondisi Motor &
-Sistem mampu menentukan kondisi motor (Normal, Warning, atau Fault) berdasarkan nilai \textit{threshold} yang telah ditentukan. \\
+Sistem mampu menentukan kondisi motor (Normal, Warning, atau Fault) berdasarkan nilai HI dan analisis getaran.\\
 \hline
 
 8 &
 Dashboard Monitoring &
-Dashboard mampu menampilkan data sensor, grafik tren, serta status motor secara \textit{real-time}. \\
+...\\
 \hline
 
 9 &
 Komunikasi Data &
-Data berhasil dikirim menuju dashboard dengan waktu tunda maksimum 1000 ms pada kondisi jaringan normal. \\
+...\\
 \hline
 
 10 &
 Alarm dan Proteksi &
-Buzzer dan relay aktif ketika parameter monitoring melebihi batas operasi yang telah ditentukan. \\
+...\\
 \hline
 
 11 &
 Data Logging &
-Data monitoring berhasil disimpan ke database lengkap dengan informasi \textit{timestamp}. \\
+...\\
 \hline
-
 \end{longtable}
 
 Berdasarkan Tabel~\ref{tab:evaluasi}, keberhasilan 
@@ -842,7 +921,7 @@ sistem mampu melakukan monitoring secara
 \textit{real-time} melalui jaringan internet. 
 Seluruh hasil pengujian tersebut menjadi dasar 
 untuk menilai tingkat keandalan sistem monitoring 
-yang dikembangkan \cite{oppenheim2010,Filho2025Fault,mqtt311}.
+yang dikembangkan \cite{Oppenheim2021, Filho2025, InternationalOrganizationforStandardizationInternationalElectrotechnicalCommission2016}.
 
 \newpage
 \section{\ProposedSolutionTitle}
@@ -893,15 +972,52 @@ dan \ref{fig:flowchart_isps_2}.
     \label{fig:flowchart_isps_2}
 \end{figure} 
 
+%%skematik full
 \newpage
-\begin{sidewaysfigure}[htbp]
+\begin{landscape}
+\begin{figure}
     \centering
-    \includegraphics[width=1\textwidth]{image/doc/skematik-monitor-2.pdf} % Ganti dengan path diagram Anda
+    \includegraphics[width=1.3\textwidth]{image/doc/skematik-monitor-2.pdf} % Ganti dengan path diagram Anda
     \caption{Skematik Rangkaian Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
     \label{fig:skematik-isps}
-\end{sidewaysfigure}
+\end{figure}
+\end{landscape}
 
-\clearpage
+%%skematik per komponen
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{image/doc/esp32.pdf} % Ganti dengan path diagram Anda
+    \caption{Skematik koneksi sistem sensor ke mikrokontroler ESP32}
+    \label{fig:esp32}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{image/doc/adxl345.pdf} % Ganti dengan path diagram Anda
+    \caption{Skematik koneksi ADXL345 ke ESP32}
+    \label{fig:adxl345}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{image/doc/temperature.pdf} % Ganti dengan path diagram Anda
+    \caption{Skematik koneksi DS18B20 ke ESP32}
+    \label{fig:ds18b20}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{image/doc/skematik-monitor-acs712.pdf} % Ganti dengan path diagram Anda
+    \caption{Skematik ACS712 ke ESP32}
+    \label{fig:acs712}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{image/doc/sct013.pdf} % Ganti dengan path diagram Anda
+    \caption{Skematik koneksi SCT-013-005 ke ESP32}
+    \label{fig:sct-013-005}
+\end{figure}
 
 Gambar \ref{fig:skematik-isps} merupakan skematik
 dari rangkaian subsistem ISPS, yang meliputi 
@@ -911,15 +1027,7 @@ dan \ref{fig:3d-pcb-belakang}.
 Desain skematik \ref{fig:skematik-isps} dan desain
 PCB  pada gambar \ref{fig:pcb-layer},
 \ref{fig:3d-pcb-depan}, dan \ref{fig:3d-pcb-belakang}
-dilakukan dengan menggunakan aplikasi KiCAD.
-
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{image/doc/pcb-layout.pdf} % Ganti dengan path diagram Anda
-%     \caption{Layout PCB ISPS}
-%     \label{fig:pcb-layer}
-% \end{figure}
+dirancang dengan menggunakan aplikasi KiCAD.
 
 \begin{figure}[H]
     \centering
@@ -956,12 +1064,12 @@ dilakukan dengan menggunakan aplikasi KiCAD.
     \end{minipage}
 \end{figure}
     
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{image/doc/device-motor.jpg} % Ganti dengan path diagram Anda
-%     \caption{Lokasi Instalasi Device}
-%     \label{fig:instalasi-device}
-% \end{figure}
+Gambar \ref{fig:motor-3-4} hingga \ref{fig:motor-belakang},
+menunjukkan lokasi pemasangan sistem sensor MONTREAL-VT pada motor induksi.
+Sistem sensor tertanam pada PCB yang dipasang pada rangka
+yang dicetak melalui proses pencetakan 3D.
+Rangka ini dipasang di sisi atas motor induksi sehingga
+sensor getaran mampu menangkap pola getaran dari motor.
 
 \begin{figure}[H]
     \centering
@@ -997,7 +1105,9 @@ dilakukan dengan menggunakan aplikasi KiCAD.
         \label{fig:motor-belakang}
     \end{minipage}
 \end{figure}
-Algoritma FFT dan pemrosesan sinyal ditulis menggunakan bahasa 
+Algoritma FFT merupakan listing kode yang berfungsi
+untuk menjalankan proses FFT pada data getaran. 
+Algoritma FFT ditulis dengan menggunakan bahasa 
 pemrograman Python seperti pada codelist \ref{lst: fft-esp32}.
 
 \subsubsection{Subsistem Cloud-hosting dan Basis Data}
@@ -1020,7 +1130,7 @@ proses kerja dari subsistem CBD.
 \end{figure}
 
 Subsistem CBD dirancang agar dapat mendukung pemantauan kondisi
-motor near-real-time, memliki latensi end-to-end kurang dari 500ms
+motor near-real-time, memliki latensi end-to-end kurang dari 1000ms
 sejak data pengukuran diterima oleh sistem hingga informasi
 diperbarui pada antarmuka. Selain itu, CBD juga bertanggung jawab
 atas aspek keamanan sistem yang mencakup mekanisme autentikasi dan
@@ -1152,8 +1262,8 @@ oleh MONTREAL-VT.
 \begin{enumerate}
     \item \textbf{Deskripsi:} Pada desain opsional ini, operasi pemrosesan sinyal lebih lanjut, terutama
     konversi domain waktu dari parameter kecepatan RMS menjadi domain frekuensi (FFT) dilakukan
-    melalui 
-    \item \textbf{Alasan Penolakan:} Implementasi operasi cloud-computing ...
+    melalui program setelah data serial disimpan pada serverless database.
+    \item \textbf{Alasan Penolakan:} -
 \end{enumerate} 
 
 \newpage
@@ -1161,38 +1271,39 @@ oleh MONTREAL-VT.
 
 Work Breakdown Structure (WBS) merupakan dekomposisi pekerjaan proyek menjadi beberapa tahapan yang lebih terstruktur sehingga proses perancangan, implementasi, pengujian, dan dokumentasi dapat dilaksanakan secara sistematis. Penyusunan WBS bertujuan untuk mempermudah proses perencanaan, pengelolaan, serta pengawasan setiap aktivitas selama penelitian berlangsung.
 
-Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit{Monitoring Getaran dan Suhu pada Motor Induksi}, mulai dari analisis kebutuhan sistem hingga penyusunan laporan akhir. Setiap tahapan memiliki keluaran (\textit{deliverable}) yang menjadi indikator keberhasilan sebelum melanjutkan ke tahap berikutnya.
+Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit{Monitoring Getaran dan Suhu pada Motor Induksi}, mulai dari analisis kebutuhan sistem hingga penyusunan laporan akhir. Setiap tahapan memiliki keluaran (\textit{Hasil}) yang menjadi indikator keberhasilan sebelum melanjutkan ke tahap berikutnya.
 
 \subsection{\WBSTitle}
-% Work Breakdown Structure (WBS) merupakan metode dekomposisi pekerjaan proyek menjadi beberapa aktivitas yang lebih terstruktur sehingga memudahkan proses perencanaan, pengelolaan, pelaksanaan, dan evaluasi proyek. Penyusunan WBS pada penelitian ini disusun berdasarkan tahapan pengembangan sistem monitoring mulai dari analisis kebutuhan, perancangan, implementasi, pengujian, hingga dokumentasi akhir proyek sesuai praktik manajemen proyek \cite{PMBOK,kerzner2022}.
 
 \textbf{WBS 1.1 Analisis Kebutuhan Sistem}
 
 \textbf{Kegiatan:}
 \begin{itemize}
-    \item Mengidentifikasi kebutuhan sistem monitoring motor induksi.
-    \item Menentukan parameter yang akan dimonitor, yaitu getaran, suhu, arus, dan kecepatan putar (RPM).
-    \item Menyusun kebutuhan fungsional dan non-fungsional sistem.
+    \item Mengidentifikasi spesifikasi motor induksi.
+    \item Menyesuaikan spesifikasi komponen dengan spesifikasi motor induksi.
+    \item Menyusun dokumen kebutuhan sistem.
 \end{itemize}
 
-\textbf{Deliverable:}
+\textbf{Hasil:}
 \begin{itemize}
-    \item Dokumen kebutuhan sistem.
+    \item Dokumen kebutuhan sistem (EL200).
 \end{itemize}
 
 \textbf{WBS 1.2 Studi Literatur}
 
 \textbf{Kegiatan:}
 \begin{itemize}
-    \item Studi mengenai motor induksi dan mekanisme kerusakannya \cite{Nandi2005Condition}.
-    \item Studi karakteristik sensor ADXL345, DS18B20, ACS712, dan Hall Effect Sensor \cite{ADXL345,ACS712,A3144}.
-    \item Studi metode pemrosesan sinyal seperti Filtering, RMS, dan FFT \cite{oppenheim2010,Filho2025Fault}.
-    \item Studi sistem monitoring kondisi motor dan sistem proteksi \cite{Jardine2006Machinery}.
+    \item Studi mengenai metode pemantauan kondisi mesin berbasis getaran.
+    \item Studi metode pemrosesan sinyal seperti pengkondisian sinyal, RMS, dan FFT \cite{Oppenheim2021, Filho2025}.
+    \item Studi mengenai komunikasi IoT menggunakan mikrokontroler ESP32-S3.
+    \item Studi mengenai cloud-hosting dan basis data serverless.
+    \item Studi mengenai visualisasi data hasil monitoring.
+    \item Studi mengenai sistem alarm dan proteksi motor AC yang terkoneksi dengan sistem DC.
 \end{itemize}
 
-\textbf{Deliverable:}
+\textbf{Hasil:}
 \begin{itemize}
-    \item Dokumen studi literatur sebagai dasar perancangan sistem.
+    \item Dokumen studi literatur dan referensi utama (EL200).
 \end{itemize}
 
 \textbf{WBS 1.3 Perancangan Arsitektur Sistem}
@@ -1202,110 +1313,104 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Menyusun diagram blok sistem.
     \item Menentukan arsitektur perangkat keras dan perangkat lunak.
     \item Menentukan pembagian subsistem sesuai pembagian tugas tim.
+    \item Merancang desain skematik dan PCB subsistem ISPS.
+    \item Merancang desain skematik dan PCB subsistem DASP.
+    \item Merancang desain dashboard pemantauan.
 \end{itemize}
 
-\textbf{Deliverable:}
+\textbf{Hasil:}
 \begin{itemize}
     \item Diagram blok sistem dan arsitektur sistem.
 \end{itemize}
 
 %====================================================
-\subsubsection*{Fase 2 -- Perancangan Sistem (Minggu 3--5)}
+\subsubsection*{Fase 2 -- Uji Komponen(Minggu 1)}
 %====================================================
 
 \textbf{WBS 2.1 Perancangan Perangkat Keras}
 
 \textbf{Kegiatan:}
 \begin{itemize}
-    \item Mendesain rangkaian ESP32.
-    \item Mendesain rangkaian sensor getaran, suhu, arus, dan RPM.
-    \item Mendesain sistem alarm dan proteksi.
+    \item Melakukan uji koneksi sensor ke mikrokontroler.
+    \item Melakukan uji rangkaian rectifier 220VAC to 5VDC.
 \end{itemize}
 
-\textbf{Deliverable:}
+\textbf{Hasil:}
 \begin{itemize}
-    \item Skematik perangkat keras.
+    \item Prototipe perangkat keras (on breadboard)
 \end{itemize}
 
-\textbf{WBS 2.2 Perancangan Perangkat Lunak}
-
+    \textbf{WBS 2.2 Perancangan Perangkat Lunak}
 \textbf{Kegiatan:}
 \begin{itemize}
-    \item Mendesain algoritma pembacaan sensor.
-    \item Mendesain algoritma filtering sinyal.
-    \item Mendesain algoritma RMS dan FFT \cite{oppenheim2010,Filho2025Fault}.
-    \item Mendesain logika analisis kondisi motor.
+    \item Mendesain tampilan dashboard dengan menggunakan Figma.
+    \item Melakukan uji koneksi perangkat keras (ESP32) ke layanan cloud Firebase.
+    \item Melakukan uji konektivitas Wi-Fi ESP32 dengan divais kontrol.
 \end{itemize}
 
-\textbf{Deliverable:}
+\textbf{Hasil:}
 \begin{itemize}
-    \item Flowchart perangkat lunak dan algoritma sistem.
-\end{itemize}
-
-\textbf{WBS 2.3 Perancangan Dashboard Monitoring}
-
-\textbf{Kegiatan:}
-\begin{itemize}
-    \item Mendesain antarmuka dashboard monitoring.
-    \item Mendesain struktur database.
-    \item Mendesain sistem penyimpanan data (\textit{data logging}).
-\end{itemize}
-
-\textbf{Deliverable:}
-\begin{itemize}
-    \item Desain dashboard monitoring dan database.
+    \item Prototipe Dashboard Monitoring
 \end{itemize}
 
 %====================================================
-\subsubsection*{Fase 3 -- Implementasi Sistem (Minggu 6--10)}
+\subsubsection*{Fase 3 -- Implementasi Sistem}
 %====================================================
 
-\textbf{WBS 3.1 Implementasi Subsistem Akuisisi Data dan Pemrosesan Sinyal}
+\textbf{WBS 3.1 Implementasi Subsistem Akuisisi Data dan Pemrosesan Sinyal  (Minggu 2-5)}
 
 \textbf{Kegiatan:}
 \begin{itemize}
-    \item Instalasi sensor pada motor induksi.
-    \item Kalibrasi sensor.
-    \item Akuisisi data getaran, suhu, arus, dan RPM.
-    \item Implementasi filtering dan pengkondisian sinyal.
+    \item Melakukan kalibrasi sensor.
+    \item Melakukan uji koneksi sensor dan mikrokontroler melalui serial monitor.
+    \item Instalasi sensor dan rangkaian pengkondisian sinyal.
+    \item Melakukan uji pengkondisian sinyal sensor dengan osiloskop.
+    \item Instalasi program konversi parameter getaran dan algoritma FFT (Python) pada mikrokontroler.
+    \item Memulai cetak PCB ISPS apabila poin 1-5 berhasil dijalankan.
+    \item Mencetak wadah PCB dengan pencetakan 3D.
+    \item Instalasi wadah PCB ISPS pada motor induksi.
 \end{itemize}
 
-\textbf{Deliverable:}
+\textbf{Hasil:}
 \begin{itemize}
-    \item Data sensor yang telah diproses dan siap dianalisis.
+    \item Prototipe sistem akuisisi data sensor yang meliputi PCB ISPS dan wadah PCB.
 \end{itemize}
 
-\textbf{WBS 3.2 Implementasi Subsistem Analisis Kondisi Motor}
+\textbf{WBS 3.2 Implementasi Subsistem Cloud-Hosting dan Basis Data (Minggue 5-10)}
 
 \textbf{Kegiatan:}
 \begin{itemize}
-    \item Implementasi perhitungan RMS.
-    \item Implementasi FFT.
-    \item Analisis kondisi motor berdasarkan nilai \textit{threshold}.
-   \item Implementasi dashboard monitoring.
-\item Implementasi penyimpanan data (\textit{data logging}) menggunakan komunikasi IoT \cite{bahga2014,mqtt311}.
+    \item Melakukan uji koneksi prototipe akuisisi data ke layanan cloud Firebase.
+    \item Menginstal program klasifikasi kerusakan berbasis vibration time-domain analysis.
+    \item Menginstal program klasifikasi kerusakan berbasis vibration frequency-domain analysis.
+    \item Menginstal program perhitungan Machine Health Index berdasarkan parameter getaran, suhu, arus, dan RPM.
+    \item Menginstal program perhitungan RUL dengan memanfaatkan MHI.
+    \item Melakukan uji skenario kerusakan.
+    \item Mengimplementasikan sistem visualisasi pada dashboard pemantauan.
+\item Implementasi penyimpanan data (\textit{data logging}) menggunakan komunikasi IoT \cite{Bahga2014, InternationalOrganizationforStandardizationInternationalElectrotechnicalCommission2016}.
 \end{itemize}
 
-\textbf{Deliverable:}
+\textbf{Hasil:}
 \begin{itemize}
-    \item Dashboard monitoring yang mampu menampilkan kondisi motor secara \textit{real-time}.
+    \item Dashboard monitoring lengkap dengan fiturnya.
 \end{itemize}
 
-\textbf{WBS 3.3 Implementasi Subsistem Alarm dan Proteksi}
+\textbf{WBS 3.3 Implementasi Subsistem Desain Alarm dan Sistem Proteksi (Minggu 2-5)}
 
 \textbf{Kegiatan:}
 \begin{itemize}
-    \item Implementasi sistem alarm.
-    \item Implementasi relay proteksi.
-    \item Implementasi \textit{event logging}.
+    \item Merancang sistem proteksi berbasis relay.
+    \item Menginstal program sistem proteksi pada mikrokontroler.
+    \item Melakukan uji rangkaian rectifier 220VAC to 5VDC dengan menggunakan osiloskop.
+    \item Mencetak PCB rectifier apabila poin 3 berhasil dilaksanakan.
+    \item Melakukan uji sistem alarm dan proteksi.
     \item Pengujian fungsi alarm dan proteksi.
 \end{itemize}
 
-\textbf{Deliverable:}
+\textbf{Hasil:}
 \begin{itemize}
-    \item Sistem alarm dan proteksi yang bekerja sesuai kondisi operasi motor.
+    \item PCB DASP dan sistem proteksi yang bekerja.
 \end{itemize}
-
 %====================================================
 \subsubsection*{Fase 4 -- Pengujian dan Validasi (Minggu 11--13)}
 %====================================================
@@ -1340,10 +1445,10 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Pengujian keseluruhan sistem mulai dari pembacaan sensor hingga aktivasi alarm dan penyimpanan data.
 \end{itemize}
 
-\textbf{Deliverable:}
+\textbf{Hasil:}
 \begin{itemize}
     \item Laporan hasil pengujian dan validasi sistem.
-    Tahap pengujian dilakukan untuk memastikan seluruh fungsi perangkat keras maupun perangkat lunak berjalan sesuai spesifikasi yang telah dirancang. Pengujian meliputi validasi sensor, analisis sinyal, komunikasi data, hingga pengujian integrasi sistem secara menyeluruh sehingga sistem memenuhi kebutuhan monitoring kondisi motor induksi \cite{PMBOK,Jardine2006Machinery}.
+    Tahap pengujian dilakukan untuk memastikan seluruh fungsi perangkat keras maupun perangkat lunak berjalan sesuai spesifikasi yang telah dirancang. Pengujian meliputi validasi sensor, analisis sinyal, komunikasi data, hingga pengujian integrasi sistem secara menyeluruh sehingga sistem memenuhi kebutuhan monitoring kondisi motor induksi \cite{ProjectManagementInstitute2021,Jardine2006}.
 \end{itemize}
 
 %====================================================
@@ -1368,7 +1473,7 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Menyiapkan bahan presentasi, poster penelitian, dan demonstrasi sistem.
 \end{itemize}
 
-\textbf{Deliverable:}
+\textbf{Hasil:}
 \begin{itemize}
     \item Laporan tugas akhir.
     \item Buku panduan penggunaan sistem.
@@ -1378,13 +1483,98 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
 \subsection{\TimelineTitle}
 Jadwal implementasi disusun berdasarkan \textit{Work Breakdown Structure} (WBS) yang telah dijelaskan pada Subbab 3.1. Penyusunan jadwal bertujuan untuk mengatur urutan pelaksanaan setiap kegiatan sehingga proses pengembangan sistem dapat berlangsung secara sistematis dan sesuai target waktu yang telah ditetapkan. Seluruh aktivitas penelitian direncanakan berlangsung selama 16 minggu, dimulai dari tahap perencanaan hingga penyusunan laporan akhir. Setiap tahapan memiliki keterkaitan dengan tahapan sebelumnya sehingga penyelesaian suatu pekerjaan menjadi prasyarat untuk melanjutkan pekerjaan berikutnya.
 
-Rencana jadwal implementasi penelitian ditunjukkan pada tabel \ref{fig:gantt}.
-\begin{sidewaysfigure}[htbp]
+Rencana jadwal implementasi penelitian ditunjukkan pada tabel \ref{tab:gantt}.
+\begin{landscape}
+    \begin{table}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{image/doc/gantt-2.pdf} % Ganti dengan path diagram Anda
-    \caption{Diagram Gantt}
-    \label{fig:gantt}
-\end{sidewaysfigure}
+    \caption{Gantt Chart Tugas Akhir - Monitoring Getaran dan Suhu Motor Induksi}
+    \label{tab:gantt}
+    \scriptsize
+    \setlength{\tabcolsep}{2pt}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|c|p{3.5cm}|p{1.6cm}|p{2.4cm}|*{14}{c|}}
+    \hline
+    \textbf{No} & \textbf{Kegiatan} & \textbf{PIC} & \textbf{Output} &
+    \textbf{M1} & \textbf{M2} & \textbf{M3} & \textbf{M4} & \textbf{M5} & \textbf{M6} &
+    \textbf{M7} & \textbf{M8} & \textbf{M9} & \textbf{M10} & \textbf{M11} & \textbf{M12} &
+    \textbf{M13} & \textbf{M14} \\
+    \hline
+    
+    1 & Studi literatur dan identifikasi kebutuhan sistem & Semua & Spesifikasi sistem \& referensi &
+    \pk & \pk & & & & & & & & & & & & \\
+    \hline
+    
+    2 & Perumusan masalah, tujuan, dan batasan sistem & Semua & Rumusan masalah \& tujuan &
+    \pk & \pk & & & & & & & & & & & & \\
+    \hline
+    
+    3 & Perancangan arsitektur sistem & Semua & Blok diagram sistem &
+    & \pk & \pk & & & & & & & & & & & \\
+    \hline
+    
+    4 & Pemilihan dan pengadaan komponen & Semua & Komponen hardware &
+    & \pk & \pk & & & & & & & & & & & \\
+    \hline
+    
+    5 & Perancangan dan pemasangan sensor & Anggota 1 & Sensor terpasang &
+    & & \pk & \pk & & & & & & & & & & \\
+    \hline
+    
+    6 & Kalibrasi dan pengujian sensor & Anggota 1 & Data kalibrasi sensor &
+    & & & \pk & \pk & & & & & & & & & \\
+    \hline
+    
+    7 & Signal processing getaran & Anggota 1 & Data getaran terolah &
+    & & & \pk & & \pk & & & & & & & & \\
+    \hline
+    
+    8 & Perancangan komunikasi IoT & Anggota 2 & Komunikasi ESP32--server &
+    & & & & \pk & \pk & & & & & & & & \\
+    \hline
+    
+    9 & Perancangan database dan dashboard & Anggota 2 & Database \& UI monitoring &
+    & & & & & \pk & & \pk & & & & & & \\
+    \hline
+    
+    10 & Implementasi pengiriman data real-time & Anggota 2 & Data real-time &
+    & & & & & & & \pk & \pk & & & & & \\
+    \hline
+    
+    11 & Pengolahan FFT dan ekstraksi fitur & Anggota 3 & Spektrum \& fitur FFT &
+    & & & & & & \pk & & \pk & & & & & \\
+    \hline
+    
+    12 & Perancangan klasifikasi kondisi motor & Anggota 3 & Algoritma klasifikasi &
+    & & & & & & & & \pk & \pk & & & & \\
+    \hline
+    
+    13 & Pengujian sistem secara keseluruhan & Semua & Hasil pengujian sistem &
+    & & & & & & & & & \pk & \pk & & & \\
+    \hline
+    
+    14 & Pengujian skenario IoT dan time-delay & Anggota 2 & Data delay \& reliability &
+    & & & & & & & & & & \pk & \pk & & \\
+    \hline
+    
+    15 & Analisis hasil dan evaluasi kinerja & Semua & Analisis performa &
+    & & & & & & & & & & & \pk & \pk & \\
+    \hline
+    
+    16 & Penyusunan laporan dan dokumentasi & Semua & Draft/final laporan &
+    & & & & & & & & & & \pk & & & \pk \\
+    \hline
+    
+    17 & Revisi dan persiapan presentasi/sidang & Semua & Materi presentasi \& finalisasi &
+    & & & & & & & & & & & & \pk & \pk \\
+    \hline
+    
+    \end{tabular}
+    
+    \vspace{0.3cm}
+    \noindent\textbf{Keterangan:} \colorbox{ganttblue}{\textcolor{white}{\phantom{XX}}} \, Periode pelaksanaan
+    
+    \end{table}
+\end{landscape}
 
 \subsection{\TeamDivisionTitle}
 Pembagian tugas tim dilakukan berdasarkan hasil diskusi bersama dosen pembimbing agar setiap anggota memiliki fokus penelitian yang berbeda sehingga tidak terjadi tumpang tindih dalam pengembangan sistem. Setiap anggota bertanggung jawab terhadap satu subsistem utama yang saling terintegrasi untuk membentuk sistem monitoring kondisi motor induksi secara menyeluruh.
@@ -1526,7 +1716,7 @@ Akurasi klasifikasi $\geq$ 90\%\\
 \hline
 
 10 &
-Motor Health Index &
+Machine Health Index (MHI) &
 Validasi terhadap kondisi motor &
 Sesuai kondisi aktual motor\\
 \hline
@@ -1696,7 +1886,7 @@ Risiko yang berkaitan dengan persepsi, kepuasan, dan adopsi sistem oleh pengguna
 Bagian ini menyajikan estimasi biaya yang terkait dengan pengembangan dan implementasi \textbf{Project }, serta analisis manfaat-biaya. Analisis finansial ini membantu dalam menilai kelayakan ekonomi proyek.
 
 \subsection{\CostEstimationTitle}
-Estimasi biaya proyek dilakukan untuk mengetahui kebutuhan anggaran dalam proses perancangan, implementasi, pengujian, hingga dokumentasi sistem monitoring getaran dan suhu pada motor induksi. Perhitungan biaya meliputi kebutuhan perangkat keras (\textit{hardware}), perangkat lunak (\textit{software}), serta biaya operasional selama penelitian berlangsung. Nilai biaya yang digunakan merupakan estimasi berdasarkan harga pasar pada saat penelitian dilakukan sehingga dapat berubah mengikuti kondisi aktual. Estimasi biaya merupakan salah satu tahapan penting dalam perencanaan proyek untuk mengetahui kebutuhan sumber daya selama proses pengembangan sistem \cite{PMBOK,kerzner2022}.
+Estimasi biaya proyek dilakukan untuk mengetahui kebutuhan anggaran dalam proses perancangan, implementasi, pengujian, hingga dokumentasi sistem monitoring getaran dan suhu pada motor induksi. Perhitungan biaya meliputi kebutuhan perangkat keras (\textit{hardware}), perangkat lunak (\textit{software}), serta biaya operasional selama penelitian berlangsung. Nilai biaya yang digunakan merupakan estimasi berdasarkan harga pasar pada saat penelitian dilakukan sehingga dapat berubah mengikuti kondisi aktual. Estimasi biaya merupakan salah satu tahapan penting dalam perencanaan proyek untuk mengetahui kebutuhan sumber daya selama proses pengembangan sistem \cite{ProjectManagementInstitute2021,kerzner2022}.
 
 \subsubsection{Biaya Perangkat Keras (\textit{Hardware})}
 
@@ -1887,19 +2077,19 @@ Rekapitulasi keseluruhan biaya proyek ditunjukkan pada Tabel~\ref{tab:rekap_biay
 \end{tabular}
 \end{table}
 
-Estimasi biaya tersebut merupakan perkiraan kebutuhan dana selama proses penelitian dan dapat berubah sesuai harga komponen elektronik di pasaran serta kebutuhan implementasi sistem. Penyusunan estimasi biaya dilakukan berdasarkan pendekatan \textit{bottom-up cost estimation}, yaitu dengan menjumlahkan seluruh kebutuhan komponen pada setiap tahapan proyek \cite{PMBOK}.
+Estimasi biaya tersebut merupakan perkiraan kebutuhan dana selama proses penelitian dan dapat berubah sesuai harga komponen elektronik di pasaran serta kebutuhan implementasi sistem. Penyusunan estimasi biaya dilakukan berdasarkan pendekatan \textit{bottom-up cost estimation}, yaitu dengan menjumlahkan seluruh kebutuhan komponen pada setiap tahapan proyek \cite{ProjectManagementInstitute2021}.
 
 \subsection{\CostBenefitTitle}
 Analisis biaya manfaat dilakukan untuk mengevaluasi kelayakan pengembangan sistem monitoring getaran dan suhu pada motor induksi berdasarkan perbandingan antara biaya implementasi dengan manfaat yang diperoleh. Analisis ini bertujuan untuk menunjukkan bahwa investasi yang dikeluarkan dalam pembangunan sistem sebanding dengan manfaat teknis, ekonomis, operasional, dan akademis yang dihasilkan. Pendekatan analisis biaya manfaat banyak digunakan dalam evaluasi proyek rekayasa untuk menilai kelayakan investasi berdasarkan nilai manfaat yang diperoleh dibandingkan biaya yang dikeluarkan \cite{boardman2018}.
 
 \subsubsection{Manfaat Teknis}
 
-Sistem yang dikembangkan mampu melakukan monitoring kondisi motor induksi secara \textit{real-time} melalui pengukuran parameter getaran, suhu, arus, dan kecepatan putar motor. Data hasil pengukuran diproses menggunakan metode \textit{Root Mean Square} (RMS) dan \textit{Fast Fourier Transform} (FFT) sehingga mampu memberikan informasi mengenai kondisi operasi motor secara lebih akurat \cite{Filho2025Fault,oppenheim2010}.
+Sistem yang dikembangkan mampu melakukan monitoring kondisi motor induksi secara \textit{real-time} melalui pengukuran parameter getaran, suhu, arus, dan kecepatan putar motor. Data hasil pengukuran diproses menggunakan metode \textit{Root Mean Square} (RMS) dan \textit{Fast Fourier Transform} (FFT) sehingga mampu memberikan informasi mengenai kondisi operasi motor secara lebih akurat \cite{Filho2025,Oppenheim2021}.
 
-sistem ini juga dilengkapi dengan algoritma klasifikasi kondisi motor, perhitungan \textit{Motor Health Index}, alarm, dan sistem proteksi sehingga pengguna dapat memperoleh peringatan dini terhadap potensi kerusakan sebelum terjadi kegagalan operasi (\textit{breakdown}) \cite{Jardine2006Machinery}.
+sistem ini juga dilengkapi dengan algoritma klasifikasi kondisi motor, perhitungan \textit{Motor Health Index}, alarm, dan sistem proteksi sehingga pengguna dapat memperoleh peringatan dini terhadap potensi kerusakan sebelum terjadi kegagalan operasi (\textit{breakdown}) \cite{Jardine2006}.
 \subsubsection{Manfaat Ekonomi}
 
-Implementasi sistem monitoring memberikan potensi penghematan biaya pemeliharaan melalui penerapan konsep \textit{predictive maintenance}. Dengan adanya informasi kondisi motor secara \textit{real-time}, tindakan perawatan dapat dilakukan sebelum terjadi kerusakan yang lebih serius sehingga biaya perbaikan maupun penggantian komponen dapat diminimalkan \cite{Jardine2006Machinery}.
+Implementasi sistem monitoring memberikan potensi penghematan biaya pemeliharaan melalui penerapan konsep \textit{predictive maintenance}. Dengan adanya informasi kondisi motor secara \textit{real-time}, tindakan perawatan dapat dilakukan sebelum terjadi kerusakan yang lebih serius sehingga biaya perbaikan maupun penggantian komponen dapat diminimalkan \cite{Jardine2006}.
 
 Biaya pembangunan prototipe relatif lebih rendah dibandingkan sistem monitoring komersial yang memiliki fungsi serupa.
 
@@ -1936,11 +2126,11 @@ Tabel~\ref{tab:perbandingan_biaya}, sistem yang dikembangkan memiliki biaya inve
 
 Penerapan sistem monitoring memungkinkan proses pemantauan kondisi motor dilakukan secara berkelanjutan tanpa harus melakukan inspeksi manual secara terus-menerus. Seluruh data hasil pengukuran dapat ditampilkan melalui dashboard monitoring sehingga memudahkan operator dalam mengevaluasi kondisi motor induksi.
 
-Keberadaan sistem alarm dan proteksi meningkatkan keselamatan operasi dengan memberikan peringatan ketika parameter getaran, suhu, maupun arus melebihi nilai ambang (\textit{threshold}) yang telah ditentukan \cite{iec60034_2022,Jardine2006Machinery}.
+Keberadaan sistem alarm dan proteksi meningkatkan keselamatan operasi dengan memberikan peringatan ketika parameter getaran, suhu, maupun arus melebihi nilai ambang (\textit{threshold}) yang telah ditentukan \cite{InternationalElectrotechnicalCommission2022, Jardine2006}.
 
 \subsubsection{Manfaat Akademik}
 
-Pengembangan sistem ini memberikan kontribusi terhadap penelitian mengenai \textit{condition monitoring} dan \textit{predictive maintenance} pada motor induksi berbasis sensor dan Internet of Things (IoT) \cite{bahga2014,Jardine2006Machinery}. Hasil penelitian diharapkan dapat menjadi referensi bagi penelitian selanjutnya mengenai diagnosis kerusakan motor induksi, pengembangan algoritma analisis kondisi motor, maupun implementasi sistem monitoring pada peralatan industri lainnya.
+Pengembangan sistem ini memberikan kontribusi terhadap penelitian mengenai \textit{condition monitoring} dan \textit{predictive maintenance} pada motor induksi berbasis sensor dan Internet of Things (IoT) \cite{Bahga2014,Jardine2006}. Hasil penelitian diharapkan dapat menjadi referensi bagi penelitian selanjutnya mengenai diagnosis kerusakan motor induksi, pengembangan algoritma analisis kondisi motor, maupun implementasi sistem monitoring pada peralatan industri lainnya.
 
 Prototipe yang dikembangkan dapat dimanfaatkan sebagai media praktikum dan pembelajaran pada Laboratorium Teknik Elektro ITERA.
 
@@ -1948,7 +2138,7 @@ Prototipe yang dikembangkan dapat dimanfaatkan sebagai media praktikum dan pembe
 
 Berdasarkan hasil estimasi biaya yang telah dilakukan, total investasi yang dibutuhkan untuk membangun sistem monitoring getaran dan suhu pada motor induksi adalah sekitar \textbf{Rp1.400.000}. Nilai tersebut relatif kecil dibandingkan manfaat yang diperoleh, baik dari aspek teknis, ekonomis, operasional, maupun akademis.
 
-Sistem yang dikembangkan mampu meningkatkan efektivitas proses monitoring kondisi motor, mendukung penerapan \textit{predictive maintenance}, mengurangi potensi \textit{unexpected breakdown}, serta meningkatkan keselamatan operasi melalui implementasi sistem alarm dan proteksi \cite{Jardine2006Machinery,Filho2025Fault}. Dengan mempertimbangkan manfaat yang diperoleh, pengembangan sistem ini dinilai layak untuk diimplementasikan sebagai prototipe monitoring kondisi motor induksi berbasis sensor dan IoT.
+Sistem yang dikembangkan mampu meningkatkan efektivitas proses monitoring kondisi motor, mendukung penerapan \textit{predictive maintenance}, mengurangi potensi \textit{unexpected breakdown}, serta meningkatkan keselamatan operasi melalui implementasi sistem alarm dan proteksi \cite{Jardine2006, Filho2025}. Dengan mempertimbangkan manfaat yang diperoleh, pengembangan sistem ini dinilai layak untuk diimplementasikan sebagai prototipe monitoring kondisi motor induksi berbasis sensor dan IoT.
 
 
 \section{\ReferencesTitle}
@@ -1963,11 +2153,8 @@ Contoh format IEEE:
 
 
 \section{\AbbrevTitle}
-
-% longtable tidak menggunakan lingkungan table[] di sekitarnya.
-% Perintah \begin{longtable} langsung menggantikan \begin{table}\begin{tabular}
 \begin{longtable}{|p{4cm}|p{11cm}|} % Lebar kolom ditetapkan agar teks wrap
-    \caption{Daftar Singkatan (Abbreviations)} \label{tab:abbreviations3} \\
+    \caption{Daftar Singkatan (Abbreviations)}\\
     \hline
     \textbf{Abbreviation} & \textbf{Definition} \\
     \hline
