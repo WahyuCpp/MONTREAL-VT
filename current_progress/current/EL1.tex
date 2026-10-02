@@ -2,6 +2,7 @@
 \documentclass{elsinta}
 \usepackage{array}
 \usepackage{booktabs}
+\usepackage{multirow}
 
 % --- Memasukkan Data Dokumen Menggunakan ---
 \projectcode{EL1}
@@ -90,7 +91,7 @@ total penggunaan motor pada pabrik dan operasi manufaktur.
 Oleh karena itu, pemantauan kondisi motor induksi sangat penting
 untuk dilakukan untuk mencegah adanya kerusakan yang tidak terprediksi. Parameter getaran
 dipilih sebagai opsi parameter utama karena memiliki korelasi yang tinggi terhadap kerusakan mekanis pada motor induksi.
-Di sisi lain, parameter arus, suhu, dan RPM dipilih sebagai parameter yang ditujukan untuk mendeteksi
+Di sisi lain, parameter arus, suhu, dan rpm dipilih sebagai parameter yang ditujukan untuk mendeteksi
 adanya kerusakan elektrik dan sebagai unit proteksi pada motor.
 
 MONTREAL-VT menawarkan solusi pemantauan kondisi motor induksi yang ekonomis, terintegrasi, dan 
@@ -102,11 +103,47 @@ pemantauan kondisi motor untuk mendukung efisiensi produksi.
 \newpage
 \section{\BackgroundTitle}
 \subsection{\NeedTitle}
-Motor induksi merupakan jenis motor listrik arus bolak-balik yang umum digunakan dalam keseharian, industri dan domestik. Cakupan penggunaan motor induksi mencapai 85\% dari total penggunaan motor pada pabrik dan operasi manufaktur \cite{Ayankoso2026}. Hal ini disebabkan oleh biaya operasi  motor induksi yang rendah, struktur motor yang kokoh, dan keandalan tinggi sehingga motor induksi secara umum dapat diaplikasikan sebagai konveyor, \textit{crane}, kompresor, dan pompa \cite{Kumar2019,Gangsar2020}.  % Dalam implementasinya, motor induksi yang umum dipakai adalah motor induksi 3-fasa dan 1-fasa. 
+Motor induksi merupakan jenis motor listrik arus
+bolak-balik yang umum digunakan dalam keseharian,
+industri, dan domestik. Cakupan penggunaan motor
+induksi mencapai 85\% dari total penggunaan
+motor pada pabrik dan operasi manufaktur\cite{Ayankoso2026}. 
+Hal ini disebabkan oleh biaya operasi  motor 
+induksi yang rendah, struktur motor yang kokoh, 
+dan keandalan tinggi sehingga motor induksi 
+secara umum dapat diaplikasikan sebagai 
+konveyor, derek, kompresor, dan pompa\cite{Kumar2019,Gangsar2020}.
 
-\begin{figure}[b!]
+Pada industri dengan skala UMKM,
+jenis motor induksi satu fasa umum digunakan sebagai mesin penepung gula aren (745 W)\cite{Tua2021},
+mesin pengupas kulit kelapa\cite{Putri2023}, mesin penggiling
+pati singkong (186 W)\cite{Suryadi2026}, bahkan mesin produksi bio-pelet\cite{Ediwan2025}.
+Motor induksi satu-fasa lebih mudah dioperasikan
+karena cukup dihubungkan dengan jaringan listrik satu-fasa
+tanpa tambahan konverter daya\cite{DAguanno2018}. Motor induksi satu-fasa
+umumnya memiliki rating daya kurang dari 2 kW dan dioperasikan
+dengan kecepatan konstan\cite{DAguanno2018,Pessina2012}.
+Namun, motor induksi satu-fasa merupakan jenis motor
+yang tidak bisa dinyalakan tanpa topologi khusus seperti
+kumparan pendukung\cite{DAguanno2018}, dan kapasitor-starter\cite{Resketi2023}.
+
+%Deskripsi studi IEEE dan EPRI
+Kerusakan pada motor induksi dapat digolongkan secara umum
+menjadi dua jenis; kerusakan mekanis dan kerusakan elektrik\cite{Yaman2021,Bazurto2017}.
+Kumar et al.\cite{Kumar2019} menyatakan bahwa
+kerusakan pada motor induksi secara umum di industri  dapat 
+disederhanakan menjadi kerusakan pada bagian laher, stator, rotor, dan 
+lain-lain (kumparan dan laminasi, rangkaian 
+magnetik, dielektrik). Survei dari IEEE dan EPRI
+pada gambar \ref{fig:induction_motor_ieee} dan \ref{fig:induction_motor_epri}
+menyatakan bahwa kasus kerusakan laher dan rotor
+memiliki porsi sekitar 50\% dari total kerusakan pada
+motor induksi. Maka dari itu, kemampuan deteksi
+lebih awal menjadi sangat penting dalam menjaga 
+efektivitas produksi\cite{Yaman2021}.
+
+\begin{figure}[H]
     \centering
-    \label{fig:faults_ieee}
     \begin{minipage}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{image/doc/motor-faults-ieee.png}
@@ -116,38 +153,22 @@ Motor induksi merupakan jenis motor listrik arus bolak-balik yang umum digunakan
     \hfill
     \begin{minipage}[b]{0.48\textwidth}
         \centering
-        \label{fig:faults_epri}
         \includegraphics[width=\textwidth]{image/doc/motor-faults-epri.png}
         \caption{Studi kasus EPRI mengenai komponen vital motor induksi \cite{Gundewar2020}}
         \label{fig:induction_motor_epri}
     \end{minipage}
 \end{figure}
 
-Menurut Kumar et al. \cite{Kumar2019}, 
-kerusakan pada motor induksi dapat 
-disederhanakan menjadi kerusakan bagian motor 
-yang meliputi bearing, stator, rotor, dan 
-lain-lain (kumparan dan laminasi, rangkaian 
-magnetik, dielektrik) yang persentase kerusakannya
-ditunjukkan oleh grafik pada gambar \ref{fig:faults_ieee}
-dan \ref{fig:faults_epri}. Kedua gambar tersebut 
-menunjukkan bahwa tipe kerusakan mekanis adalah
-tipe kerusakan yang lebih umum dijumpai pada 
-motor induksi. Maka dari itu, parameter
-yang harus diutamakan dalam pemantauan kondisi motor
-induksi adalah parameter yang sensitif terhadap
-kerusakan mekanis.
-
-Pendekatan pemantauan kondisi motor menjadi 
-solusi yang relevan sebagai upaya pemeliharaan 
-prediktif (PdM). Pemantauan kondisi motor 
+Teknik pemantauan kondisi (\textit{condition monitoring})
+merupakan salah satu opsi untuk mendeteksi kerusakan
+motor lebih awal. Pemantauan kondisi motor 
 bertujuan untuk mengevaluasi keadaan performa 
 dan kesehatan motor\cite{Mystkowski2022}, 
 dan peralatan \cite{Nithin2022}. 
 Proses pemantauan motor dapat dilakukan dengan 
 berfokus pada beberapa parameter 
-yang meliputi; suhu winding, getaran shaft, \textit{noise}, 
-rus winding, tegangan \cite{VishnuKvAnoopBk2015}. 
+yang meliputi; suhu kumparan motor, getaran as motor, \textit{noise}, 
+arus kumparan motor, tegangan \cite{VishnuKvAnoopBk2015}. 
 Akan tetapi, tidak seluruh jenis parameter 
 memiliki korelasi yang tinggi terhadap 
 kerusakan motor. Parameter getaran dan suhu 
@@ -157,21 +178,20 @@ motor \cite{Filho2025}. Namun, parameter
 getaran lebih sensitif terhadap kerusakan mekanis
 dibandingkan parameter arus\cite{Ayankoso2026}.
 
-%Parameter suhu
-Di sisi lain, parameter arus dapat dimanfaatkan untuk
-mendeteksi adanya kerusakan elektrik pada motor.
-Urgensi atas deteksi kerusakan elektrik adalah
-karena jenis kerusakan elektrik memiliki porsi sebesar
+%Deskripsi parameter suhu
+Di sisi lain, anomali pada arus kumparan motor mampu
+mengindikasikan adanya kerusakan elektrik pada motor.
+Jenis kerusakan elektrik mengambil porsi sebesar
 45\% dari seluruh kerusakan motor\cite{Filho2025}.
 Kerusakan elektrik umumnya mengakibatkan kenaikan suhu
-pada winding \cite{Filho2025}. Lonjakan
-arus pada winding motor mengakibatkan kenaikan suhu pada
-winding motor\cite{Filho2025}. Selain itu,
+pada kumparan motor secara tidak langsung \cite{Filho2025}. Lonjakan
+arus pada kumparan motor mengakibatkan kenaikan suhu pada
+kumparan motor\cite{Filho2025}. Maka dari itu,
 parameter suhu dapat dimanfaatkan sebagai
-upaya proteksi pada winding motor untuk mencegah
-\textit{Thermal overload}\cite{Gedzurs2015}.
+upaya proteksi pada kumparan motor untuk mencegah
+\textit{thermal overload}\cite{Gedzurs2015}.
 
-
+%NDT Condition Monitoring and Pricey
 Dengan demikian, pengembangan sistem pemantauan
 kondisi berbasis parameter getaran dan suhu 
 tidak hanya relevan, melainkan menjadi 
@@ -181,9 +201,132 @@ berbasis motor induksi, khususnya dalam
 aplikasi industri yang menuntut keberlanjutan 
 dan efisiensi yang tinggi.
 
-%%===============Diagram 5 Why=================%%
+\subsection{\ExistingConditionTitle}
+Jenis kerusakan yang umum ditemukan pada motor induksi
+dapat dibagi menjadi kerusakan mekanis yang memiliki
+porsi sekitar 45\%-55\% dari total kerusakan pada motor induksi\cite{Gangsar2020}. Sementara itu, kerusakan elektrik
+berkisar 30\%-40\% dalam total kerusakan pada motor induksi \cite{Gangsar2020}.
+Tabel \ref{tab:tipe_kerusakan_IM} menunjukkan tipe kerusakan
+yang biasanya terjadi pada motor induksi.
+
+\begin{table}[H]
+\centering
+\caption{Tipe kerusakan umum pada motor induksi\cite{Gangsar2020}}
+\label{tab:tipe_kerusakan_IM}
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Kategori} & \textbf{Subkategori} & \textbf{Contoh}\\ \hline
+%baris 1
+\multirow{7}{*}{Kerusakan mekanis}  & \multirow{4}{*}{Kerusakan laher}  & \textit{Outer bearing}                    \\      \cline{3-3}
+                                    &                                   & \textit{Inner bearing}                    \\      \cline{3-3}
+                                    &                                   & \textit{Rolling element}                  \\      \cline{3-3}
+                                    &                                   & \textit{Cage/train fault}                 \\      \cline{2-3}
+                                    & \multirow{3}{*}{Kerusakan rotor}  & \textit{Rotor misalignment}            \\      \cline{3-3}
+                                    &                                   & \textit{Bowed rotor}                   \\      \cline{3-3}
+                                    &                                   & \textit{Unbalanced rotor}                 \\      \hline
+\multirow{8}{*}{Kerusakan elektrik} & \multirow{4}{*}{Stator winding}   & \textit{Turn-to-turn}                     \\      \cline{3-3}
+                                    &                                   & \textit{Coil-to-coil}                     \\      \cline{3-3}    
+                                    &                                   & \textit{Phase-to-phase}                   \\      \cline{3-3}
+                                    &                                   & \textit{Phase-to-ground}                  \\      \cline{2-3}
+                                    & \multirow{2}{*}{Rotor}            & \textit{Broken rotor}                  \\      \cline{3-3}
+                                    &                                   & \textit{Broken end ring}                  \\      \cline{2-3}
+                                    & \multirow{2}{*}{Suplai listrik}   & \textit{Phase unbalance} (tiga-fasa)                  \\      \cline{3-3}             
+                                    &                                   & \textit{Single phase fault}               \\      \hline
+\end{tabular}
+\end{table}
+
+Kerusakan mekanis pada motor induksi dapat disebabkan
+oleh kerusakan pada \textit{bearing} dan rotor.
+Motor induksi umumnya menggunakan tipe \textit{ball bearing} atau
+\textit{roller bearing}\cite{Gangsar2020}, sementara tipe motor induksi dengan tingkat kebisingan
+rendah menggunakan \textit{sleeve bearing} (\textit{bushing}). 
+Kerusakan \textit{bearing} menyebabkan getaran berlebih
+pada motor\cite{Gangsar2020}. Sementara itu, kerusakan
+pada rotor biasanya terkait dengan ketidakselarasan (\textit{eccentricy}) (baik
+ketidakselaran statis atau dinamis)\cite{Gangsar2020,Antonino-Daviu2007}.
+dapat diklasifikasikan lagi menjadi \textit{rotor misalignment} (MR),
+\textit{bowed rotor} (BR) dan \textit{bent rotor}, dan \textit{unbalanced rotor} (UB).
+
+Selain kerusakan mekanis, kerusakan elektrik yang terdiri
+atas kerusakan pada kumparan stator, \textit{broken rotor bar},
+dan \textit{phase unbalance} pada motor tiga fasa, dan
+\textit{single phase fault} pada motor satu fasa.
+Kerusakan rotor bar dapat terjadi seiring repetisi menyalakan
+motor, atau kurangnya lubrikasi yang mengakibatkan tekanan mekanis
+\cite{Gangsar2020, Fier2001}.
+Kerusakan rotor bar ini dapat mengakibatkan kerusakan pada bagian
+motor lainnya seperti kerusakan pada kumparan stator. Kerusakan
+kumparan stator juga dapat diakibatkan oleh panas berlebih\cite{Gangsar2020}.
+Sementara kerusakan \textit{phase unbalance} terjadi ketika adanya
+ketidaksesuaian tegangan antar fasa pada motor tiga fasa. \textit{Single phasing}
+terjadi ketika satu fasa mengalami \textit{open circuit} ketika beroperasi.
+
+Kerusakan-kerusakan pada motor induksi dapat dideteksi melalui
+pemantauan kondisi (\textit{condition monitoring}) yang dilakukan secara terus menerus.
+Pemantauan kondisi dapat dilakukan dengan sistem sensor yang bekerja secara \textit{real-time}
+dalam merekam data dan menyimpannya pada basis data yang telah dirancang.
+% Gangsar et al.\cite{Gangsar2018,Yaman2021} berhasil mendeteksi kerusakan
+% pada stator, \textit{bearing}, rotor, dan ketidakselarasan dengan menggunakan
+% sensor getaran dan sensor arus, lalu kerusakan diklasifikasikan dengan
+% menggunakan \textit{support vector machine} (SVM). Stief et al. \cite{Stief2017,Yaman2021} mengembangkan metode diagnosa dua langkah
+% dengan memanfaatkan sinyal sensor akustik, getaran, rpm, arus, dan tegangan.
+% Penelitian Stief et al. dilakukan pada motor induksi dengan rating daya 0.8 kW dan kecepatan
+% putar 1400 rpm. 
+
+%===============Tabel Perbandingan Metode dan Parameter Pemantauan==============%%
+\begin{table}[H]
+\centering
+\caption{Perbandingan parameter uji pada motor induksi}
+\begin{tabular}{|p{3cm}|p{4cm}|p{4cm}|p{2cm}|}
+\hline
+\textbf{Metode} & \textbf{Aplikasi} & \textbf{Efektivitas} &\textbf{Ref.}\\ \hline
+
+%baris 1
+\multirow{5}{*}{\textit{Vibration analysis}}        & ketidakselarasan            & Efisien biaya                                 & \cite{Hassan2024,Pardeshi2022,Tsypkin2017} \\
+                                                    & ketidakseimbangan         & Non-intrusif                                  & \\
+                                                    & komponen longgar          & Korelasi tinggi terhadap kerusakan mekanis    & \\
+                                                    & kerusakan \textit{bearing}&                                               & \\ \hline
+%baris 2    
+\multirow{3}{*}{MCSA}                               & rotor bar patah       & Efisien biaya                 & \cite{Cameron1986, Sunal2022}\\
+                                                    & ketidakselarasan      & non-intrusif                  & \\
+                                                    & short-circuit         &                               & \\ \hline
+
+%baris 3
+\multirow{2}{*}{Pemantauan suhu}                    & Overload          & Pemantauan kontak   & \cite{Filho2025, Lee2002}\\
+                                                    & Stator winding    &                     & \\ \hline
+
+% %baris 4
+% Suhu (Infra-red)
+% & Titik pemanasan, kebocoran insulasi.
+% & Pengawasan visual langsung
+% & \cite{Mahami2021}\\ \hline
+
+%baris 5
+\textit{Acoustic Signature}
+& Kerusakan rotor/laher, ketidakserasian komponen.
+& Tingkat akurasi tinggi, biaya murah
+& \cite{Venkatesh2022}\\ \hline
+\end{tabular}
+\end{table}
+
+Saat ini, sudah terdapat beberapa produk komersial
+yang mampu digunakan untuk mendeteksi kerusakan pada mesin
+menggunakan parameter getaran dan suhu. SKF QuickCollect CMDT 391
+merupakan contoh divais portable yang mampu ditemukan
+di pasaran\cite{SKFGroup2021}. Namun, produk ini
+memiliki rentang harga yang cukup tinggi untuk industri
+skala UMKM, yakni sekitar
+Rp26.000.000,00 hingga Rp60.000.000,00 di \textit{e-commerce}.
+Selain itu, sistem cerdas yang mampu melakukan diagnosis
+kerusakan pada motor induksi berdasarkan parameter getaran, suhu,
+dan arus. Mayoritas sistem diagnostik kerusakan motor induksi
+membutuhkan tenaga ahli yang mampu menerjemahkan data menjadi informasi yang relevan.
+Maka dari itu, proyek ini bertujuan untuk merancang divais 
+pemantauan kondisi motor induksi yang bersifat rendah biaya.
+
+%===============Diagram 5 Why=================%%
     \usetikzlibrary{positioning}
-    \begin{figure}[t!]
+    \begin{figure}[H]
     \centering
     
     \begin{tikzpicture}[
@@ -242,64 +385,7 @@ dan efisiensi yang tinggi.
     \caption{Diagram Analisis 5 Why}
     
     \end{figure}
-%%===========End Diagram 5 Whys==================%%
-
-\subsection{\ExistingConditionTitle}
-Beberapa strategi pemeliharaan mesin yang diketahui secara umum meliputi \textit{preventive maintenance}, \textit{predictive maintenance}, \textit{corrective maintenance}, \textit{reliability maintenance} dan total \textit{productive maintenance}\cite{Nithin2022,Hassan2024}. Preventive maintenance umum diaplikasikan di dunia industri manufaktur, transportasi, dan energi, memastikan prosedur pemeliharaan dilaksanakan secara terjadwal sehingga mampu memaksimalkan umur penggunaan mesin, mengurangi kegagalan mesin yang merugikan, dan menjamin keandalan\cite{Tsunashima2019}.
-
-Tindakan PdM pada motor induksi berdasarkan jenis kerusakan dapat diklasifikasikan menjadi \textit{electrical predictive maintenance}  (E-PdM) dan \textit{mechanical predictive maintenance} (M-PdM). \textit{electrical predictive maintenance} meliputi \textit{motor current signature analysis} (MCSA), dan \textit{instantaneous power signature analysis} (IPSA) \cite{Venkatesh2022}. Lebih lanjut, tindak \textit{mechanical predictive maintenance} yang umum diaplikasikan meliputi \textit{vibration analysis technique} (VAT), \textit{acoustic analysis}, and \textit{speed oscillations}\cite{Venkatesh2022}. 
-
-M-PdM umum dilakukan untuk mendeteksi kerusakan pada sistem mekanis motor seperti kerusakan bearing, ketidakselarasan dan ketidakseimbangan komponen mekanis, serta komponen longgar. VAT merupakan salah satu metode pemantauan kondisi mekanis motor dengan tujuan menjadikan getaran motor sebagai parameter ukur dengan memanfaatkan accelerometer sebagai sensor. VAT memiliki tingkat korelasi yang tinggi terhadap indikasi kerusakan mekanis pad motor induksi \cite{Pardeshi2022}. Metode lain yang umum dipakai adalah \textit{acoustic signature} dengan memanfaatkan data suara mesin yang diubah domainnya dengan \textit{fast-fourier transform} (FFT) \cite{Venkatesh2022,Sonowal2019}.
-
-MCSA merupakan metode E-PdM dengan menggunakan arus sebagai parameter ukur. MCSA pada umumnya dipakai karena biaya rancangan yang rendah, \textit{current clamps} dan tranduser tertanam pada feeder motor. Ranah aplikasi MCSA umumnya tidak berbeda dari VAT, dengan kelebihan pemantauan parameter lonjakan arus pada motor \cite{Cameron1986}. Praktik MCSA pada industri tidak akan mengganggu produktivitas industri karena bersifat non-intrusif, artinya proses pemantauan tidak mengharuskan pemberhentian operasi motor \cite{Venkatesh2022}.
-
-Parameter lain yang layak dipertimbangkan sebagai alasan penguat tindakan pemeliharaan motor adalah suhu. Suhu tinggi pada motor induksi umumnya mampu mengidentifikasikan kerusakan kumparan pada stator, atau beban berlebih \cite{Filho2025}. Pengukuran suhu umumnya dilakukan dengan menggunakan \textit{thermocouple} yang ditempatkan pada bagian motor yang telah ditentukan, biasanya bagian internal, enclosure, frontal bearing, end bracket \cite{Filho2025}. Hal ini disebabkan penggunaan alat lain seperti sensor \textit{infra-red}, hanya secara realistis diimplementasikan untuk mengetahui suhu motor dari sisi eksternal \cite{Mahami2021}. Perbandingan performa masing-masing metode dan parameter tercantum pada tabel EL1.1.
-
-
-% Source - https://tex.stackexchange.com/a/22861
-% Posted by Stefan Kottwitz, modified by community. See post 'Timeline' for change history
-% Retrieved 2026-03-23, License - CC BY-SA 4.0
-
-%%===============Tabel Perbandingan Metode dan Parameter Pemantauan==============%%
-\begin{table}[t!]
-\centering
-\caption{Perbandingan parameter uji pada motor induksi}
-\begin{tabular}{|p{2cm}|p{3cm}|p{4cm}|p{4cm}|}
-\hline
-\textbf{Ref.} & \textbf{Metode} & \textbf{Aplikasi} & \textbf{Efektivitas}\\ \hline
-
-%baris 1
-Ul Hassan et al. \cite{Hassan2024}, Pardeshi et al. \cite{Pardeshi2022} 
-& \textit{Vibration analysis technique} (VAT).
-& Kerusakan mekanis; ketidakselaran, ketidakseimbangan, kerusakan bearing,  komponen longgar.
-& Efisien biaya, non, intrusif, korelasi tinggi terhadap kerusakan mekanis.\\ \hline
-
-%baris 2
-Cameron et al. \cite{Cameron1986}
-& \textit{Motor current signature analysis} (MCSA).
-& Kerusakan elektrik dan mekanis; rotor bar patah, \textit{air-gap eccentricity}, short-circuit.
-& Efisien biaya, non-intrusif.\\ \hline
-
-%baris 3
-Filho et al. \cite{Filho2025}, Lee et al. \cite{Lee2002}
-& Suhu (Thermocouple)
-& Overload, pemanasan kumparan stator .
-& Pemantauan suhu secara fisik pada bagian motor.\\ \hline
-
-%baris 4
-Mahami et al. \cite{Mahami2021}
-& Suhu (Infra-red)
-& Titik pemanasan, kebocoran insulasi.
-& Pengawasan visual langsung.\\ \hline
-
-%baris 5
-Venkatesh et al. \cite{Venkatesh2022}
-& \textit{Acoustic Signature}
-& Kerusakan rotor/bearing, ketidakserasian komponen.
-& Tingkat akurasi tinggi, biaya murah.\\ \hline
-
-\end{tabular}
-\end{table}
+%===========End Diagram 5 Whys==================%%
 
 \subsection{\ProjectUrgencyTitle}
 % Di bagian ini dijelaskan mengapa proyek capstone perlu segera dilakukan. Penekanan dapat diberikan pada masalah yang semakin mendesak, peluang yang akan hilang jika tidak dimanfaatkan, atau dampak negatif jika permasalahan tidak segera diatasi. Subbab ini juga bisa menekankan manfaat strategis, baik untuk pengembangan ilmu, teknologi, maupun aplikasi praktis yang dapat dirasakan oleh pengguna.
@@ -317,14 +403,14 @@ Venkatesh et al. \cite{Venkatesh2022}
 \begin{enumerate}
   \item Mengembangkan sistem pemantauan kondisi 
   motor induksi dengan berbasis sensor getar, sensor suhu,
-  sensor arus, dan sensor RPM. Sensor getaran
+  sensor arus, dan sensor rpm. Sensor getaran
   harus mampu diimplementasikan pada \textit{vibration time-domain analysis},
   dan \textit{vibration frequency-domain 
   analysis} dengan metode \textit{frequency-signature analysis}.
   Metode \textit{envelope analysis} untuk mendeteksi
-  kerusakan bearing apabila dimungkinkan.
+  kerusakan laher apabila dimungkinkan.
   \item Mengembangkan sistem pemantauan kondisi
-  dengan parameter suhu, arus dan \textit{Revolution per Minute} (RPM), dengan galat pengukuran pada parameter
+  dengan parameter suhu, arus dan \textit{Revolution per Minute} (rpm), dengan galat pengukuran pada parameter
   suhu dan arus tidak lebih dari 5\%. Parameter ini
   harus mampu diimplementasikan sebagai sistem proteksi motor.
   \item Mengembangkan sistem IoT terintegrasi Wi-Fi sebagai 
@@ -344,7 +430,7 @@ Venkatesh et al. \cite{Venkatesh2022}
 \begin{enumerate} 
     \item Mengimplementasikan enkripsi sistem IoT yang menjamin keamanan transmisi data dari sensor ke mikrokontroler dan dari mikrokontroler ke cloud.
     \item Merancang sistem analisis getaran dengan metode \textit{envelope analysis}
-    untuk mendeteksi kerusakan bearing secara detil.
+    untuk mendeteksi kerusakan laher secara detil.
 \end{enumerate}
 
 \subsection{\DeliverablesTitle}
@@ -373,7 +459,7 @@ Luaran yang dihasilkan dari proyek ini mencakup beberapa keluaran utama yang men
 \subsection{\ScopeTitle}
 % Bagian ini menjelaskan ruang lingkup proyek secara jelas, yaitu apa saja yang termasuk ke dalam cakupan proyek dan apa yang berada di luar cakupan. Penjelasan ini penting agar pembaca tidak memiliki ekspektasi yang keliru terhadap hasil yang akan dicapai.  
 % Sebagai contoh, proyek ini hanya berfokus pada \textit{pemantauan} suhu dan kelembaban di rumah kaca. Proyek tidak mencakup pengembangan kontrol otomatis untuk pompa nutrisi atau sistem irigasi cerdas. Dengan demikian, batasan yang ditetapkan dapat memberikan kejelasan sekaligus menjaga proyek tetap realistis dan sesuai waktu yang tersedia.  
-Proyek ini mencakup perancangan sistem pemantauan kondisi motor induksi satu fasa berbasis pengukuran tren getaran dan suhu. Perolehan akuisisi plot data getaran digunakan untuk mendeteksi kerusakan mekanis melalui analisis domain waktu dan domain frekuensi data getaran, sedangkan sensor suhu ditempatkan pada bagian winding atau bagian yang konduktif terhadap suhu winding untuk mendeteksi terjadinya \textit{overheating}. Sistem pemantauan ini diimplementasikan dalam bentuk prototipe yang mencakup mikrokontroler sebagai unit pemrosesan utama, sensor getar, serta sensor suhu. Proses akuisisi dan pengolahan data dilakukan secara \textit{real-time} dengan \textit{time-delay} $\leq 1000ms$, dan terintegrasi dengan dashboard pemantauan untuk visualisasi data. Selain itu, sistem dilengkapi dengan mekanisme peringatan dini serta rekomendasi tindak pemeliharaan berdasarkan kondisi yang terdeteksi.
+Proyek ini mencakup perancangan sistem pemantauan kondisi motor induksi satu fasa berbasis pengukuran tren getaran dan suhu. Perolehan akuisisi plot data getaran digunakan untuk mendeteksi kerusakan mekanis melalui analisis domain waktu dan domain frekuensi data getaran, sedangkan sensor suhu ditempatkan pada bagian kumparan motor atau bagian yang konduktif terhadap suhu kumparan motor untuk mendeteksi terjadinya \textit{overheating}. Sistem pemantauan ini diimplementasikan dalam bentuk prototipe yang mencakup mikrokontroler sebagai unit pemrosesan utama, sensor getar, serta sensor suhu. Proses akuisisi dan pengolahan data dilakukan secara \textit{real-time} dengan \textit{time-delay} $\leq 1000ms$, dan terintegrasi dengan dashboard pemantauan untuk visualisasi data. Selain itu, sistem dilengkapi dengan mekanisme peringatan dini serta rekomendasi tindak pemeliharaan berdasarkan kondisi yang terdeteksi.
 
 \subsection{\ConstraintsTitle}
 % Constraints adalah batasan-batasan yang diberikan oleh stakeholder kepada  tim dalam melaksanakan proyek. Keterbatasan ini dapat berupa waktu, sumber daya manusia, ketersediaan perangkat keras atau perangkat lunak, serta faktor eksternal lainnya.  
@@ -493,7 +579,8 @@ Pemangku kepentingan tersebut saling berperan dalam mendukung keberhasilan proye
 % longtable tidak menggunakan lingkungan table[] di sekitarnya.
 % Perintah \begin{longtable} langsung menggantikan \begin{table}\begin{tabular}
 \begin{longtable}{|p{4cm}|p{11cm}|} % Lebar kolom ditetapkan agar teks wrap
-    \caption{Daftar Singkatan (Abbreviations)} \label{tab:abbreviationsEL1} \\
+    \caption{Daftar Singkatan (Abbreviations)} 
+    \label{tab:abbreviationsEL1} \\
     \hline
     \textbf{Abbreviation} & \textbf{Definition} \\
     \hline

@@ -22,10 +22,10 @@
 \capstonetitle{Monitoring on Induction Motor In Real-Time: Vibration and Temperature}
 \shortname{MONTREAL-VT} 
 \documentnumber{TA2526.02.003}
-\revisionnumber{03}
-\publicationdate{22 September 2025}
+\revisionnumber{00}
+\publicationdate{06 September 2026}
 
-\revdatefooter{03/10/2025}
+\revdatefooter{06/09/2026}
 % --- Memasukkan Data Halaman Pengesahan (Halaman 2) ---
 \currentpage{2} % Halaman yang sedang dicetak
 
@@ -86,6 +86,44 @@
 % Isi Document Summary umumnya meliputi penjelasan singkat tentang masalah yang diangkat, metode atau pendekatan yang digunakan, serta ringkasan hasil utama yang dicapai. Jika proyek berbentuk implementasi sistem atau prototipe, maka bisa dijelaskan secara ringkas fitur utama atau inovasi yang menjadi keunggulan. Bagian ini juga dapat menyinggung keterkaitan proyek dengan kebutuhan industri atau masyarakat, sehingga nilai praktisnya lebih menonjol.
 
 % Selain itu, Document Summary sebaiknya memuat ringkasan manfaat proyek, tantangan utama yang dihadapi, serta rekomendasi pengembangan ke depan. Dengan begitu, pembaca yang hanya membaca bagian ini sudah bisa memahami konteks, pendekatan, dan hasil dari capstone tanpa harus membaca seluruh isi dokumen. Singkatnya, Document Summary dalam capstone document harus menjadi "etalase" yang ringkas, padat, dan menarik, sekaligus mencerminkan esensi dari keseluruhan karya.
+
+Dokumen ini berisi mengenai rancangan awal dari proyek
+\textbf{Monitoring on Induction Motor In Real-Time: Vibration and Monitoring (MONTREAL-VT)}.
+
+MONTREAL-VT merupakan solusi pemantauan kondisi
+spesifik untuk motor induksi satu fasa yang bersifat
+rendah biaya, andal, dan cerdas. Proyek ini bertujuan
+dalam memanfaatkan \textit{vibration analysis technique}
+untuk mendeteksi adanya kerusakan pada motor. ISO 20816
+dan 13373 dijadikan rujukan untuk menerapkan
+\textit{time-domain analysis} dan \textit{frequency-domain analysis}
+pada data getaran untuk mendapatkan detil mengenai tipe kerusakan yang terjadi pada motor.
+
+Selain itu, MONTREAL-VT ditujukan untuk melakukan tindak
+\textit{predictive maintenance} (PdM) untuk memprediksi
+waktu \textit{breakdown} motor dengan memanfaatkan metode
+\textit{machine health index} (MHI) dan \textit{remaining useful life} (RUL)
+dengan memanfaatkan integrasi parameter getaran, suhu, arus, dan rpm.
+
+Sensor yang akan digunakan meliputi MEMS akselerometer ADXL345,
+sensor suhu DS18B20 dan/atau XYMD02, sensor arus
+ACS712 dan/atau SCT-013-005, dan sensor
+efek hall A3144 untuk mengukur rpm motor. Data sensor
+diproses menggunakan mikrokontroler ESP32 lalu disimpan
+secara lokal (SDCard). Apabila terdapat koneksi
+Wi-Fi, data yang disimpan akan dikirim ke serverless database
+lalu ditampilkan secara \textit{real-time} 
+menggunakan layanan cloud seperti Firebase.
+Selain tampilan data \textit{real-time}, data historis juga dapat
+diakses oleh administrator yang telah diberikan
+autentikasi resmi.
+
+Sistem MONTREAL-VT juga dilengkapi sistem proteksi yang terdiri atas
+rangkaian penyearah 220VAC to 5VDC sehingga daya listrik
+AC dapat dijadikan sebagai suplai sistem DC. Sistem proteksi
+juga terdiri atas sistem proteksi dengan relay, yang berfungsi
+untuk memutus arus apabila parameter suhu dan arus melebihi
+batasan yang telah ditentukan.
 
 \newpage
 
@@ -184,7 +222,7 @@ data secara lokal, arsitektur semi-permanen dan enkripsi data untuk keamanan kom
 
     9 
     & Sistem mampu menghitung parameter
-    \textit{Motor Health Index} (MHI) 
+    \textit{Machine Health Index} (MHI) 
     & \textit{Condition rating} \\
     \hline
 
@@ -862,49 +900,10 @@ Kalibrasi dengan multimeter.\\
 \hline
 
 4 &
-Sensor efek hall&
-$\%error = \pm 10\%$\\
-\hline
+Sensor Efek Hall&
+$\%error = \pm 10\%$
 
-5 &
-Pengkondisian sinyal &
-$SNR_{vib} = $
-
-$SNR_{temp} = $
-
-$SNR_{curr} = $
-
-$SNR_{rpm} = $\\
-\hline
-
-6 &
-Konversi parameter getaran dan FFT &
-...\\
-\hline
-
-7 &
-Analisis Kondisi Motor &
-Sistem mampu menentukan kondisi motor (Normal, Warning, atau Fault) berdasarkan nilai HI dan analisis getaran.\\
-\hline
-
-8 &
-Dashboard Monitoring &
-...\\
-\hline
-
-9 &
-Komunikasi Data &
-...\\
-\hline
-
-10 &
-Alarm dan Proteksi &
-...\\
-\hline
-
-11 &
-Data Logging &
-...\\
+Kalibrasi dengan tachometer.\\
 \hline
 \end{longtable}
 
@@ -923,7 +922,6 @@ Seluruh hasil pengujian tersebut menjadi dasar
 untuk menilai tingkat keandalan sistem monitoring 
 yang dikembangkan \cite{Oppenheim2021, Filho2025, InternationalOrganizationforStandardizationInternationalElectrotechnicalCommission2016}.
 
-\newpage
 \section{\ProposedSolutionTitle}
 \subsection{\ArchitectureTitle}
 Arsitektur utama yang diterapkan pada sistem
@@ -972,24 +970,33 @@ dan \ref{fig:flowchart_isps_2}.
     \label{fig:flowchart_isps_2}
 \end{figure} 
 
-%%skematik full
-\newpage
-\begin{landscape}
-\begin{figure}
-    \centering
-    \includegraphics[width=1.3\textwidth]{image/doc/skematik-monitor-2.pdf} % Ganti dengan path diagram Anda
-    \caption{Skematik Rangkaian Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
-    \label{fig:skematik-isps}
-\end{figure}
-\end{landscape}
+% %%skematik full
+% \newpage
+% \begin{landscape}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.3\textwidth]{image/doc/skematik-monitor-2.pdf} % Ganti dengan path diagram Anda
+%     \caption{Skematik Rangkaian Subsistem Instalasi Sensor dan Pemrosesan Sinyal (ISPS)}
+%     \label{fig:skematik-isps}
+% \end{figure}
+% \end{landscape}
 
 %%skematik per komponen
+Gambar
+di bawah ini menunjukkan skematik koneksi komponen-komponen
+yang digunakan pada subsistem ISPS 
+terhadap mikrokontroler ESP32 pada gambar \ref{fig:esp32}.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{image/doc/esp32.pdf} % Ganti dengan path diagram Anda
     \caption{Skematik koneksi sistem sensor ke mikrokontroler ESP32}
     \label{fig:esp32}
 \end{figure}
+
+ADXL345 menggunakan protokol \textit{inter-integrated circuit}
+(I2C) yang menghubungkan komunikasi sensor melalui
+pin serial data (SDA) dan serial clock (SCL).
 
 \begin{figure}[H]
     \centering
@@ -998,6 +1005,9 @@ dan \ref{fig:flowchart_isps_2}.
     \label{fig:adxl345}
 \end{figure}
 
+DS18B20 pada gambar \ref{fig:ds18b20} terhubung dengan
+GPIO35 (pin ADC1) melalui jalur data.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{image/doc/temperature.pdf} % Ganti dengan path diagram Anda
@@ -1005,6 +1015,10 @@ dan \ref{fig:flowchart_isps_2}.
     \label{fig:ds18b20}
 \end{figure}
 
+ACS712 merupakan sensor arus analog yang dikoneksikan
+ke mikrokontroler melalui pin ADC. Pin GPIO34 (ADC1)
+dipilih dalam tujuan menghindari pin ADC2 yang terhubung dengan Wi-Fi driver pada
+ESP32.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{image/doc/skematik-monitor-acs712.pdf} % Ganti dengan path diagram Anda
@@ -1012,6 +1026,9 @@ dan \ref{fig:flowchart_isps_2}.
     \label{fig:acs712}
 \end{figure}
 
+SCT-013 merupakan sensor CT, pemilihan
+sensor CT dipertimbangkan sebagai solusi pemasangan
+sensor arus fleksibel. 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{image/doc/sct013.pdf} % Ganti dengan path diagram Anda
@@ -1019,19 +1036,18 @@ dan \ref{fig:flowchart_isps_2}.
     \label{fig:sct-013-005}
 \end{figure}
 
-Gambar \ref{fig:skematik-isps} merupakan skematik
+Gambar di atas merupakan skematik
 dari rangkaian subsistem ISPS, yang meliputi 
 instalasi sensor dan pengolahan sinyal.
 Sementara itu, model 3D PCB ditunjukkan oleh gambar \ref{fig:3d-pcb-depan}
 dan \ref{fig:3d-pcb-belakang}.
-Desain skematik \ref{fig:skematik-isps} dan desain
+Desain skematik dan desain
 PCB  pada gambar \ref{fig:pcb-layer},
 \ref{fig:3d-pcb-depan}, dan \ref{fig:3d-pcb-belakang}
 dirancang dengan menggunakan aplikasi KiCAD.
 
 \begin{figure}[H]
     \centering
-    
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[height=5cm]{image/doc/pcb-layout.pdf}
@@ -1209,7 +1225,6 @@ kondisi motor.
  serta mengaktifkan relay proteksi apabila 
  parameter arus dan suhu melewati batas 
  dalam jangka waktu yang ditentukan.
-
  Gambar \ref{fig:flowchart_dasp} menunjukkan
  proses kerja mikrokontroler pada subsistem DASP.
  Program alarm dan proteksi diimplementasikan 
@@ -1234,6 +1249,17 @@ dengan komponen sumber DC seperti mikrokontroler.
     \label{fig:skematik-rectifier}
 \end{figure}
 
+Gambar \ref{fig:sekamtik-relay} di bawah ini menunjukkan
+sistem proteksi dengan memanfaatkan relay untuk memutus arus
+apabila parameter suhu dan arus melebihi batas yang telah ditentukan.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{image/doc/relay.pdf} % Ganti dengan path diagram Anda
+    \caption{Skematik sistem proteksi menggunakan relay}
+    \label{fig:sekamtik-relay}
+\end{figure}
+
 \subsection{\MainFeaturesTitle}
 Di bawah ini merupakan daftar fitur utama yang ditawarkan
 oleh MONTREAL-VT.
@@ -1256,17 +1282,17 @@ oleh MONTREAL-VT.
 
 \subsection{\AlternativeDesignTitle}
 
-\subsection{\JustificationTitle}
+\subsubsection{\JustificationTitle}
 
 \subsubsection*{Alternatif 1: Mikrokontroler ESP32-S3, Cloud Computing}
 \begin{enumerate}
     \item \textbf{Deskripsi:} Pada desain opsional ini, operasi pemrosesan sinyal lebih lanjut, terutama
     konversi domain waktu dari parameter kecepatan RMS menjadi domain frekuensi (FFT) dilakukan
     melalui program setelah data serial disimpan pada serverless database.
-    \item \textbf{Alasan Penolakan:} -
+    \item \textbf{Alasan Penolakan:} Pemrosesan data setelah dikirim ke cloud membebani traffic Wi-Fi, mengurangi latensi.
+    Data mentah akselerasi getaran akan sangat banyak sehingga membebani traffic database.
 \end{enumerate} 
 
-\newpage
 \section{\ImplementationPlanTitle}
 
 Work Breakdown Structure (WBS) merupakan dekomposisi pekerjaan proyek menjadi beberapa tahapan yang lebih terstruktur sehingga proses perancangan, implementasi, pengujian, dan dokumentasi dapat dilaksanakan secara sistematis. Penyusunan WBS bertujuan untuk mempermudah proses perencanaan, pengelolaan, serta pengawasan setiap aktivitas selama penelitian berlangsung.
@@ -1275,8 +1301,8 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
 
 \subsection{\WBSTitle}
 
-\textbf{WBS 1.1 Analisis Kebutuhan Sistem}
-
+\subsubsection*{Fase 1 -- Studi Awal (Minggu 1)}
+\textbf{WBS 1.1 Analisis Kebutuhan Sistem (Minggu 1)} 
 \textbf{Kegiatan:}
 \begin{itemize}
     \item Mengidentifikasi spesifikasi motor induksi.
@@ -1284,12 +1310,12 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Menyusun dokumen kebutuhan sistem.
 \end{itemize}
 
-\textbf{Hasil:}
+\textbf{Keluaran:}
 \begin{itemize}
     \item Dokumen kebutuhan sistem (EL200).
 \end{itemize}
 
-\textbf{WBS 1.2 Studi Literatur}
+\textbf{WBS 1.2 Studi Literatur (Minggu 1)}
 
 \textbf{Kegiatan:}
 \begin{itemize}
@@ -1301,16 +1327,15 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Studi mengenai sistem alarm dan proteksi motor AC yang terkoneksi dengan sistem DC.
 \end{itemize}
 
-\textbf{Hasil:}
+\textbf{Keluaran:}
 \begin{itemize}
-    \item Dokumen studi literatur dan referensi utama (EL200).
+    \item Dokumen studi literatur.
 \end{itemize}
 
-\textbf{WBS 1.3 Perancangan Arsitektur Sistem}
+\textbf{WBS 1.3 Perancangan Arsitektur Sistem (Minggu 1)}
 
 \textbf{Kegiatan:}
 \begin{itemize}
-    \item Menyusun diagram blok sistem.
     \item Menentukan arsitektur perangkat keras dan perangkat lunak.
     \item Menentukan pembagian subsistem sesuai pembagian tugas tim.
     \item Merancang desain skematik dan PCB subsistem ISPS.
@@ -1318,29 +1343,32 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Merancang desain dashboard pemantauan.
 \end{itemize}
 
-\textbf{Hasil:}
+\textbf{Keluaran:}
 \begin{itemize}
-    \item Diagram blok sistem dan arsitektur sistem.
+    \item Diagram arsitektur sistem.
+    \item Skematik subsistem ISPS, CBD, dan DASP.
+    \item Desain PCB sistem sensor (ISPS) (gerber).
+    \item Desain PCB rangkaian penyearah 220VAC to 5VDC (DASP) (gerber).
+    \item Desain tampilan dashboard pemantauan.
 \end{itemize}
 
 %====================================================
-\subsubsection*{Fase 2 -- Uji Komponen(Minggu 1)}
+\subsubsection*{Fase 2 -- Uji Komponen(Minggu 2)}
 %====================================================
 
-\textbf{WBS 2.1 Perancangan Perangkat Keras}
+\textbf{WBS 2.1 Perancangan Perangkat Keras (Minggu 2)}
 
 \textbf{Kegiatan:}
 \begin{itemize}
     \item Melakukan uji koneksi sensor ke mikrokontroler.
-    \item Melakukan uji rangkaian rectifier 220VAC to 5VDC.
 \end{itemize}
 
-\textbf{Hasil:}
+\textbf{Keluaran:}
 \begin{itemize}
-    \item Prototipe perangkat keras (on breadboard)
+    \item Prototipe sistem sensor (on breadboard).
 \end{itemize}
 
-    \textbf{WBS 2.2 Perancangan Perangkat Lunak}
+    \textbf{WBS 2.2 Perancangan Perangkat Lunak (Minggu 2)}
 \textbf{Kegiatan:}
 \begin{itemize}
     \item Mendesain tampilan dashboard dengan menggunakan Figma.
@@ -1348,13 +1376,13 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Melakukan uji konektivitas Wi-Fi ESP32 dengan divais kontrol.
 \end{itemize}
 
-\textbf{Hasil:}
+\textbf{Keluaran:}
 \begin{itemize}
-    \item Prototipe Dashboard Monitoring
+    \item Prototipe dashboard monitoring sementara.
 \end{itemize}
 
 %====================================================
-\subsubsection*{Fase 3 -- Implementasi Sistem}
+\subsubsection*{Fase 3 -- Implementasi Sistem (Minggu 2-10)}
 %====================================================
 
 \textbf{WBS 3.1 Implementasi Subsistem Akuisisi Data dan Pemrosesan Sinyal  (Minggu 2-5)}
@@ -1371,12 +1399,15 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Instalasi wadah PCB ISPS pada motor induksi.
 \end{itemize}
 
-\textbf{Hasil:}
+\textbf{Keluaran:}
 \begin{itemize}
-    \item Prototipe sistem akuisisi data sensor yang meliputi PCB ISPS dan wadah PCB.
+    \item Data akurasi sensor sebelum dan setelah kalibrasi.
+    \item Data SNR tegangan input dan tegangan output.
+    \item Data PSD dalam domain frekuensi.
+    \item PCB sistem sensor (ISPS).
 \end{itemize}
 
-\textbf{WBS 3.2 Implementasi Subsistem Cloud-Hosting dan Basis Data (Minggue 5-10)}
+\textbf{WBS 3.2 Implementasi Subsistem Cloud-Hosting dan Basis Data (Minggu 5-10)}
 
 \textbf{Kegiatan:}
 \begin{itemize}
@@ -1387,12 +1418,16 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Menginstal program perhitungan RUL dengan memanfaatkan MHI.
     \item Melakukan uji skenario kerusakan.
     \item Mengimplementasikan sistem visualisasi pada dashboard pemantauan.
-\item Implementasi penyimpanan data (\textit{data logging}) menggunakan komunikasi IoT \cite{Bahga2014, InternationalOrganizationforStandardizationInternationalElectrotechnicalCommission2016}.
+    \item Implementasi penyimpanan data (\textit{data logging}) menggunakan komunikasi IoT.
 \end{itemize}
 
-\textbf{Hasil:}
+\textbf{Keluaran:}
 \begin{itemize}
-    \item Dashboard monitoring lengkap dengan fiturnya.
+    \item Data akurasi klasifikasi jenis kerusakan menggunakan analis getaran domain waktu dan domain frekuensi.
+    \item Data akurasi klasifikasi tingkat kesehatan motor menggunakan MHI dan RUL.
+    \item Data persentase total data pemantauan  berhasil terkirim ke serverless database.
+    \item Data persentase total data pemantauan berhasil ditampilkan dashboard.
+    \item Dashboard pemantauan lengkap dengan fiturnya.
 \end{itemize}
 
 \textbf{WBS 3.3 Implementasi Subsistem Desain Alarm dan Sistem Proteksi (Minggu 2-5)}
@@ -1407,12 +1442,15 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Pengujian fungsi alarm dan proteksi.
 \end{itemize}
 
-\textbf{Hasil:}
+\textbf{Keluaran:}
 \begin{itemize}
-    \item PCB DASP dan sistem proteksi yang bekerja.
+    \item Data eror absolut tegangan output rangkaian penyearah dari target 5V.
+    \item Data akurasi sistem proteksi dengan skenario overload dan overcurrent.
+    \item Rangkaian proteksi berbasis relay.
+    \item PCB penyearah 220VAC to 5VDC.
 \end{itemize}
 %====================================================
-\subsubsection*{Fase 4 -- Pengujian dan Validasi (Minggu 11--13)}
+\subsubsection*{Fase 4 -- Pengujian dan Validasi (Minggu 11-13)}
 %====================================================
 
 \textbf{WBS 4.1 Pengujian Perangkat Keras}
@@ -1445,7 +1483,7 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Pengujian keseluruhan sistem mulai dari pembacaan sensor hingga aktivasi alarm dan penyimpanan data.
 \end{itemize}
 
-\textbf{Hasil:}
+\textbf{Keluaran:}
 \begin{itemize}
     \item Laporan hasil pengujian dan validasi sistem.
     Tahap pengujian dilakukan untuk memastikan seluruh fungsi perangkat keras maupun perangkat lunak berjalan sesuai spesifikasi yang telah dirancang. Pengujian meliputi validasi sensor, analisis sinyal, komunikasi data, hingga pengujian integrasi sistem secara menyeluruh sehingga sistem memenuhi kebutuhan monitoring kondisi motor induksi \cite{ProjectManagementInstitute2021,Jardine2006}.
@@ -1473,7 +1511,7 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
     \item Menyiapkan bahan presentasi, poster penelitian, dan demonstrasi sistem.
 \end{itemize}
 
-\textbf{Hasil:}
+\textbf{Keluaran:}
 \begin{itemize}
     \item Laporan tugas akhir.
     \item Buku panduan penggunaan sistem.
@@ -1484,97 +1522,124 @@ Pada penelitian ini, WBS disusun berdasarkan tahapan pengembangan sistem \textit
 Jadwal implementasi disusun berdasarkan \textit{Work Breakdown Structure} (WBS) yang telah dijelaskan pada Subbab 3.1. Penyusunan jadwal bertujuan untuk mengatur urutan pelaksanaan setiap kegiatan sehingga proses pengembangan sistem dapat berlangsung secara sistematis dan sesuai target waktu yang telah ditetapkan. Seluruh aktivitas penelitian direncanakan berlangsung selama 16 minggu, dimulai dari tahap perencanaan hingga penyusunan laporan akhir. Setiap tahapan memiliki keterkaitan dengan tahapan sebelumnya sehingga penyelesaian suatu pekerjaan menjadi prasyarat untuk melanjutkan pekerjaan berikutnya.
 
 Rencana jadwal implementasi penelitian ditunjukkan pada tabel \ref{tab:gantt}.
-\begin{landscape}
-    \begin{table}[htbp]
-    \centering
-    \caption{Gantt Chart Tugas Akhir - Monitoring Getaran dan Suhu Motor Induksi}
-    \label{tab:gantt}
-    \scriptsize
-    \setlength{\tabcolsep}{2pt}
-    \renewcommand{\arraystretch}{1.3}
-    \begin{tabular}{|c|p{3.5cm}|p{1.6cm}|p{2.4cm}|*{14}{c|}}
-    \hline
-    \textbf{No} & \textbf{Kegiatan} & \textbf{PIC} & \textbf{Output} &
-    \textbf{M1} & \textbf{M2} & \textbf{M3} & \textbf{M4} & \textbf{M5} & \textbf{M6} &
-    \textbf{M7} & \textbf{M8} & \textbf{M9} & \textbf{M10} & \textbf{M11} & \textbf{M12} &
-    \textbf{M13} & \textbf{M14} \\
-    \hline
-    
-    1 & Studi literatur dan identifikasi kebutuhan sistem & Semua & Spesifikasi sistem \& referensi &
-    \pk & \pk & & & & & & & & & & & & \\
-    \hline
-    
-    2 & Perumusan masalah, tujuan, dan batasan sistem & Semua & Rumusan masalah \& tujuan &
-    \pk & \pk & & & & & & & & & & & & \\
-    \hline
-    
-    3 & Perancangan arsitektur sistem & Semua & Blok diagram sistem &
-    & \pk & \pk & & & & & & & & & & & \\
-    \hline
-    
-    4 & Pemilihan dan pengadaan komponen & Semua & Komponen hardware &
-    & \pk & \pk & & & & & & & & & & & \\
-    \hline
-    
-    5 & Perancangan dan pemasangan sensor & Anggota 1 & Sensor terpasang &
-    & & \pk & \pk & & & & & & & & & & \\
-    \hline
-    
-    6 & Kalibrasi dan pengujian sensor & Anggota 1 & Data kalibrasi sensor &
-    & & & \pk & \pk & & & & & & & & & \\
-    \hline
-    
-    7 & Signal processing getaran & Anggota 1 & Data getaran terolah &
-    & & & \pk & & \pk & & & & & & & & \\
-    \hline
-    
-    8 & Perancangan komunikasi IoT & Anggota 2 & Komunikasi ESP32--server &
-    & & & & \pk & \pk & & & & & & & & \\
-    \hline
-    
-    9 & Perancangan database dan dashboard & Anggota 2 & Database \& UI monitoring &
-    & & & & & \pk & & \pk & & & & & & \\
-    \hline
-    
-    10 & Implementasi pengiriman data real-time & Anggota 2 & Data real-time &
-    & & & & & & & \pk & \pk & & & & & \\
-    \hline
-    
-    11 & Pengolahan FFT dan ekstraksi fitur & Anggota 3 & Spektrum \& fitur FFT &
-    & & & & & & \pk & & \pk & & & & & \\
-    \hline
-    
-    12 & Perancangan klasifikasi kondisi motor & Anggota 3 & Algoritma klasifikasi &
-    & & & & & & & & \pk & \pk & & & & \\
-    \hline
-    
-    13 & Pengujian sistem secara keseluruhan & Semua & Hasil pengujian sistem &
-    & & & & & & & & & \pk & \pk & & & \\
-    \hline
-    
-    14 & Pengujian skenario IoT dan time-delay & Anggota 2 & Data delay \& reliability &
-    & & & & & & & & & & \pk & \pk & & \\
-    \hline
-    
-    15 & Analisis hasil dan evaluasi kinerja & Semua & Analisis performa &
-    & & & & & & & & & & & \pk & \pk & \\
-    \hline
-    
-    16 & Penyusunan laporan dan dokumentasi & Semua & Draft/final laporan &
-    & & & & & & & & & & \pk & & & \pk \\
-    \hline
-    
-    17 & Revisi dan persiapan presentasi/sidang & Semua & Materi presentasi \& finalisasi &
-    & & & & & & & & & & & & \pk & \pk \\
-    \hline
-    
-    \end{tabular}
-    
-    \vspace{0.3cm}
-    \noindent\textbf{Keterangan:} \colorbox{ganttblue}{\textcolor{white}{\phantom{XX}}} \, Periode pelaksanaan
-    
-    \end{table}
-\end{landscape}
+% Requires: \usepackage{longtable} and \usepackage{colortbl} (for \pk / colorbox) in preamble
+
+\begingroup
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{|c|p{2.5cm}|p{1.6cm}|p{2.4cm}|*{14}{c|}}
+
+\caption{Gantt Chart Tugas Akhir - Monitoring Getaran dan Suhu Motor Induksi} \label{tab:gantt} \\
+
+\hline
+\textbf{No} & \textbf{Kegiatan} & \textbf{PIC} & \textbf{Output} &
+\textbf{M1} & \textbf{M2} & \textbf{M3} & \textbf{M4} & \textbf{M5} & \textbf{M6} &
+\textbf{M7} & \textbf{M8} & \textbf{M9} & \textbf{M10} & \textbf{M11} & \textbf{M12} &
+\textbf{M13} & \textbf{M14} \\
+\hline
+\endfirsthead
+
+\multicolumn{18}{c}{{\tablename\ \thetable{} -- lanjutan}} \\
+\hline
+\textbf{No} & \textbf{Kegiatan} & \textbf{PIC} & \textbf{Output} &
+\textbf{M1} & \textbf{M2} & \textbf{M3} & \textbf{M4} & \textbf{M5} & \textbf{M6} &
+\textbf{M7} & \textbf{M8} & \textbf{M9} & \textbf{M10} & \textbf{M11} & \textbf{M12} &
+\textbf{M13} & \textbf{M14} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{18}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+1 & Analisis kebutuhan sistem & Semua & Dokumen kebutuhan sistem &
+\pk & & & & & & & & & & & & & \\
+\hline
+
+2 & Studi Literatur & Semua & Dokumen studi literatur &
+\pk & & & & & & & & & & & & & \\
+\hline
+
+3 & Perancangan arsitektur sistem & Semua & Diagram arsitektur sistem, skematik, desain dashboard, desain PCB &
+& \pk & & & & & & & & & & & & \\
+\hline
+
+4 & Perancangan perangkat keras & Semua & Prototipe sistem sensor (on-board) &
+& \pk & & & & & & & & & & & & \\
+\hline
+
+5 & Perancangan perangkat lunak & Semua & Prototipe dashboard sementara &
+& \pk & & & & & & & & & & & & \\
+\hline
+
+6 & Kalibrasi sensor & Anggota 1 & Data akurasi sensor &
+& \pk & \pk & & & & & & & & & & & \\
+\hline
+
+7 & Pengkondisian sinyal & Anggota 1 & Data SNR tegangan input dan output &
+& & \pk & \pk & & & & & & & & & & \\
+\hline
+
+8 & Konversi parameter getaran dan FFT & Anggota 1 & Data PSD domain frekuensi &
+& & & & \pk & & & & & & & & & \\
+\hline
+
+9 & Cetak PCB ISPS dan 3D Printing & Anggota 1 & Data PSD domain frekuensi (spektrum frekuensi) &
+& & & & & \pk & & & & & & & & \\
+\hline
+
+10 & Perancangan rangkaian rectifier dan pengujian & Anggota 3 & Rangkaian rectifier (on breadboard), data tegangan output rectifier &
+& & \pk & \pk & & & & & & & & & & \\
+\hline
+
+11 & Cetak PCB rectifier & Anggota 3 & PCB rectifier &
+& & & \pk & & & & & & & & & & \\
+\hline
+
+12 & Rangkaian proteksi otomatis & Anggota 3 & Rangkaian proteksi sistem (MCCB dan Relay) &
+& & & & \pk & \pk & & & & & & & & \\
+\hline
+
+13 & Uji rangkaian proteksi & Anggota 3 & Data akurasi sistem proteksi &
+& & & & & \pk & & & & & & & & \\
+\hline
+
+14 & Perancangan program klasifikasi kerusakan berdasarkan analisis frekuensi dan pengujian & Anggota 2 & Program, data akurasi klasifikasi kerusakan &
+& & & & & \pk & \pk & \pk & & & & & & \\
+\hline
+
+15 & Perancangan klasifikasi kondisi motor berdasarkan MHI dan RUL & Anggota 2 & Program, data akurasi prediksi kerusakan &
+& & & & & & & & \pk & \pk & & & & \\
+\hline
+
+16 & Pengujian dashboard monitoring Firebase & Anggota 2 & Tampilan dashboard &
+& & & & & & & & & \pk & & & & \\
+\hline
+
+17 & Pengujian penyimpanan data lokal dan cloud & Anggota 1 \& 2 & Data persentase keberhasilan penyimpanan data &
+& & & & & & & & & & \pk & & & \\
+\hline
+
+18 & Analisis hasil dan evaluasi kinerja & Semua & Analisis performa &
+& & & & & & & & & & & \pk & \pk & \\
+\hline
+
+19 & Penyusunan laporan dan dokumentasi & Semua & Draft/final laporan &
+& & & & & & & & & &  &\pk & & \\
+\hline
+
+20 & Revisi dan persiapan presentasi/sidang & Semua & Materi presentasi \& finalisasi &
+& & & & & & & & & & & & \pk & \pk \\
+\hline
+
+\end{longtable}
+\endgroup
+
+\noindent\textbf{Keterangan:} \colorbox{ganttblue}{\textcolor{white}{\phantom{XX}}} \, Periode pelaksanaan
 
 \subsection{\TeamDivisionTitle}
 Pembagian tugas tim dilakukan berdasarkan hasil diskusi bersama dosen pembimbing agar setiap anggota memiliki fokus penelitian yang berbeda sehingga tidak terjadi tumpang tindih dalam pengembangan sistem. Setiap anggota bertanggung jawab terhadap satu subsistem utama yang saling terintegrasi untuk membentuk sistem monitoring kondisi motor induksi secara menyeluruh.
@@ -1611,7 +1676,7 @@ Mahasiswa B
 Cloud-Hosting dan Basis Data
 &
 Implementasi komunikasi IoT, memastikan proses pengiriman data memiliki spesifikasi sesuai dengan
-spesifikasi fungsional dan nonfungsional, membangun database yang andal, \textit{data logging}, dashboard monitoring, \textit{Health Index}, klasifikasi kerusakan, dan pengembangan sistem estimasi \textit{breakdown}.
+spesifikasi fungsional dan nonfungsional, membangun database yang andal, \textit{data logging}, dashboard monitoring, \textit{Health Index}, klasifikasi kerusakan berdasarkan vibration analysis, dan pengembangan sistem estimasi \textit{breakdown} (RUL).
 \\
 \hline
 
@@ -1626,18 +1691,22 @@ Merancang rangkaian rectifier 220VAC to 5VDC, penentuan nilai \textit{threshold}
 \end{tabular}
 \end{table}
 
-Mahasiswa A bertanggung jawab terhadap pengembangan subsistem instalasi sensor dan pemrosesan sinyal. Ruang lingkup pekerjaan meliputi pemasangan sensor ADXL345, DS18B20, ACS712, dan Hall Effect Sensor pada motor induksi, proses kalibrasi sensor, akuisisi data, serta pengkondisian sinyal melalui proses \textit{filtering} dan penguatan sinyal. Luaran dari subsistem ini berupa data percepatan sumbu X, Y, dan Z, suhu motor, arus motor, tegangan AC, serta \textit{pulse count} yang siap digunakan untuk proses analisis.
-
-Mahasiswa B bertanggung jawab terhadap pengembangan subsistem integrasi IoT dan algoritma klasifikasi kerusakan. Ruang lingkup pekerjaan meliputi implementasi komunikasi data melalui jaringan Wi-Fi, pengolahan sinyal menggunakan metode \textit{Root Mean Square} (RMS) dan \textit{Fast Fourier Transform} (FFT), penyimpanan data (\textit{data logging}), pencatatan \textit{timestamp}, visualisasi data melalui dashboard monitoring, klasifikasi kondisi motor, perhitungan \textit{Motor Health Index}, serta estimasi waktu menuju kondisi kritis (\textit{estimated breakdown}).
-
-Mahasiswa C bertanggung jawab terhadap pengembangan subsistem \textit{threshold} alarm dan sistem proteksi. Ruang lingkup pekerjaan meliputi penentuan nilai ambang (\textit{threshold}), implementasi alarm, pengendalian relay proteksi, pencatatan \textit{maintenance record}, \textit{event logging}, serta klasifikasi kategori gangguan (\textit{fault category}). Subsistem ini berfungsi memberikan peringatan dini serta melakukan tindakan proteksi apabila parameter operasi motor melebihi batas yang telah ditentukan.
-
-Ketiga subsistem tersebut dirancang agar saling terintegrasi. Subsistem instalasi sensor dan pemrosesan sinyal menghasilkan data hasil pengukuran yang selanjutnya diproses oleh subsistem integrasi IoT dan algoritma klasifikasi kerusakan. Hasil analisis kemudian digunakan oleh subsistem \textit{threshold} alarm dan sistem proteksi untuk menentukan status alarm serta tindakan proteksi sesuai kondisi operasi motor. Dengan pembagian tersebut, setiap anggota memiliki fokus penelitian yang berbeda namun tetap mendukung pengembangan sistem monitoring kondisi motor induksi secara menyeluruh.
-
-
+Ketiga subsistem tersebut dirancang agar saling
+terintegrasi. Subsistem instalasi sensor dan 
+pemrosesan sinyal menghasilkan data hasil 
+pengukuran yang selanjutnya diproses oleh 
+subsistem integrasi IoT dan algoritma 
+klasifikasi kerusakan. Hasil analisis kemudian
+ digunakan oleh subsistem \textit{threshold} 
+ alarm dan sistem proteksi untuk menentukan 
+ status alarm serta tindakan proteksi sesuai 
+ kondisi operasi motor. 
+ Dengan pembagian tersebut, setiap anggota 
+ memiliki fokus penelitian yang berbeda 
+ namun tetap mendukung pengembangan sistem monitoring kondisi motor induksi secara 
+ menyeluruh.
 
 \subsection{\SystemTestingTitle}
-
 
 Pengujian sistem dilakukan untuk memverifikasi bahwa seluruh subsistem yang telah dirancang dapat berfungsi sesuai dengan spesifikasi fungsional dan non-fungsional yang telah ditetapkan. Pengujian ini bertujuan untuk memastikan bahwa proses akuisisi data, pengolahan sinyal, analisis kondisi motor, serta sistem alarm dan proteksi dapat bekerja secara terintegrasi dalam melakukan monitoring kondisi motor induksi.
 
@@ -1646,107 +1715,121 @@ Pengujian dilaksanakan secara bertahap yang meliputi pengujian masing-masing sub
 Parameter yang diuji meliputi akurasi pembacaan sensor, kualitas hasil pemrosesan sinyal, keberhasilan komunikasi data, kemampuan algoritma dalam mengidentifikasi kondisi motor, kecepatan respons alarm, serta fungsi sistem proteksi ketika terjadi kondisi abnormal.
 
 Kriteria keberhasilan pengujian sistem ditunjukkan pada Tabel~\ref{tab:kriteria_pengujian}.
-
-\begin{table}[H]
-\centering
-\caption{Kriteria Keberhasilan Pengujian Sistem}
-\label{tab:kriteria_pengujian}
+\begin{longtable}{|c|p{4.5cm}|p{4.2cm}|p{4cm}|}
+    \caption{Kriteria Keberhasilan Pengujian Sistem}
+    \label{tab:kriteria_pengujian}\\
 %%\renewcommand{\arraystretch}{1.3}
+    \hline
+    \textbf{No} &
+    \textbf{Parameter Pengujian} &
+    \textbf{Metode Pengujian}&
+    \textbf{Parameter keberhasilan}\\
+    \hline
+    \endfirsthead
 
-\begin{tabular}{|c|p{4.5cm}|p{4.2cm}|p{4cm}|}
-\hline
-\textbf{No} &
-\centering\textbf{Parameter Pengujian} &
-\centering\textbf{Metode Pengujian} &
-\centering\arraybackslash\textbf{Kriteria Keberhasilan}\\
-\hline
+    \multicolumn{3}{c}{\tablename\ \thetable\ -- \textit{lanjutan dari halaman sebelumnya}} \\
+    \hline
+    \textbf{No} & \textbf{Parameter Pengujian} & \textbf{Metode Pengujian} & \textbf{Parameter keberhasilan}\\
+    \hline
+    \endhead
 
-1 &
-Akurasi sensor getaran (ADXL345) &
-Dibandingkan dengan vibration meter &
-Error $\leq$ 15\%\\
+    \hline
+    \multicolumn{3}{r}{\textit{bersambung ke halaman berikutnya}} \\
+    \endfoot
+
+    \hline
+    \endlastfoot
+
+    1 &
+Pengkondisian sinyal getaran &
+Digital high-pass filter &
+$SNR \geq 10dB$\\
 \hline
 
 2 &
-Akurasi sensor suhu (DS18B20) &
-Dibandingkan dengan termometer digital &
-Error $\leq$ 2$^\circ$C atau $\leq$ 5\%\\
+Pengkondisian sinyal suhu &
+Digital band-pass filter&
+$|E_{T} \leq 2\%$\\
 \hline
 
 3 &
-Akurasi sensor arus (ACS712) &
-Dibandingkan dengan clamp meter &
-Error $\leq$ 10\%\\
+Pengkondisian sinyal arus (ACS712) &
+Analog active band-pass filter &
+$E_{I} = 2.5\%$\\
 \hline
 
 4 &
-Akurasi pembacaan RPM &
-Dibandingkan dengan tachometer &
-Error $\leq$ 5\%\\
+Pengkondisian sinyal arus (SCT013) &
+Analog active band-pass filter &
+$E_{I} = 5\%$\\
 \hline
 
 5 &
-Pengiriman data IoT &
-Monitoring dashboard &
-Keberhasilan pengiriman $\geq$ 98\%\\
+Pengkondisian sinyal efek hall (RPM)&
+Analog active band-pass filter&
+$E_{N} \leq 1\%$\\
 \hline
 
 6 &
-Delay komunikasi data &
-Pengukuran waktu pengiriman &
-Delay $\leq$ 3 detik\\
+Konversi data akselerasi getaran ke kecepatan getaran &
+Perhitungan sesuai formulasi&
+$\%error \leq 5\%$\\
 \hline
 
-7 &
-Perhitungan RMS &
-Dibandingkan dengan MATLAB/Python &
-Error $\leq$ 5\%\\
+6 &
+Konversi data kecepatan getaran ke kecepatan RMS&
+Perhitungan sesuai formulasi&
+$\%error \leq 5\%$\\
+\hline
+
+6 &
+FFT &
+Pengukuran&
+frekuensi FFT $\geq n\omega$ Hz\\
 \hline
 
 8 &
 Analisis FFT &
-Dibandingkan dengan spektrum referensi &
-Frekuensi dominan sesuai referensi\\
+Perhitungan tingkat keberhasilan prediksi kerusakan melalui skenario &
+$A=80\%$\\
 \hline
 
 9 &
-Klasifikasi kondisi motor &
-Pengujian beberapa kondisi motor &
-Akurasi klasifikasi $\geq$ 90\%\\
+Cloud-hosting &
+Perhitungan persentase total data serial monitor terkirim&
+$\%data=100\%$\\
 \hline
 
 10 &
-Machine Health Index (MHI) &
-Validasi terhadap kondisi motor &
-Sesuai kondisi aktual motor\\
+Machine Health Index (MHI) dan RUL&
+Perhitungan tingkat keberhasilan alat dalam memprediksi motor dengan kesehatan rendah&
+$A=90\%$\\
 \hline
 
 11 &
-Alarm &
-Simulasi melewati nilai threshold &
-Alarm aktif otomatis\\
+Kualitas tegangan output tegangan rectifier&
+Eksperimen menggunakan osiloskop &
+$4.8 \leq V_{out} \leq 5.2$\\
 \hline
 
 12 &
 Relay proteksi &
-Simulasi kondisi gangguan &
-Relay bekerja sesuai logika\\
+Perhitungan tingkat keberhasilan sistem proteksi dalam n skenario&
+$A=90\%$\\
 \hline
 
 13 &
-Event logging &
-Simulasi beberapa gangguan &
-Seluruh data tersimpan\\
+Percobaan penyimpanan lokal&
+Perhitungan persentasi total data tersimpan ketika keadaan luring &
+$\%data = 100\%$\\
 \hline
 
 14 &
-Operasi sistem &
+Ketahanan sistem &
 Pengujian kontinu &
-Beroperasi minimal 24 jam\\
+Beroperasi mampu beroperasi dalam durasi 6 jam\\
 \hline
-
-\end{tabular}
-\end{table}
+\end{longtable}
 
 Selain pengujian pada masing-masing subsistem, dilakukan pengujian integrasi untuk memastikan seluruh subsistem dapat bekerja secara terpadu. Pengujian ini bertujuan untuk mengetahui apakah data hasil pembacaan sensor dapat diproses dengan benar, dikirim ke sistem monitoring, dianalisis menggunakan algoritma diagnosis, kemudian menghasilkan keputusan alarm dan proteksi sesuai kondisi motor.
 
@@ -1786,7 +1869,7 @@ Data tampil secara \textit{real-time}\\
 \hline
 
 5 &
-Dashboard $\rightarrow$ Motor Health Index &
+Dashboard $\rightarrow$ Machine Health Index &
 Kondisi motor berhasil diklasifikasikan\\
 \hline
 
@@ -1815,13 +1898,12 @@ Tahapan pengujian sistem dilakukan sebagai berikut.
 \item Pengujian proses \textit{signal conditioning} yang meliputi \textit{filtering} dan validasi kualitas sinyal.
 \item Pengujian algoritma RMS dan FFT menggunakan data hasil pengukuran motor.
 \item Pengujian komunikasi IoT dan dashboard monitoring secara \textit{real-time}.
-\item Pengujian algoritma klasifikasi kondisi motor dan perhitungan \textit{Motor Health Index}.
+\item Pengujian algoritma klasifikasi kondisi motor dan perhitungan \textit{Machine Health Index}.
 \item Pengujian alarm dan sistem proteksi menggunakan beberapa skenario gangguan.
 \item Pengujian integrasi seluruh subsistem dalam satu sistem monitoring motor induksi.
 \item Pengujian operasi sistem secara kontinu selama minimal 24 jam untuk mengevaluasi kestabilan sistem.
 \end{enumerate} 
 
-\newpage
 \section{\RiskAssessmentTitle}
 
 mengidentifikasi potensi risiko yang dapat memengaruhi keberhasilan proyek MONTREAL-VT, mempelajari dampaknya, dan merumuskan strategi mitigasi untuk mengurangi kemungkinan dan/atau konsekuensi dari risiko tersebut.
@@ -1832,25 +1914,24 @@ mengidentifikasi potensi risiko yang dapat memengaruhi keberhasilan proyek MONTR
 \subsubsection*{Technical Risk}
 Risiko yang terkait dengan aspek teknologi, implementasi, dan fungsionalitas sistem mekanis serta elektrikal.
 \begin{enumerate}
-    \item \textbf{Akurasi Sensor dan Noise Lingkungan:} Sensor akselerometer berbasis Micro-Electro-Mechanical Systems (MEMS) dan sensor suhu harus dipasang secara fisik pada area kritis motor induksi, seperti Drive End (DE) dan Non-Drive End (NDE) bearing housing serta bagian enclosure stator. Lingkungan operasional motor induksi menghasilkan fluks magnetik yang kuat, induksi elektromagnetik (Electromagnetic Interference / EMI), serta getaran latar belakang (background vibration) dari pondasi mesin. Faktor-faktor ini dapat menyuntikkan noise berfrekuensi tinggi ke dalam jalur kabel analog maupun digital transduser. Jika strategi pemfilteran (filtering) dan penguatan sinyal gagal menekan noise tersebut, galat (error) pengukuran akan membengkak melebihi batas toleransi kritis sistem yaitu $\le15\%$. Dampak turunannya adalah terjadinya galat fatal pada pembacaan dasbor visual serta kegagalan algoritma dalam membedakan noise lingkungan dengan sinyal degradasi bearing yang sebenarnya. 
-    \item \textbf{Akurasi dan Stabilitas Sensor Rendah dalam Lingkungan Dinamis:} Sensor low-cost (seperti akselerometer MEMS atau sensor suhu komersial) rentan mengalami gangguan akibat noise dari lingkungan industri atau fluktuasi beban motor. Hal ini memengaruhi keandalan plot data spektrum getaran dan suhu.
+    \item \textbf{Akurasi Sensor dan Noise Lingkungan:} Resiko memilih tipe sensor rendah biaya adalah kelemahannya pada akurasi sensor tersebut. Sensor MEMS, dan sensor analog memiliki tigkat galat dalam rentang 1.5\% hingga 1.5 LSB RMS pada suhu kerja tertentu.
     \item \textbf{Keterbatasan Komputasi Pengolahan Sinyal (FFT/RMS):}Proses konversi data getaran dari domain waktu ke domain frekuensi menggunakan algoritma  (FFT) dan Envelope Analysis secara real-time berpotensi membebani memori (buffer size) dan kinerja mikrokontroler ESP32 secara berlebihan. 
-    \item \textbf{Konektivitas \text{IoT} Tidak Stabil:} Pengiriman parameter (getaran, suhu, arus, tegangan) dari ESP32 menuju broker MQTT di cloud sangat bergantung pada stabilitas koneksi Wi-Fi. Fluktuasi jaringan dapat menyebabkan waktu tunda pengiriman data melebihi batas ketentuan ($\le1000\text{ ms}$), sehingga menghambat fungsi early warning. 
+    \item \textbf{Konektivitas Wi-Fi yang Kurang Andal:} Pengiriman parameter (getaran, suhu, arus, tegangan) dari ESP32 menuju broker MQTT di cloud sangat bergantung pada stabilitas koneksi Wi-Fi. Fluktuasi jaringan dapat menyebabkan waktu tunda pengiriman data melebihi batas ketentuan ($\le1000\text{ ms}$), sehingga menghambat fungsi early warning. 
     \item \textbf{Risiko Keselamatan Kelistrikan saat Integrasi Sensor:} Pemasangan sensor pada bagian stator atau area internal motor bertegangan tinggi (terutama jika menguji motor 3 fasa) memiliki risiko induksi listrik, { short circuit } , atau sengatan listrik bagi personel jika isolasi tidak memadai. 
+    \item \textbf{Risiko Kerusakan Alat Saat Kegagalan Sistem Proteksi dan Penyearah:} Rangkaian penyearah 220VAC to 5VDC merupakan rangkaian yang krusial agar mikrokontroler dapat mendapatkan suplai daya yang terhubung dengan 220 VAC. Apabila terjadi kegagalan pada rangkaian penyearah dan rangkaian proteksi, maka ini akan mengakibatkan kerusakan pada sistem MONTREAL-VT bahkan pada motor induksi.
 \end{enumerate}
 
 \subsubsection*{Financial Risk}
 Risiko yang berkaitan dengan anggaran dan sumber daya keuangan proyek.
 \begin{enumerate}
-    \item \textbf{Pembengkakan Biaya akibat Batasan Anggaran yang Ketat:} Pihak pengembang menetapkan batasan anggaran yang sangat ketat, yaitu maksimal Rp1.000.000,00. Kenaikan harga komponen elektronik, kerusakan komponen saat perakitan, atau kebutuhan sensor dengan spesifikasi bandwidth lebih tinggi dapat dengan mudah membuat pengeluaran melewati batas tersebut.
-    \item \textbf{Biaya Transmisi dan Penyimpanan Cloud-IoT:} Integrasi sistem penyimpanan dan pemrosesan data berbasis cloud yang berjalan secara non-stop tiap detik dapat memicu biaya tak terduga jika kuota pengiriman data (throughput pesan MQTT) melebihi batas paket gratisan platform. 
+    \item \textbf{Pembengkakan Biaya akibat Komponen yang Tidak Sesuai:} Komponen yang tidak sesuai dapat menyebabkan sistem MONTREAL-VT tidak bekerja sebagaimana mestinya sesuai spesifikasi yang telah ditetapkan. Terdapat resiko pembengkakan biaya akibat pembelian komponen baru.
 \end{enumerate}
 
 \subsubsection*{User Acceptance Risk}
 Risiko yang berkaitan dengan persepsi, kepuasan, dan adopsi sistem oleh pengguna sasaran (laboratorium dan teknisi industri). 
 \begin{enumerate}
     \item \textbf{Kompleksitas Interpretasi Data Diagnostik:} DApabila aplikasi web/seluler hanya menampilkan data mentah spektrum frekuensi FFT tanpa indikator status sederhana (seperti batasan standar ISO 20816 atau IEC 60034-1) , pengguna akhir (teknisi/staf laboratorium) akan kesulitan memahami kondisi aktual motor. 
-    \item \textbf{ Kelelahan Peringatan akibat False Alarms:} Getaran tidak stabil yang terjadi sesaat akibat fluktuasi beban (bukan karena kerusakan mekanis asli seperti bearing wear atau misalignment) dapat memicu alarm bahaya palsu secara terus-menerus, sehingga mengurangi kepercayaan pengguna terhadap sistem.
+    \item \textbf{Kelelahan Peringatan akibat False Alarms:} Getaran tidak stabil yang terjadi sesaat akibat fluktuasi beban (bukan karena kerusakan mekanis asli seperti bearing wear atau misalignment) dapat memicu alarm bahaya palsu secara terus-menerus, sehingga mengurangi kepercayaan pengguna terhadap sistem.
 
 \end{enumerate}
 
@@ -1861,15 +1942,13 @@ Risiko yang berkaitan dengan persepsi, kepuasan, dan adopsi sistem oleh pengguna
 \begin{enumerate}
     \item \textbf{Mitigasi Risiko Teknis:}
     \begin{enumerate}
-        \item \textbf{Akurasi Sensor:} Menerapkan algoritma filter data digital (noise filtering) pada perangkat lunak sebelum data dikonversi. Sensor diletakkan secara presisi pada posisi Drive End dan Non-Drive End bearing housing sesuai rekomendasi ISO 20816-1.
-        \item \textbf{Kompatibilitas Hardware/Software:} Membagi beban kerja melalui sistem Cloud-IoT, di mana mikrokontroler difokuskan untuk akuisisi data mentah dan konversi awal, sedangkan penyimpanan dan analisis tren jangka panjang diserahkan ke platform cloud untuk meringankan kerja ESP32. 
-        \item \textbf{Konektivitas \text{IoT} Stabil:} Mengimplementasikan mekanisme reconnection otomatis pada kode program MQTT serta menyediakan local buffering (penyimpanan sementara di RAM/EEPROM) jika koneksi Wi-Fi terputus sesaat.
-        \item \textbf{Kesulitan Kalibrasi:} Memastikan penggunaan sensor suhu (thermocouple) yang dilengkapi selubung isolasi listrik memadai , menerapkan prosedur Lock-Out/Tag-Out (LOTO) saat pemasangan komponen , serta memastikan proses pengujian didampingi oleh teknisi ahli sesuai SOP Laboratorium ITERA. 
+        \item \textbf{Akurasi Sensor:} Menerapkan sistem pengkondisian sinyal sehingga sinyal sensor dapat diterima oleh mikrokontroler.
+        \item \textbf{Kompatibilitas Hardware/Software:} Mengoptimalkan arsitektur dan sistem memori dan cache pada sistem MONTREAL-VT. 
+        \item \textbf{Konektivitas \text{IoT} Stabil:} Menghindari penggunaan pin ADC2 pada ESP32 yang terhubung dengan jalur Wi-Fi driver. 
     \end{enumerate}
     \item \textbf{Mitigasi Risiko Finansial:}
     \begin{enumerate}
-        \item \textbf{Biaya Komponen:} Melakukan riset pasar (vendor comparison) secara mendalam di awal untuk mencari komponen alternatif berbiaya rendah namun memenuhi spesifikasi datasheet. Memanfaatkan modul ESP32 dari distributor resmi yang sudah memiliki sertifikasi DJID/SDPPI untuk menghindari membeli modul tiruan yang rentan rusak.
-        \item \textbf{Biaya Layanan \text{Cloud}:} Memilih protokol komunikasi MQTT versi yang lightweight (hemat bandwidth) serta membatasi interval pengiriman data ke cloud (misalnya hanya mengirimkan nilai RMS hasil kalkulasi per sekian detik, bukan data sampling rate mentah yang besar). 
+        \item \textbf{Biaya Komponen:} Melakukan riset pasar (vendor comparison) secara mendalam di awal untuk mencari komponen alternatif berbiaya rendah namun memenuhi spesifikasi datasheet. Memanfaatkan modul ESP32 dari distributor resmi yang sudah memiliki sertifikasi DJID/SDPPI untuk menghindari membeli modul tiruan yang rentan rusak. 
     \end{enumerate}
     \item \textbf{Mitigasi Risiko Penerimaan Pengguna:}
     \begin{enumerate}
@@ -1879,8 +1958,6 @@ Risiko yang berkaitan dengan persepsi, kepuasan, dan adopsi sistem oleh pengguna
     \end{enumerate}
 \end{enumerate}
 
-
-\newpage
 \section{\FinancialAnalysisTitle}
 
 Bagian ini menyajikan estimasi biaya yang terkait dengan pengembangan dan implementasi \textbf{Project }, serta analisis manfaat-biaya. Analisis finansial ini membantu dalam menilai kelayakan ekonomi proyek.
@@ -2086,7 +2163,7 @@ Analisis biaya manfaat dilakukan untuk mengevaluasi kelayakan pengembangan siste
 
 Sistem yang dikembangkan mampu melakukan monitoring kondisi motor induksi secara \textit{real-time} melalui pengukuran parameter getaran, suhu, arus, dan kecepatan putar motor. Data hasil pengukuran diproses menggunakan metode \textit{Root Mean Square} (RMS) dan \textit{Fast Fourier Transform} (FFT) sehingga mampu memberikan informasi mengenai kondisi operasi motor secara lebih akurat \cite{Filho2025,Oppenheim2021}.
 
-sistem ini juga dilengkapi dengan algoritma klasifikasi kondisi motor, perhitungan \textit{Motor Health Index}, alarm, dan sistem proteksi sehingga pengguna dapat memperoleh peringatan dini terhadap potensi kerusakan sebelum terjadi kegagalan operasi (\textit{breakdown}) \cite{Jardine2006}.
+sistem ini juga dilengkapi dengan algoritma klasifikasi kondisi motor, perhitungan \textit{Machine Health Index}, alarm, dan sistem proteksi sehingga pengguna dapat memperoleh peringatan dini terhadap potensi kerusakan sebelum terjadi kegagalan operasi (\textit{breakdown}) \cite{Jardine2006}.
 \subsubsection{Manfaat Ekonomi}
 
 Implementasi sistem monitoring memberikan potensi penghematan biaya pemeliharaan melalui penerapan konsep \textit{predictive maintenance}. Dengan adanya informasi kondisi motor secara \textit{real-time}, tindakan perawatan dapat dilakukan sebelum terjadi kerusakan yang lebih serius sehingga biaya perbaikan maupun penggantian komponen dapat diminimalkan \cite{Jardine2006}.
@@ -2180,7 +2257,7 @@ Contoh format IEEE:
     \hline
     CT & Current Transformer\\
     \hline
-    MHI & Motor Health Index\\
+    MHI & Machine Health Index\\
     \hline
     Wi-Fi & Wireless Fidelity\\
     \hline

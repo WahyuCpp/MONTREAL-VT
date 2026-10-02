@@ -6944,6 +6944,48 @@
 		)
 	)
 	(sheet
+		(at 199.39 93.98)
+		(size 12.7 5.08)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "485ec26b-cd2f-4a55-a6ef-ddfad9ce340e")
+		(property "Sheetname" "hall_effect"
+			(at 199.39 93.2684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "hall_effect.kicad_sch"
+			(at 199.39 99.6446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "skematik-monitor"
+				(path "/a829869c-96ff-413d-b6a5-644534e66486"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 241.3 163.83)
 		(size 30.48 10.16)
 		(exclude_from_sim no)

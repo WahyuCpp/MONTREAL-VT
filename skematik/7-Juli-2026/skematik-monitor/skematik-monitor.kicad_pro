@@ -644,6 +644,10 @@
     [
       "26aae467-6286-425a-ac9d-3802b392ca2c",
       "relay"
+    ],
+    [
+      "485ec26b-cd2f-4a55-a6ef-ddfad9ce340e",
+      "hall_effect"
     ]
   ],
   "text_variables": {}
