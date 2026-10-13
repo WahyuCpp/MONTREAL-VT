@@ -261,17 +261,35 @@ Sementara kerusakan \textit{phase unbalance} terjadi ketika adanya
 ketidaksesuaian tegangan antar fasa pada motor tiga fasa. \textit{Single phasing}
 terjadi ketika satu fasa mengalami \textit{open circuit} ketika beroperasi.
 
-Kerusakan-kerusakan pada motor induksi dapat dideteksi melalui
-pemantauan kondisi (\textit{condition monitoring}) yang dilakukan secara terus menerus.
+Kerusakan-kerusakan pada motor induksi dapat dideteksi dan ditindak melalui
+pemeliharaan berbasis kondisi (\textit{condition-based maintenance}) atau dapat disingkat sebagai CBM. Motor induksi
+dipantau melalui beberapa parameter yang mampu mengindikasikan keadaan motor tersebut, kegiatan
+memantau parameter-parameter ini disebut sebagai pemantauan kondisi (condition monitoring).
 Pemantauan kondisi dapat dilakukan dengan sistem sensor yang bekerja secara \textit{real-time}
 dalam merekam data dan menyimpannya pada basis data yang telah dirancang.
-% Gangsar et al.\cite{Gangsar2018,Yaman2021} berhasil mendeteksi kerusakan
-% pada stator, \textit{bearing}, rotor, dan ketidakselarasan dengan menggunakan
-% sensor getaran dan sensor arus, lalu kerusakan diklasifikasikan dengan
-% menggunakan \textit{support vector machine} (SVM). Stief et al. \cite{Stief2017,Yaman2021} mengembangkan metode diagnosa dua langkah
-% dengan memanfaatkan sinyal sensor akustik, getaran, rpm, arus, dan tegangan.
-% Penelitian Stief et al. dilakukan pada motor induksi dengan rating daya 0.8 kW dan kecepatan
-% putar 1400 rpm. 
+Beberapa penelitian terdahulu telah membahas mengenai metode
+deteksi kerusakan pada motor, Kral et al. berhasil mendeteksi kasus kerusakan mekanis
+seperti ketidakseimbangan dan ketidakselarasan pada motor tanpa analisis spektral\cite{Kral2004}.
+Linessio et al. melakukan penelitian analisis getaran dengan \textit{biaxial optical accelerometer},
+lalu membandingkan hasilnya dengan akselerometer kapasitif \cite{Linessio2016}.
+Penelitian ini menunjukkan ketahanan sensor fiber optik terhadap
+interferensi elektromagnetik, sehingga mampu diimplementasikan pada mesin listrik dengan rating daya tinggi\cite{Linessio2016}.
+
+Penelitian lain menunjukkan metode klasifikasi kerusakan dengan menerapkan
+\textit{machine learning}. Gangsar et al.\cite{Gangsar2018,Yaman2021} berhasil mendeteksi kerusakan
+pada stator, \textit{bearing}, rotor, dan ketidakselarasan dengan menggunakan
+sensor getaran dan sensor arus, lalu kerusakan diklasifikasikan dengan
+menggunakan \textit{support vector machine} (SVM). Stief et al. \cite{Stief2017,Yaman2021} mengembangkan metode diagnosa dua langkah
+dengan memanfaatkan sinyal sensor akustik, getaran, rpm, arus, dan tegangan.
+Penelitian Stief et al. dilakukan pada motor induksi dengan rating daya 0.8 kW dan kecepatan
+putar 1400 rpm. % TAMBAHKAN PENELITIAN MACHINE LEARNING
+
+Selain itu, tindakan \textit{condition-based maintenance} terbukti
+lebih efisien pada beberapa skenario tertentu apabila dibandingkan dengan \textit{scheduled maintenance}.
+Dong et al. mampu menghemat biaya pemeliharaan \textit{fuselage skins}
+pada pesawat sebesar $US\mathdollar1.18 \times 10^{7}$ dengan menerapkan
+CBM \cite{Dong2019}. % TAMBAHKAN KASUS URGENSI CBM
+
 
 %===============Tabel Perbandingan Metode dan Parameter Pemantauan==============%%
 \begin{table}[H]
@@ -302,10 +320,9 @@ dalam merekam data dan menyimpannya pada basis data yang telah dirancang.
 % & \cite{Mahami2021}\\ \hline
 
 %baris 5
-\textit{Acoustic Signature}
-& Kerusakan rotor/laher, ketidakserasian komponen.
-& Tingkat akurasi tinggi, biaya murah
-& \cite{Venkatesh2022}\\ \hline
+\multirow{3}{*}{\textit{Acoustic Signature}}        & Kerusakan rotor/laher & Tingkat akurasi tinggi, biaya murah   & \multirow{2}{*}{\cite{Venkatesh2022}}\\ 
+                                                    & Ketidakselarasan      & biaya implementasi rendah             &\\ \hline 
+
 \end{tabular}
 \end{table}
 
@@ -321,14 +338,15 @@ Selain itu, sistem cerdas yang mampu melakukan diagnosis
 kerusakan pada motor induksi berdasarkan parameter getaran, suhu,
 dan arus. Mayoritas sistem diagnostik kerusakan motor induksi
 membutuhkan tenaga ahli yang mampu menerjemahkan data menjadi informasi yang relevan.
-Maka dari itu, proyek ini bertujuan untuk merancang divais 
-pemantauan kondisi motor induksi yang bersifat rendah biaya.
+Maka dari itu, proyek ini bertujuan untuk merancang alat 
+pemantauan kondisi motor induksi cerdas yang mampu mengklasifikasikan
+kerusakan berdasarkan \textit{baseline} yang sesuai dengan
+standar internasional ISO 20816, dan ISO 13373, serta bersifat rendah biaya.
 
 %===============Diagram 5 Why=================%%
     \usetikzlibrary{positioning}
     \begin{figure}[H]
     \centering
-    
     \begin{tikzpicture}[
     node distance=0.5cm,
     box/.style={
@@ -344,35 +362,38 @@ pemantauan kondisi motor induksi yang bersifat rendah biaya.
     
     \node[box] (A) at (0,0)
     {\textbf{Masalah Utama}\\
-    Sistem pemantauan kondisi motor induksi tidak mampu dijangkau
-    elemen UMKM dan industri skala kecil karena terlalu mahal};
+    Kerusakan motor induksi secara mendadak merugikan pengguna pada skala bisnis dengan biaya reparasi atau biaya penggantian yang lebih tinggi.};
     
     \node[box, below=of A] (B)
     {\textbf{WHY 1}\\
     Elemen UMKM dan industri skala kecil tidak memiliki akses terhadap
-    sistem pemantauan kondisi motor induksi};
+    sistem pemantauan kondisi motor induksi.};
     
     \node[box, below=of B] (C)
     {\textbf{WHY 2}\\
-    Pemantauan kondisi motor induksi dilakukan dengan cara manual};
+    Pemantauan kondisi motor induksi tidak dilaksanakan 
+    sehingga terjadi \textit{breakdown} pada motor induksi 
+    secara mendadak};
     
     \node[box, below=of C] (D)
     {\textbf{WHY 3}\\
-    Pemeriksaan kondisi motor secara manual
-    kurang efisien dan memiliki risiko kecelakaan
-    pada tingkat tertentu.};
+    Pengguna melakukan analisis kondisi dan reparasi
+    motor induksi secara manual dengan membongkar (scrapping)
+    mesin namun kekurangan data penyebab
+    kerusakan mesin.};
     
     \node[box, below=of D] (E)
     {\textbf{WHY 4}\\
-    Pemeriksaan yang kurang efisien dan berbahaya
-    dapat mengakibatkan risiko kerusakan motor meningkat};
+    Analisis kerusakan motor induksi dengan membongkar
+    mesin tanpa data kerusakan yang cukup
+    lebih menghabiskan waktu.};
     
     \node[box, below=of E] (F)
     {\textbf{Akar Masalah}\\
-    Pemeriksaan kondisi motor induksi
-    yang dilakukan secara manual dapat mengakibatkan
-    risiko kerusakan motor yang meningkat dan menyebabkan
-    kerugian ekonomi akibat \textit{downtime} motor.};
+    Kekurangan data penyebab kerusakan pada motor induksi
+    dapat menyebabkan tingkat kerusakan yang lebih tinggi, dan
+    dalam beberapa skenario, mampu membahayakan keselamatan pemilik saat melakukan
+    reparasi.};
     
     \draw[arrow] (A) -- (B);
     \draw[arrow] (B) -- (C);
@@ -381,19 +402,51 @@ pemantauan kondisi motor induksi yang bersifat rendah biaya.
     \draw[arrow] (E) -- (F);
     
     \end{tikzpicture}
-    
-    \caption{Diagram Analisis 5 Why}
+    \label{fig: 5_why_diagram}
+    \caption{Diagram analisis \textit{5 Why} menjabarkan 
+    urgensi dilaksanakannya proyek MONTREAL-VT}
     
     \end{figure}
 %===========End Diagram 5 Whys==================%%
 
+Sebagaimana telah dijabarkan pada diagram \textit{5 Why} yang
+ditunjukkan oleh gambar \ref{fig: 5_why_diagram}. Perancangan
+proyek MONTREAL-VT dapat dijustifikasi oleh kekurangan
+proses akuisisi data penyebab kerusakan motor induksi pada skala
+motor induksi.  % DESKRIPSIKAN LEBIH LANJUT!
+
+
 \subsection{\ProjectUrgencyTitle}
 % Di bagian ini dijelaskan mengapa proyek capstone perlu segera dilakukan. Penekanan dapat diberikan pada masalah yang semakin mendesak, peluang yang akan hilang jika tidak dimanfaatkan, atau dampak negatif jika permasalahan tidak segera diatasi. Subbab ini juga bisa menekankan manfaat strategis, baik untuk pengembangan ilmu, teknologi, maupun aplikasi praktis yang dapat dirasakan oleh pengguna.
 \begin{enumerate}
-    \item Sistem pemantauan kondisi pada motor induksi merupakan komponen dasar dalam upaya PdM dalam operasi industri. Sistem ini memungkinkan evaluasi kondisi mesin secara kontinu melalui parameter operasional seperti getaran, suhu, dan arus. Sistem pemantauan ini berfungsi sebagai tolak ukur keandalan motor listrik dijaga dalam kondisi optimal.
-    \item Kebutuhan sistem peringatan dini (early fault detection) dalam sistem produksi yang semakin kritis, terutama dalam proses identifikasi degradasi performa motor induksi. Implemetasi sistem peringatan dini memungkinkan tindakan pemeliharaan yang secara signifikan mampu menekan risiko downtime tidak terencana, mengurangi biaya perbaikan motor, serta meminimalkan tingkat kerugian.
-    \item Aspek aksesibilitas dan efisiensi biaya menjadi pertimbangan utama dalam pengembangan sistem terutama untuk industri skala kecil dan menengah. Sistem pemantauan sederhana dengan biaya implementasi rendah mampu menjembatani kesenjangan teknologi pemantauan industri tingkat tinggi pada industri skala kecil.
-    \item Kebutuhan akan sistem proteksi otomatis yang mencegah keadaan bahaya seperti overload, overcurrent, dan overheat pada motor induksi.
+    \item   Kurangnya sistem akuisisi data parameter 
+            (getaran, arus, dan suhu) motor induksi yang
+            andal mengakibatkan proses reparasi yang lebih
+            menghabiskan waktu, tidak efisien, dan dalam beberapa skenario,
+            mampu mengakibatkan tingkat kerusakan yang lebih parah dan
+            membahayakan pengguna.
+    \item   Kebutuhan sistem peringatan dini (\textit{early fault detection})
+            dalam sistem produksi yang semakin
+            kritis, terutama dalam proses identifikasi
+            degradasi performa motor induksi. Implemetasi
+            sistem peringatan dini memungkinkan tindakan
+            pemeliharaan yang secara signifikan mampu
+            menekan risiko \textit{downtime} tidak terencana,
+            mengurangi biaya perbaikan motor, serta
+            meminimalisir tingkat kerugian usaha.
+    \item   Aspek aksesibilitas dan efisiensi biaya menjadi
+            pertimbangan utama dalam pengembangan sistem
+            terutama untuk industri skala kecil dan menengah.
+            Sistem pemantauan sederhana dengan biaya implementasi
+            rendah mampu menjembatani kesenjangan teknologi
+            pemantauan industri tingkat tinggi pada industri
+            skala kecil.
+    \item   Kebutuhan akan sistem proteksi otomatis yang
+            mendeteksi situasi berbahaya bahaya seperti
+            \textit{overload},
+            \textit{overcurrent}, dan \textit{overheat} pada motor induksi,
+            lalu memutus koneksi arus untuk mencegah kerusakan \textit{winding}
+            yang lebih parah, hingga bencana kebakaran.
 \end{enumerate}
 
 \section{\ObjectivesTitle}
@@ -401,36 +454,40 @@ pemantauan kondisi motor induksi yang bersifat rendah biaya.
 \subsection{\MainObjectiveTitle}
 %Tujuan utama merupakan hasil inti dari proyek ini, menggambarkan sistem atau layanan yang akan dihasilkan, dengan indikator pencapaian yang terukur.    
 \begin{enumerate}
-  \item Mengembangkan sistem pemantauan kondisi 
-  motor induksi dengan berbasis sensor getar, sensor suhu,
-  sensor arus, dan sensor rpm. Sensor getaran
-  harus mampu diimplementasikan pada \textit{vibration time-domain analysis},
-  dan \textit{vibration frequency-domain 
-  analysis} dengan metode \textit{frequency-signature analysis}.
-  Metode \textit{envelope analysis} untuk mendeteksi
-  kerusakan laher apabila dimungkinkan.
-  \item Mengembangkan sistem pemantauan kondisi
-  dengan parameter suhu, arus dan \textit{Revolution per Minute} (rpm), dengan galat pengukuran pada parameter
-  suhu dan arus tidak lebih dari 5\%. Parameter ini
-  harus mampu diimplementasikan sebagai sistem proteksi motor.
-  \item Mengembangkan sistem IoT terintegrasi Wi-Fi sebagai 
-  media informasi dan komunikasi yang ramah 
-  pengguna, yang mampu mengirim dan menampilkan
-   data secara \textit{real-time} dengan 
-   time-delay $\leq 1000ms$, serta diuji 
-   melalui minimal 5 skenario penggunaan 
-   pengguna.
-%   \item Merancang dan membuat sistem pengendali
-%    kecepatan motor induksi berbasis kontrol tertutup yang mampu menjaga kecepatan dengan \textit{error steady-state}, setpoint, waktu tunak yang tidak  melebihi batas ketetentuan, dan overshoot terkendali.
-  \item Menyusun dokumentasi teknis dan manual pengguna yang membahas mengenai proses perancangan alat, penggunaan, serta data akuisisi sistem pemantauan motor induksi sehingga dapat digunakan, dikembangkan, atau direplikasi, dan diselesaikan bersamaan dengan selesainya perancangan alat. 
+    \item   Mengembangkan divais untuk melakukan pemantauan parameter
+            (getaran, arus, dan suhu) pada motor induksi, mengklasifikasikan
+            kondisi motor induksi dengan mengaplikasikan konsep \textit{vibration
+            severity} (ISO 20816), mengklasifikasikan tipe kerusakan dengan
+            mengaplikasikan konsep \textit{frequency signature fault classification}
+            (ISO 13373) sebagai \textit{baseline}.
+    \item   Mengembangkan sistem IoT dengan memanfaatkan koneksi
+            Wi-Fi sebagai media visualisasi dan kontrol dari sistem yang dirancang.
+            Sistem terbagi menjadi \textit{vibration monitoring} yang
+            diklasifikasikan sebagai \textit{soft real-time system} dan
+            \textit{protection monitoring} yang bersifat \textit{hard real-time system}.
+            % kecepatan motor induksi berbasis kontrol tertutup yang mampu menjaga kecepatan dengan \textit{error steady-state}, setpoint, waktu tunak yang tidak  melebihi batas ketetentuan, dan overshoot terkendali.
+    \item   Menyusun dokumentasi teknis dan manual pengguna 
+            yang membahas mengenai proses perancangan alat,
+            implementasi alat, dan data kinerja alat, sehingga alat dapat digunakan,
+            dikembangkan, atau direplikasi di masa yang akan datang.
+    \item   Merancang sistem proteksi yang mampu memutus sumber arus
+            menuju motor apabila melebihi ambang arus dan suhu yang telah
+            ditentukan.
+
 \end{enumerate}
 
 \subsection{\AdditionalObjectivesTitle}
 % Tujuan tambahan adalah target pendukung yang memperkuat keberhasilan proyek meskipun bukan keluaran inti, biasanya terkait dokumentasi, diseminasi, atau peningkatan kualitas sistem.
 \begin{enumerate} 
-    \item Mengimplementasikan enkripsi sistem IoT yang menjamin keamanan transmisi data dari sensor ke mikrokontroler dan dari mikrokontroler ke cloud.
-    \item Merancang sistem analisis getaran dengan metode \textit{envelope analysis}
-    untuk mendeteksi kerusakan laher secara detil.
+    \item   Mengimplementasikan enkripsi data hasil akuisisi
+            sensor yang menjamin keamanan transmisi data 
+            dari sensor ke mikrokontroler dan dari mikrokontroler ke cloud.
+    \item   Merancang sistem pembelajaran mesin (\textit{machine learning}) (ML)
+            untuk mencapai tingkat akurasi prediksi kerusakan yang
+            lebih tinggi, lalu dibandingkan dengan \textit{baseline}.
+    % \item   Merancang sistem analisis getaran dengan metode 
+    %         \textit{envelope analysis}
+    %         untuk mendeteksi kerusakan laher secara detil.
 \end{enumerate}
 
 \subsection{\DeliverablesTitle}
@@ -438,28 +495,65 @@ pemantauan kondisi motor induksi yang bersifat rendah biaya.
 Luaran yang dihasilkan dari proyek ini mencakup beberapa keluaran utama yang mendukung tujuan utama dan tujuan tambahan, antara lain:
 
 \begin{enumerate}
-    \item \textbf{Prototipe sistem pemantauan yang terdiri atas sensor dan pengkondisian sinyal:} \\
-    Sistem pemantauan getaran dan suhu motor 
-    induksi yang mampu merekam data secara 
-    \textit{real-time}, minim derau, dan terintegrasi dengan cloud.
-    \item \textbf{Dashboard interaktif:} \\ 
-    yang menampilkan tingkat kesehatan motor, 
-    visualisasi 
-    parameter pemantauan kondisi motor, indikasi potensi
-    kerusakan dan saran tindakan pemeliharaan 
-    induksi.
-    \item \textbf{Sistem proteksi motor induksi:}\\
-    Sistem proteksi yang terdiri atas sistem relay dan saklar darurat. Serta
-    rangkaian penyearah tegangan 220VAC ke 5 VDC untuk suplai daya mikrokontroler.
-    \item \textbf{Laporan teknis dan manual pengguna} \\
-    Data hasil pengukuran sensor accelerometer, dan sensor suhu. Lebih lanjut, terdapat proses instalasi, pengoperasian, pemeliharaan prototipe, indikasi kerusakan dan saran tindakan pemeliharaan motor induksi dalam terdokumentasi dalam bentuk laporan.
+    \item   \textbf{PCB sistem sensor:} \\
+            \textit{Printed Circuit Board} (PCB) yang memuat komponen
+            \textit{Microcontroller Unit} (MCU), sistem sensor yang
+            terdiri atas komponen sensor dan komponen pengkondisian sinyal
+            sensor.
+    \item   \textbf{PCB rangkaian 220VAC-to-5VDC:} \\ 
+            PCB yang memuat rangkaian \textit{step-down} \textit{220VAC-to-9VAC} dan penyearah
+            (\textit{rectifier 9VAC-to-5VDC}) untuk mengkondisikan
+            tegangan listrik rumahan 220 VAC menjadi tegangan yang mampu
+            memberi daya ke PCB sistem sensor.
+    \item   \textbf{Sistem Proteksi Sistem dan Proteksi Motor:}\\
+            Sistem proteksi sistem (Divais dan motor) yang terdiri atas
+            \textit{circuit breaker}, dan sistem proteksi motor terhadap
+            \textit{winding overcurrent} dan \textit{winding overheat} yang terdiri
+            atas relay dan rangkaian gerbang logika.
+    \item   \textbf{Aplikasi \textit{monitoring} dan kontrol MONTREAL-VT berbasis website:}\\
+            \textit{Dashboard monitoring} yang berfungsi sebagai
+            media visualisasi data sensor, penerima notifikasi kerusakan, dan media
+            kontrol divais MONTREAL-VT.
+    \item   \textbf{Laporan teknis dan manual pengguna:} \\
+            Laporan teknis yang berisi spesifikasi komponen,
+            proses perancangan divais, metode penggunaan, dan
+            data hasil pengujian divais pada beberapa skenario.
+
 \end{enumerate}
 
 \section{\ScopeConstraintsTitle}
 \subsection{\ScopeTitle}
 % Bagian ini menjelaskan ruang lingkup proyek secara jelas, yaitu apa saja yang termasuk ke dalam cakupan proyek dan apa yang berada di luar cakupan. Penjelasan ini penting agar pembaca tidak memiliki ekspektasi yang keliru terhadap hasil yang akan dicapai.  
 % Sebagai contoh, proyek ini hanya berfokus pada \textit{pemantauan} suhu dan kelembaban di rumah kaca. Proyek tidak mencakup pengembangan kontrol otomatis untuk pompa nutrisi atau sistem irigasi cerdas. Dengan demikian, batasan yang ditetapkan dapat memberikan kejelasan sekaligus menjaga proyek tetap realistis dan sesuai waktu yang tersedia.  
-Proyek ini mencakup perancangan sistem pemantauan kondisi motor induksi satu fasa berbasis pengukuran tren getaran dan suhu. Perolehan akuisisi plot data getaran digunakan untuk mendeteksi kerusakan mekanis melalui analisis domain waktu dan domain frekuensi data getaran, sedangkan sensor suhu ditempatkan pada bagian kumparan motor atau bagian yang konduktif terhadap suhu kumparan motor untuk mendeteksi terjadinya \textit{overheating}. Sistem pemantauan ini diimplementasikan dalam bentuk prototipe yang mencakup mikrokontroler sebagai unit pemrosesan utama, sensor getar, serta sensor suhu. Proses akuisisi dan pengolahan data dilakukan secara \textit{real-time} dengan \textit{time-delay} $\leq 1000ms$, dan terintegrasi dengan dashboard pemantauan untuk visualisasi data. Selain itu, sistem dilengkapi dengan mekanisme peringatan dini serta rekomendasi tindak pemeliharaan berdasarkan kondisi yang terdeteksi.
+
+Proyek ini hanya mencakup perancangan satu alat yang memiliki
+fitur\textit{monitoring} kontinu, deteksi kerusakan, dan klasifikasi kerusakan motor induksi.
+Uji coba alat dilakukan pada
+satu jenis mesin yang memiliki spesifikasi yang sama, yakni
+motor induksi kipas angin dengan rating daya 55W 1400RPM, dan diujikan pada beberapa
+skenario kerusakan berbeda. Ambang batas setiap parameter seperti
+keparahan getaran, suhu, arus, akan membutuhkan konfigurasi ulang
+apabila jenis motor induksi memiliki spesifikasi yang berbeda.
+Hal ini juga mempengaruhi penentuan frekuensi kerusakan, termasuk \textit{shaft frequency
+($1\times$ harmonics)}, \textit{second order harmonics ($2\times$ harmonics)}, hingga
+\textit{$n^{th}$ order harmonics} sesuai pada persamaan \ref{eq: harmonics equation}.% ADD SOURCE
+Serta frekuensi kerusakan \textit{bearing}, contohnya \textit{fundamental train frequency} (FTF),
+\textit{ball pass frequency outer race} (BPFO), \textit{ball pass frequency inner race} (BPFI),
+dan \textit{ball spin frequency} (BSF). Parameter-parameter tersebut
+membutuhkan konfigurasi sesuai dengan spesifikasi motor induksi yang akan dijadikan objek pemantauan.
+
+\begin{align}
+    \label{eq: harmonics equation}
+    f_n = n (\frac{N}{60})
+\end{align}
+dengan definisi variabel sbb;
+
+\begin{tabular}{lll}
+    $f_n$ & = frekuensi harmonik (Hz) \\
+    $n$   & = koefisien harmonik \\
+    $N$   & = rating putaran shaft (RPM) \\
+\end{tabular}
+
 
 \subsection{\ConstraintsTitle}
 % Constraints adalah batasan-batasan yang diberikan oleh stakeholder kepada  tim dalam melaksanakan proyek. Keterbatasan ini dapat berupa waktu, sumber daya manusia, ketersediaan perangkat keras atau perangkat lunak, serta faktor eksternal lainnya.  
@@ -467,8 +561,10 @@ Proyek ini mencakup perancangan sistem pemantauan kondisi motor induksi satu fas
 % Contoh constraints yang relevan meliputi:  
 Batasan yang telah ditetapkan oleh pihak pengembang adalah sbb;
 \begin{enumerate}
-    \item Anggaran pengembangan sistem dibatasi maksimal sebesar Rp. 1.000.000,00, sehingga pemilihan opsi komponen dan metode implementasi harus disesuaikan dengan keterbatasan biaya tersebut.
-    \item Sistem dirancang untuk digunakan pada motor induksi satu fasa.
+    \item   Anggaran pengembangan sistem dibatasi maksimal 
+            sebesar $Rp 1.000.000,00$, sehingga pemilihan
+            opsi komponen dan metode implementasi harus
+            disesuaikan dengan keterbatasan biaya tersebut.
 \end{enumerate}
 
 \section{\BusinessAnalysisTitle}
@@ -478,17 +574,39 @@ Batasan yang telah ditetapkan oleh pihak pengembang adalah sbb;
 
 \subsubsection*{Segmen Target Utama:}
 \begin{enumerate}
-    \item \textbf{Institusi Pendidikan dan Penelitian ($\text{ITERA}$):} Lab praktikum dan penelitian yang berfokus pada sistem kendali, diagnostik, dan pemeliharaan motor induksi satu fasa dan tiga fasa.
-    \item \textbf{Perusahaan industri berbasis motor induksi:} Perusahaan yang memanfaatkan motor induksi sebagai mesin utama dalam proses produksi, sehingga memerlukan opsi alternatif sistem pemantauan kondisi untuk meningkatkan keandalan dan mengurangi downtime dengan biaya yang lebih rendah.
-    \item \textbf{Usaha kecil atau UMKM di sektor reparasi kumparan motor:} Pelaku usaha yang bergerak di bidang perbaikan dan penggulungan ulang (rewinding) motor listrik, yang membutuhkan alat bantu diagnostik untuk identifikasi dan kerusakan motor.
+    \item   \textbf{Perusahaan kecil/UMKM yang menggunakan motor induksi sebagai mesin produksi utama}\\
+            Perusahaan yang memanfaatkan motor induksi sebagai
+            mesin utama dalam proses produksi, contohnya industri penepung
+            gula aren, dan industri penggilingan pati singkong.
+    \item   \textbf{Usaha kecil atau UMKM di sektor reparasi\\
+            kumparan motor:} Pelaku usaha yang bergerak di 
+            bidang perbaikan dan penggulungan ulang 
+            (\textit{rewinding}) motor induksi satu fasa, yang membutuhkan alat
+            diagnostik untuk identifikasi dan kerusakan
+            motor.
+    \item   \textbf{Institusi Pendidikan dan Penelitian (ITERA)}\\
+            Laboratorium praktikum dan penelitian sains dan rekayasa. 
+            
 \end{enumerate}
 
 \subsubsection*{Kebutuhan pasar yang Belum Terpenuhi:}
 \begin{enumerate}
-    \item \textbf{Ketersediaan Solusi Berbiaya Rendah (Low-Cost System):} Perangkat pemantauan getaran industri standar seperti \textit{vibration analyzer} atau sensor piezoelektrik kelas industri memiliki harga yang sangat mahal. Pasar membutuhkan opsi alternatif sistem perangkat yang memiliki biaya terjangkau namun memiliki akurasi yang tepat.
-    \item \textbf{Pemantauan Real-Time dan Kontinu:} Banyak industri masih mengandalkan pengecekan manual dalam upaya CM secara berkala. Industri membutuhkan sistem yang mampu melakukan pemantauan dengan operasi non-stop.
-    % \item \textbf{Aksesibilitas Data Jarak Jauh (Integrasi IoT):} Dashboard berbasis web yang memungkinkan data getaran dan suhu dipantau oleh pengguna dari kantor atau ruang kontrol secara remote.
-    \item \textbf{Sistem Peringatan Dini Sederhana (User-Friendly Alerts):} Pasar membutuhkan sistem yang tidak hanya memberi data mentah numerik, tetapi juga memberikan indikator status berdasarkan batas kerja normal motor sesuai standar yang berlaku.
+    \item   \textbf{Alat Deteksi Kerusakan Motor Induksi Berbasis Getaran, Suhu dan Arus yang Cerdas, dan Berbiaya Rendah (Low-Cost System)}\\
+            Perangkat pemantauan getaran industri standar
+            seperti \textit{vibration analyzer} atau sensor
+            piezoelektrik kelas industri memiliki harga yang
+            sangat mahal. Pasar membutuhkan opsi alternatif
+            perangkat klasifikasi kerusakan yang memiliki biaya terjangkau
+            namun memiliki akurasi tinggi dengan memanfaatkan ML dan \textit{baseline} yang mengacu
+            pada ISO 20816 dan 13373.
+    \item   \textbf{\textit{Dashboard Monitoring} dan Notifikasi Kerusakan Dini yang Ramah Pengguna Awam}\\
+            Tampilan \textit{dashboard monitoring} yang mampu menampilkan data akuisisi sensor,
+            menampilkan potensi kerusakan motor induksi, menyimpan dan mengakses data dalam database luring,
+            dan menerima notifikasi dari sistem alarm dan proteksi. 
+    \item   \textbf{Sistem Proteksi Otomatis yang Melindungi Motor Induksi dari \textit{Winding Overcurrent} dan \textit{Winding Overheat}}\\
+            Sistem proteksi motor yang menggunakan data sensor suhu, dan sensor arus, untuk
+            memutus sumber arus menuju motor apabila suhu dan arus telah melewati
+            ambang batas yang telah ditetapkan.
 \end{enumerate}
 
 \subsection{\ValuePropTitle}
@@ -594,16 +712,24 @@ Pemangku kepentingan tersebut saling berperan dalam mendukung keberhasilan proye
     \endlastfoot % Footer untuk halaman terakhir (kosong)
 
     % --- Isi Tabel ---
-    PdM & Predictive Maintenance \\
-    \hline
-    M-PdM & Mechanical Predictive Maintenance \\
-    \hline
-    E-PdM & Electrical Predictive Maintenance \\
-    \hline
-    VAT & Vibration Analysis Technique \\
-    \hline
-    MCSA & Motor Current Signature Analysis \\
-    \hline    
+    MCSA    & Motor Current Signature Analysis  \\  \hline
+    UMKM    & Usaha Mikro, Kecil, dan Menengah  \\  \hline
+    W, kW   & Watt, kiloWatt                    \\  \hline
+    IEEE    & Institutions of Electrical and Electronics Engineers  \\  \hline
+    EPRI    & Electric Power Research Institute \\  \hline
+    MR      & Rotor Misalignment                \\  \hline
+    UB      & Unbalanced Rotor                  \\  \hline
+    BR      & Bowed Rotor                       \\  \hline
+    CBM     & Condition-Based Maintenance       \\  \hline
+    KNN     & K-Nearest Neighbor                \\  \hline
+    SVM     & Support Vector Machine            \\  \hline
+    PCB     & Printed Circuit-Board             \\  \hline
+    FTF     & Fundamental Train Frequency       \\  \hline
+    BPFO    & Ball-Pass Frequency Outer Race    \\  \hline
+    BPFI    & Ball-Pass Frequency Inner Race    \\  \hline
+    BSF     & Ball Spin Frequency               \\  \hline
+
+
     % Tambahkan lebih banyak baris di sini untuk memicu pemisahan halaman
     % ... (Tambahkan entri lain jika tabel perlu memanjang)
 
